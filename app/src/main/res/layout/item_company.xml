@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:layout_marginBottom="5dp">
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:id="@+id/is_accept"
+              android:text="@string/view_tv_accept_invitation"
+              android:layout_alignParentRight="true"
+              android:layout_centerVertical="true"
+              android:gravity="center"
+              android:textColor="@color/green"
+              android:textStyle="italic"
+              android:textSize="12sp"
+              android:visibility="visible"/>
+    <Button android:layout_width="40dp" android:layout_height="30dp"
+            android:id="@+id/refused"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="@string/view_bt_refused"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:background="@drawable/gray_select_btn"
+            android:textColor="@android:color/white"
+            android:visibility="gone"/>
+    <Button android:layout_width="40dp" android:layout_height="30dp"
+            android:id="@+id/accept"
+            android:layout_toLeftOf="@id/refused"
+            android:layout_centerVertical="true"
+            android:text="@string/view_bt_accept"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:textColor="@android:color/white"
+            android:background="@drawable/green_select_btn"
+            android:visibility="gone"/>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:id="@+id/company_name"
+              android:layout_centerVertical="true"
+              android:textSize="16sp"/>
+</RelativeLayout>

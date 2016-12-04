@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/head"
+        layout="@layout/default_head" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/head"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="50dp">
+
+        <TextView
+            android:id="@+id/call_hot_line"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:text="@string/view_tv_call_hot_line"
+            android:textColor="@color/middle_black"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/mobile_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/bg_edittext"
+            android:hint="@string/view_et_input_account"
+            android:inputType="number"
+            android:padding="10dp" />
+
+        <LinearLayout
+            android:id="@+id/auth"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_below="@id/mobile_phone"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/auth_code"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:background="@drawable/bg_edittext"
+                android:hint="@string/view_et_auth_code"
+                android:inputType="number"
+                android:padding="10dp" />
+
+            <Button
+                android:id="@+id/send_auth_code"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="3"
+                android:background="@drawable/bg_blue_corners"
+                android:padding="10dp"
+                android:text="@string/view_bt_send_auth_code"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/auth"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_edittext"
+            android:hint="@string/view_et_input_pwd"
+            android:inputType="textPassword"
+            android:padding="10dp" />
+
+        <EditText
+            android:id="@+id/password_again"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/password"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_edittext"
+            android:hint="@string/view_et_input_pwd_again"
+            android:inputType="textPassword"
+            android:padding="10dp" />
+
+        <Button
+            android:id="@+id/retrieveBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/call_hot_line"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/green_select_btn"
+            android:padding="15dp"
+            android:text="@string/view_bt_retrieve_pwd"
+            android:textColor="@android:color/white" />
+    </RelativeLayout>
+</RelativeLayout>

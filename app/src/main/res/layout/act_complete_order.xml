@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white">
+    <include layout="@layout/default_head"/>
+    <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:layout_marginTop="120dp"
+                  android:layout_centerHorizontal="true"
+                  android:padding="5dp"
+                  android:gravity="center_horizontal">
+        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                   android:background="@drawable/finish"
+                   android:minHeight="100dp"
+                   android:minWidth="100dp"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="@string/view_tv_complete_order"
+                  android:textSize="18sp"
+                  android:textColor="@color/middle_black"
+                  android:layout_marginTop="15dp"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:id="@+id/serialNo"
+                  android:textSize="14sp"
+                  android:textColor="@color/middle_gray"
+                  android:layout_marginTop="10dp"/>
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:layout_alignParentBottom="true"
+                  android:padding="20dp"
+                  android:layout_marginBottom="20dp">
+        <Button android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:id="@+id/waybill_details"
+                android:padding="15dp"
+                android:text="@string/view_bt_look_order_detail"
+                android:textSize="14sp"
+                android:textColor="@android:color/white"
+                android:background="@drawable/green_select_btn"/>
+        <Button android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:id="@+id/back_to_list"
+                android:layout_marginTop="15dp"
+                android:padding="15dp"
+                android:text="@string/view_bt_back_list"
+                android:textSize="14sp"
+                android:textColor="@android:color/white"
+                android:background="@drawable/green_select_btn"/>
+    </LinearLayout>
+</RelativeLayout>

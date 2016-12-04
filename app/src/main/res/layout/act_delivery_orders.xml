@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+        android:background="@android:color/white">
+    <include layout="@layout/default_head"/>
+    <RelativeLayout
+            android:id="@+id/rl_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@color/bg_gray"
+            android:padding="10dp"
+            android:gravity="center_vertical">
+
+        <EditText android:id="@+id/etSearch"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:singleLine="true"
+                  android:background="@drawable/search_frame"
+                  android:paddingLeft="32dp"
+                  android:textSize="12sp"
+                  android:hint="@string/view_et_search"/>
+
+        <ImageView android:id="@+id/ivDeleteText"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_alignParentRight="true"
+                   android:src="@drawable/delete"
+                   android:layout_centerInParent="true"
+                   android:paddingRight="20dp"
+                   android:visibility="gone"/>
+    </RelativeLayout>
+    <com.zzqs.app_kc.widgets.xlistView.XListView
+            android:id="@+id/XListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="#00000000"
+            android:dividerHeight="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:scrollbars="none"/>
+</LinearLayout>

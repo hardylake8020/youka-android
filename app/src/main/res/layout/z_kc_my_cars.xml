@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+  <include
+    android:id="@+id/defaultHead"
+    layout="@layout/default_head"/>
+
+  <TextView
+    android:id="@+id/tvAddCar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:background="@color/green"
+    android:gravity="center"
+    android:padding="20dp"
+    android:text="@string/add_car"
+    android:textColor="@android:color/white"
+    android:textSize="16sp"/>
+
+  <ListView
+    android:id="@+id/lvCars"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_above="@id/tvAddCar"
+    android:layout_below="@id/defaultHead"
+    android:background="@color/bg_gray"
+    android:divider="#00000000"
+    android:listSelector="@android:color/white"
+    android:scrollbars="none"/>
+
+</RelativeLayout>

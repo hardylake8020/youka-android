@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@android:color/white">
+    <include layout="@layout/default_head"/>
+    <ScrollView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:background="@android:color/white">
+        <LinearLayout android:orientation="vertical"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:paddingLeft="15dp"
+                      android:background="@android:color/white">
+            <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                            android:id="@+id/rl_head"
+                            android:padding="10dp"
+                            android:background="@drawable/item_click_selector">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="@string/view_tv_head_portrait"
+                          android:textSize="14sp"
+                          android:layout_alignParentLeft="true"
+                          android:layout_centerVertical="true"
+                          android:textColor="@color/click_gray"/>
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                           android:id="@+id/icon1"
+                           android:layout_alignParentRight="true"
+                           android:layout_centerVertical="true"
+                           android:background="@drawable/icon_right_arrows"/>
+                <com.zzqs.app_kc.widgets.CircleImageView
+                  android:layout_width="40dp" android:layout_height="40dp"
+                  android:id="@+id/head_portrait"
+                  android:layout_centerVertical="true"
+                  android:layout_toLeftOf="@id/icon1"
+                  android:layout_marginRight="5dp"
+                  android:src="@drawable/default_head_portrait"/>
+            </RelativeLayout>
+            <ImageView android:layout_width="match_parent" android:layout_height="1px"
+                       android:background="@color/bg_gray"
+                       android:layout_marginLeft="10dp"/>
+            <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                            android:id="@+id/rl_name"
+                            android:padding="10dp"
+                            android:background="@drawable/item_click_selector">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="@string/view_tv_name"
+                          android:textSize="14sp"
+                          android:layout_alignParentLeft="true"
+                          android:layout_centerVertical="true"
+                          android:textColor="@color/click_gray"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:id="@+id/name"
+                          android:layout_alignParentRight="true"
+                          android:drawableRight="@drawable/icon_right_arrows"
+                          android:layout_centerVertical="true"
+                          android:drawablePadding="10dp"/>
+            </RelativeLayout>
+            <ImageView android:layout_width="match_parent" android:layout_height="1px"
+                       android:background="@color/bg_gray"
+                       android:layout_marginLeft="10dp"/>
+            <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                            android:id="@+id/rl_license_plates"
+                            android:padding="10dp"
+                            android:background="@drawable/item_click_selector">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="@string/view_tv_plate"
+                          android:textSize="14sp"
+                          android:layout_alignParentLeft="true"
+                          android:layout_centerVertical="true"
+                          android:textColor="@color/click_gray"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:id="@+id/plate"
+                           android:layout_alignParentRight="true"
+                           android:layout_centerVertical="true"
+                           android:drawableRight="@drawable/icon_right_arrows"
+                           android:drawablePadding="10dp"/>
+            </RelativeLayout>
+            <ImageView android:layout_width="match_parent" android:layout_height="1px"
+                       android:background="@color/bg_gray"
+                       android:layout_marginLeft="10dp"/>
+            <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                            android:id="@+id/rl_Id_card"
+                            android:padding="10dp"
+                            android:background="@drawable/item_click_selector">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="@string/view_tv_ID"
+                          android:textSize="14sp"
+                          android:layout_alignParentLeft="true"
+                          android:layout_centerVertical="true"
+                          android:textColor="@color/click_gray"/>
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                           android:id="@+id/icon2"
+                           android:layout_alignParentRight="true"
+                           android:layout_centerVertical="true"
+                           android:background="@drawable/icon_right_arrows"/>
+                <com.zzqs.app_kc.widgets.RoundImageView
+                  android:layout_width="40dp" android:layout_height="40dp"
+                  android:id="@+id/id_card_img"
+                  android:layout_centerVertical="true"
+                  android:layout_toLeftOf="@id/icon2"
+                  android:layout_marginRight="5dp"
+                  android:background="@null"
+                  android:scaleType="fitXY"/>
+            </RelativeLayout>
+            <ImageView android:layout_width="match_parent" android:layout_height="1px"
+                       android:background="@color/bg_gray"
+                       android:layout_marginLeft="10dp"/>
+            <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                            android:id="@+id/rl_driver_license"
+                            android:padding="10dp"
+                            android:background="@drawable/item_click_selector">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="@string/view_tv_driver_license"
+                          android:textSize="14sp"
+                          android:layout_alignParentLeft="true"
+                          android:layout_centerVertical="true"
+                          android:textColor="@color/click_gray"/>
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                           android:id="@+id/icon3"
+                           android:layout_alignParentRight="true"
+                           android:layout_centerVertical="true"
+                           android:background="@drawable/icon_right_arrows"/>
+                <com.zzqs.app_kc.widgets.RoundImageView
+                  android:layout_width="40dp" android:layout_height="40dp"
+                  android:id="@+id/driving_id_img"
+                  android:layout_centerVertical="true"
+                  android:layout_toLeftOf="@id/icon3"
+                  android:layout_marginRight="5dp"
+                  android:background="@color/lucency"
+                  android:scaleType="fitXY"/>
+            </RelativeLayout>
+            <ImageView android:layout_width="match_parent" android:layout_height="1px"
+                       android:background="@color/bg_gray"
+                       android:layout_marginLeft="10dp"/>
+            <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                            android:id="@+id/rl_trading_card"
+                            android:padding="10dp"
+                            android:background="@drawable/item_click_selector">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="@string/view_tv_trading_card"
+                          android:textSize="14sp"
+                          android:layout_alignParentLeft="true"
+                          android:layout_centerVertical="true"
+                          android:textColor="@color/click_gray"/>
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                           android:id="@+id/icon5"
+                           android:layout_alignParentRight="true"
+                           android:layout_centerVertical="true"
+                           android:background="@drawable/icon_right_arrows"/>
+                <com.zzqs.app_kc.widgets.RoundImageView
+                  android:layout_width="40dp" android:layout_height="40dp"
+                  android:id="@+id/trading_id_img"
+                  android:layout_centerVertical="true"
+                  android:layout_toLeftOf="@id/icon5"
+                  android:layout_marginRight="5dp"
+                  android:background="@color/lucency"
+                  android:scaleType="fitXY"/>
+            </RelativeLayout>
+            <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                            android:id="@+id/rl_driving_license"
+                            android:padding="10dp"
+                            android:background="@drawable/item_click_selector">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="@string/view_tv_driving_license"
+                          android:textSize="14sp"
+                          android:layout_alignParentLeft="true"
+                          android:layout_centerVertical="true"
+                          android:textColor="@color/click_gray"/>
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                           android:id="@+id/icon4"
+                           android:layout_alignParentRight="true"
+                           android:layout_centerVertical="true"
+                           android:background="@drawable/icon_right_arrows"/>
+                <com.zzqs.app_kc.widgets.RoundImageView
+                  android:layout_width="40dp" android:layout_height="40dp"
+                  android:id="@+id/travel_id_img"
+                  android:layout_centerVertical="true"
+                  android:layout_toLeftOf="@id/icon4"
+                  android:layout_marginRight="5dp"
+                  android:background="@color/lucency"
+                  android:scaleType="fitXY"/>
+            </RelativeLayout>
+            <ImageView android:layout_width="match_parent" android:layout_height="1px"
+                       android:background="@color/bg_gray"
+                       android:layout_marginLeft="10dp"/>
+            <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                            android:id="@+id/rl_driving_date"
+                            android:padding="10dp"
+                            android:background="@drawable/item_click_selector">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="@string/view_tv_driving_date"
+                          android:textSize="14sp"
+                          android:layout_alignParentLeft="true"
+                          android:layout_centerVertical="true"
+                          android:textColor="@color/click_gray"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:id="@+id/driving_date"
+                          android:layout_alignParentRight="true"
+                          android:drawableRight="@drawable/icon_right_arrows"
+                          android:layout_centerVertical="true"
+                          android:drawablePadding="10dp"/>
+            </RelativeLayout>
+            <ImageView android:layout_width="match_parent" android:layout_height="1px"
+                       android:background="@color/bg_gray"
+                       android:layout_marginLeft="10dp"/>
+            <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                            android:id="@+id/rl_mobile_phone"
+                            android:padding="10dp"
+                            android:background="@drawable/item_click_selector">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="@string/view_tv_mobile_phone"
+                          android:textSize="14sp"
+                          android:layout_alignParentLeft="true"
+                          android:layout_centerVertical="true"
+                          android:textColor="@color/click_gray"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:id="@+id/mobile_phone"
+                          android:layout_alignParentRight="true"
+                          android:drawableRight="@drawable/icon_right_arrows"
+                          android:layout_centerVertical="true"
+                          android:drawablePadding="10dp"/>
+            </RelativeLayout>
+            <ImageView android:layout_width="match_parent" android:layout_height="1px"
+                       android:background="@color/bg_gray"
+                       android:layout_marginLeft="10dp"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

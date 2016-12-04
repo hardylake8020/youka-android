@@ -1,0 +1,39 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/primary_colors"
+                tools:context="com.zzqs.app_kc.activities.LaunchActivity">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:id="@+id/btns"
+                  android:layout_alignParentBottom="true">
+        <Button android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:id="@+id/signup"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:padding="15dp"
+                android:textSize="16sp"
+                android:textColor="@android:color/white"
+                android:background="@drawable/bg_orange_corners"
+                android:text="@string/view_bt_sign_up"/>
+        <Button android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:id="@+id/login"
+                android:layout_above="@id/signup"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="20dp"
+                android:padding="15dp"
+                android:textSize="16sp"
+                android:textColor="@color/middle_black"
+                android:background="@drawable/bg_white_corners"
+                android:text="@string/view_bt_login"/>
+    </LinearLayout>
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent"
+                    android:layout_above="@id/btns">
+        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                   android:background="@drawable/start_launch"
+                   android:layout_centerInParent="true"/>
+    </RelativeLayout>
+</RelativeLayout>

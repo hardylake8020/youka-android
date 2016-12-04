@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white">
+    <include layout="@layout/default_head"
+             android:id="@+id/head"/>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:id="@+id/foot_rl"
+                  android:layout_alignParentBottom="true"
+                  android:background="@color/bg_gray">
+        <ImageView android:layout_width="match_parent" android:layout_height="1px"
+                   android:background="@color/text_gray"/>
+        <!--<ImageView android:layout_width="65dp" android:layout_height="65dp"-->
+        <!--android:id="@+id/scan"-->
+        <!--android:background="@drawable/scan_code_btn2"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:layout_marginBottom="10dp"-->
+        <!--android:layout_marginTop="25dp"/>-->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:id="@+id/scan"
+                  android:text="@string/icon_qr_code"
+                  android:layout_marginTop="25dp"
+                  android:textSize="40dp"
+                  android:layout_gravity="center_horizontal"
+                  android:layout_marginBottom="10dp"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:layout_gravity="center_horizontal"
+                  android:text="@string/view_tv_continue_scan"
+                  android:textColor="@color/middle_black"
+                  android:textSize="16sp"
+                  android:layout_marginBottom="5dp"/>
+        <Button android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:id="@+id/save_code"
+                android:background="@drawable/green_select_btn"
+                android:padding="13dp"
+                android:text="@string/view_bt_complete_scan"
+                android:textSize="18sp"
+                android:textColor="@android:color/white"
+                />
+    </LinearLayout>
+    <!--<ListView android:layout_width="match_parent" android:layout_height="wrap_content"-->
+    <!--android:id="@+id/codes"-->
+    <!--android:layout_below="@id/head"-->
+    <!--android:layout_above="@id/foot_rl"/>-->
+    <com.zzqs.app_kc.widgets.swipelistview.SwipeListView
+            xmlns:swipe="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/codes"
+            android:layout_below="@id/head"
+            android:layout_above="@id/foot_rl"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            swipe:swipeActionLeft="reveal"
+            swipe:swipeBackView="@+id/id_back"
+            swipe:swipeCloseAllItemsWhenMoveList="true"
+            android:cacheColorHint="@color/bg_gray"
+            swipe:swipeFrontView="@+id/id_front"
+            swipe:swipeMode="left"
+            swipe:swipeOffsetLeft="250dp"
+            swipe:swipeOpenOnLongPress="false"/>
+</RelativeLayout>

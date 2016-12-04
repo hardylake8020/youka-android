@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:id="@+id/rl_orders"
+                android:background="@android:color/white"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/layout"
+
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true">
+        <ImageView android:layout_width="match_parent" android:layout_height="1px"
+                   android:background="@color/click_gray"
+                />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:id="@+id/orders_number"
+                  android:textColor="@color/black"
+                  android:textSize="14sp"
+                  android:visibility="gone"
+                />
+    </LinearLayout>
+    <ListView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:id="@+id/orders"
+              android:layout_above="@id/layout"
+              android:layout_alignParentTop="true"
+              android:layout_alignParentLeft="true"
+              android:listSelector="@android:color/transparent"
+              android:divider="@color/bg_gray"
+              android:dividerHeight="30px"
+              android:scrollbars="none"/>
+</RelativeLayout>

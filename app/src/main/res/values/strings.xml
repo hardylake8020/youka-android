@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string name="app_name">柱柱卡车</string>
+
+  <!-- xlistView -->
+  <string name="xlistview_header_hint_normal">下拉刷新</string>
+  <string name="xlistview_header_hint_ready">松开刷新数据</string>
+  <string name="xlistview_header_hint_loading">正在加载...</string>
+  <string name="xlistview_header_last_time">上次更新时间：</string>
+  <string name="xlistview_footer_hint_normal">上拉查看更多</string>
+  <string name="xlistview_footer_hint_ready">松开载入更多</string>
+  <string name="xilstview_refreshed">刚刚</string>
+
+  <!-- 录音相关-->
+  <string name="press_talk">按住说话</string>
+  <string name="time_short">时间太短</string>
+  <string name="cancel">取消</string>
+  <string name="accept">接受</string>
+  <string name="hint">添加备注</string>
+
+  <!-- 二维码相关 -->
+  <string name="scan_text">将二维码放入框内, 即可自动扫描</string>
+  <string name="title_activity_actual_delivery">ActualDeliveryActivity</string>
+
+  <!-- kc -->
+  <string name="un_deal_order">待处理订单</string>
+  <string name="un_deal_waybill">待处理运单</string>
+  <string name="i_need_find_goods">我要找货</string>
+  <string name="my_cars">我的车队</string>
+  <string name="my_wallet">我的钱包</string>
+  <string name="my_oil_card">我的油卡</string>
+  <string name="to">&#160;至&#160;</string>
+  <string name="grab">抢</string>
+  <string name="compare">比</string>
+  <string name="order_item_description">货物描述&#160;&#160;%1$s&#160;%2$s&#160;%3$s</string>
+  <string name="order_item_create_time">发布时间&#160;&#160;%1$s&#160;&#160;%2$s</string>
+  <string name="prince_unit">元</string>
+  <string name="distance_unit">公里</string>
+  <string name="need_cars">要求车辆</string>
+  <string name="total">合计</string>
+  <string name="remark">注意事项</string>
+  <string name="initiator">发标方</string>
+  <string name="initiator_name">联系人</string>
+  <string name="initiator_phone">联系电话</string>
+  <string name="pickup_time">提货时间</string>
+  <string name="pickup_address">提货地址</string>
+  <string name="delivery_time">交货时间</string>
+  <string name="delivery_address">交货地址</string>
+  <string name="order_detail_freight">运费：</string>
+  <string name="grab_order">抢单</string>
+  <string name="pay_way">支付方式</string>
+  <string name="first_pay">首付</string>
+  <string name="last_pay">尾款</string>
+  <string name="receipt">回单</string>
+  <string name="cash">现金</string>
+  <string name="oil_card">油卡</string>
+  <string name="cash_pay">现金支付</string>
+  <string name="oil_card_pay">油卡支付</string>
+  <string name="offer">出价</string>
+  <string name="input_total_prince">输入总价格</string>
+  <string name="compare_rest_time">比价剩余时间</string>
+  <string name="max_prince">出价不能高于</string>
+  <string name="grab_details">抢单详情</string>
+  <string name="bidding_details">比价详情</string>
+  <string name="contact_customer_service">联系客服</string>
+  <string name="provenance">始发地</string>
+  <string name="destination">目的地</string>
+  <string name="all">全部</string>
+  <string name="bidding">竞价</string>
+  <string name="goods_list">货源列表</string>
+  <string name="find_good_by_map">地图找货</string>
+  <string name="add_car">添加车辆</string>
+
+</resources>

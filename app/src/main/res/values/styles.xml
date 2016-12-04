@@ -1,0 +1,41 @@
+<resources>
+
+
+  <style name="AppTheme" parent="Base.Theme.AppCompat.Light">
+    <item name="android:windowBackground">@null</item>
+    <item name="android:windowNoTitle">true</item>
+    <item name="colorPrimary">@color/primary_colors</item>
+    <item name="colorPrimaryDark">@color/primary_colors</item>
+  </style>
+
+  <style name="Dialog_Fullscreen">
+    <item name="android:windowFullscreen">true</item>
+    <item name="android:windowNoTitle">true</item>
+  </style>
+
+  <style name="color_gray">
+    <item name="android:textSize">14sp</item>
+    <item name="android:textColor">@color/middle_gray</item>
+  </style>
+
+  <style name="color_red">
+    <item name="android:textSize">14sp</item>
+    <item name="android:textColor">@color/red</item>
+    <item name="android:textStyle">italic</item>
+  </style>
+
+  <style name="myProgressBarStyleLarge">
+    　　
+    <item name="android:indeterminateDrawable">@drawable/progressbar</item>
+    <item name="android:indeterminateDuration">1500</item>
+    　　
+    <item name="android:minWidth">24dip</item>
+    　　
+    <item name="android:maxWidth">48dip</item>
+    　　
+    <item name="android:minHeight">24dip</item>
+    　　
+    <item name="android:maxHeight">48dip</item>
+  </style>
+
+</resources>

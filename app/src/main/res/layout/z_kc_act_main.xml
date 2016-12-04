@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/primary_colors"
+    android:orientation="vertical">
+
+    <RelativeLayout
+      android:id="@+id/rlHeader"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:padding="10dp">
+
+      <com.zzqs.app_kc.widgets.CircleImageView
+        android:id="@+id/cvUserPhoto"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="5dp"
+        android:src="@drawable/default_head_portrait"/>
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/app_name"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"/>
+    </RelativeLayout>
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:paddingBottom="10dp">
+
+      <LinearLayout
+        android:id="@+id/llZCOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+          android:id="@+id/tvUnDealOrderNum"
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent"
+          android:text="4"
+          android:textColor="@android:color/white"
+          android:textSize="20sp"/>
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="10dp"
+          android:text="@string/un_deal_order"
+          android:textColor="@android:color/white"
+          android:textSize="14sp"/>
+      </LinearLayout>
+
+      <LinearLayout
+        android:id="@+id/llDriverOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+          android:id="@+id/tvUnDealWaybillNum"
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent"
+          android:text="4"
+          android:textColor="@android:color/white"
+          android:textSize="20sp"/>
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="10dp"
+          android:text="@string/un_deal_waybill"
+          android:textColor="@android:color/white"
+          android:textSize="14sp"/>
+      </LinearLayout>
+    </LinearLayout>
+  </LinearLayout>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:background="@android:color/white"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+      android:id="@+id/rlFindGoods"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:drawablePadding="5dp"
+        android:drawableTop="@drawable/default_head_portrait"
+        android:text="@string/i_need_find_goods"/>
+
+      <ImageView
+        android:layout_width="1px"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:background="@color/line_gray"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+      android:id="@+id/rlMyCars"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:drawablePadding="5dp"
+        android:drawableTop="@drawable/default_head_portrait"
+        android:text="@string/my_cars"/>
+
+      <ImageView
+        android:layout_width="1px"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:background="@color/line_gray"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+      android:id="@+id/rlMyWallet"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:drawablePadding="5dp"
+        android:drawableTop="@drawable/default_head_portrait"
+        android:text="@string/my_wallet"/>
+
+      <ImageView
+        android:layout_width="1px"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:background="@color/line_gray"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+      android:id="@+id/rlMyOilCard"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_weight="1">
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:drawablePadding="5dp"
+        android:drawableTop="@drawable/default_head_portrait"
+        android:text="@string/my_oil_card"/>
+    </RelativeLayout>
+  </LinearLayout>
+
+  <com.zzqs.app_kc.widgets.xlistView.XListView
+    android:id="@+id/lvOrders"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="15dp"
+    android:background="@android:color/white"
+    android:divider="@android:color/white"
+    android:dividerHeight="0px"
+    android:listSelector="@android:color/white"
+    android:scrollbars="none"/>
+</LinearLayout>

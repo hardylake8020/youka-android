@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/bg_gray"
+              android:orientation="vertical">
+
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white">
+
+    <TextView
+      android:id="@+id/title"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentLeft="true"
+      android:padding="15dp"
+      android:text="@string/view_tv_goods"
+      android:textColor="@color/gray"
+      android:textSize="16sp"/>
+
+    <TextView
+      android:id="@+id/tv_goods_name"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentRight="true"
+      android:layout_toRightOf="@id/title"
+      android:gravity="right"
+      android:padding="15dp"
+      android:textColor="@color/actual_text"
+      android:textSize="16sp"/>
+  </RelativeLayout>
+
+  <ImageView
+    android:layout_width="match_parent"
+    android:layout_height="1px"
+    android:layout_marginLeft="15dp"
+    android:background="@color/line_gray"/>
+
+  <FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+      android:id="@+id/ll_damageType"
+      android:layout_width="match_parent"
+      android:layout_height="40dp"
+      android:layout_marginTop="50dp"
+      android:background="@android:color/white"
+      android:orientation="horizontal"
+      android:visibility="gone">
+
+      <Button
+        android:id="@+id/btn_lack"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:background="@color/second_bg_gray"
+        android:padding="5dp"
+        android:text="@string/view_bt_goods_lack"
+        android:textColor="@color/actual_text"
+        android:textSize="16sp"/>
+
+      <ImageView
+        android:layout_width="1px"
+        android:layout_height="40dp"
+        android:background="@color/line_gray"/>
+
+      <Button
+        android:id="@+id/btn_damage"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_weight="1"
+        android:background="@color/second_bg_gray"
+        android:padding="5dp"
+        android:text="@string/view_bt_goods_damage"
+        android:textColor="@color/actual_text"
+        android:textSize="16sp"/>
+    </LinearLayout>
+
+    <RelativeLayout
+      android:id="@+id/re_layout"
+      android:layout_width="match_parent"
+      android:layout_height="50dp"
+      android:background="@android:color/white">
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="@string/view_tv_incomplete_goods_num"
+        android:textColor="@color/gray"
+        android:textSize="16sp"/>
+
+      <LinearLayout
+        android:layout_width="135dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="65dp"
+        android:orientation="horizontal">
+
+        <Button
+          android:id="@+id/btn_cut"
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_marginBottom="10dp"
+          android:layout_marginTop="10dp"
+          android:layout_weight="1"
+          android:background="@drawable/modify_select_btn"
+          android:text="－"
+          android:textColor="@color/actual_text"
+          android:textSize="18sp"/>
+
+        <EditText
+          android:id="@+id/et_quantity"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="2"
+          android:background="@color/lucency"
+          android:digits="1234567890."
+          android:gravity="center"
+          android:inputType="numberDecimal"
+          android:padding="15dp"
+          android:singleLine="true"
+          android:textColor="#333333"
+          android:textColorHint="@color/hint"
+          android:textSize="16sp"/>
+
+        <Button
+          android:id="@+id/btn_add"
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_marginBottom="10dp"
+          android:layout_marginTop="10dp"
+          android:layout_weight="1"
+          android:background="@drawable/modify_select_btn"
+          android:text="＋"
+          android:textColor="@color/actual_text"
+          android:textSize="18sp"/>
+      </LinearLayout>
+
+      <TextView
+        android:id="@+id/tv_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="箱"
+        android:textColor="@color/text_black"
+        android:textSize="16sp"/>
+
+      <ImageView
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_alignParentBottom="true"
+        android:background="@color/line_gray"/>
+    </RelativeLayout>
+  </FrameLayout>
+</LinearLayout>

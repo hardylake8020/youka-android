@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.zzqs.app_kc">
+
+  <uses-sdk
+    android:minSdkVersion="14"
+    android:targetSdkVersion="20"/>
+
+  <uses-permission
+    android:name="android.permission.DEVICE_POWER"
+    tools:ignore="ProtectedPermissions"/>
+  <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+  <uses-permission android:name="android.permission.VIBRATE"/>
+  <uses-permission android:name="android.permission.CAMERA"/>
+
+  <uses-feature android:name="android.hardware.camera"/>
+  <uses-feature android:name="android.hardware.camera.autofocus"/>
+
+  <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+  <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+  <uses-permission android:name="android.permission.READ_SMS"/>
+  <uses-permission android:name="android.permission.CALL_PHONE"/>
+  <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+  <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+  <!-- 这个权限用于进行网络定位 -->
+  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+  <!-- 这个权限用于访问GPS定位 -->
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+  <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
+  <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+  <!-- 获取运营商信息，用于支持提供运营商信息相关的接口 -->
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+  <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+  <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+  <!-- 写入扩展存储，向扩展卡写入数据，用于写入离线定位数据 -->
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+  <!-- 访问网络，网络定位需要上网 -->
+  <uses-permission android:name="android.permission.INTERNET"/>
+  <!-- SD卡读取权限，用户写入离线定位数据 -->
+  <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+  <!-- 允许应用读取低级别的系统日志文件 -->
+  <uses-permission android:name="android.permission.READ_LOGS"/>
+  <!-- 允许访问闪光灯权限 -->
+  <uses-permission android:name="android.permission.FLASHLIGHT"/>
+  <!-- 个推相关权限 -->
+  <uses-permission android:name="android.permission.WAKE_LOCK"/>
+  <uses-permission android:name="getui.permission.GetuiService.com.zhuzhuqs.zzqs"/>
+
+  <permission
+    android:name="getui.permission.GetuiService.com.zhuzhuqs.app"
+    android:protectionLevel="normal"/>
+
+  <application
+    android:name="com.zzqs.app_kc.app.ZZQSApplication"
+    android:allowBackup="true"
+    android:icon="@drawable/ic_launcher"
+    android:label="@string/app_name"
+    android:largeHeap="true"
+    android:persistent="true"
+    android:theme="@style/AppTheme">
+    <activity
+      android:name="com.zzqs.app_kc.activities.LaunchActivity"
+      android:configChanges="keyboardHidden|orientation|screenSize"
+      android:label="@string/app_name"
+      android:screenOrientation="portrait">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN"/>
+
+        <category android:name="android.intent.category.LAUNCHER"/>
+      </intent-filter>
+    </activity>
+    <activity
+      android:name="com.zzqs.app_kc.activities.LoginActivity"
+      android:configChanges="keyboardHidden|orientation|screenSize"
+      android:screenOrientation="portrait"
+      android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+    <activity
+      android:name="com.zzqs.app_kc.activities.SignupActivity"
+      android:configChanges="keyboardHidden|orientation|screenSize"
+      android:screenOrientation="portrait"
+      android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+    <activity
+      android:name="com.zzqs.app_kc.activities.CompaniesActivity"
+      android:screenOrientation="portrait"/>
+    <activity
+      android:name="com.zzqs.app_kc.activities.OrderDetailsActivity"
+      android:configChanges="keyboardHidden|orientation|screenSize"
+      android:hardwareAccelerated="true"
+      android:screenOrientation="portrait"/>
+    <activity
+      android:name="com.zzqs.app_kc.activities.SettingActivity"
+      android:screenOrientation="portrait"/>
+    <activity
+      android:name="com.zzqs.app_kc.activities.OrderTimeAxisActivity"
+      android:screenOrientation="portrait"/>
+    <activity
+      android:name="com.zzqs.app_kc.activities.UserInfoActivity"
+      android:screenOrientation="portrait"/>
+    <activity
+      android:name="com.zzqs.app_kc.activities.LogInfoActivity"
+      android:screenOrientation="portrait"/>
+    <activity
+      android:name="com.zzqs.app_kc.activities.PlatePhotosActivity"
+      android:screenOrientation="portrait"/>
+    <activity
+      android:name="com.zzqs.app_kc.activities.HelpCenterActivity"
+      android:screenOrientation="portrait"/>
+    <activity
+      android:name="com.zzqs.app_kc.activities.GuideActivity"
+      android:screenOrientation="portrait"/>
+    <activity
+      android:name="com.zzqs.app_kc.activities.OrderCompleteActivity"
+      android:screenOrientation="portrait"/>
+    <activity
+      android:name="com.zzqs.app_kc.activities.DeliveryOrderActivity"
+      android:screenOrientation="portrait"/>
+    <activity
+      android:name="com.zzqs.app_kc.activities.MipcaActivityCapture"
+      android:configChanges="keyboardHidden|orientation|screenSize"
+      android:hardwareAccelerated="true"
+      android:screenOrientation="portrait"/>
+    <activity
+      android:name="com.zzqs.app_kc.activities.ScanCodeListActivity"
+      android:screenOrientation="portrait"/>
+    <activity
+      android:name="com.zzqs.app_kc.activities.GuideAfterSignupActivity"
+      android:screenOrientation="portrait"/>
+    <activity
+      android:name="com.zzqs.app_kc.activities.ForgetPwdActivity"
+      android:screenOrientation="portrait"/>
+    <activity
+      android:name="com.zzqs.app_kc.activities.EvaluationActivity"
+      android:screenOrientation="portrait"/>
+    <activity
+      android:name="com.zzqs.app_kc.activities.InputActivity"
+      android:screenOrientation="portrait"/>
+    <activity
+      android:name="com.zzqs.app_kc.activities.OrderOperation.SingleOperationActivity"
+      android:launchMode="singleTop"
+      android:screenOrientation="portrait"/>
+    <activity
+      android:name="com.zzqs.app_kc.activities.OrderOperation.BatchOperationActivity"
+      android:launchMode="singleTop"
+      android:screenOrientation="portrait"/>
+    <activity
+      android:name="com.zzqs.app_kc.activities.MainActivity"
+      android:configChanges="keyboardHidden|orientation|screenSize"
+      android:launchMode="singleTask"
+      android:screenOrientation="portrait"/>
+    <activity
+      android:name="com.zzqs.app_kc.activities.UploadEvent.SingleEntranceAndMidwayEventActivity"
+      android:configChanges="keyboardHidden|orientation|screenSize"
+      android:hardwareAccelerated="true"
+      android:screenOrientation="portrait"/>
+    <activity
+      android:name="com.zzqs.app_kc.activities.UploadEvent.BatchEntranceAndMidwayEventActivity"
+      android:configChanges="keyboardHidden|orientation|screenSize"
+      android:hardwareAccelerated="true"
+      android:screenOrientation="portrait"/>
+    <activity
+      android:name="com.zzqs.app_kc.activities.UploadEvent.SinglePickAndDeliveryEventActivity"
+      android:configChanges="keyboardHidden|orientation|screenSize"
+      android:hardwareAccelerated="true"
+      android:screenOrientation="portrait"/>
+    <activity
+      android:name="com.zzqs.app_kc.activities.UploadEvent.BatchPickAndDeliveryEventActivity"
+      android:configChanges="keyboardHidden|orientation|screenSize"
+      android:hardwareAccelerated="true"
+      android:screenOrientation="portrait"/>
+    <activity
+      android:name="com.zzqs.app_kc.activities.ActualDeliveryActivity"
+      android:configChanges="orientation|keyboardHidden"
+      android:screenOrientation="portrait"/>
+
+    <service android:name="com.zzqs.app_kc.service.LocationService"/>
+    <service android:name="com.zzqs.app_kc.service.UploadTraceService"/>
+    <!-- 百度定位配置 -->
+    <service
+      android:name="com.baidu.location.f"
+      android:enabled="true"
+      android:process=":remote"></service>
+
+    <meta-data
+      android:name="com.baidu.lbsapi.API_KEY"
+      android:value="WWLWOhuK1c6hY0S183iCKVM0YlGPc9l2"></meta-data>
+
+    <!-- 配置弹框activity -->
+    <activity
+      android:name="com.igexin.getuiext.activity.GetuiExtActivity"
+      android:configChanges="orientation|keyboard|keyboardHidden"
+      android:excludeFromRecents="true"
+      android:exported="false"
+      android:process=":pushservice"
+      android:taskAffinity="android.task.myServicetask"
+      android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+
+    <service
+      android:name="com.igexin.sdk.PushService"
+      android:exported="true"
+      android:label="NotificationCenter"
+      android:process=":pushservice"></service>
+
+    <service
+      android:name="com.zzqs.app_kc.service.HeartbeatService"
+      android:priority="1000"/>
+
+    <receiver android:name="com.zzqs.app_kc.receiver.UnOpenReceiver">
+      <intent-filter>
+        <action android:name="com.zhuzhuqs.android.GPS_UNOPEN"/>
+        <action android:name="com.zhuzhuqs.android.NET_WORK_UNOPEN"/>
+      </intent-filter>
+    </receiver>
+    <receiver
+      android:name="com.igexin.getuiext.service.PayloadReceiver"
+      android:exported="false">
+      <intent-filter>
+
+        <!-- 这个com.igexin.sdk.action.7fjUl2Z3LH6xYy7NQK4ni4固定，不能修改 -->
+        <action android:name="com.igexin.sdk.action.7fjUl2Z3LH6xYy7NQK4ni4"/>
+        <!-- android:name="com.igexin.sdk.action.第三方的appId" -->
+        <action android:name="com.igexin.sdk.action.MCml1MhrQu9j1vaoi5Hyr2"/>
+      </intent-filter>
+    </receiver>
+
+    <service
+      android:name="com.igexin.getuiext.service.GetuiExtService"
+      android:process=":pushservice"/>
+
+    <receiver
+      android:name="com.zzqs.app_kc.receiver.PushReceiver"
+      android:exported="false">
+      <intent-filter>
+
+        <!-- 替换为action android:name="com.igexin.sdk.action.第三方应用APPID" -->
+        <action android:name="com.igexin.sdk.action.MCml1MhrQu9j1vaoi5Hyr2"/>
+      </intent-filter>
+    </receiver>
+    <!-- 个推服务配置 -->
+    <!-- 配置的第三方参数属性 -->
+    <meta-data
+      android:name="PUSH_APPID"
+      android:value="MCml1MhrQu9j1vaoi5Hyr2"/>
+    <meta-data
+      android:name="PUSH_APPSECRET"
+      android:value="vwFeeJBV9J9czNnFZyvDR9"/>
+    <meta-data
+      android:name="PUSH_APPKEY"
+      android:value="blxNCGhyIP6JDtckzOFVi8"/>
+    <meta-data
+      android:name="PUSH_GROUPID"
+      android:value=""/>
+    <!-- testin配置 -->
+    <meta-data
+      android:name="TESTIN_APPKEY"
+      android:value="e01c63dc15f83f6fdb9681be09e5a40d"/>
+
+
+    <!-- kc -->
+    <activity
+      android:name=".z_kc.activity.MainActivity"
+      android:configChanges="keyboardHidden|orientation|screenSize"
+      android:launchMode="singleTask"
+      android:screenOrientation="portrait"/>
+    <activity
+      android:name=".z_kc.activity.ZCOrderDetailActivity"
+      android:configChanges="keyboardHidden|orientation|screenSize"
+      android:screenOrientation="portrait"
+      android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
+    <activity
+      android:name=".z_kc.activity.FindGoodsActivity"
+      android:configChanges="keyboardHidden|orientation|screenSize"
+      android:screenOrientation="portrait"
+      android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
+    <activity
+      android:name=".z_kc.activity.MyCarsActivity"
+      android:configChanges="keyboardHidden|orientation|screenSize"
+      android:screenOrientation="portrait"
+      android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
+  </application>
+
+</manifest>

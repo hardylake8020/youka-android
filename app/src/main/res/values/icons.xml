@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fa_camera">&#xf030;</string>
+    <string name="icon_warning">&#xf071;</string>
+    <string name="icon_entrance">&#xf090;</string>
+    <string name="icon_partner">&#xf1e0;</string>
+    <string name="icon_clock">&#xf017;</string>
+    <string name="icon_set">&#xf013;</string>
+    <string name="icon_headphones">&#xf025;</string>
+    <string name="icon_heart">&#xf004;</string>
+    <string name="icon_off">&#xf011;</string>
+    <string name="icon_qr_code">&#xf029;</string>
+</resources>

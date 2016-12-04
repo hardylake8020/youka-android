@@ -1,0 +1,42 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/bg_gray"
+                tools:context="com.zzqs.app_kc.activities.ActualDeliveryActivity">
+    <include layout="@layout/default_head"
+             android:id="@+id/head"/>
+    <ListView android:layout_width="match_parent" android:layout_height="match_parent"
+              android:id="@+id/lv_goods"
+              android:layout_below="@id/head"
+              android:scrollbars="none"
+              android:divider="@color/bg_gray"
+              android:dividerHeight="30px"
+              android:layout_above="@+id/ll_operation"
+              android:visibility="visible"/>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:id="@+id/ll_operation"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true">
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:id="@+id/tv_money"
+                android:padding="10dp"
+                android:textSize="20sp"
+                android:textColor="@android:color/white"
+                android:text="@string/view_tv_loan"
+                android:background="#333333"
+                android:gravity="left"
+                />
+        <Button android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/btn_commit"
+                android:background="@color/green"
+                android:textColor="@android:color/white"
+                android:text="@string/view_bt_confirm"
+                android:padding="10dp"
+                android:textSize="20sp"
+                />
+    </LinearLayout>
+
+</RelativeLayout>

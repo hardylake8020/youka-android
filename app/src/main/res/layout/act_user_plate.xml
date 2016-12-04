@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white">
+    <include layout="@layout/default_head"
+             android:id="@+id/head"/>
+    <GridView android:layout_width="match_parent" android:layout_height="match_parent"
+              android:id="@+id/plate_photos"
+              android:numColumns="3"
+              android:layout_margin="10dp"
+              android:layout_below="@id/head"
+              android:horizontalSpacing="10dp"
+              android:verticalSpacing="10dp"/>
+</RelativeLayout>

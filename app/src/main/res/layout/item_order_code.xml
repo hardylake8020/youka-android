@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content">
+
+    <LinearLayout
+            android:id="@+id/id_back"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:gravity="right">
+        <Button
+                android:id="@+id/id_remove"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:text="@string/view_bt_delete"
+                android:padding="15dp"
+                android:textSize="14sp"
+                android:background="@color/red_live_4"
+                android:textColor="@android:color/white">
+        </Button>
+    </LinearLayout>
+    <LinearLayout android:id="@+id/id_front"
+                  android:orientation="horizontal"
+                  android:layout_width="match_parent"
+                  android:layout_height="60dp"
+                  android:layout_gravity="center_vertical"
+                  android:gravity="center_vertical"
+                  android:background="@android:color/white"
+                  android:paddingLeft="10dp"
+                  android:paddingRight="10dp"
+                  android:paddingTop="15dp"
+                  android:paddingBottom="15dp">
+        <TextView android:layout_width="25dp" android:layout_height="wrap_content"
+                  android:id="@+id/scan_code_No"
+                  android:textSize="14sp"
+                  android:text="12"
+                  android:textColor="@color/text_gray"
+                  android:layout_marginLeft="10dp"/>
+        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                   android:background="@drawable/icon_scan_code"
+                   android:layout_marginLeft="7dp"/>
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:id="@+id/scan_text"
+                  android:layout_marginLeft="20dp"
+                  android:gravity="right"
+                  android:textSize="14sp"
+                  android:textColor="@color/text_gray"
+                  android:layout_marginRight="10dp"/>
+    </LinearLayout>
+
+</FrameLayout>

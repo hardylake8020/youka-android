@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/black">
+    <include layout="@layout/default_head"
+            android:id="@+id/ll"/>
+    <com.zzqs.app_kc.widgets.photoview.PhotoView
+            android:id="@+id/bigImage"
+            android:layout_below="@id/ll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    <Button android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/view_bt_choice_default_plate"
+            android:id="@+id/default_plate"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="@android:color/white"
+            android:padding="13dp"
+            android:textSize="18sp"
+            android:background="@drawable/green_select_btn"
+            android:visibility="gone"/>
+</RelativeLayout>

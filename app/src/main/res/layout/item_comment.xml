@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:background="@android:color/white">
+    <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:id="@+id/left"
+                  android:orientation="horizontal"
+                  android:layout_alignParentLeft="true">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:id="@+id/serial_No"
+                  android:textColor="@color/text_gray"/>
+        <ImageView android:layout_width="10dp" android:layout_height="1px"
+                   android:layout_gravity="center_vertical"
+                   android:layout_marginLeft="5dp"
+                   android:layout_marginRight="5dp"
+                   android:background="@color/text_gray"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:id="@+id/company_name"
+                  android:textColor="@color/text_gray"/>
+    </LinearLayout>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:id="@+id/time1"
+              android:layout_alignParentRight="true"
+              android:textColor="@color/text_gray"/>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:id="@+id/time2"
+              android:layout_below="@id/time1"
+              android:layout_marginTop="5dp"
+              android:textColor="@color/text_gray"
+              android:layout_alignParentRight="true"/>
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:id="@+id/content"
+              android:layout_toLeftOf="@id/time1"
+              android:layout_below="@id/left"
+              android:layout_marginTop="5dp"
+              android:textColor="@color/dark_black"/>
+</RelativeLayout>

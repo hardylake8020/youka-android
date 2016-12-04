@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white">
+    <include android:id="@+id/head" layout="@layout/default_head"/>
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:layout_below="@id/head"
+                    android:layout_marginTop="100dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginBottom="10dp">
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:id="@+id/call_hot_line"
+                  android:layout_alignParentBottom="true"
+                  android:text="@string/view_tv_call_hot_line"
+                  android:textColor="@color/middle_black"
+                  android:textSize="14sp"
+                  android:gravity="center"
+                  android:layout_marginBottom="10dp"/>
+        <Button android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:id="@+id/commitLogin"
+                android:layout_above="@id/call_hot_line"
+                android:padding="15dp"
+                android:textSize="16sp"
+                android:text="@string/view_bt_login"
+                android:textColor="@android:color/white"
+                android:background="@drawable/green_select_btn"
+                android:layout_marginBottom="40dp"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:id="@+id/forgetPassword"
+                  android:layout_above="@id/commitLogin"
+                  android:textSize="14sp"
+                  android:text="@string/view_tv_forget_password"
+                  android:textColor="@color/green"
+                  android:layout_alignLeft="@id/commitLogin"
+                  android:layout_marginBottom="10dp"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:id="@+id/signup"
+                  android:layout_above="@id/commitLogin"
+                  android:layout_alignRight="@id/commitLogin"
+                  android:textColor="@color/green"
+                  android:layout_marginBottom="10dp"/>
+        <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:id="@+id/mobile_phone"
+                  android:layout_alignParentTop="true"
+                  android:hint="@string/view_et_input_tel_num"
+                  android:padding="10dp"
+                  android:textSize="18sp"
+                  android:phoneNumber="true"
+                  android:background="@drawable/bg_edittext"/>
+        <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:id="@+id/password"
+                  android:layout_below="@id/mobile_phone"
+                  android:layout_marginTop="15dp"
+                  android:textSize="18sp"
+                  android:padding="10dp"
+                  android:inputType="textPassword"
+                  android:background="@drawable/bg_edittext"
+                  android:hint="@string/view_et_input_pwd"/>
+    </RelativeLayout>
+</RelativeLayout>

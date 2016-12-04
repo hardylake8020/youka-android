@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+    <ImageView
+            android:id="@+id/iv_popup"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/chatting_setmode_msg_btn"/>
+
+    <RelativeLayout
+            android:id="@+id/btn_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:focusableInTouchMode="true"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/iv_popup">
+
+
+        <EditText
+                android:id="@+id/et_send_message"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/login_edit_normal"
+                android:singleLine="true"
+                android:hint="@string/hint"
+                android:textColorHint="@color/hint"
+                android:textSize="18sp"/>
+    </RelativeLayout>
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="40dp"
+                    android:layout_toRightOf="@id/iv_popup">
+        <Button android:layout_width="35dp" android:layout_height="35dp"
+                android:id="@+id/play_sound"
+                android:layout_gravity="center_horizontal"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/btn_play_sound"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="20dp"
+                android:visibility="gone"/>
+        <TextView
+                android:id="@+id/btn_rcd"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_toLeftOf="@id/play_sound"
+                android:layout_centerVertical="true"
+                android:background="@drawable/chat_send_btn"
+                android:gravity="center"
+                android:layout_marginLeft="20dp"
+                android:text="@string/press_talk"
+                android:textColor="@color/middle_black"
+                android:visibility="gone"/>
+    </RelativeLayout>
+</RelativeLayout>
