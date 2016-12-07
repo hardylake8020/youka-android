@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:fresco="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/bg_gray"
+              android:orientation="vertical">
+
+  <include layout="@layout/default_head"/>
+
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/primary_colors">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+      android:id="@+id/sdCarPhoto"
+      android:layout_width="100dp"
+      android:layout_height="100dp"
+      android:layout_centerInParent="true"
+      android:layout_gravity="center_vertical"
+      android:layout_marginBottom="20dp"
+      android:layout_marginTop="10dp"
+      fresco:actualImageScaleType="focusCrop"
+      fresco:fadeDuration="1000"
+      fresco:placeholderImage="@drawable/default_head_portrait"
+      fresco:placeholderImageScaleType="focusCrop"
+      fresco:roundAsCircle="true"/>
+  </RelativeLayout>
+
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="7dp"
+    android:background="@android:color/white"
+    android:padding="10dp">
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentLeft="true"
+      android:text="@string/plate_number"
+      android:textColor="@color/black"
+      android:textSize="14sp"/>
+
+    <TextView
+      android:id="@+id/tvPlateNumber"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentRight="true"
+      android:textColor="@color/black"
+      android:textSize="14sp"/>
+  </RelativeLayout>
+
+  <ImageView
+    android:layout_width="match_parent"
+    android:layout_height="1px"
+    android:background="@color/line_gray"/>
+
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:padding="10dp">
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentLeft="true"
+      android:text="@string/car_type"
+      android:textColor="@color/black"
+      android:textSize="14sp"/>
+
+    <TextView
+      android:id="@+id/tvCarType"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentRight="true"
+      android:textColor="@color/black"
+      android:textSize="14sp"/>
+  </RelativeLayout>
+
+  <ImageView
+    android:layout_width="match_parent"
+    android:layout_height="1px"
+    android:background="@color/line_gray"/>
+
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:padding="10dp">
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentLeft="true"
+      android:text="@string/oil_card"
+      android:textColor="@color/black"
+      android:textSize="14sp"/>
+
+    <TextView
+      android:id="@+id/tvOilCard"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentRight="true"
+      android:textColor="@color/black"
+      android:textSize="14sp"/>
+  </RelativeLayout>
+
+  <ImageView
+    android:layout_width="match_parent"
+    android:layout_height="1px"
+    android:background="@color/line_gray"/>
+
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="7dp"
+    android:background="@android:color/white"
+    android:padding="10dp">
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentLeft="true"
+      android:text="@string/driver"
+      android:textColor="@color/black"
+      android:textSize="14sp"/>
+
+    <TextView
+      android:id="@+id/tvDriverName"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentRight="true"
+      android:textColor="@color/black"
+      android:textSize="14sp"/>
+  </RelativeLayout>
+
+  <ImageView
+    android:layout_width="match_parent"
+    android:layout_height="1px"
+    android:background="@color/line_gray"/>
+
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:padding="10dp">
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentLeft="true"
+      android:text="@string/driver_phone"
+      android:textColor="@color/black"
+      android:textSize="14sp"/>
+
+    <TextView
+      android:id="@+id/tvDriverPhone"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentRight="true"
+      android:textColor="@color/black"
+      android:textSize="14sp"/>
+  </RelativeLayout>
+
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="7dp"
+    android:background="@android:color/white"
+    android:padding="10dp">
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentLeft="true"
+      android:text="@string/status"
+      android:textColor="@color/black"
+      android:textSize="14sp"/>
+
+    <TextView
+      android:id="@+id/tvCarStatus"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentRight="true"
+      android:textColor="@color/black"
+      android:textSize="14sp"/>
+  </RelativeLayout>
+
+  <ImageView
+    android:layout_width="match_parent"
+    android:layout_height="1px"
+    android:background="@color/line_gray"/>
+
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:padding="10dp">
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentLeft="true"
+      android:text="@string/now_location"
+      android:textColor="@color/black"
+      android:textSize="14sp"/>
+
+    <TextView
+      android:id="@+id/tvCarLocation"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentRight="true"
+      android:drawableRight="@drawable/icon_right_arrows"
+      android:textColor="@color/black"
+      android:textSize="14sp"/>
+  </RelativeLayout>
+</LinearLayout>
