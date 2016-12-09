@@ -82,4 +82,16 @@
   <string name="no_location_info">无位置信息</string>
   <string name="un_transport">未运输</string>
   <string name="transporting">运输中</string>
+  <string name="account_balance">账户余额（元）</string>
+  <string name="bank_card">银行卡</string>
+  <string name="top_up">充值</string>
+  <string name="withdraw">提现</string>
+  <string name="cash_deposit">保证金</string>
+  <string name="bill">账单</string>
+  <string name="payed">已缴纳</string>
+  <string name="un_pay">未缴纳</string>
+  <string name="extract_cash_deposit">提取保证金￥%1$s</string>
+  <string name="payment_cash_deposit">存入保证金￥%1$s</string>
+  <string name="open_offer_permissions">开启报价权限</string>
+  <string name="close_offer_permissions">取消报价权限</string>
 </resources>

@@ -58,6 +58,12 @@ public class MainActivity extends BaseActivity implements XListView.IXListViewLi
       }
     });
     rlMyWallet = (RelativeLayout) findViewById(R.id.rlMyWallet);
+    rlMyWallet.setOnClickListener(new MyOnClickListener() {
+      @Override
+      public void OnceOnClick(View view) {
+        startActivity(new Intent(mContext, MyWalletActivity.class));
+      }
+    });
     rlMyOilCard = (RelativeLayout) findViewById(R.id.rlMyOilCard);
     lvOrders = (XListView) findViewById(R.id.lvOrders);
     lvOrders.setPullRefreshEnable(true);

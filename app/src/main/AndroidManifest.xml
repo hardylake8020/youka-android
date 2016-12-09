@@ -284,6 +284,16 @@
       android:configChanges="keyboardHidden|orientation|screenSize"
       android:screenOrientation="portrait"
       android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
+    <activity
+      android:name=".z_kc.activity.MyWalletActivity"
+      android:configChanges="keyboardHidden|orientation|screenSize"
+      android:screenOrientation="portrait"
+      android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
+    <activity
+      android:name=".z_kc.activity.CashDepositActivity"
+      android:configChanges="keyboardHidden|orientation|screenSize"
+      android:screenOrientation="portrait"
+      android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
   </application>
 
 </manifest>
