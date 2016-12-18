@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/bg_gray"
+                android:orientation="vertical">
+
+  <include
+    android:id="@+id/defaultHead"
+    layout="@layout/default_head"/>
+
+  <RelativeLayout
+    android:id="@+id/rlSubHead"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/defaultHead"
+    android:background="@color/green"
+    android:paddingBottom="15dp"
+    android:paddingTop="15dp">
+
+    <ImageView
+      android:id="@+id/ivCashDepositStatus"
+      android:layout_width="75dp"
+      android:layout_height="75dp"
+      android:layout_centerHorizontal="true"
+      android:background="@drawable/ic_tick_blue"/>
+
+    <TextView
+      android:id="@+id/tvCashDepositStatus"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/ivCashDepositStatus"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="15dp"
+      android:text="@string/payed"
+      android:textColor="@android:color/white"
+      android:textSize="16sp"/>
+  </RelativeLayout>
+
+  <TextView
+    android:id="@+id/tvOperation"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:background="@android:color/white"
+    android:gravity="center"
+    android:padding="20dp"
+    android:textColor="@color/primary_colors"
+    android:textSize="16sp"/>
+
+  <com.zzqs.app_kc.widgets.xlistView.XListView
+    android:id="@+id/lvRecords"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_above="@id/tvOperation"
+    android:layout_below="@id/rlSubHead"
+    android:background="@color/bg_gray"
+    android:divider="@android:color/white"
+    android:dividerHeight="0px"
+    android:listSelector="@color/lucency"
+    android:scrollbars="none"/>
+</RelativeLayout>

@@ -1,35 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/head_rl"
-                android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@color/primary_colors">
-    <TextView android:layout_width="wrap_content" android:layout_height="50dp"
-              android:id="@+id/head_back"
-              android:text="@string/view_bt_back"
-              android:layout_centerVertical="true"
-              android:textColor="@color/white_to_gray"
-              android:textSize="16sp"
-              android:paddingLeft="10dp"
-              android:gravity="center"
-              android:drawableLeft="@drawable/back_btn" />
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:id="@+id/head_title"
-              android:layout_centerInParent="true"
-              android:paddingTop="15dp"
-              android:paddingBottom="15dp"
-              android:layout_centerVertical="true"
-              android:layout_centerHorizontal="true"
-              android:textColor="@android:color/white"
-              android:textSize="20sp"/>
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:id="@+id/head_right"
-              android:layout_alignParentRight="true"
-              android:layout_centerVertical="true"
-              android:padding="6dp"
-              android:textSize="16sp"
-              android:layout_marginRight="10dp"
-              android:textColor="@android:color/white"
-              android:textStyle="bold"
-              android:visibility="gone"/>
+
+  <RelativeLayout
+    android:id="@+id/rlDefaultHeadParent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+      android:id="@+id/head_back"
+      android:layout_width="wrap_content"
+      android:layout_height="50dp"
+      android:layout_centerVertical="true"
+      android:drawableLeft="@drawable/back_btn"
+      android:gravity="center"
+      android:paddingLeft="10dp"
+      android:text="@string/view_bt_back"
+      android:textColor="@color/white_to_gray"
+      android:textSize="16sp"/>
+
+    <TextView
+      android:id="@+id/head_title"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerHorizontal="true"
+      android:layout_centerInParent="true"
+      android:layout_centerVertical="true"
+      android:paddingBottom="15dp"
+      android:paddingTop="15dp"
+      android:textColor="@android:color/white"
+      android:textSize="20sp"/>
+
+    <TextView
+      android:id="@+id/head_right"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentRight="true"
+      android:layout_centerVertical="true"
+      android:layout_marginRight="10dp"
+      android:padding="6dp"
+      android:textColor="@android:color/white"
+      android:textSize="16sp"
+      android:textStyle="bold"
+      android:visibility="gone"/>
+  </RelativeLayout>
 </RelativeLayout>

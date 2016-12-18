@@ -1,7 +1,9 @@
 package com.zzqs.app_kc.z_kc.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -54,6 +56,15 @@ public class MyCarsActivity extends BaseActivity {
     lvCars = (ListView) findViewById(R.id.lvCars);
     carAdapter = new CarAdapter(this, carList);
     lvCars.setAdapter(carAdapter);
+    lvCars.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+      @Override
+      public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Car car = carList.get(position);
+        Intent intent = new Intent(mContext,CarDetailActivity.class);
+        intent.putExtra(Car.CAR,car);
+        startActivity(intent);
+      }
+    });
   }
 
   @Override
