@@ -20,6 +20,8 @@ public class KCOrder implements Parcelable {
   private String order_number;
   private String refer_order_number;
   private String sender_company;//发标方
+  private String sender_phone;
+  private String sender_name;
   private String pay_approver;//付款审核人
   private String finance_officer;//财务负责人
   private String status;//unStarted,inProgress,completed,stop,obsolete,deleted;未开始，进行中，已截止， 已完成，已过时，已删除
@@ -78,7 +80,7 @@ public class KCOrder implements Parcelable {
   private double grab_increment_price;
   private double current_grab_price;
 
-  private double my_prince;
+  private double driver_price;
 
   public String getTender_number() {
     return tender_number;
@@ -110,6 +112,22 @@ public class KCOrder implements Parcelable {
 
   public void setSender_company(String sender_company) {
     this.sender_company = sender_company;
+  }
+
+  public String getSender_phone() {
+    return sender_phone;
+  }
+
+  public void setSender_phone(String sender_phone) {
+    this.sender_phone = sender_phone;
+  }
+
+  public String getSender_name() {
+    return sender_name;
+  }
+
+  public void setSender_name(String sender_name) {
+    this.sender_name = sender_name;
   }
 
   public String getPay_approver() {
@@ -376,7 +394,6 @@ public class KCOrder implements Parcelable {
     this.delivery_tel_phone = delivery_tel_phone;
   }
 
-
   public String getInitiator_name() {
     return initiator_name;
   }
@@ -391,22 +408,6 @@ public class KCOrder implements Parcelable {
 
   public void setInitiator_phone(String initiator_phone) {
     this.initiator_phone = initiator_phone;
-  }
-
-  public String getTender_type() {
-    return tender_type;
-  }
-
-  public void setTender_type(String tender_type) {
-    this.tender_type = tender_type;
-  }
-
-  public double getHighest_protect_price() {
-    return highest_protect_price;
-  }
-
-  public void setHighest_protect_price(double highest_protect_price) {
-    this.highest_protect_price = highest_protect_price;
   }
 
   public double getPayment_top_rate() {
@@ -481,28 +482,12 @@ public class KCOrder implements Parcelable {
     this.payment_last_card_rate = payment_last_card_rate;
   }
 
-  public double getHighest_grab_price() {
-    return highest_grab_price;
+  public String getTender_type() {
+    return tender_type;
   }
 
-  public void setHighest_grab_price(double highest_grab_price) {
-    this.highest_grab_price = highest_grab_price;
-  }
-
-  public double getCurrent_grab_price() {
-    return current_grab_price;
-  }
-
-  public void setCurrent_grab_price(double current_grab_price) {
-    this.current_grab_price = current_grab_price;
-  }
-
-  public double getMy_prince() {
-    return my_prince;
-  }
-
-  public void setMy_prince(double my_prince) {
-    this.my_prince = my_prince;
+  public void setTender_type(String tender_type) {
+    this.tender_type = tender_type;
   }
 
   public double getLowest_protect_price() {
@@ -513,12 +498,28 @@ public class KCOrder implements Parcelable {
     this.lowest_protect_price = lowest_protect_price;
   }
 
+  public double getHighest_protect_price() {
+    return highest_protect_price;
+  }
+
+  public void setHighest_protect_price(double highest_protect_price) {
+    this.highest_protect_price = highest_protect_price;
+  }
+
   public double getLowest_grab_price() {
     return lowest_grab_price;
   }
 
   public void setLowest_grab_price(double lowest_grab_price) {
     this.lowest_grab_price = lowest_grab_price;
+  }
+
+  public double getHighest_grab_price() {
+    return highest_grab_price;
+  }
+
+  public void setHighest_grab_price(double highest_grab_price) {
+    this.highest_grab_price = highest_grab_price;
   }
 
   public double getGrab_increment_price() {
@@ -528,6 +529,23 @@ public class KCOrder implements Parcelable {
   public void setGrab_increment_price(double grab_increment_price) {
     this.grab_increment_price = grab_increment_price;
   }
+
+  public double getCurrent_grab_price() {
+    return current_grab_price;
+  }
+
+  public void setCurrent_grab_price(double current_grab_price) {
+    this.current_grab_price = current_grab_price;
+  }
+
+  public double getDriver_price() {
+    return driver_price;
+  }
+
+  public void setDriver_price(double driver_price) {
+    this.driver_price = driver_price;
+  }
+
 
   @Override
   public int describeContents() {
@@ -540,6 +558,8 @@ public class KCOrder implements Parcelable {
     dest.writeString(this.order_number);
     dest.writeString(this.refer_order_number);
     dest.writeString(this.sender_company);
+    dest.writeString(this.sender_phone);
+    dest.writeString(this.sender_name);
     dest.writeString(this.pay_approver);
     dest.writeString(this.finance_officer);
     dest.writeString(this.status);
@@ -591,7 +611,7 @@ public class KCOrder implements Parcelable {
     dest.writeDouble(this.highest_grab_price);
     dest.writeDouble(this.grab_increment_price);
     dest.writeDouble(this.current_grab_price);
-    dest.writeDouble(this.my_prince);
+    dest.writeDouble(this.driver_price);
   }
 
   public KCOrder() {
@@ -602,6 +622,8 @@ public class KCOrder implements Parcelable {
     this.order_number = in.readString();
     this.refer_order_number = in.readString();
     this.sender_company = in.readString();
+    this.sender_phone = in.readString();
+    this.sender_name = in.readString();
     this.pay_approver = in.readString();
     this.finance_officer = in.readString();
     this.status = in.readString();
@@ -655,7 +677,7 @@ public class KCOrder implements Parcelable {
     this.highest_grab_price = in.readDouble();
     this.grab_increment_price = in.readDouble();
     this.current_grab_price = in.readDouble();
-    this.my_prince = in.readDouble();
+    this.driver_price = in.readDouble();
   }
 
   public static final Creator<KCOrder> CREATOR = new Creator<KCOrder>() {
