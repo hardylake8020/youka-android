@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zzqs.app_kc.R;
+import com.zzqs.app_kc.z_kc.entitiy.Goods;
 import com.zzqs.app_kc.z_kc.entitiy.KCOrder;
 import com.zzqs.app_kc.z_kc.listener.MyOnClickListener;
 import com.zzqs.app_kc.z_kc.util.NumberUtil;
@@ -87,12 +88,12 @@ public class ZCOrderDetailActivity extends BaseActivity {
     llLastPay = (LinearLayout) findViewById(R.id.llLastPay);
     llReceiptPay = (LinearLayout) findViewById(R.id.llReceiptPay);
 
-    if (order.getType().equals(KCOrder.NORMAL_ORDER)) {
+    if (order.getTender_type().equals(KCOrder.GRAB)) {
       tvTitle.setText(R.string.grab_details);
       llBiddingOrderHead.setVisibility(View.GONE);
       llBiddingOrder.setVisibility(View.GONE);
       DecimalFormat df = new DecimalFormat("######0.00");
-      tvFreight.setText(df.format(order.getFixed_prince()));
+      tvFreight.setText(df.format(order.getHighest_protect_price()));
       tvGrabOrder.setOnClickListener(new MyOnClickListener() {
         @Override
         public void OnceOnClick(View view) {
@@ -103,7 +104,7 @@ public class ZCOrderDetailActivity extends BaseActivity {
       tvTitle.setText(R.string.bidding_details);
       llGrabOrder.setVisibility(View.GONE);
       long startTime = System.currentTimeMillis();
-      long endTime = TimeUtil.UTCTimeToTimeMillis(order.getOver_time());
+      long endTime = TimeUtil.UTCTimeToTimeMillis(order.getEnd_time());
       remainingTime = endTime - startTime;
       if (remainingTime > 0) {
         timer = new Timer();
@@ -114,7 +115,7 @@ public class ZCOrderDetailActivity extends BaseActivity {
             setRemainingTime();
           }
         }, 0, 1000);
-        tvMaxPrince.setText(order.getMax_prince() + getString(R.string.prince_unit));
+        tvMaxPrince.setText(order.getHighest_grab_price() + getString(R.string.prince_unit));
         tvBiddingOrder.setOnClickListener(new MyOnClickListener() {
           @Override
           public void OnceOnClick(View view) {
@@ -127,57 +128,74 @@ public class ZCOrderDetailActivity extends BaseActivity {
       }
     }
 
-    tvStartCity.setText(order.getStart_city());
-    tvStartDistrict.setText(order.getStart_district());
-    tvEndCity.setText(order.getEnd_city());
-    tvEndDistrict.setText(order.getEnd_district());
-    tvNeedCars.setText(order.getRequirement_car_type() + "  " + order.getRequirement_car_number() + "辆");
+    tvStartCity.setText(order.getPickup_city());
+    tvStartDistrict.setText(order.getPickup_region());
+    tvEndCity.setText(order.getDelivery_city());
+    tvEndDistrict.setText(order.getDelivery_region());
+    tvNeedCars.setText(order.getTruck_type() + "  " + order.getTruck_count() + "辆");
     StringBuilder sb = new StringBuilder();
-    if (order.getTotal_quantity() != 0) {
-      sb.append(order.getTotal_quantity() + order.getQuantity_unit());
-    }
-    if (order.getTotal_volume() != 0) {
-      if (sb.length() > 0) {
-        sb.append("/");
+    if (order.getGoods() != null) {
+      double quantity = 0, volume = 0, weight = 0;
+      String quantityUnit = null, volumeUnit = null, weightUnit = null;
+      for (Goods goods : order.getGoods()) {
+        quantity += goods.getCount();
+        volume += goods.getCount2();
+        weight += goods.getCount3();
+        if (!TextUtils.isEmpty(goods.getUnit())) {
+          quantityUnit = goods.getUnit();
+        }
+        if (!TextUtils.isEmpty(goods.getUnit2())) {
+          quantityUnit = goods.getUnit2();
+        }
+        if (!TextUtils.isEmpty(goods.getUnit2())) {
+          quantityUnit = goods.getUnit2();
+        }
       }
-      sb.append(order.getTotal_volume() + order.getVolume_unit());
-    }
-    if (order.getTotal_weight() != 0) {
-      if (sb.length() > 0) {
-        sb.append("/");
+      if (!TextUtils.isEmpty(quantityUnit)) {
+        sb.append(quantity + quantityUnit);
       }
-      sb.append(order.getTotal_weight() + order.getWeight_unit());
+      if (!TextUtils.isEmpty(volumeUnit)) {
+        if (sb.length() > 0) {
+          sb.append("/");
+        }
+        sb.append(volume + volumeUnit);
+      }
+      if (!TextUtils.isEmpty(weightUnit)) {
+        if (sb.length() > 0) {
+          sb.append("/");
+        }
+        sb.append(weight + weightUnit);
+      }
+      tvGoodsInfo.setText(sb.toString());
+      sb.setLength(0);
     }
-    tvGoodsInfo.setText(sb.toString());
-    sb.setLength(0);
-
     tvRemark.setText(TextUtils.isEmpty(order.getRemark()) ? "-" : order.getRemark());
-    tvInitiator.setText(order.getInitiator());
+    tvInitiator.setText(order.getSender_company());
     tvInitiatorName.setText(order.getInitiator_name());
     tvInitiatorPhone.setText(order.getInitiator_phone());
-    tvPickupTime.setText(TimeUtil.convertDateStringFormat(order.getPickup_start_time(), TimeUtil.SERVER_TIME_FORMAT, "MM-dd HH:mm") + "~" + TimeUtil.convertDateStringFormat(order.getPickup_end_time(), TimeUtil.SERVER_TIME_FORMAT, "MM-dd HH:mm"));
-    tvPickupAddress.setText(order.getStart_address());
-    tvDeliveryTime.setText(TimeUtil.convertDateStringFormat(order.getDelivery_start_time(), TimeUtil.SERVER_TIME_FORMAT, "MM-dd HH:mm") + "~" + TimeUtil.convertDateStringFormat(order.getDelivery_end_time(), TimeUtil.SERVER_TIME_FORMAT, "MM-dd HH:mm"));
-    tvDeliveryAddress.setText(order.getEnd_address());
-    if (order.getFirst_pay() > 0) {
-      sb.append(getString(R.string.first_pay));
-    } else if (order.getLast_pay() > 0) {
-      sb.append("+" + getString(R.string.last_pay));
+    tvPickupTime.setText(TimeUtil.convertDateStringFormat(order.getPickup_start_time_format(), TimeUtil.SERVER_TIME_FORMAT, "MM-dd HH:mm") + "~" + TimeUtil.convertDateStringFormat(order.getPickup_end_time_format(), TimeUtil.SERVER_TIME_FORMAT, "MM-dd HH:mm"));
+    tvPickupAddress.setText(order.getPickup_address());
+    tvDeliveryTime.setText(TimeUtil.convertDateStringFormat(order.getDelivery_start_time_format(), TimeUtil.SERVER_TIME_FORMAT, "MM-dd HH:mm") + "~" + TimeUtil.convertDateStringFormat(order.getDelivery_end_time_format(), TimeUtil.SERVER_TIME_FORMAT, "MM-dd HH:mm"));
+    tvDeliveryAddress.setText(order.getDelivery_address());
+    if (order.getPayment_top_rate() > 0) {
+      sb.append(getString(R.string.payment_top_rate));
+    } else if (order.getPayment_last_rate() > 0) {
+      sb.append("+" + getString(R.string.payment_last_rate));
     }
-    if (order.getReceipt_pay() > 0) {
+    if (order.getPayment_tail_rate() > 0) {
       sb.append("+" + getString(R.string.receipt));
     }
     tvPayWay.setText(sb.toString());
     sb.setLength(0);
 
-    if (order.getFirst_pay() > 0) {
-      sb.append(NumberUtil.doubleTrans(order.getFirst_pay()) + "%   ");
-      if (order.getFirst_pay_cash() == 100) {
+    if (order.getPayment_top_rate() > 0) {
+      sb.append(NumberUtil.doubleTrans(order.getPayment_top_rate()) + "%   ");
+      if (order.getPayment_top_cash_rate() == 100) {
         sb.append(getString(R.string.cash_pay));
-      } else if (order.getFirst_pay_oil_card() == 100) {
+      } else if (order.getPayment_top_card_rate() == 100) {
         sb.append(getString(R.string.oil_card_pay));
       } else {
-        sb.append("(" + NumberUtil.doubleTrans(order.getFirst_pay_cash()) + "%" + getString(R.string.cash) + "  +  " + NumberUtil.doubleTrans(order.getFirst_pay_oil_card()) + "%" + getString(R.string.oil_card) + ")");
+        sb.append("(" + NumberUtil.doubleTrans(order.getPayment_top_cash_rate()) + "%" + getString(R.string.cash) + "  +  " + NumberUtil.doubleTrans(order.getPayment_top_card_rate()) + "%" + getString(R.string.oil_card) + ")");
       }
       tvFirstPay.setText(sb.toString());
       sb.setLength(0);
@@ -185,14 +203,14 @@ public class ZCOrderDetailActivity extends BaseActivity {
       llFirstPay.setVisibility(View.GONE);
     }
 
-    if (order.getLast_pay() > 0) {
-      sb.append(NumberUtil.doubleTrans(order.getLast_pay()) + "%   ");
-      if (order.getLast_pay_cash() == 100) {
+    if (order.getPayment_last_rate() > 0) {
+      sb.append(NumberUtil.doubleTrans(order.getPayment_last_rate()) + "%   ");
+      if (order.getPayment_last_cash_rate() == 100) {
         sb.append("(" + getString(R.string.cash_pay) + ")");
-      } else if (order.getLast_pay_oil_card() == 100) {
+      } else if (order.getPayment_last_card_rate() == 100) {
         sb.append("(" + getString(R.string.oil_card_pay) + ")");
       } else {
-        sb.append("(" + NumberUtil.doubleTrans(order.getLast_pay_cash()) + "%" + getString(R.string.cash) + "  +  " + NumberUtil.doubleTrans(order.getLast_pay_oil_card()) + "%" + getString(R.string.oil_card) + ")");
+        sb.append("(" + NumberUtil.doubleTrans(order.getPayment_last_cash_rate()) + "%" + getString(R.string.cash) + "  +  " + NumberUtil.doubleTrans(order.getPayment_last_card_rate()) + "%" + getString(R.string.oil_card) + ")");
       }
       tvLastPay.setText(sb.toString());
       sb.setLength(0);
@@ -200,14 +218,14 @@ public class ZCOrderDetailActivity extends BaseActivity {
       llLastPay.setVisibility(View.GONE);
     }
 
-    if (order.getReceipt_pay() > 0) {
-      sb.append(NumberUtil.doubleTrans(order.getReceipt_pay()) + "%   ");
-      if (order.getReceipt_pay_cash() == 100) {
+    if (order.getPayment_tail_rate() > 0) {
+      sb.append(NumberUtil.doubleTrans(order.getPayment_tail_rate()) + "%   ");
+      if (order.getPayment_tail_cash_rate() == 100) {
         sb.append("(" + getString(R.string.cash_pay) + ")");
-      } else if (order.getReceipt_pay_oil_card() == 100) {
+      } else if (order.getPayment_tail_card_rate() == 100) {
         sb.append("(" + getString(R.string.oil_card_pay) + ")");
       } else {
-        sb.append("(" + NumberUtil.doubleTrans(order.getReceipt_pay_cash()) + "%" + getString(R.string.cash) + "  +  " + NumberUtil.doubleTrans(order.getReceipt_pay_oil_card()) + "%" + getString(R.string.oil_card) + ")");
+        sb.append("(" + NumberUtil.doubleTrans(order.getPayment_tail_cash_rate()) + "%" + getString(R.string.cash) + "  +  " + NumberUtil.doubleTrans(order.getPayment_tail_card_rate()) + "%" + getString(R.string.oil_card) + ")");
       }
       tvReceipt.setText(sb.toString());
       sb.setLength(0);

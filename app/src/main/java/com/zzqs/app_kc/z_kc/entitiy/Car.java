@@ -12,32 +12,33 @@ import java.util.List;
 
 public class Car implements Parcelable{
   public static final String CAR = "car";
-  private String plate_number;
-  private String car_type;
+  public static final String UN_USAGE = "unUsage";
+  public static final String USAGE = "usage";
+  private String truck_number;
+  private String truck_type;
+  private List<Double> location;
+
   private String driver_phone;
   private String car_photo;
   private String driver_name;
   private String status;
   private String oil_card;
-  private List<Double> location;
-  public static final String UN_TRANSPORT = "un_transport";
-  public static final String TRANSPORTING = "transporting";
 
 
-  public String getPlate_number() {
-    return plate_number;
+  public String getTruck_number() {
+    return truck_number;
   }
 
-  public void setPlate_number(String plate_number) {
-    this.plate_number = plate_number;
+  public void setTruck_number(String truck_number) {
+    this.truck_number = truck_number;
   }
 
-  public String getCar_type() {
-    return car_type;
+  public String getTruck_type() {
+    return truck_type;
   }
 
-  public void setCar_type(String car_type) {
-    this.car_type = car_type;
+  public void setTruck_type(String truck_type) {
+    this.truck_type = truck_type;
   }
 
   public String getDriver_phone() {
@@ -96,8 +97,8 @@ public class Car implements Parcelable{
 
   @Override
   public void writeToParcel(Parcel dest, int flags) {
-    dest.writeString(this.plate_number);
-    dest.writeString(this.car_type);
+    dest.writeString(this.truck_number);
+    dest.writeString(this.truck_type);
     dest.writeString(this.driver_phone);
     dest.writeString(this.car_photo);
     dest.writeString(this.driver_name);
@@ -110,8 +111,8 @@ public class Car implements Parcelable{
   }
 
   protected Car(Parcel in) {
-    this.plate_number = in.readString();
-    this.car_type = in.readString();
+    this.truck_number = in.readString();
+    this.truck_type = in.readString();
     this.driver_phone = in.readString();
     this.car_photo = in.readString();
     this.driver_name = in.readString();
