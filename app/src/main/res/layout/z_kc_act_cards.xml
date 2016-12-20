@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+  <include layout="@layout/default_head" android:id="@+id/rlHeader"/>
+
+  <RelativeLayout
+    android:id="@+id/rlSub"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/rlHeader"
+    android:background="@color/primary_colors"
+    android:paddingBottom="2dp">
+
+    <LinearLayout
+      android:id="@+id/llTitles"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:paddingBottom="10dp"
+      android:paddingTop="10dp">
+
+
+      <TextView
+        android:id="@+id/tvOilCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/oil_card"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"/>
+
+      <TextView
+        android:id="@+id/tvETCCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/etc_card"
+        android:textColor="@color/dark_blue"
+        android:textSize="16sp"/>
+
+    </LinearLayout>
+
+    <ImageView
+      android:id="@+id/ivCursor"
+      android:layout_width="200dp"
+      android:layout_height="4dp"
+      android:layout_below="@id/llTitles"
+      android:background="@android:color/white"/>
+  </RelativeLayout>
+
+  <android.support.v4.view.ViewPager
+    android:id="@+id/viewPager"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/rlSub"
+    android:layout_gravity="center"
+    android:layout_marginTop="2dp"
+    android:layout_weight="1"
+    android:background="@android:color/white"
+    android:flipInterval="30"
+    android:persistentDrawingCache="animation"/>
+</LinearLayout>

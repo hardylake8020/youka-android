@@ -70,12 +70,12 @@ public class MyCarsActivity extends BaseActivity {
   @Override
   public void loadData() {
     Car car1 = new Car();
-    car1.setCar_type("金杯");
+    car1.setTruck_type("金杯");
     car1.setDriver_name("张三");
     car1.setDriver_phone("18721850339");
-    car1.setPlate_number("沪A12345");
+    car1.setTruck_number("沪A12345");
     car1.setOil_card("1234 1234 1234 1234");
-    car1.setStatus(Car.TRANSPORTING);
+    car1.setStatus(Car.USAGE);
     List<Double> location = new ArrayList<>();
     location.add(121.48789949);
     location.add(31.24916171);
@@ -83,12 +83,12 @@ public class MyCarsActivity extends BaseActivity {
     carList.add(car1);
 
     Car car2 = new Car();
-    car2.setCar_type("五菱之光");
+    car2.setTruck_type("五菱之光");
     car2.setDriver_name("李四");
     car2.setDriver_phone("13927499609");
-    car2.setPlate_number("沪B54321");
+    car2.setTruck_number("沪B54321");
     car2.setOil_card("4321 4321 4321 4321");
-    car2.setStatus(Car.UN_TRANSPORT);
+    car2.setStatus(Car.UN_USAGE);
     List<Double> location2 = new ArrayList<>();
     location2.add(120.48789949);
     location2.add(29.24916171);

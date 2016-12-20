@@ -61,9 +61,9 @@ public class CarDetailActivity extends BaseActivity {
       }
     });
     tvPlateNumber = (TextView) findViewById(R.id.tvPlateNumber);
-    tvPlateNumber.setText(car.getPlate_number());
+    tvPlateNumber.setText(car.getTruck_number());
     tvCarType = (TextView) findViewById(R.id.tvCarType);
-    tvCarType.setText(car.getCar_type());
+    tvCarType.setText(car.getTruck_type());
     tvOilCard = (TextView) findViewById(R.id.tvOilCard);
     tvOilCard.setText(car.getOil_card());
     tvDriverName = (TextView) findViewById(R.id.tvDriverName);
@@ -71,9 +71,9 @@ public class CarDetailActivity extends BaseActivity {
     tvDriverPhone = (TextView) findViewById(R.id.tvDriverPhone);
     tvDriverPhone.setText(car.getDriver_phone());
     tvCarStatus = (TextView) findViewById(R.id.tvCarStatus);
-    if (car.getStatus().equals(Car.UN_TRANSPORT)) {
+    if (car.getStatus().equals(Car.UN_USAGE)) {
       tvCarStatus.setText(R.string.un_transport);
-    } else if (car.getStatus().equals(Car.TRANSPORTING)) {
+    } else if (car.getStatus().equals(Car.USAGE)) {
       tvCarStatus.setText(R.string.transporting);
     }
     tvCarLocation = (TextView) findViewById(R.id.tvCarLocation);

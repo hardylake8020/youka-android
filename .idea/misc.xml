@@ -38,10 +38,14 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
 <<<<<<< HEAD
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+=======
+<<<<<<< HEAD
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" default="true" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
 =======
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
 >>>>>>> a39e3a46ec58c62ff8de3756ca3109e3c74c5f48
+>>>>>>> 18a6d64d2a0b4d3348a5e72017e0e1bcd7a790be
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

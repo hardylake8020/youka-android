@@ -40,7 +40,7 @@
   <string name="need_cars">要求车辆</string>
   <string name="total">合计</string>
   <string name="remark">注意事项</string>
-  <string name="initiator">发标方</string>
+  <string name="sender_company">发标方</string>
   <string name="initiator_name">联系人</string>
   <string name="initiator_phone">联系电话</string>
   <string name="pickup_time">提货时间</string>
@@ -50,8 +50,8 @@
   <string name="order_detail_freight">运费：</string>
   <string name="grab_order">抢单</string>
   <string name="pay_way">支付方式</string>
-  <string name="first_pay">首付</string>
-  <string name="last_pay">尾款</string>
+  <string name="payment_top_rate">首付</string>
+  <string name="payment_last_rate">尾款</string>
   <string name="receipt">回单</string>
   <string name="cash">现金</string>
   <string name="oil_card">油卡</string>
@@ -60,7 +60,7 @@
   <string name="offer">出价</string>
   <string name="input_total_prince">输入总价格</string>
   <string name="compare_rest_time">比价剩余时间</string>
-  <string name="max_prince">出价不能高于</string>
+  <string name="highest_grab_price">出价不能高于</string>
   <string name="grab_details">抢单详情</string>
   <string name="bidding_details">比价详情</string>
   <string name="contact_customer_service">联系客服</string>
@@ -71,8 +71,8 @@
   <string name="goods_list">货源列表</string>
   <string name="find_good_by_map">地图找货</string>
   <string name="add_car">添加车辆</string>
-  <string name="plate_number">车牌</string>
-  <string name="car_type">车型</string>
+  <string name="truck_number">车牌</string>
+  <string name="truck_type">车型</string>
   <string name="driver">司机</string>
   <string name="driver_phone">司机手机</string>
   <string name="status">状态</string>
@@ -94,4 +94,5 @@
   <string name="payment_cash_deposit">存入保证金￥%1$s</string>
   <string name="open_offer_permissions">开启报价权限</string>
   <string name="close_offer_permissions">取消报价权限</string>
+  <string name="etc_card">ETC卡</string>
 </resources>

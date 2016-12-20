@@ -65,8 +65,8 @@ public class CarAdapter extends BaseAdapter {
       Uri uri = Uri.parse(CommonFiled.QINIU_ZOOM + car.getCar_photo());
       holder.sdCarPhoto.setImageURI(uri);
     }
-    holder.tvPlateNumber.setText(car.getPlate_number() + "");
-    holder.tvCarType.setText(car.getCar_type() + "");
+    holder.tvPlateNumber.setText(car.getTruck_number() + "");
+    holder.tvCarType.setText(car.getTruck_type() + "");
     holder.tvDriverPhone.setText(car.getDriver_phone() + "");
     return view;
   }
