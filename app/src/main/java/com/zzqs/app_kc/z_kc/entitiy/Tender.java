@@ -10,26 +10,28 @@ import com.google.gson.annotations.SerializedName;
  * Created by lance on 2016/12/3.
  */
 
-public class KCOrder implements Parcelable {
-  public static final String KC_ORDER = "kCOrder";
-  public static final String NORMAL_ORDER = "normal_order";
-  public static final String BIDDING_ORDER = "biddingOrder";
+public class Tender implements Parcelable {
+  public static final String TENDER = "tender";
+  public static final String TENDERS = "tenders";
+  public static final String NORMAL_TENDER = "normal_tender";
+  public static final String BIDDING_TENDER = "bidding_tender";
 
   @SerializedName("_id")
-  private String order_id;
-  private String create_time;
-  private String over_time;
+  private String tender_id;
+  private String start_time;
+  private String end_time;
   private String remark;
-  private String requirement_car_type;
-  private int requirement_car_number;
-  private String transport_type;
+  private String truck_type;
   private int distance;
 
-  private String start_city;
-  private String start_district;
-  private String start_address;
+  private String pickup_province;
+  private String pickup_city;
+  private String pickup_region;
+  private String pickup_street;
+  private String pickup_address;
   private String pickup_start_time;
   private String pickup_end_time;
+
 
   private String end_city;
   private String end_district;
@@ -48,7 +50,7 @@ public class KCOrder implements Parcelable {
   private String initiator_name;
   private String initiator_phone;
 
-  private String type;
+  private String tender_type;
   private double fixed_prince;
 
   private double my_prince;
@@ -65,28 +67,28 @@ public class KCOrder implements Parcelable {
   private double receipt_pay_cash;
   private double receipt_pay_oil_card;
 
-  public String getOrder_id() {
-    return order_id;
+  public String getTender_id() {
+    return tender_id;
   }
 
-  public void setOrder_id(String order_id) {
-    this.order_id = order_id;
+  public void setTender_id(String tender_id) {
+    this.tender_id = tender_id;
   }
 
-  public String getCreate_time() {
-    return create_time;
+  public String getStart_time() {
+    return start_time;
   }
 
-  public void setCreate_time(String create_time) {
-    this.create_time = create_time;
+  public void setStart_time(String start_time) {
+    this.start_time = start_time;
   }
 
-  public String getOver_time() {
-    return over_time;
+  public String getEnd_time() {
+    return end_time;
   }
 
-  public void setOver_time(String over_time) {
-    this.over_time = over_time;
+  public void setEnd_time(String end_time) {
+    this.end_time = end_time;
   }
 
   public String getRemark() {
@@ -97,44 +99,37 @@ public class KCOrder implements Parcelable {
     this.remark = remark;
   }
 
-  public String getRequirement_car_type() {
-    return requirement_car_type;
+  public String getTruck_type() {
+    return truck_type;
   }
 
-  public void setRequirement_car_type(String requirement_car_type) {
-    this.requirement_car_type = requirement_car_type;
+  public void setTruck_type(String truck_type) {
+    this.truck_type = truck_type;
   }
 
-  public int getRequirement_car_number() {
-    return requirement_car_number;
+
+  public String getPickup_city() {
+    return pickup_city;
   }
 
-  public void setRequirement_car_number(int requirement_car_number) {
-    this.requirement_car_number = requirement_car_number;
+  public void setPickup_city(String pickup_city) {
+    this.pickup_city = pickup_city;
   }
 
-  public String getStart_city() {
-    return start_city;
+  public String getPickup_region() {
+    return pickup_region;
   }
 
-  public void setStart_city(String start_city) {
-    this.start_city = start_city;
+  public void setPickup_region(String pickup_region) {
+    this.pickup_region = pickup_region;
   }
 
-  public String getStart_district() {
-    return start_district;
+  public String getPickup_street() {
+    return pickup_street;
   }
 
-  public void setStart_district(String start_district) {
-    this.start_district = start_district;
-  }
-
-  public String getStart_address() {
-    return start_address;
-  }
-
-  public void setStart_address(String start_address) {
-    this.start_address = start_address;
+  public void setPickup_street(String pickup_street) {
+    this.pickup_street = pickup_street;
   }
 
   public String getPickup_start_time() {
@@ -265,12 +260,12 @@ public class KCOrder implements Parcelable {
     this.initiator_phone = initiator_phone;
   }
 
-  public String getType() {
-    return type;
+  public String getTender_type() {
+    return tender_type;
   }
 
-  public void setType(String type) {
-    this.type = type;
+  public void setTender_type(String tender_type) {
+    this.tender_type = tender_type;
   }
 
   public double getFixed_prince() {
@@ -303,14 +298,6 @@ public class KCOrder implements Parcelable {
 
   public void setMax_prince(double max_prince) {
     this.max_prince = max_prince;
-  }
-
-  public String getTransport_type() {
-    return transport_type;
-  }
-
-  public void setTransport_type(String transport_type) {
-    this.transport_type = transport_type;
   }
 
   public int getDistance() {
@@ -401,17 +388,15 @@ public class KCOrder implements Parcelable {
 
   @Override
   public void writeToParcel(Parcel dest, int flags) {
-    dest.writeString(this.order_id);
-    dest.writeString(this.create_time);
-    dest.writeString(this.over_time);
+    dest.writeString(this.tender_id);
+    dest.writeString(this.start_time);
+    dest.writeString(this.end_time);
     dest.writeString(this.remark);
-    dest.writeString(this.requirement_car_type);
-    dest.writeInt(this.requirement_car_number);
-    dest.writeString(this.transport_type);
+    dest.writeString(this.truck_type);
     dest.writeInt(this.distance);
-    dest.writeString(this.start_city);
-    dest.writeString(this.start_district);
-    dest.writeString(this.start_address);
+    dest.writeString(this.pickup_city);
+    dest.writeString(this.pickup_region);
+    dest.writeString(this.pickup_street);
     dest.writeString(this.pickup_start_time);
     dest.writeString(this.pickup_end_time);
     dest.writeString(this.end_city);
@@ -428,7 +413,7 @@ public class KCOrder implements Parcelable {
     dest.writeString(this.initiator);
     dest.writeString(this.initiator_name);
     dest.writeString(this.initiator_phone);
-    dest.writeString(this.type);
+    dest.writeString(this.tender_type);
     dest.writeDouble(this.fixed_prince);
     dest.writeDouble(this.my_prince);
     dest.writeDouble(this.current_prince);
@@ -444,21 +429,19 @@ public class KCOrder implements Parcelable {
     dest.writeDouble(this.receipt_pay_oil_card);
   }
 
-  public KCOrder() {
+  public Tender() {
   }
 
-  protected KCOrder(Parcel in) {
-    this.order_id = in.readString();
-    this.create_time = in.readString();
-    this.over_time = in.readString();
+  protected Tender(Parcel in) {
+    this.tender_id = in.readString();
+    this.start_time = in.readString();
+    this.end_time = in.readString();
     this.remark = in.readString();
-    this.requirement_car_type = in.readString();
-    this.requirement_car_number = in.readInt();
-    this.transport_type = in.readString();
+    this.truck_type = in.readString();
     this.distance = in.readInt();
-    this.start_city = in.readString();
-    this.start_district = in.readString();
-    this.start_address = in.readString();
+    this.pickup_city = in.readString();
+    this.pickup_region = in.readString();
+    this.pickup_street = in.readString();
     this.pickup_start_time = in.readString();
     this.pickup_end_time = in.readString();
     this.end_city = in.readString();
@@ -475,7 +458,7 @@ public class KCOrder implements Parcelable {
     this.initiator = in.readString();
     this.initiator_name = in.readString();
     this.initiator_phone = in.readString();
-    this.type = in.readString();
+    this.tender_type = in.readString();
     this.fixed_prince = in.readDouble();
     this.my_prince = in.readDouble();
     this.current_prince = in.readDouble();
@@ -491,15 +474,60 @@ public class KCOrder implements Parcelable {
     this.receipt_pay_oil_card = in.readDouble();
   }
 
-  public static final Creator<KCOrder> CREATOR = new Creator<KCOrder>() {
+  public static final Creator<Tender> CREATOR = new Creator<Tender>() {
     @Override
-    public KCOrder createFromParcel(Parcel source) {
-      return new KCOrder(source);
+    public Tender createFromParcel(Parcel source) {
+      return new Tender(source);
     }
 
     @Override
-    public KCOrder[] newArray(int size) {
-      return new KCOrder[size];
+    public Tender[] newArray(int size) {
+      return new Tender[size];
     }
   };
+
+  @Override
+  public String toString() {
+    return "Tender{" +
+            "tender_id='" + tender_id + '\'' +
+            ", start_time='" + start_time + '\'' +
+            ", end_time='" + end_time + '\'' +
+            ", remark='" + remark + '\'' +
+            ", truck_type='" + truck_type + '\'' +
+            ", distance=" + distance +
+            ", pickup_city='" + pickup_city + '\'' +
+            ", pickup_region='" + pickup_region + '\'' +
+            ", pickup_street='" + pickup_street + '\'' +
+            ", pickup_start_time='" + pickup_start_time + '\'' +
+            ", pickup_end_time='" + pickup_end_time + '\'' +
+            ", end_city='" + end_city + '\'' +
+            ", end_district='" + end_district + '\'' +
+            ", end_address='" + end_address + '\'' +
+            ", delivery_start_time='" + delivery_start_time + '\'' +
+            ", delivery_end_time='" + delivery_end_time + '\'' +
+            ", total_quantity=" + total_quantity +
+            ", total_volume=" + total_volume +
+            ", total_weight=" + total_weight +
+            ", quantity_unit='" + quantity_unit + '\'' +
+            ", volume_unit='" + volume_unit + '\'' +
+            ", weight_unit='" + weight_unit + '\'' +
+            ", initiator='" + initiator + '\'' +
+            ", initiator_name='" + initiator_name + '\'' +
+            ", initiator_phone='" + initiator_phone + '\'' +
+            ", tender_type='" + tender_type + '\'' +
+            ", fixed_prince=" + fixed_prince +
+            ", my_prince=" + my_prince +
+            ", current_prince=" + current_prince +
+            ", max_prince=" + max_prince +
+            ", first_pay=" + first_pay +
+            ", last_pay=" + last_pay +
+            ", receipt_pay=" + receipt_pay +
+            ", first_pay_cash=" + first_pay_cash +
+            ", first_pay_oil_card=" + first_pay_oil_card +
+            ", last_pay_cash=" + last_pay_cash +
+            ", last_pay_oil_card=" + last_pay_oil_card +
+            ", receipt_pay_cash=" + receipt_pay_cash +
+            ", receipt_pay_oil_card=" + receipt_pay_oil_card +
+            '}';
+  }
 }

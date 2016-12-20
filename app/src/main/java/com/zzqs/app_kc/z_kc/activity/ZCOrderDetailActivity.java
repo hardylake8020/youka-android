@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zzqs.app_kc.R;
-import com.zzqs.app_kc.z_kc.entitiy.KCOrder;
+import com.zzqs.app_kc.z_kc.entitiy.Tender;
 import com.zzqs.app_kc.z_kc.listener.MyOnClickListener;
 import com.zzqs.app_kc.z_kc.util.NumberUtil;
 import com.zzqs.app_kc.z_kc.util.TimeUtil;
@@ -28,14 +28,14 @@ public class ZCOrderDetailActivity extends BaseActivity {
   LinearLayout llBiddingOrderHead, llGrabOrder, llBiddingOrder, llFirstPay, llLastPay, llReceiptPay;
   EditText etBiddingPrince;
 
-  private KCOrder order;
+  private Tender order;
   private Timer timer;
   private long remainingTime;
 
 
   @Override
   public void initVariables() {
-    order = getIntent().getParcelableExtra(KCOrder.KC_ORDER);
+    order = getIntent().getParcelableExtra(Tender.TENDER);
   }
 
   @Override
@@ -87,7 +87,7 @@ public class ZCOrderDetailActivity extends BaseActivity {
     llLastPay = (LinearLayout) findViewById(R.id.llLastPay);
     llReceiptPay = (LinearLayout) findViewById(R.id.llReceiptPay);
 
-    if (order.getType().equals(KCOrder.NORMAL_ORDER)) {
+    if (order.getTender_type().equals(Tender.NORMAL_TENDER)) {
       tvTitle.setText(R.string.grab_details);
       llBiddingOrderHead.setVisibility(View.GONE);
       llBiddingOrder.setVisibility(View.GONE);
@@ -103,7 +103,7 @@ public class ZCOrderDetailActivity extends BaseActivity {
       tvTitle.setText(R.string.bidding_details);
       llGrabOrder.setVisibility(View.GONE);
       long startTime = System.currentTimeMillis();
-      long endTime = TimeUtil.UTCTimeToTimeMillis(order.getOver_time());
+      long endTime = TimeUtil.UTCTimeToTimeMillis(order.getEnd_time());
       remainingTime = endTime - startTime;
       if (remainingTime > 0) {
         timer = new Timer();
@@ -127,11 +127,11 @@ public class ZCOrderDetailActivity extends BaseActivity {
       }
     }
 
-    tvStartCity.setText(order.getStart_city());
-    tvStartDistrict.setText(order.getStart_district());
+    tvStartCity.setText(order.getPickup_city());
+    tvStartDistrict.setText(order.getPickup_region());
     tvEndCity.setText(order.getEnd_city());
     tvEndDistrict.setText(order.getEnd_district());
-    tvNeedCars.setText(order.getRequirement_car_type() + "  " + order.getRequirement_car_number() + "辆");
+    tvNeedCars.setText(order.getTruck_type() + "  "  + "1 辆");
     StringBuilder sb = new StringBuilder();
     if (order.getTotal_quantity() != 0) {
       sb.append(order.getTotal_quantity() + order.getQuantity_unit());
@@ -156,7 +156,7 @@ public class ZCOrderDetailActivity extends BaseActivity {
     tvInitiatorName.setText(order.getInitiator_name());
     tvInitiatorPhone.setText(order.getInitiator_phone());
     tvPickupTime.setText(TimeUtil.convertDateStringFormat(order.getPickup_start_time(), TimeUtil.SERVER_TIME_FORMAT, "MM-dd HH:mm") + "~" + TimeUtil.convertDateStringFormat(order.getPickup_end_time(), TimeUtil.SERVER_TIME_FORMAT, "MM-dd HH:mm"));
-    tvPickupAddress.setText(order.getStart_address());
+    tvPickupAddress.setText(order.getPickup_street());
     tvDeliveryTime.setText(TimeUtil.convertDateStringFormat(order.getDelivery_start_time(), TimeUtil.SERVER_TIME_FORMAT, "MM-dd HH:mm") + "~" + TimeUtil.convertDateStringFormat(order.getDelivery_end_time(), TimeUtil.SERVER_TIME_FORMAT, "MM-dd HH:mm"));
     tvDeliveryAddress.setText(order.getEnd_address());
     if (order.getFirst_pay() > 0) {

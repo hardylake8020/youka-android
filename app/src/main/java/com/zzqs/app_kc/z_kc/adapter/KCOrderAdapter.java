@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.zzqs.app_kc.R;
-import com.zzqs.app_kc.z_kc.entitiy.KCOrder;
+import com.zzqs.app_kc.z_kc.entitiy.Tender;
 import com.zzqs.app_kc.z_kc.util.NumberUtil;
 import com.zzqs.app_kc.z_kc.util.TimeUtil;
 
@@ -22,24 +22,24 @@ import java.util.List;
 public class KCOrderAdapter extends BaseAdapter {
   private Context context;
   private LayoutInflater inflater;
-  private List<KCOrder> kcOrderList;
+  private List<Tender> tenderList;
   private DecimalFormat df;
 
-  public KCOrderAdapter(Context context, List<KCOrder> kcOrderList) {
+  public KCOrderAdapter(Context context, List<Tender> tenderList) {
     this.context = context;
     inflater = LayoutInflater.from(context);
-    this.kcOrderList = kcOrderList;
+    this.tenderList = tenderList;
     df = new DecimalFormat("######0.00");
   }
 
   @Override
   public int getCount() {
-    return kcOrderList != null ? kcOrderList.size() : 0;
+    return tenderList != null ? tenderList.size() : 0;
   }
 
   @Override
   public Object getItem(int position) {
-    return kcOrderList != null ? kcOrderList.get(position) : null;
+    return tenderList != null ? tenderList.get(position) : null;
   }
 
   @Override
@@ -50,7 +50,7 @@ public class KCOrderAdapter extends BaseAdapter {
   @Override
   public View getView(int position, View view, ViewGroup parent) {
     ViewHolder holder;
-    KCOrder order = kcOrderList.get(position);
+    Tender tender = tenderList.get(position);
     if (view == null) {
       view = inflater.inflate(R.layout.z_kc_item_kc_order, null);
       holder = new ViewHolder();
@@ -64,27 +64,27 @@ public class KCOrderAdapter extends BaseAdapter {
     } else {
       holder = (ViewHolder) view.getTag();
     }
-    if (order.getType().equals(KCOrder.NORMAL_ORDER)) {
+    if (tender.getTender_type().equals(Tender.NORMAL_TENDER)) {
       holder.tvType.setText(R.string.grab);
       holder.tvType.setBackgroundResource(R.drawable.round_red);
-      holder.tvPrince.setText(df.format(order.getFixed_prince()) + context.getString(R.string.prince_unit));
+      holder.tvPrince.setText(df.format(tender.getFixed_prince()) + context.getString(R.string.prince_unit));
     } else {
       holder.tvType.setText(R.string.compare);
       holder.tvType.setBackgroundResource(R.drawable.round_green);
-      holder.tvPrince.setText(df.format(order.getCurrent_prince()) + context.getString(R.string.prince_unit));
+      holder.tvPrince.setText(df.format(tender.getCurrent_prince()) + context.getString(R.string.prince_unit));
     }
-    holder.tvStartAddress.setText(order.getStart_city() + order.getStart_district());
-    holder.tvEndAddress.setText(order.getEnd_city() + order.getEnd_district());
+    holder.tvStartAddress.setText(tender.getPickup_city() + tender.getPickup_region());
+    holder.tvEndAddress.setText(tender.getEnd_city() + tender.getEnd_district());
     String msg = "";
-    if (order.getTotal_quantity() != 0) {
-      msg = NumberUtil.doubleTrans(order.getTotal_quantity()) + order.getQuantity_unit();
-    } else if (order.getTotal_volume() != 0) {
-      msg = NumberUtil.doubleTrans(order.getTotal_volume()) + order.getVolume_unit();
-    } else if (order.getTotal_weight() != 0) {
-      msg = NumberUtil.doubleTrans(order.getTotal_weight()) + order.getWeight_unit();
+    if (tender.getTotal_quantity() != 0) {
+      msg = NumberUtil.doubleTrans(tender.getTotal_quantity()) + tender.getQuantity_unit();
+    } else if (tender.getTotal_volume() != 0) {
+      msg = NumberUtil.doubleTrans(tender.getTotal_volume()) + tender.getVolume_unit();
+    } else if (tender.getTotal_weight() != 0) {
+      msg = NumberUtil.doubleTrans(tender.getTotal_weight()) + tender.getWeight_unit();
     }
-    holder.tvGoodsDescription.setText(context.getString(R.string.order_item_description, order.getTransport_type(), order.getInitiator(), msg));
-    holder.tvCreateTime.setText(context.getString(R.string.order_item_create_time, TimeUtil.convertDateStringFormat(order.getCreate_time(), TimeUtil.SERVER_TIME_FORMAT, "MM-dd HH:mm"), order.getDistance() + context.getString(R.string.distance_unit)));
+    holder.tvGoodsDescription.setText(context.getString(R.string.order_item_description, tender.getInitiator(), msg,"45公里"));
+    holder.tvCreateTime.setText(context.getString(R.string.order_item_create_time, TimeUtil.convertDateStringFormat(tender.getStart_time(), TimeUtil.SERVER_TIME_FORMAT, "MM-dd HH:mm"), tender.getDistance() + context.getString(R.string.distance_unit)));
     return view;
   }
 

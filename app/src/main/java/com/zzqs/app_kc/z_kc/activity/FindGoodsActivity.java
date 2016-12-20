@@ -8,11 +8,10 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
 import com.zzqs.app_kc.R;
 import com.zzqs.app_kc.widgets.xlistView.XListView;
 import com.zzqs.app_kc.z_kc.adapter.KCOrderAdapter;
-import com.zzqs.app_kc.z_kc.entitiy.KCOrder;
+import com.zzqs.app_kc.z_kc.entitiy.Tender;
 import com.zzqs.app_kc.z_kc.listener.MyOnClickListener;
 
 import java.util.ArrayList;
@@ -27,7 +26,7 @@ public class FindGoodsActivity extends BaseActivity implements XListView.IXListV
   EditText etStart, etEnd;
   XListView lvOrders;
   KCOrderAdapter adapter;
-  private List<KCOrder> kcOrderList;
+  private List<Tender> tenderList;
   private int selectType;
   private static final int ALL = 1;
   private static final int BIDDING = 2;
@@ -35,7 +34,7 @@ public class FindGoodsActivity extends BaseActivity implements XListView.IXListV
 
   @Override
   public void initVariables() {
-    kcOrderList = new ArrayList<>();
+    tenderList = new ArrayList<>();
   }
 
   @Override
@@ -82,7 +81,7 @@ public class FindGoodsActivity extends BaseActivity implements XListView.IXListV
     lvOrders.setPullRefreshEnable(true);
     lvOrders.setPullLoadEnable(false);
     lvOrders.setXListViewListener(this);
-    adapter = new KCOrderAdapter(this, kcOrderList);
+    adapter = new KCOrderAdapter(this, tenderList);
     lvOrders.setAdapter(adapter);
     lvOrders.stopRefresh();
     lvOrders.stopLoadMore();
@@ -91,8 +90,8 @@ public class FindGoodsActivity extends BaseActivity implements XListView.IXListV
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if (position > 0) {
           Intent intent = new Intent(mContext, ZCOrderDetailActivity.class);
-          KCOrder order = kcOrderList.get(position - 1);
-          intent.putExtra(KCOrder.KC_ORDER, order);
+          Tender order = tenderList.get(position - 1);
+          intent.putExtra(Tender.TENDER, order);
           startActivity(intent);
         }
       }
@@ -117,69 +116,7 @@ public class FindGoodsActivity extends BaseActivity implements XListView.IXListV
   }
 
   private void getKCOrders() {
-    kcOrderList.clear();
-    Gson gson = new Gson();
 
-    KCOrder order1 = new KCOrder();
-    order1.setType(KCOrder.NORMAL_ORDER);
-    order1.setStart_city("上海");
-    order1.setStart_district("虹口区");
-    order1.setStart_address("上海市虹口区XX路XXX号");
-    order1.setPickup_start_time("2016-12-2T16:00:00.000Z");
-    order1.setPickup_end_time("2016-12-2T22:00:00.000Z");
-    order1.setEnd_city("南京");
-    order1.setEnd_district("中山区");
-    order1.setEnd_address("南京市中山区xxx路xx号");
-    order1.setDelivery_start_time("2016-12-4T00:00:00.000Z");
-    order1.setDelivery_end_time("2016-12-6T11:00:00.000Z");
-    order1.setFixed_prince(2333);
-    order1.setCreate_time("2016-12-1T00:00:00.000Z");
-    order1.setOver_time("2016-12-5T17:00:00.000Z");
-    order1.setTransport_type("快运");
-    order1.setInitiator("上海圆通");
-    order1.setInitiator_name("张三");
-    order1.setInitiator_phone("18721850339");
-    order1.setTotal_quantity(123);
-    order1.setQuantity_unit("箱");
-    order1.setTotal_volume(2);
-    order1.setVolume_unit("吨");
-    order1.setTotal_weight(5);
-    order1.setWeight_unit("立方");
-    order1.setDistance(200);
-    order1.setFirst_pay(50);
-    order1.setFirst_pay_cash(40);
-    order1.setFirst_pay_oil_card(60);
-    order1.setLast_pay(25.5);
-    order1.setLast_pay_cash(100);
-    order1.setReceipt_pay(24.5);
-    order1.setReceipt_pay_oil_card(100);
-    order1.setRequirement_car_type("金杯车");
-    order1.setRequirement_car_number(10);
-    KCOrder order2 = gson.fromJson(gson.toJson(order1), KCOrder.class);
-    order2.setMax_prince(50000);
-    order2.setType(KCOrder.BIDDING_ORDER);
-    order2.setCurrent_prince(12345);
-    order2.setTotal_quantity(0);
-    order2.setFirst_pay(50);
-    order2.setFirst_pay_cash(50);
-    order2.setFirst_pay_oil_card(50);
-    order2.setLast_pay(50);
-    order2.setLast_pay_oil_card(100);
-    order2.setRemark("嘻嘻哈哈");
-
-    if (selectType == ALL) {
-      kcOrderList.add(order1);
-      kcOrderList.add(order1);
-      kcOrderList.add(order2);
-      kcOrderList.add(order2);
-    } else if (selectType == BIDDING) {
-      kcOrderList.add(order2);
-      kcOrderList.add(order2);
-    } else {
-      kcOrderList.add(order1);
-      kcOrderList.add(order1);
-    }
-    adapter.notifyDataSetChanged();
   }
 
   /**
@@ -189,7 +126,7 @@ public class FindGoodsActivity extends BaseActivity implements XListView.IXListV
     lvOrders.stopRefresh();
     lvOrders.stopLoadMore();
     lvOrders.setRefreshTime(getString(R.string.xilstview_refreshed));
-    if (kcOrderList.size() >= 10) {
+    if (tenderList.size() >= 10) {
       lvOrders.setPullLoadEnable(true);
     }
   }
