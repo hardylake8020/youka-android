@@ -4,8 +4,8 @@
   <style name="AppTheme" parent="Base.Theme.AppCompat.Light">
     <item name="android:windowBackground">@null</item>
     <item name="android:windowNoTitle">true</item>
-    <item name="colorPrimary">@color/primary_colors</item>
-    <item name="colorPrimaryDark">@color/primary_colors</item>
+    <item name="colorPrimary">@color/tender_primary_color</item>
+    <item name="colorPrimaryDark">@color/tender_primary_color</item>
   </style>
 
   <style name="Dialog_Fullscreen">

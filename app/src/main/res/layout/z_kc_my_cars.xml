@@ -6,7 +6,7 @@
 
   <include
     android:id="@+id/defaultHead"
-    layout="@layout/default_head"/>
+    layout="@layout/z_kc_default_head"/>
 
   <TextView
     android:id="@+id/tvAddCar"

@@ -4,12 +4,14 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-  <include layout="@layout/default_head"/>
+  <include layout="@layout/z_kc_default_head"/>
 
   <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp">
 
     <ImageView
       android:id="@+id/ivSearch"
@@ -17,7 +19,7 @@
       android:layout_height="wrap_content"
       android:layout_alignParentRight="true"
       android:layout_centerInParent="true"
-      android:background="@android:drawable/ic_search_category_default"/>
+      android:background="@drawable/z_kc_ic_search"/>
 
     <LinearLayout
       android:layout_width="match_parent"
@@ -30,21 +32,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:background="@null"
         android:gravity="center"
         android:hint="@string/provenance"
         android:paddingBottom="20dp"
         android:paddingTop="20dp"
         android:textColorHint="@color/click_gray"
-        android:background="@null"
         android:textSize="16sp"/>
 
-      <TextView
+      <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/to"
-        android:textColor="@color/text_gray"
-        android:textSize="12sp"/>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/z_kc_ic_arrow"
+        android:gravity="center"/>
 
       <EditText
         android:id="@+id/etEnd"
