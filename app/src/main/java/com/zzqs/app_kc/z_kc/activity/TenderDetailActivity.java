@@ -24,19 +24,19 @@ import java.util.TimerTask;
  * Created by lance on 2016/12/4.
  */
 
-public class ZCOrderDetailActivity extends BaseActivity {
+public class TenderDetailActivity extends BaseActivity {
     TextView tvLeft, tvTitle, tvRight, tvRemainingTime, tvMaxPrince, tvStartCity, tvStartDistrict, tvEndCity, tvEndDistrict, tvNeedCars, tvGoodsInfo, tvRemark, tvInitiator, tvInitiatorName, tvInitiatorPhone, tvPickupTime, tvPickupAddress, tvDeliveryTime, tvDeliveryAddress, tvPayWay, tvFirstPay, tvLastPay, tvReceipt, tvFreight, tvGrabOrder, tvBiddingOrder;
     LinearLayout llBiddingOrderHead, llGrabOrder, llBiddingOrder, llFirstPay, llLastPay, llReceiptPay;
     EditText etBiddingPrince;
 
-    private Tender order;
+    private Tender tender;
     private Timer timer;
     private long remainingTime;
 
 
     @Override
     public void initVariables() {
-        order = getIntent().getParcelableExtra(Tender.TENDER);
+        tender = getIntent().getParcelableExtra(Tender.TENDER);
     }
 
     @Override
@@ -88,12 +88,12 @@ public class ZCOrderDetailActivity extends BaseActivity {
         llLastPay = (LinearLayout) findViewById(R.id.llLastPay);
         llReceiptPay = (LinearLayout) findViewById(R.id.llReceiptPay);
 
-        if (order.getTender_type().equals(Tender.GRAB)) {
+        if (tender.getTender_type().equals(Tender.GRAB)) {
             tvTitle.setText(R.string.grab_details);
             llBiddingOrderHead.setVisibility(View.GONE);
             llBiddingOrder.setVisibility(View.GONE);
             DecimalFormat df = new DecimalFormat("######0.00");
-            tvFreight.setText(df.format(order.getHighest_protect_price()));
+            tvFreight.setText(df.format(tender.getHighest_protect_price()));
             tvGrabOrder.setOnClickListener(new MyOnClickListener() {
                 @Override
                 public void OnceOnClick(View view) {
@@ -104,7 +104,7 @@ public class ZCOrderDetailActivity extends BaseActivity {
             tvTitle.setText(R.string.bidding_details);
             llGrabOrder.setVisibility(View.GONE);
             long startTime = System.currentTimeMillis();
-            long endTime = TimeUtil.UTCTimeToTimeMillis(order.getEnd_time());
+            long endTime = TimeUtil.UTCTimeToTimeMillis(tender.getEnd_time());
             remainingTime = endTime - startTime;
             if (remainingTime > 0) {
                 timer = new Timer();
@@ -115,7 +115,7 @@ public class ZCOrderDetailActivity extends BaseActivity {
                         setRemainingTime();
                     }
                 }, 0, 1000);
-                tvMaxPrince.setText(order.getHighest_grab_price() + getString(R.string.prince_unit));
+                tvMaxPrince.setText(tender.getHighest_grab_price() + getString(R.string.prince_unit));
                 tvBiddingOrder.setOnClickListener(new MyOnClickListener() {
                     @Override
                     public void OnceOnClick(View view) {
@@ -128,16 +128,16 @@ public class ZCOrderDetailActivity extends BaseActivity {
             }
         }
 
-        tvStartCity.setText(order.getPickup_city());
-        tvStartDistrict.setText(order.getPickup_region());
-        tvEndCity.setText(order.getDelivery_city());
-        tvEndDistrict.setText(order.getDelivery_region());
-        tvNeedCars.setText(order.getTruck_type() + "  " + order.getTruck_count() + "辆");
+        tvStartCity.setText(tender.getPickup_city());
+        tvStartDistrict.setText(tender.getPickup_region());
+        tvEndCity.setText(tender.getDelivery_city());
+        tvEndDistrict.setText(tender.getDelivery_region());
+        tvNeedCars.setText(tender.getTruck_type() + "  " + tender.getTruck_count() + "辆");
         StringBuilder sb = new StringBuilder();
-        if (order.getGoods() != null) {
+        if (tender.getMobile_goods() != null) {
             double quantity = 0, volume = 0, weight = 0;
             String quantityUnit = null, volumeUnit = null, weightUnit = null;
-            for (Goods goods : order.getGoods()) {
+            for (Goods goods : tender.getMobile_goods()) {
                 quantity += goods.getCount();
                 volume += goods.getCount2();
                 weight += goods.getCount3();
@@ -169,33 +169,33 @@ public class ZCOrderDetailActivity extends BaseActivity {
             tvGoodsInfo.setText(sb.toString());
             sb.setLength(0);
         }
-        tvRemark.setText(TextUtils.isEmpty(order.getRemark()) ? "-" : order.getRemark());
-        tvInitiator.setText(order.getSender_company());
-        tvInitiatorName.setText(order.getInitiator_name());
-        tvInitiatorPhone.setText(order.getInitiator_phone());
-        tvPickupTime.setText(TimeUtil.convertDateStringFormat(order.getPickup_start_time_format(), TimeUtil.SERVER_TIME_FORMAT, "MM-dd HH:mm") + "~" + TimeUtil.convertDateStringFormat(order.getPickup_end_time_format(), TimeUtil.SERVER_TIME_FORMAT, "MM-dd HH:mm"));
-        tvPickupAddress.setText(order.getPickup_address());
-        tvDeliveryTime.setText(TimeUtil.convertDateStringFormat(order.getDelivery_start_time_format(), TimeUtil.SERVER_TIME_FORMAT, "MM-dd HH:mm") + "~" + TimeUtil.convertDateStringFormat(order.getDelivery_end_time_format(), TimeUtil.SERVER_TIME_FORMAT, "MM-dd HH:mm"));
-        tvDeliveryAddress.setText(order.getDelivery_address());
-        if (order.getPayment_top_rate() > 0) {
+        tvRemark.setText(TextUtils.isEmpty(tender.getRemark()) ? "-" : tender.getRemark());
+        tvInitiator.setText(tender.getSender_company());
+        tvInitiatorName.setText(tender.getInitiator_name());
+        tvInitiatorPhone.setText(tender.getInitiator_phone());
+        tvPickupTime.setText(TimeUtil.convertDateStringNormalTimeFormat(tender.getPickup_start_time_format(), "MM-dd HH:mm") + "~" + TimeUtil.convertDateStringNormalTimeFormat(tender.getPickup_end_time_format(), "MM-dd HH:mm"));
+        tvPickupAddress.setText(tender.getPickup_address());
+        tvDeliveryTime.setText(TimeUtil.convertDateStringNormalTimeFormat(tender.getDelivery_start_time_format(), "MM-dd HH:mm") + "~" + TimeUtil.convertDateStringNormalTimeFormat(tender.getDelivery_end_time_format(), "MM-dd HH:mm"));
+        tvDeliveryAddress.setText(tender.getDelivery_address());
+        if (tender.getPayment_top_rate() > 0) {
             sb.append(getString(R.string.payment_top_rate));
-        } else if (order.getPayment_last_rate() > 0) {
+        } else if (tender.getPayment_last_rate() > 0) {
             sb.append("+" + getString(R.string.payment_last_rate));
         }
-        if (order.getPayment_tail_rate() > 0) {
+        if (tender.getPayment_tail_rate() > 0) {
             sb.append("+" + getString(R.string.receipt));
         }
         tvPayWay.setText(sb.toString());
         sb.setLength(0);
 
-        if (order.getPayment_top_rate() > 0) {
-            sb.append(NumberUtil.doubleTrans(order.getPayment_top_rate()) + "%   ");
-            if (order.getPayment_top_cash_rate() == 100) {
+        if (tender.getPayment_top_rate() > 0) {
+            sb.append(NumberUtil.doubleTrans(tender.getPayment_top_rate()) + "%   ");
+            if (tender.getPayment_top_cash_rate() == 100) {
                 sb.append(getString(R.string.cash_pay));
-            } else if (order.getPayment_top_card_rate() == 100) {
+            } else if (tender.getPayment_top_card_rate() == 100) {
                 sb.append(getString(R.string.oil_card_pay));
             } else {
-                sb.append("(" + NumberUtil.doubleTrans(order.getPayment_top_cash_rate()) + "%" + getString(R.string.cash) + "  +  " + NumberUtil.doubleTrans(order.getPayment_top_card_rate()) + "%" + getString(R.string.oil_card) + ")");
+                sb.append("(" + NumberUtil.doubleTrans(tender.getPayment_top_cash_rate()) + "%" + getString(R.string.cash) + "  +  " + NumberUtil.doubleTrans(tender.getPayment_top_card_rate()) + "%" + getString(R.string.oil_card) + ")");
             }
             tvFirstPay.setText(sb.toString());
             sb.setLength(0);
@@ -203,14 +203,14 @@ public class ZCOrderDetailActivity extends BaseActivity {
             llFirstPay.setVisibility(View.GONE);
         }
 
-        if (order.getPayment_last_rate() > 0) {
-            sb.append(NumberUtil.doubleTrans(order.getPayment_last_rate()) + "%   ");
-            if (order.getPayment_last_cash_rate() == 100) {
+        if (tender.getPayment_last_rate() > 0) {
+            sb.append(NumberUtil.doubleTrans(tender.getPayment_last_rate()) + "%   ");
+            if (tender.getPayment_last_cash_rate() == 100) {
                 sb.append("(" + getString(R.string.cash_pay) + ")");
-            } else if (order.getPayment_last_card_rate() == 100) {
+            } else if (tender.getPayment_last_card_rate() == 100) {
                 sb.append("(" + getString(R.string.oil_card_pay) + ")");
             } else {
-                sb.append("(" + NumberUtil.doubleTrans(order.getPayment_last_cash_rate()) + "%" + getString(R.string.cash) + "  +  " + NumberUtil.doubleTrans(order.getPayment_last_card_rate()) + "%" + getString(R.string.oil_card) + ")");
+                sb.append("(" + NumberUtil.doubleTrans(tender.getPayment_last_cash_rate()) + "%" + getString(R.string.cash) + "  +  " + NumberUtil.doubleTrans(tender.getPayment_last_card_rate()) + "%" + getString(R.string.oil_card) + ")");
             }
             tvLastPay.setText(sb.toString());
             sb.setLength(0);
@@ -218,14 +218,14 @@ public class ZCOrderDetailActivity extends BaseActivity {
             llLastPay.setVisibility(View.GONE);
         }
 
-        if (order.getPayment_tail_rate() > 0) {
-            sb.append(NumberUtil.doubleTrans(order.getPayment_tail_rate()) + "%   ");
-            if (order.getPayment_tail_cash_rate() == 100) {
+        if (tender.getPayment_tail_rate() > 0) {
+            sb.append(NumberUtil.doubleTrans(tender.getPayment_tail_rate()) + "%   ");
+            if (tender.getPayment_tail_cash_rate() == 100) {
                 sb.append("(" + getString(R.string.cash_pay) + ")");
-            } else if (order.getPayment_tail_card_rate() == 100) {
+            } else if (tender.getPayment_tail_card_rate() == 100) {
                 sb.append("(" + getString(R.string.oil_card_pay) + ")");
             } else {
-                sb.append("(" + NumberUtil.doubleTrans(order.getPayment_tail_cash_rate()) + "%" + getString(R.string.cash) + "  +  " + NumberUtil.doubleTrans(order.getPayment_tail_card_rate()) + "%" + getString(R.string.oil_card) + ")");
+                sb.append("(" + NumberUtil.doubleTrans(tender.getPayment_tail_cash_rate()) + "%" + getString(R.string.cash) + "  +  " + NumberUtil.doubleTrans(tender.getPayment_tail_card_rate()) + "%" + getString(R.string.oil_card) + ")");
             }
             tvReceipt.setText(sb.toString());
             sb.setLength(0);

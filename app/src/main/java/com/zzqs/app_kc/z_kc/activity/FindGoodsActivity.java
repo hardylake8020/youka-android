@@ -12,7 +12,6 @@ import com.zzqs.app_kc.R;
 import com.zzqs.app_kc.widgets.xlistView.XListView;
 import com.zzqs.app_kc.z_kc.adapter.KCOrderAdapter;
 import com.zzqs.app_kc.z_kc.entitiy.Tender;
-import com.zzqs.app_kc.z_kc.entitiy.Goods;
 import com.zzqs.app_kc.z_kc.listener.MyOnClickListener;
 
 import java.util.ArrayList;
@@ -90,7 +89,7 @@ public class FindGoodsActivity extends BaseActivity implements XListView.IXListV
       @Override
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if (position > 0) {
-          Intent intent = new Intent(mContext, ZCOrderDetailActivity.class);
+          Intent intent = new Intent(mContext, TenderDetailActivity.class);
           Tender order = tenderList.get(position - 1);
           intent.putExtra(Tender.TENDER, order);
           startActivity(intent);

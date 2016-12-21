@@ -78,10 +78,10 @@ public class KCOrderAdapter extends BaseAdapter {
         holder.tvStartAddress.setText(order.getPickup_city() + order.getPickup_region());
         holder.tvEndAddress.setText(order.getDelivery_city() + order.getDelivery_region());
         String msg = "";
-        if (order.getGoods() != null) {
+        if (order.getMobile_goods() != null) {
             double quantity = 0, volume = 0, weight = 0;
             String quantityUnit = null, volumeUnit = null, weightUnit = null;
-            for (Goods goods : order.getGoods()) {
+            for (Goods goods : order.getMobile_goods()) {
                 quantity += goods.getCount();
                 volume += goods.getCount2();
                 weight += goods.getCount3();
@@ -103,8 +103,8 @@ public class KCOrderAdapter extends BaseAdapter {
                 msg = NumberUtil.doubleTrans(weight) + weightUnit;
             }
         }
-        holder.tvGoodsDescription.setText(context.getString(R.string.order_item_description, order.getTransport_type(), order.getSender_company(), msg));
-        holder.tvCreateTime.setText(context.getString(R.string.order_item_create_time, TimeUtil.convertDateStringFormat(order.getStart_time(), TimeUtil.SERVER_TIME_FORMAT, "MM-dd HH:mm"), order.getDistance() + context.getString(R.string.distance_unit)));
+        holder.tvGoodsDescription.setText(context.getString(R.string.order_item_description, order.getSender_company(), msg, order.getDistance() + context.getString(R.string.distance_unit)));
+        holder.tvCreateTime.setText(context.getString(R.string.order_item_create_time, TimeUtil.convertDateStringFormat(order.getStart_time(), TimeUtil.SERVER_TIME_FORMAT, "MM-dd HH:mm")));
         return view;
     }
 

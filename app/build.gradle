@@ -42,7 +42,7 @@ android {
             minifyEnabled false
 //            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.cfg'
             signingConfig signingConfigs.release
-            buildConfigField "String", "BASE_URL", "\"http://192.168.0.113:3002\""
+            buildConfigField "String", "BASE_URL", "\"http://192.168.0.112:3002\""
 //            buildConfigField "String", "BASE_URL", "\"http://www.cvs001.com\""
 
         }

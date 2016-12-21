@@ -4,6 +4,8 @@ package com.zzqs.app_kc.z_kc.entitiy;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +19,9 @@ public class Tender implements Parcelable {
   public static final String GRAB = "grab";
   public static final String COMPARE = "compare";
 
+
+  @SerializedName("_id")
+  private String tender_id;
   private String tender_number;
   private String order_number;
   private String refer_order_number;
@@ -30,7 +35,7 @@ public class Tender implements Parcelable {
   private String end_time;
   private String truck_type;
   private int truck_count;
-  private List<Goods> goods = new ArrayList<>();
+  private List<Goods> mobile_goods = new ArrayList<>();
   private String remark;
   private String transport_type;
   private int distance;
@@ -82,6 +87,14 @@ public class Tender implements Parcelable {
   private double current_grab_price;
 
   private double driver_price;
+
+  public String getTender_id() {
+    return tender_id;
+  }
+
+  public void setTender_id(String tender_id) {
+    this.tender_id = tender_id;
+  }
 
   public String getTender_number() {
     return tender_number;
@@ -187,12 +200,12 @@ public class Tender implements Parcelable {
     this.truck_count = truck_count;
   }
 
-  public List<Goods> getGoods() {
-    return goods;
+  public List<Goods> getMobile_goods() {
+    return mobile_goods;
   }
 
-  public void setGoods(List<Goods> goods) {
-    this.goods = goods;
+  public void setMobile_goods(List<Goods> mobile_goods) {
+    this.mobile_goods = mobile_goods;
   }
 
   public String getRemark() {
@@ -555,6 +568,7 @@ public class Tender implements Parcelable {
 
   @Override
   public void writeToParcel(Parcel dest, int flags) {
+    dest.writeString(this.tender_id);
     dest.writeString(this.tender_number);
     dest.writeString(this.order_number);
     dest.writeString(this.refer_order_number);
@@ -568,7 +582,7 @@ public class Tender implements Parcelable {
     dest.writeString(this.end_time);
     dest.writeString(this.truck_type);
     dest.writeInt(this.truck_count);
-    dest.writeTypedList(this.goods);
+    dest.writeTypedList(this.mobile_goods);
     dest.writeString(this.remark);
     dest.writeString(this.transport_type);
     dest.writeInt(this.distance);
@@ -619,6 +633,7 @@ public class Tender implements Parcelable {
   }
 
   protected Tender(Parcel in) {
+    this.tender_id = in.readString();
     this.tender_number = in.readString();
     this.order_number = in.readString();
     this.refer_order_number = in.readString();
@@ -632,7 +647,7 @@ public class Tender implements Parcelable {
     this.end_time = in.readString();
     this.truck_type = in.readString();
     this.truck_count = in.readInt();
-    this.goods = in.createTypedArrayList(Goods.CREATOR);
+    this.mobile_goods = in.createTypedArrayList(Goods.CREATOR);
     this.remark = in.readString();
     this.transport_type = in.readString();
     this.distance = in.readInt();
@@ -692,4 +707,69 @@ public class Tender implements Parcelable {
       return new Tender[size];
     }
   };
+
+  @Override
+  public String toString() {
+    return "Tender{" +
+            "tender_id='" + tender_id + '\'' +
+            ", tender_number='" + tender_number + '\'' +
+            ", order_number='" + order_number + '\'' +
+            ", refer_order_number='" + refer_order_number + '\'' +
+            ", sender_company='" + sender_company + '\'' +
+            ", sender_phone='" + sender_phone + '\'' +
+            ", sender_name='" + sender_name + '\'' +
+            ", pay_approver='" + pay_approver + '\'' +
+            ", finance_officer='" + finance_officer + '\'' +
+            ", status='" + status + '\'' +
+            ", start_time='" + start_time + '\'' +
+            ", end_time='" + end_time + '\'' +
+            ", truck_type='" + truck_type + '\'' +
+            ", truck_count=" + truck_count +
+            ", mobile_goods=" + mobile_goods +
+            ", remark='" + remark + '\'' +
+            ", transport_type='" + transport_type + '\'' +
+            ", distance=" + distance +
+            ", pickup_province='" + pickup_province + '\'' +
+            ", pickup_city='" + pickup_city + '\'' +
+            ", pickup_region='" + pickup_region + '\'' +
+            ", pickup_street='" + pickup_street + '\'' +
+            ", pickup_address='" + pickup_address + '\'' +
+            ", pickup_location=" + pickup_location +
+            ", pickup_start_time_format='" + pickup_start_time_format + '\'' +
+            ", pickup_end_time_format='" + pickup_end_time_format + '\'' +
+            ", pickup_name='" + pickup_name + '\'' +
+            ", pickup_mobile_phone='" + pickup_mobile_phone + '\'' +
+            ", pickup_tel_phone='" + pickup_tel_phone + '\'' +
+            ", delivery_province='" + delivery_province + '\'' +
+            ", delivery_city='" + delivery_city + '\'' +
+            ", delivery_region='" + delivery_region + '\'' +
+            ", delivery_street='" + delivery_street + '\'' +
+            ", delivery_address='" + delivery_address + '\'' +
+            ", delivery_location=" + delivery_location +
+            ", delivery_start_time_format='" + delivery_start_time_format + '\'' +
+            ", delivery_end_time_format='" + delivery_end_time_format + '\'' +
+            ", delivery_name='" + delivery_name + '\'' +
+            ", delivery_mobile_phone='" + delivery_mobile_phone + '\'' +
+            ", delivery_tel_phone='" + delivery_tel_phone + '\'' +
+            ", initiator_name='" + initiator_name + '\'' +
+            ", initiator_phone='" + initiator_phone + '\'' +
+            ", payment_top_rate=" + payment_top_rate +
+            ", payment_top_cash_rate=" + payment_top_cash_rate +
+            ", payment_top_card_rate=" + payment_top_card_rate +
+            ", payment_tail_rate=" + payment_tail_rate +
+            ", payment_tail_cash_rate=" + payment_tail_cash_rate +
+            ", payment_tail_card_rate=" + payment_tail_card_rate +
+            ", payment_last_rate=" + payment_last_rate +
+            ", payment_last_cash_rate=" + payment_last_cash_rate +
+            ", payment_last_card_rate=" + payment_last_card_rate +
+            ", tender_type='" + tender_type + '\'' +
+            ", lowest_protect_price=" + lowest_protect_price +
+            ", highest_protect_price=" + highest_protect_price +
+            ", lowest_grab_price=" + lowest_grab_price +
+            ", highest_grab_price=" + highest_grab_price +
+            ", grab_increment_price=" + grab_increment_price +
+            ", current_grab_price=" + current_grab_price +
+            ", driver_price=" + driver_price +
+            '}';
+  }
 }

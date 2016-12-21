@@ -34,7 +34,7 @@
   <string name="grab">抢</string>
   <string name="compare">比</string>
   <string name="order_item_description">货物摘要&#160;&#160;%1$s&#160;%2$s&#160;%3$s</string>
-  <string name="order_item_create_time">发布时间&#160;&#160;%1$s&#160;&#160;%2$s</string>
+  <string name="order_item_create_time">发布时间&#160;&#160;%1$s</string>
   <string name="prince_unit">元</string>
   <string name="distance_unit">公里</string>
   <string name="need_cars">要求车辆</string>

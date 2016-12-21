@@ -12,6 +12,7 @@ import java.util.TimeZone;
  */
 public class TimeUtil {
   public static final String SERVER_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+  public static final String NORMAL_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
   private static long lastClickTime;
 
   /**
@@ -86,6 +87,19 @@ public class TimeUtil {
     try {
       DateFormat inputFormat = new SimpleDateFormat(fromFormat);
       inputFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+      DateFormat outputFormat = new SimpleDateFormat(toFormat);
+      Date parsed = inputFormat.parse(strDate);
+      String outputText = outputFormat.format(parsed);
+      return outputText;
+    } catch (Exception e) {
+      e.printStackTrace();
+      return "";
+    }
+  }
+
+  public static String convertDateStringNormalTimeFormat(String strDate,String toFormat){
+    try {
+      DateFormat inputFormat = new SimpleDateFormat(NORMAL_TIME_FORMAT);
       DateFormat outputFormat = new SimpleDateFormat(toFormat);
       Date parsed = inputFormat.parse(strDate);
       String outputText = outputFormat.format(parsed);

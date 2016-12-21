@@ -81,9 +81,9 @@ public class MainActivity extends BaseActivity implements XListView.IXListViewLi
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position > 0) {
-                    Intent intent = new Intent(mContext, ZCOrderDetailActivity.class);
-                    Tender order = tenderList.get(position - 1);
-                    intent.putExtra(Tender.TENDER, order);
+                    Intent intent = new Intent(mContext, TenderDetailActivity.class);
+                    Tender tender = tenderList.get(position - 1);
+                    intent.putExtra(Tender.TENDER, tender);
                     startActivity(intent);
                 }
             }
