@@ -69,11 +69,17 @@ public class MainActivity extends BaseActivity implements XListView.IXListViewLi
             }
         });
         rlMyOilCard = (RelativeLayout) findViewById(R.id.rlMyOilCard);
+        rlMyOilCard.setOnClickListener(new MyOnClickListener() {
+            @Override
+            public void OnceOnClick(View view) {
+                startActivity(new Intent(mContext, MyOilCardActivity.class));
+            }
+        });
         lvOrders = (XListView) findViewById(R.id.lvOrders);
         lvOrders.setPullRefreshEnable(true);
         lvOrders.setPullLoadEnable(false);
         lvOrders.setXListViewListener(this);
-        adapter = new TenderAdapter(this, tenderList,true);
+        adapter = new TenderAdapter(this, tenderList, true);
         lvOrders.setAdapter(adapter);
         lvOrders.stopRefresh();
         lvOrders.stopLoadMore();
@@ -93,7 +99,7 @@ public class MainActivity extends BaseActivity implements XListView.IXListViewLi
         llZCOrder.setOnClickListener(new MyOnClickListener() {
             @Override
             public void OnceOnClick(View view) {
-
+                startActivity(new Intent(mContext, MyTendersActivity.class));
             }
         });
         llDriverOrder = (LinearLayout) findViewById(R.id.llDriverOrder);

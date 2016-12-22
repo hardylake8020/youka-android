@@ -25,7 +25,6 @@ import java.text.DecimalFormat;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import retrofit2.http.HEAD;
 import rx.Subscriber;
 
 /**
