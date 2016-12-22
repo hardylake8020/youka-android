@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.zzqs.app_kc.R;
 import com.zzqs.app_kc.widgets.xlistView.XListView;
-import com.zzqs.app_kc.z_kc.adapter.KCOrderAdapter;
+import com.zzqs.app_kc.z_kc.adapter.TenderAdapter;
 import com.zzqs.app_kc.z_kc.entitiy.Tender;
 import com.zzqs.app_kc.z_kc.listener.MyOnClickListener;
 
@@ -25,7 +25,7 @@ public class FindGoodsActivity extends BaseActivity implements XListView.IXListV
   TextView tvLeft, tvTitle, tvRight, tvSelectAll, tvSelectBidding, tvSelectGrab;
   EditText etStart, etEnd;
   XListView lvOrders;
-  KCOrderAdapter adapter;
+  TenderAdapter adapter;
   private List<Tender> tenderList;
   private int selectType;
   private static final int ALL = 1;
@@ -81,7 +81,7 @@ public class FindGoodsActivity extends BaseActivity implements XListView.IXListV
     lvOrders.setPullRefreshEnable(true);
     lvOrders.setPullLoadEnable(false);
     lvOrders.setXListViewListener(this);
-    adapter = new KCOrderAdapter(this, tenderList);
+    adapter = new TenderAdapter(this, tenderList, false);
     lvOrders.setAdapter(adapter);
     lvOrders.stopRefresh();
     lvOrders.stopLoadMore();

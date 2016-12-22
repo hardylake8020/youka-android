@@ -5,14 +5,14 @@
 
     <include
         android:id="@+id/defaultHead"
-        layout="@layout/default_head" />
+        layout="@layout/z_kc_default_head" />
 
     <RelativeLayout
         android:id="@+id/layout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/defaultHead"
-        android:background="@color/primary_colors">
+        android:background="@color/tender_primary_color">
 
         <LinearLayout
             android:id="@+id/linearLayout1"

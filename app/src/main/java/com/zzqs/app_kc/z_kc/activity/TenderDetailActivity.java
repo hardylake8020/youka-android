@@ -25,6 +25,7 @@ import java.text.DecimalFormat;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import retrofit2.http.HEAD;
 import rx.Subscriber;
 
 /**
@@ -48,7 +49,7 @@ public class TenderDetailActivity extends BaseActivity {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-        setContentView(R.layout.z_kc_act_order_detail);
+        setContentView(R.layout.z_kc_act_tender_detail);
         tvLeft = (TextView) findViewById(R.id.head_back);
         tvLeft.setText("");
         tvLeft.setOnClickListener(new MyOnClickListener() {
@@ -94,7 +95,6 @@ public class TenderDetailActivity extends BaseActivity {
         llFirstPay = (LinearLayout) findViewById(R.id.llFirstPay);
         llLastPay = (LinearLayout) findViewById(R.id.llLastPay);
         llReceiptPay = (LinearLayout) findViewById(R.id.llReceiptPay);
-
         if (tender.getTender_type().equals(Tender.GRAB)) {
             tvTitle.setText(R.string.grab_details);
             llBiddingOrderHead.setVisibility(View.GONE);
@@ -134,111 +134,111 @@ public class TenderDetailActivity extends BaseActivity {
                 tvRemainingTime.setText("已结束");
                 llBiddingOrder.setVisibility(View.GONE);
             }
-        }
 
-        tvStartCity.setText(tender.getPickup_city());
-        tvStartDistrict.setText(tender.getPickup_region());
-        tvEndCity.setText(tender.getDelivery_city());
-        tvEndDistrict.setText(tender.getDelivery_region());
-        tvNeedCars.setText(tender.getTruck_type() + "  " + tender.getTruck_count() + "辆");
-        StringBuilder sb = new StringBuilder();
-        if (tender.getMobile_goods() != null) {
-            double quantity = 0, volume = 0, weight = 0;
-            String quantityUnit = null, volumeUnit = null, weightUnit = null;
-            for (Goods goods : tender.getMobile_goods()) {
-                quantity += goods.getCount();
-                volume += goods.getCount2();
-                weight += goods.getCount3();
-                if (!TextUtils.isEmpty(goods.getUnit())) {
-                    quantityUnit = goods.getUnit();
+            tvStartCity.setText(tender.getPickup_city());
+            tvStartDistrict.setText(tender.getPickup_region());
+            tvEndCity.setText(tender.getDelivery_city());
+            tvEndDistrict.setText(tender.getDelivery_region());
+            tvNeedCars.setText(tender.getTruck_type() + "  " + tender.getTruck_count() + "辆");
+            StringBuilder sb = new StringBuilder();
+            if (tender.getMobile_goods() != null) {
+                double quantity = 0, volume = 0, weight = 0;
+                String quantityUnit = null, volumeUnit = null, weightUnit = null;
+                for (Goods goods : tender.getMobile_goods()) {
+                    quantity += goods.getCount();
+                    volume += goods.getCount2();
+                    weight += goods.getCount3();
+                    if (!TextUtils.isEmpty(goods.getUnit())) {
+                        quantityUnit = goods.getUnit();
+                    }
+                    if (!TextUtils.isEmpty(goods.getUnit2())) {
+                        quantityUnit = goods.getUnit2();
+                    }
+                    if (!TextUtils.isEmpty(goods.getUnit2())) {
+                        quantityUnit = goods.getUnit2();
+                    }
                 }
-                if (!TextUtils.isEmpty(goods.getUnit2())) {
-                    quantityUnit = goods.getUnit2();
+                if (!TextUtils.isEmpty(quantityUnit)) {
+                    sb.append(quantity + quantityUnit);
                 }
-                if (!TextUtils.isEmpty(goods.getUnit2())) {
-                    quantityUnit = goods.getUnit2();
+                if (!TextUtils.isEmpty(volumeUnit)) {
+                    if (sb.length() > 0) {
+                        sb.append("/");
+                    }
+                    sb.append(volume + volumeUnit);
                 }
+                if (!TextUtils.isEmpty(weightUnit)) {
+                    if (sb.length() > 0) {
+                        sb.append("/");
+                    }
+                    sb.append(weight + weightUnit);
+                }
+                tvGoodsInfo.setText(sb.toString());
+                sb.setLength(0);
             }
-            if (!TextUtils.isEmpty(quantityUnit)) {
-                sb.append(quantity + quantityUnit);
+            tvRemark.setText(TextUtils.isEmpty(tender.getRemark()) ? "-" : tender.getRemark());
+            tvInitiator.setText(tender.getSender_company());
+            tvInitiatorName.setText(tender.getPickup_name());
+            tvInitiatorPhone.setText(tender.getPickup_mobile_phone());
+            tvPickupTime.setText(TimeUtil.convertDateStringNormalTimeFormat(tender.getPickup_start_time_format(), "MM-dd HH:mm") + "~" + TimeUtil.convertDateStringNormalTimeFormat(tender.getPickup_end_time_format(), "MM-dd HH:mm"));
+            tvPickupAddress.setText(tender.getPickup_address());
+            tvDeliveryTime.setText(TimeUtil.convertDateStringNormalTimeFormat(tender.getDelivery_start_time_format(), "MM-dd HH:mm") + "~" + TimeUtil.convertDateStringNormalTimeFormat(tender.getDelivery_end_time_format(), "MM-dd HH:mm"));
+            tvDeliveryAddress.setText(tender.getDelivery_address());
+            if (tender.getPayment_top_rate() > 0) {
+                sb.append(getString(R.string.payment_top_rate));
+            } else if (tender.getPayment_last_rate() > 0) {
+                sb.append("+" + getString(R.string.payment_last_rate));
             }
-            if (!TextUtils.isEmpty(volumeUnit)) {
-                if (sb.length() > 0) {
-                    sb.append("/");
-                }
-                sb.append(volume + volumeUnit);
+            if (tender.getPayment_tail_rate() > 0) {
+                sb.append("+" + getString(R.string.receipt));
             }
-            if (!TextUtils.isEmpty(weightUnit)) {
-                if (sb.length() > 0) {
-                    sb.append("/");
-                }
-                sb.append(weight + weightUnit);
-            }
-            tvGoodsInfo.setText(sb.toString());
+            tvPayWay.setText(sb.toString());
             sb.setLength(0);
-        }
-        tvRemark.setText(TextUtils.isEmpty(tender.getRemark()) ? "-" : tender.getRemark());
-        tvInitiator.setText(tender.getSender_company());
-        tvInitiatorName.setText(tender.getInitiator_name());
-        tvInitiatorPhone.setText(tender.getInitiator_phone());
-        tvPickupTime.setText(TimeUtil.convertDateStringNormalTimeFormat(tender.getPickup_start_time_format(), "MM-dd HH:mm") + "~" + TimeUtil.convertDateStringNormalTimeFormat(tender.getPickup_end_time_format(), "MM-dd HH:mm"));
-        tvPickupAddress.setText(tender.getPickup_address());
-        tvDeliveryTime.setText(TimeUtil.convertDateStringNormalTimeFormat(tender.getDelivery_start_time_format(), "MM-dd HH:mm") + "~" + TimeUtil.convertDateStringNormalTimeFormat(tender.getDelivery_end_time_format(), "MM-dd HH:mm"));
-        tvDeliveryAddress.setText(tender.getDelivery_address());
-        if (tender.getPayment_top_rate() > 0) {
-            sb.append(getString(R.string.payment_top_rate));
-        } else if (tender.getPayment_last_rate() > 0) {
-            sb.append("+" + getString(R.string.payment_last_rate));
-        }
-        if (tender.getPayment_tail_rate() > 0) {
-            sb.append("+" + getString(R.string.receipt));
-        }
-        tvPayWay.setText(sb.toString());
-        sb.setLength(0);
 
-        if (tender.getPayment_top_rate() > 0) {
-            sb.append(NumberUtil.doubleTrans(tender.getPayment_top_rate()) + "%   ");
-            if (tender.getPayment_top_cash_rate() == 100) {
-                sb.append(getString(R.string.cash_pay));
-            } else if (tender.getPayment_top_card_rate() == 100) {
-                sb.append(getString(R.string.oil_card_pay));
+            if (tender.getPayment_top_rate() > 0) {
+                sb.append(NumberUtil.doubleTrans(tender.getPayment_top_rate()) + "%   ");
+                if (tender.getPayment_top_cash_rate() == 100) {
+                    sb.append(getString(R.string.cash_pay));
+                } else if (tender.getPayment_top_card_rate() == 100) {
+                    sb.append(getString(R.string.oil_card_pay));
+                } else {
+                    sb.append("(" + NumberUtil.doubleTrans(tender.getPayment_top_cash_rate()) + "%" + getString(R.string.cash) + "  +  " + NumberUtil.doubleTrans(tender.getPayment_top_card_rate()) + "%" + getString(R.string.oil_card) + ")");
+                }
+                tvFirstPay.setText(sb.toString());
+                sb.setLength(0);
             } else {
-                sb.append("(" + NumberUtil.doubleTrans(tender.getPayment_top_cash_rate()) + "%" + getString(R.string.cash) + "  +  " + NumberUtil.doubleTrans(tender.getPayment_top_card_rate()) + "%" + getString(R.string.oil_card) + ")");
+                llFirstPay.setVisibility(View.GONE);
             }
-            tvFirstPay.setText(sb.toString());
-            sb.setLength(0);
-        } else {
-            llFirstPay.setVisibility(View.GONE);
-        }
 
-        if (tender.getPayment_last_rate() > 0) {
-            sb.append(NumberUtil.doubleTrans(tender.getPayment_last_rate()) + "%   ");
-            if (tender.getPayment_last_cash_rate() == 100) {
-                sb.append("(" + getString(R.string.cash_pay) + ")");
-            } else if (tender.getPayment_last_card_rate() == 100) {
-                sb.append("(" + getString(R.string.oil_card_pay) + ")");
+            if (tender.getPayment_last_rate() > 0) {
+                sb.append(NumberUtil.doubleTrans(tender.getPayment_last_rate()) + "%   ");
+                if (tender.getPayment_last_cash_rate() == 100) {
+                    sb.append("(" + getString(R.string.cash_pay) + ")");
+                } else if (tender.getPayment_last_card_rate() == 100) {
+                    sb.append("(" + getString(R.string.oil_card_pay) + ")");
+                } else {
+                    sb.append("(" + NumberUtil.doubleTrans(tender.getPayment_last_cash_rate()) + "%" + getString(R.string.cash) + "  +  " + NumberUtil.doubleTrans(tender.getPayment_last_card_rate()) + "%" + getString(R.string.oil_card) + ")");
+                }
+                tvLastPay.setText(sb.toString());
+                sb.setLength(0);
             } else {
-                sb.append("(" + NumberUtil.doubleTrans(tender.getPayment_last_cash_rate()) + "%" + getString(R.string.cash) + "  +  " + NumberUtil.doubleTrans(tender.getPayment_last_card_rate()) + "%" + getString(R.string.oil_card) + ")");
+                llLastPay.setVisibility(View.GONE);
             }
-            tvLastPay.setText(sb.toString());
-            sb.setLength(0);
-        } else {
-            llLastPay.setVisibility(View.GONE);
-        }
 
-        if (tender.getPayment_tail_rate() > 0) {
-            sb.append(NumberUtil.doubleTrans(tender.getPayment_tail_rate()) + "%   ");
-            if (tender.getPayment_tail_cash_rate() == 100) {
-                sb.append("(" + getString(R.string.cash_pay) + ")");
-            } else if (tender.getPayment_tail_card_rate() == 100) {
-                sb.append("(" + getString(R.string.oil_card_pay) + ")");
+            if (tender.getPayment_tail_rate() > 0) {
+                sb.append(NumberUtil.doubleTrans(tender.getPayment_tail_rate()) + "%   ");
+                if (tender.getPayment_tail_cash_rate() == 100) {
+                    sb.append("(" + getString(R.string.cash_pay) + ")");
+                } else if (tender.getPayment_tail_card_rate() == 100) {
+                    sb.append("(" + getString(R.string.oil_card_pay) + ")");
+                } else {
+                    sb.append("(" + NumberUtil.doubleTrans(tender.getPayment_tail_cash_rate()) + "%" + getString(R.string.cash) + "  +  " + NumberUtil.doubleTrans(tender.getPayment_tail_card_rate()) + "%" + getString(R.string.oil_card) + ")");
+                }
+                tvReceipt.setText(sb.toString());
+                sb.setLength(0);
             } else {
-                sb.append("(" + NumberUtil.doubleTrans(tender.getPayment_tail_cash_rate()) + "%" + getString(R.string.cash) + "  +  " + NumberUtil.doubleTrans(tender.getPayment_tail_card_rate()) + "%" + getString(R.string.oil_card) + ")");
+                llReceiptPay.setVisibility(View.GONE);
             }
-            tvReceipt.setText(sb.toString());
-            sb.setLength(0);
-        } else {
-            llReceiptPay.setVisibility(View.GONE);
         }
     }
 
@@ -280,6 +280,7 @@ public class TenderDetailActivity extends BaseActivity {
         } else {
             timeStringBuilder.append(seconds + "秒");
         }
+
         Message msMessage = changeTimeHandler.obtainMessage();
         msMessage.obj = timeStringBuilder.toString();
         timeStringBuilder.setLength(0);
@@ -305,6 +306,8 @@ public class TenderDetailActivity extends BaseActivity {
 //                finish();
 //            }
 //        });
+
+        //测试
         OilCard oilCard = new OilCard();
         oilCard.setNumber("abc123abc");
         oilCard.setType(OilCard.ETC);
@@ -328,3 +331,4 @@ public class TenderDetailActivity extends BaseActivity {
         });
     }
 }
+

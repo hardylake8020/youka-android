@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <string name="app_name">柱柱卡车</string>
+  <string name="app_name">柱柱优卡</string>
 
   <!-- xlistView -->
   <string name="xlistview_header_hint_normal">下拉刷新</string>
@@ -24,18 +24,19 @@
   <string name="title_activity_actual_delivery">ActualDeliveryActivity</string>
 
   <!-- kc -->
-  <string name="un_deal_order">待处理订单</string>
-  <string name="un_deal_waybill">待处理运单</string>
-  <string name="i_need_find_goods">我要找货</string>
+  <string name="un_deal_order">比价、抢单中</string>
+  <string name="un_deal_waybill">我的运单</string>
+  <string name="zhuzhu_goods">柱柱资源</string>
   <string name="my_cars">我的车队</string>
   <string name="my_wallet">我的钱包</string>
   <string name="my_oil_card">我的油卡</string>
   <string name="to">&#160;至&#160;</string>
   <string name="grab">抢</string>
   <string name="compare">比</string>
-  <string name="order_item_description">货物摘要&#160;&#160;%1$s&#160;%2$s&#160;%3$s</string>
-  <string name="order_item_create_time">发布时间&#160;&#160;%1$s</string>
+  <string name="order_item_create_time">发布时间&#160;&#160;&#160;&#160;%1$s</string>
+  <string name="order_item_description">货物摘要&#160;&#160;&#160;&#160;%1$s&#160;&#160;%2$s&#160;&#160;%3$s</string>
   <string name="prince_unit">元</string>
+  <string name="prince_unit2">(元)</string>
   <string name="distance_unit">公里</string>
   <string name="need_cars">要求车辆</string>
   <string name="total">合计</string>
@@ -60,6 +61,7 @@
   <string name="offer">出价</string>
   <string name="input_total_prince">输入总价格</string>
   <string name="compare_rest_time">比价剩余时间</string>
+  <string name="rest_time">剩余时间</string>
   <string name="highest_grab_price">出价不能高于</string>
   <string name="grab_details">抢单详情</string>
   <string name="bidding_details">比价详情</string>

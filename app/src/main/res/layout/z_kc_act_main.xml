@@ -7,7 +7,7 @@
   <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/primary_colors"
+    android:background="@color/tender_primary_color"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -105,13 +105,21 @@
       android:layout_height="match_parent"
       android:layout_weight="1">
 
+      <ImageView
+        android:id="@+id/ivGoods"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/z_kc_find_goods"/>
+
       <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:drawablePadding="5dp"
-        android:drawableTop="@drawable/default_head_portrait"
-        android:text="@string/i_need_find_goods"/>
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:text="@string/zhuzhu_goods"/>
 
       <ImageView
         android:layout_width="1px"
@@ -126,12 +134,20 @@
       android:layout_height="match_parent"
       android:layout_weight="1">
 
+      <ImageView
+        android:id="@+id/ivCars"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/z_kc_cars"/>
+
       <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:drawablePadding="5dp"
-        android:drawableTop="@drawable/default_head_portrait"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
         android:text="@string/my_cars"/>
 
       <ImageView
@@ -147,12 +163,20 @@
       android:layout_height="match_parent"
       android:layout_weight="1">
 
+      <ImageView
+        android:id="@+id/ivMyWallet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/z_kc_my_wallet"/>
+
       <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:drawablePadding="5dp"
-        android:drawableTop="@drawable/default_head_portrait"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
         android:text="@string/my_wallet"/>
 
       <ImageView
@@ -168,13 +192,22 @@
       android:layout_height="match_parent"
       android:layout_weight="1">
 
+      <ImageView
+        android:id="@+id/ivMyOilCards"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/z_kc_oil_cards"/>
+
       <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:drawablePadding="5dp"
-        android:drawableTop="@drawable/default_head_portrait"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
         android:text="@string/my_oil_card"/>
+
     </RelativeLayout>
   </LinearLayout>
 

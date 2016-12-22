@@ -12,7 +12,7 @@ import com.zzqs.app_kc.R;
 import com.zzqs.app_kc.utils.CommonTools;
 import com.zzqs.app_kc.widgets.CircleImageView;
 import com.zzqs.app_kc.widgets.xlistView.XListView;
-import com.zzqs.app_kc.z_kc.adapter.KCOrderAdapter;
+import com.zzqs.app_kc.z_kc.adapter.TenderAdapter;
 import com.zzqs.app_kc.z_kc.entitiy.ErrorInfo;
 import com.zzqs.app_kc.z_kc.entitiy.Tender;
 import com.zzqs.app_kc.z_kc.listener.MyOnClickListener;
@@ -33,7 +33,7 @@ public class MainActivity extends BaseActivity implements XListView.IXListViewLi
     RelativeLayout rlFindGoods, rlMyCars, rlMyWallet, rlMyOilCard;
     LinearLayout llZCOrder, llDriverOrder;
     XListView lvOrders;
-    KCOrderAdapter adapter;
+    TenderAdapter adapter;
     private List<Tender> tenderList;
 
     @Override
@@ -73,7 +73,7 @@ public class MainActivity extends BaseActivity implements XListView.IXListViewLi
         lvOrders.setPullRefreshEnable(true);
         lvOrders.setPullLoadEnable(false);
         lvOrders.setXListViewListener(this);
-        adapter = new KCOrderAdapter(this, tenderList);
+        adapter = new TenderAdapter(this, tenderList,true);
         lvOrders.setAdapter(adapter);
         lvOrders.stopRefresh();
         lvOrders.stopLoadMore();

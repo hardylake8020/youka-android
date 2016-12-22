@@ -6,12 +6,12 @@
               android:background="@color/bg_gray"
               android:orientation="vertical">
 
-  <include layout="@layout/default_head"/>
+  <include layout="@layout/z_kc_default_head"/>
 
   <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/primary_colors">
+    android:background="@color/tender_primary_color">
 
     <com.facebook.drawee.view.SimpleDraweeView
       android:id="@+id/sdCarPhoto"
