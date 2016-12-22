@@ -8,17 +8,24 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zzqs.app_kc.R;
+import com.zzqs.app_kc.utils.CommonTools;
+import com.zzqs.app_kc.z_kc.entitiy.ErrorInfo;
 import com.zzqs.app_kc.z_kc.entitiy.Goods;
+import com.zzqs.app_kc.z_kc.entitiy.OilCard;
 import com.zzqs.app_kc.z_kc.entitiy.Tender;
 import com.zzqs.app_kc.z_kc.listener.MyOnClickListener;
+import com.zzqs.app_kc.z_kc.network.OilCardApiImpl;
 import com.zzqs.app_kc.z_kc.util.NumberUtil;
 import com.zzqs.app_kc.z_kc.util.TimeUtil;
 
 import java.text.DecimalFormat;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import rx.Subscriber;
 
 /**
  * Created by lance on 2016/12/4.
@@ -98,6 +105,7 @@ public class TenderDetailActivity extends BaseActivity {
                 @Override
                 public void OnceOnClick(View view) {
                     //抢单
+                    grabTender();
                 }
             });
         } else {
@@ -276,5 +284,47 @@ public class TenderDetailActivity extends BaseActivity {
         msMessage.obj = timeStringBuilder.toString();
         timeStringBuilder.setLength(0);
         changeTimeHandler.sendMessage(msMessage);
+    }
+
+    private void grabTender() {
+//        TenderApiImpl.getUserApiImpl().grabTender(CommonTools.getToken(this), tender.getTender_id(), new Subscriber<ErrorInfo>() {
+//            @Override
+//            public void onCompleted() {
+//
+//            }
+//
+//            @Override
+//            public void onError(Throwable e) {
+//                Toast.makeText(TenderDetailActivity.this, "失败", Toast.LENGTH_LONG).show();
+//                e.printStackTrace();
+//            }
+//
+//            @Override
+//            public void onNext(ErrorInfo errorInfo) {
+//                Toast.makeText(TenderDetailActivity.this, "成功", Toast.LENGTH_LONG).show();
+//                finish();
+//            }
+//        });
+        OilCard oilCard = new OilCard();
+        oilCard.setNumber("abc123abc");
+        oilCard.setType(OilCard.ETC);
+        OilCardApiImpl.getOilCardApiImpl().addOilCardByDriver(CommonTools.getToken(this), oilCard, new Subscriber<ErrorInfo>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Toast.makeText(TenderDetailActivity.this, "失败", Toast.LENGTH_LONG).show();
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onNext(ErrorInfo errorInfo) {
+                Toast.makeText(TenderDetailActivity.this, "成功", Toast.LENGTH_LONG).show();
+                finish();
+            }
+        });
     }
 }

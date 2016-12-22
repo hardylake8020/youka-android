@@ -71,4 +71,60 @@ public class TenderApiImpl {
                 .throttleFirst(1000, TimeUnit.MILLISECONDS)
                 .subscribe(subscriber);
     }
+
+    public void getStartedListByDriver(@NonNull String accessToken, @NonNull int currentCount, @NonNull int limit, @NonNull String status, Subscriber<ErrorInfo> subscriber) {
+        tenderApi.getStartedListByDriver(accessToken, currentCount, limit, status)
+                .map(new Func1<JsonObject, ErrorInfo>() {
+                    @Override
+                    public ErrorInfo call(JsonObject jsonObject) {
+                        ErrorInfo errorInfo = new ErrorInfo();
+                        if (jsonObject.has(errorInfo.ERR)) {
+                            Log.e("getStartedListByDriver", jsonObject.toString());
+                            JsonObject errObj = jsonObject.getAsJsonObject(errorInfo.ERR);
+                            errorInfo = gson.fromJson(errObj, ErrorInfo.class);
+                        } else {
+                            errorInfo.setType(ErrorInfo.SUCCESS);
+                            JsonArray jsonArray = jsonObject.getAsJsonArray(Tender.TENDERS);
+                            for (int i = 0; i < jsonArray.size(); i++) {
+                                JsonObject obj = (JsonObject) jsonArray.get(i);
+                                Log.e("obj", obj.toString());
+                            }
+                            Type type = new TypeToken<List<Tender>>() {
+                            }.getType();
+                            List<Tender> list = gson.fromJson(jsonArray, type);
+                            for (Tender tender : list) {
+                                Log.e("tender", tender.toString());
+                            }
+                            errorInfo.object = list;
+                        }
+                        return errorInfo;
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .throttleFirst(1000, TimeUnit.MILLISECONDS)
+                .subscribe(subscriber);
+    }
+
+    public void grabTender(@NonNull String accessToken, @NonNull String tenderId, Subscriber<ErrorInfo> subscriber) {
+        tenderApi.grabTender(accessToken, tenderId)
+                .map(new Func1<JsonObject, ErrorInfo>() {
+                    @Override
+                    public ErrorInfo call(JsonObject jsonObject) {
+                        ErrorInfo errorInfo = new ErrorInfo();
+                        if (jsonObject.has(errorInfo.ERR)) {
+                            Log.e("grabTender", jsonObject.toString());
+                            JsonObject errObj = jsonObject.getAsJsonObject(errorInfo.ERR);
+                            errorInfo = gson.fromJson(errObj, ErrorInfo.class);
+                        } else {
+                            errorInfo.setType(ErrorInfo.SUCCESS);
+                        }
+                        return errorInfo;
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .throttleFirst(1000, TimeUnit.MILLISECONDS)
+                .subscribe(subscriber);
+    }
 }
