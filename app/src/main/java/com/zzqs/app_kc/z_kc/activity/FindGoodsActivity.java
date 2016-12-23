@@ -15,6 +15,7 @@ import com.zzqs.app_kc.z_kc.listener.MyOnClickListener;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * Created by lance on 2016/12/4.
  */
@@ -47,7 +48,7 @@ public class FindGoodsActivity extends BaseActivity implements XListView.IXListV
             }
         });
         tvTitle = (TextView) findViewById(R.id.head_title);
-        tvTitle.setText(R.string.source_of_goods);
+        tvTitle.setText(R.string.goods_list);
         tvSelectAll = (TextView) findViewById(R.id.tvSelectAll);
         tvSelectAll.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +85,6 @@ public class FindGoodsActivity extends BaseActivity implements XListView.IXListV
 
     @Override
     public void loadData() {
-
     }
 
     @Override
@@ -93,13 +93,11 @@ public class FindGoodsActivity extends BaseActivity implements XListView.IXListV
         onLoad();
     }
 
+
     @Override
     public void onLoadMore() {
         getKCOrders();
         onLoad();
-    }
-
-    private void getKCOrders() {
     }
 
     /**
@@ -112,6 +110,9 @@ public class FindGoodsActivity extends BaseActivity implements XListView.IXListV
         if (tenderList.size() >= 10) {
             lvTenders.setPullLoadEnable(true);
         }
+    }
+
+    private void getKCOrders() {
     }
 
     private void setSelectType(int type) {
