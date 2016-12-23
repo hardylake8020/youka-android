@@ -22,7 +22,7 @@ import java.util.List;
  */
 
 public class FindGoodsActivity extends BaseActivity implements XListView.IXListViewListener {
-  TextView tvLeft, tvTitle, tvRight, tvSelectAll, tvSelectBidding, tvSelectGrab;
+  TextView tvLeft, tvTitle, tvSelectAll, tvSelectBidding, tvSelectGrab;
   EditText etStart, etEnd;
   XListView lvOrders;
   TenderAdapter adapter;
@@ -49,10 +49,7 @@ public class FindGoodsActivity extends BaseActivity implements XListView.IXListV
       }
     });
     tvTitle = (TextView) findViewById(R.id.head_title);
-    tvTitle.setText(R.string.goods_list);
-    tvRight = (TextView) findViewById(R.id.head_right);
-    tvRight.setText(R.string.find_good_by_map);
-    tvRight.setVisibility(View.VISIBLE);
+    tvTitle.setText(R.string.source_of_goods);
     tvSelectAll = (TextView) findViewById(R.id.tvSelectAll);
     tvSelectAll.setOnClickListener(new View.OnClickListener() {
       @Override
