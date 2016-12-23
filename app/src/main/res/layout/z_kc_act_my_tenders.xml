@@ -29,22 +29,22 @@
         android:gravity="center_horizontal">
 
         <TextView
-          android:id="@+id/tvUntreated"
+          android:id="@+id/tvUnAssigned"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:gravity="center"
-          android:text="@string/untreated"
+          android:text="@string/un_assigned"
           android:textColor="@android:color/white"
           android:textSize="16sp"/>
       </RelativeLayout>
 
       <TextView
-        android:id="@+id/tvOnGoing"
+        android:id="@+id/tvInProgress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="@string/ongoing"
+        android:text="@string/in_progress"
         android:textColor="@color/gray"
         android:textSize="16sp"/>
 

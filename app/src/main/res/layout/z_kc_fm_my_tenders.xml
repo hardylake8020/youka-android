@@ -3,5 +3,14 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-
+  <com.zzqs.app_kc.widgets.xlistView.XListView
+    android:id="@+id/lvTenders"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="10dp"
+    android:background="@android:color/white"
+    android:divider="@android:color/white"
+    android:dividerHeight="0px"
+    android:listSelector="@android:color/white"
+    android:scrollbars="none" />
 </LinearLayout>

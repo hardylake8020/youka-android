@@ -5,6 +5,7 @@
               android:orientation="vertical">
 
   <RelativeLayout
+    android:id="@+id/rlTop"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentLeft="true"
@@ -132,4 +133,26 @@
     android:layout_height="1px"
     android:layout_marginTop="10dp"
     android:background="@color/line_gray"/>
+
+  <LinearLayout
+    android:id="@+id/llBottom"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+      android:id="@+id/tvBottom"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="center"
+      android:paddingBottom="10dp"
+      android:paddingTop="10dp"
+      android:textColor="@color/dark_blue"
+      android:textSize="14sp"/>
+
+    <ImageView
+      android:layout_width="match_parent"
+      android:layout_height="1px"
+      android:background="@color/line_gray"/>
+  </LinearLayout>
 </LinearLayout>

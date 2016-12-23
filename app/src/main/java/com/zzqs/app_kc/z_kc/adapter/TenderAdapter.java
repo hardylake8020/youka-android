@@ -1,14 +1,19 @@
 package com.zzqs.app_kc.z_kc.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zzqs.app_kc.R;
+import com.zzqs.app_kc.z_kc.activity.TenderDetailActivity;
 import com.zzqs.app_kc.z_kc.entitiy.Goods;
 import com.zzqs.app_kc.z_kc.entitiy.Tender;
 import com.zzqs.app_kc.z_kc.util.NumberUtil;
@@ -27,13 +32,14 @@ public class TenderAdapter extends BaseAdapter {
   private LayoutInflater inflater;
   private List<Tender> kcOrderList;
   private DecimalFormat doubleDF;
-  private boolean isUnParticipation;
+  private boolean isMyTender;
   private SimpleDateFormat timeDF;
-  public TenderAdapter(Context context, List<Tender> kcOrderList, boolean isUnParticipation) {
+
+  public TenderAdapter(Context context, List<Tender> kcOrderList, boolean isMyTender) {
     this.context = context;
     inflater = LayoutInflater.from(context);
     this.kcOrderList = kcOrderList;
-    this.isUnParticipation = isUnParticipation;
+    this.isMyTender = isMyTender;
     doubleDF = new DecimalFormat("######0.00");
     timeDF = new SimpleDateFormat("HH:mm:ss");
   }
@@ -69,7 +75,37 @@ public class TenderAdapter extends BaseAdapter {
       holder.tvImgBelow = (TextView) view.findViewById(R.id.tvImgBelow);
       holder.tvGoodsDescription = (TextView) view.findViewById(R.id.tvGoodsDescription);
       holder.tvCreateTime = (TextView) view.findViewById(R.id.tvCreateTime);
+      holder.rlTop = (RelativeLayout) view.findViewById(R.id.rlTop);
+      holder.llBottom = (LinearLayout) view.findViewById(R.id.llBottom);
+      holder.tvBottom = (TextView) view.findViewById(R.id.tvBottom);
+
+      holder.rlTop.setOnClickListener(new ViewHolderClicKListener(tender) {
+        @Override
+        public void onClick(View v, Tender tender) {
+          Intent intent = new Intent(context, TenderDetailActivity.class);
+          intent.putExtra(Tender.TENDER, tender);
+          context.startActivity(intent);
+        }
+      });
+
+      holder.llBottom.setOnClickListener(new ViewHolderClicKListener(tender) {
+        @Override
+        public void onClick(View v, Tender tender) {
+          switch (tender.getStatus()) {
+            case Tender.UN_ASSIGNED:
+              //去分配车辆的页面
+              break;
+            case Tender.IN_PROGRESS:
+            case Tender.COMPLETED:
+              //去时间轴页面
+              break;
+          }
+        }
+      });
+
       view.setTag(holder);
+      holder.rlTop.setTag(tender);
+      holder.llBottom.setTag(tender);
     } else {
       holder = (ViewHolder) view.getTag();
     }
@@ -106,7 +142,29 @@ public class TenderAdapter extends BaseAdapter {
     holder.tvGoodsDescription.setText(context.getString(R.string.order_item_description, tender.getSender_company(), msg, tender.getDistance() + context.getString(R.string.distance_unit)));
     holder.tvCreateTime.setText(context.getString(R.string.order_item_create_time, TimeUtil.convertDateStringFormat(tender.getStart_time(), TimeUtil.SERVER_TIME_FORMAT, "MM-dd HH:mm")));
 
-    if (isUnParticipation) {
+    if (isMyTender) {
+      holder.llBottom.setVisibility(View.VISIBLE);
+      holder.tvType.setVisibility(View.GONE);
+      holder.tvImgAbove.setText(R.string.grab_success);
+      holder.tvImgAbove.setTextColor(ContextCompat.getColor(context, R.color.green));
+      switch (tender.getStatus()) {
+        case Tender.UN_ASSIGNED:
+          holder.tvImgBelow.setText(R.string.un_distribution_car);
+          holder.tvBottom.setText(R.string.distribution_car);
+          break;
+        case Tender.IN_PROGRESS:
+          holder.tvImgBelow.setText(R.string.transporting);
+          holder.tvBottom.setText("湘A12345");
+          break;
+        case Tender.COMPLETED:
+          holder.tvImgBelow.setText(R.string.completed);
+          holder.tvBottom.setText("湘A12345");
+          break;
+      }
+    } else {
+      holder.llBottom.setVisibility(View.GONE);
+      holder.tvType.setVisibility(View.VISIBLE);
+      holder.tvImgAbove.setTextColor(ContextCompat.getColor(context, R.color.red_5));
       if (tender.getTender_type().equals(Tender.GRAB)) {
         holder.tvType.setText(R.string.grab);
         holder.tvType.setBackgroundResource(R.drawable.round_red);
@@ -121,11 +179,31 @@ public class TenderAdapter extends BaseAdapter {
         holder.tvImgAbove.setText(time);
         holder.tvImgBelow.setText(R.string.rest_time);
       }
+
     }
     return view;
   }
 
   private class ViewHolder {
-    TextView tvType, tvPickupProvince, tvPickupCity, tvDeliveryProvince, tvDeliveryCity, tvImgAbove, tvImgBelow, tvCreateTime, tvGoodsDescription;
+    TextView tvType, tvPickupProvince, tvPickupCity, tvDeliveryProvince, tvDeliveryCity, tvImgAbove, tvImgBelow, tvCreateTime, tvGoodsDescription, tvBottom;
+    RelativeLayout rlTop;
+    LinearLayout llBottom;
+  }
+
+  private abstract class ViewHolderClicKListener implements View.OnClickListener {
+
+    private Tender tender;
+
+    public ViewHolderClicKListener(Tender tender) {
+      this.tender = tender;
+    }
+
+    @Override
+    public void onClick(View v) {
+      onClick(v, tender);
+    }
+
+    public abstract void onClick(View v, Tender tender);
+
   }
 }

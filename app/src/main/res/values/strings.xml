@@ -97,7 +97,10 @@
   <string name="open_offer_permissions">开启报价权限</string>
   <string name="close_offer_permissions">取消报价权限</string>
   <string name="etc_card">ETC卡</string>
-  <string name="untreated">待处理</string>
-  <string name="ongoing">进行中</string>
+  <string name="un_assigned">待处理</string>
+  <string name="in_progress">进行中</string>
   <string name="completed">已完成</string>
+  <string name="grab_success">抢标成功</string>
+  <string name="un_distribution_car">待分配车辆</string>
+  <string name="distribution_car">分配车辆</string>
 </resources>
