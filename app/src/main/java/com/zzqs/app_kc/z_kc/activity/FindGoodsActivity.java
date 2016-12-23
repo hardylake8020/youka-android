@@ -24,7 +24,7 @@ import java.util.List;
 public class FindGoodsActivity extends BaseActivity implements XListView.IXListViewListener {
   TextView tvLeft, tvTitle, tvRight, tvSelectAll, tvSelectBidding, tvSelectGrab;
   EditText etStart, etEnd;
-  XListView lvOrders;
+  XListView lvTenders;
   TenderAdapter adapter;
   private List<Tender> tenderList;
   private int selectType;
@@ -77,25 +77,14 @@ public class FindGoodsActivity extends BaseActivity implements XListView.IXListV
     });
     etStart = (EditText) findViewById(R.id.etStart);
     etEnd = (EditText) findViewById(R.id.etEnd);
-    lvOrders = (XListView) findViewById(R.id.lvOrders);
-    lvOrders.setPullRefreshEnable(true);
-    lvOrders.setPullLoadEnable(false);
-    lvOrders.setXListViewListener(this);
-    adapter = new TenderAdapter(this, tenderList, true);
-    lvOrders.setAdapter(adapter);
-    lvOrders.stopRefresh();
-    lvOrders.stopLoadMore();
-    lvOrders.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-      @Override
-      public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (position > 0) {
-          Intent intent = new Intent(mContext, TenderDetailActivity.class);
-          Tender order = tenderList.get(position - 1);
-          intent.putExtra(Tender.TENDER, order);
-          startActivity(intent);
-        }
-      }
-    });
+    lvTenders = (XListView) findViewById(R.id.lvTenders);
+    lvTenders.setPullRefreshEnable(true);
+    lvTenders.setPullLoadEnable(false);
+    lvTenders.setXListViewListener(this);
+    adapter = new TenderAdapter(this, tenderList, false);
+    lvTenders.setAdapter(adapter);
+    lvTenders.stopRefresh();
+    lvTenders.stopLoadMore();
   }
 
   @Override
@@ -122,11 +111,11 @@ public class FindGoodsActivity extends BaseActivity implements XListView.IXListV
    * 停止刷新，
    */
   private void onLoad() {
-    lvOrders.stopRefresh();
-    lvOrders.stopLoadMore();
-    lvOrders.setRefreshTime(getString(R.string.xilstview_refreshed));
+    lvTenders.stopRefresh();
+    lvTenders.stopLoadMore();
+    lvTenders.setRefreshTime(getString(R.string.xilstview_refreshed));
     if (tenderList.size() >= 10) {
-      lvOrders.setPullLoadEnable(true);
+      lvTenders.setPullLoadEnable(true);
     }
   }
 

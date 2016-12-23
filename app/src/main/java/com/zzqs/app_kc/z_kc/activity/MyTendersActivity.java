@@ -28,10 +28,10 @@ import java.util.List;
 public class MyTendersActivity extends BaseActivity {
   android.support.v4.app.FragmentManager mFragmentManager;
   ViewPager mPager;
-  TextView tvLeft, tvTitle, tvUnTreated, tvOnGoing, tvCompleted;
+  TextView tvLeft, tvTitle, tvUnAssigned, tvInProgress, tvCompleted;
   private ImageView cursor;
 
-  MyTenderFragment fmUntreated, fmOnGoing, fmCompleted;
+  MyTenderFragment fmUnAssigned, fmInProgress, fmCompleted;
   private FragmentAdapter mFragmentAdapter;
   private List<Fragment> listFragments; // Tab页面列表
   public int currIndex = 0;// 当前页卡编号
@@ -55,10 +55,10 @@ public class MyTendersActivity extends BaseActivity {
     });
     tvTitle = (TextView) findViewById(R.id.head_title);
     tvTitle.setText(R.string.un_deal_order);
-    tvUnTreated = (TextView) findViewById(R.id.tvUntreated);
-    tvUnTreated.setOnClickListener(new CursorClickListener(0));
-    tvOnGoing = (TextView) findViewById(R.id.tvOnGoing);
-    tvOnGoing.setOnClickListener(new CursorClickListener(0));
+    tvUnAssigned = (TextView) findViewById(R.id.tvUnAssigned);
+    tvUnAssigned.setOnClickListener(new CursorClickListener(0));
+    tvInProgress = (TextView) findViewById(R.id.tvInProgress);
+    tvInProgress.setOnClickListener(new CursorClickListener(0));
     tvCompleted = (TextView) findViewById(R.id.tvCompleted);
     tvCompleted.setOnClickListener(new CursorClickListener(0));
 
@@ -71,23 +71,23 @@ public class MyTendersActivity extends BaseActivity {
     mPager = (ViewPager) findViewById(R.id.vPager);
     mPager.setOffscreenPageLimit(2);
     listFragments = new ArrayList<>();
-    fmUntreated = new MyTenderFragment();
+    fmUnAssigned = new MyTenderFragment();
     Bundle bundle1 = new Bundle();
-    bundle1.putString(Tender.TENDER_STATUS, Tender.UNASSIGNED);
-    fmUntreated.setArguments(bundle1);
+    bundle1.putString(Tender.TENDER_STATUS, Tender.UN_ASSIGNED);
+    fmUnAssigned.setArguments(bundle1);
 
-    fmOnGoing = new MyTenderFragment();
+    fmInProgress = new MyTenderFragment();
     Bundle bundle2 = new Bundle();
-    bundle2.putString(Tender.TENDER_STATUS, Tender.INPROGRESS);
-    fmOnGoing.setArguments(bundle2);
+    bundle2.putString(Tender.TENDER_STATUS, Tender.IN_PROGRESS);
+    fmInProgress.setArguments(bundle2);
 
     fmCompleted = new MyTenderFragment();
     Bundle bundle3 = new Bundle();
     bundle3.putString(Tender.TENDER_STATUS, Tender.COMPLETED);
     fmCompleted.setArguments(bundle3);
 
-    listFragments.add(fmUntreated);
-    listFragments.add(fmOnGoing);
+    listFragments.add(fmUnAssigned);
+    listFragments.add(fmInProgress);
     listFragments.add(fmCompleted);
     mFragmentAdapter = new FragmentAdapter(mFragmentManager, listFragments);
     mPager.setAdapter(mFragmentAdapter);
@@ -145,8 +145,8 @@ public class MyTendersActivity extends BaseActivity {
   }
 
   private void resetTextView() {
-    tvUnTreated.setTextColor(ContextCompat.getColor(this, R.color.gray));
-    tvOnGoing.setTextColor(ContextCompat.getColor(this, R.color.gray));
+    tvUnAssigned.setTextColor(ContextCompat.getColor(this, R.color.gray));
+    tvInProgress.setTextColor(ContextCompat.getColor(this, R.color.gray));
     tvCompleted.setTextColor(ContextCompat.getColor(this, R.color.gray));
   }
 
@@ -161,10 +161,10 @@ public class MyTendersActivity extends BaseActivity {
       resetTextView();
       switch (position) {
         case 0:
-          tvUnTreated.setTextColor(Color.WHITE);
+          tvUnAssigned.setTextColor(Color.WHITE);
           break;
         case 1:
-          tvOnGoing.setTextColor(Color.WHITE);
+          tvInProgress.setTextColor(Color.WHITE);
           break;
         case 2:
           tvCompleted.setTextColor(Color.WHITE);

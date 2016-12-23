@@ -32,7 +32,7 @@ public class MainActivity extends BaseActivity implements XListView.IXListViewLi
     TextView tvUnDealOrderNum, tvUnDealWaybillNum;
     RelativeLayout rlFindGoods, rlMyCars, rlMyWallet, rlMyOilCard;
     LinearLayout llZCOrder, llDriverOrder;
-    XListView lvOrders;
+    XListView lvTenders;
     TenderAdapter adapter;
     private List<Tender> tenderList;
 
@@ -75,25 +75,14 @@ public class MainActivity extends BaseActivity implements XListView.IXListViewLi
                 startActivity(new Intent(mContext, MyOilCardActivity.class));
             }
         });
-        lvOrders = (XListView) findViewById(R.id.lvOrders);
-        lvOrders.setPullRefreshEnable(true);
-        lvOrders.setPullLoadEnable(false);
-        lvOrders.setXListViewListener(this);
-        adapter = new TenderAdapter(this, tenderList, true);
-        lvOrders.setAdapter(adapter);
-        lvOrders.stopRefresh();
-        lvOrders.stopLoadMore();
-        lvOrders.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position > 0) {
-                    Intent intent = new Intent(mContext, TenderDetailActivity.class);
-                    Tender tender = tenderList.get(position - 1);
-                    intent.putExtra(Tender.TENDER, tender);
-                    startActivity(intent);
-                }
-            }
-        });
+        lvTenders = (XListView) findViewById(R.id.lvTenders);
+        lvTenders.setPullRefreshEnable(true);
+        lvTenders.setPullLoadEnable(false);
+        lvTenders.setXListViewListener(this);
+        adapter = new TenderAdapter(this, tenderList, false);
+        lvTenders.setAdapter(adapter);
+        lvTenders.stopRefresh();
+        lvTenders.stopLoadMore();
 
         llZCOrder = (LinearLayout) findViewById(R.id.llZCOrder);
         llZCOrder.setOnClickListener(new MyOnClickListener() {
@@ -164,11 +153,11 @@ public class MainActivity extends BaseActivity implements XListView.IXListViewLi
      * 停止刷新，
      */
     private void onLoad() {
-        lvOrders.stopRefresh();
-        lvOrders.stopLoadMore();
-        lvOrders.setRefreshTime(getString(R.string.xilstview_refreshed));
+        lvTenders.stopRefresh();
+        lvTenders.stopLoadMore();
+        lvTenders.setRefreshTime(getString(R.string.xilstview_refreshed));
         if (tenderList.size() >= 10) {
-            lvOrders.setPullLoadEnable(true);
+            lvTenders.setPullLoadEnable(true);
         }
     }
 }

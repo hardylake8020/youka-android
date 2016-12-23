@@ -115,7 +115,7 @@
     android:background="@color/line_gray"/>
 
   <com.zzqs.app_kc.widgets.xlistView.XListView
-    android:id="@+id/lvOrders"
+    android:id="@+id/lvTenders"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
