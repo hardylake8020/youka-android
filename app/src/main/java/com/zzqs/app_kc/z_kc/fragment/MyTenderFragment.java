@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zzqs.app_kc.widgets.xlistView.XListView;
+import com.zzqs.app_kc.z_kc.entitiy.Tender;
 
 /**
  * Created by lance on 2016/12/23.
@@ -16,11 +17,10 @@ import com.zzqs.app_kc.widgets.xlistView.XListView;
 
 public class MyTenderFragment extends Fragment implements XListView.IXListViewListener  {
   private String status;
-  public static final String TENDER_STATUS = "tenderStatus";
   @Override
   public void onAttach(Context context) {
     super.onAttach(context);
-    status = getArguments().getString(TENDER_STATUS);
+    status = getArguments().getString(Tender.TENDER_STATUS);
     if (status == null){
       getActivity().finish();
     }

@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.zzqs.app_kc.R;
 import com.zzqs.app_kc.utils.ScreenUtil;
+import com.zzqs.app_kc.z_kc.entitiy.Tender;
 import com.zzqs.app_kc.z_kc.fragment.MyTenderFragment;
 import com.zzqs.app_kc.z_kc.listener.MyOnClickListener;
 
@@ -24,7 +25,7 @@ import java.util.List;
  * Created by lance on 2016/12/23.
  */
 
-public class MyTenderActivity extends BaseActivity {
+public class MyTendersActivity extends BaseActivity {
   android.support.v4.app.FragmentManager mFragmentManager;
   ViewPager mPager;
   TextView tvLeft, tvTitle, tvUnTreated, tvOnGoing, tvCompleted;
@@ -43,7 +44,7 @@ public class MyTenderActivity extends BaseActivity {
 
   @Override
   public void initViews(Bundle savedInstanceState) {
-    setContentView(R.layout.z_kc_act_my_tender);
+    setContentView(R.layout.z_kc_act_my_tenders);
     tvLeft = (TextView) findViewById(R.id.head_back);
     tvLeft.setText("");
     tvLeft.setOnClickListener(new MyOnClickListener() {
@@ -71,8 +72,20 @@ public class MyTenderActivity extends BaseActivity {
     mPager.setOffscreenPageLimit(2);
     listFragments = new ArrayList<>();
     fmUntreated = new MyTenderFragment();
+    Bundle bundle1 = new Bundle();
+    bundle1.putString(Tender.TENDER_STATUS, Tender.UNASSIGNED);
+    fmUntreated.setArguments(bundle1);
+
     fmOnGoing = new MyTenderFragment();
+    Bundle bundle2 = new Bundle();
+    bundle2.putString(Tender.TENDER_STATUS, Tender.INPROGRESS);
+    fmOnGoing.setArguments(bundle2);
+
     fmCompleted = new MyTenderFragment();
+    Bundle bundle3 = new Bundle();
+    bundle3.putString(Tender.TENDER_STATUS, Tender.COMPLETED);
+    fmCompleted.setArguments(bundle3);
+
     listFragments.add(fmUntreated);
     listFragments.add(fmOnGoing);
     listFragments.add(fmCompleted);
