@@ -15,9 +15,7 @@ import com.zzqs.app_kc.z_kc.util.NumberUtil;
 import com.zzqs.app_kc.z_kc.util.TimeUtil;
 
 import java.text.DecimalFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,15 +26,16 @@ public class TenderAdapter extends BaseAdapter {
   private Context context;
   private LayoutInflater inflater;
   private List<Tender> kcOrderList;
-  private DecimalFormat df;
+  private DecimalFormat doubleDF;
   private boolean isUnParticipation;
-
+  private SimpleDateFormat timeDF;
   public TenderAdapter(Context context, List<Tender> kcOrderList, boolean isUnParticipation) {
     this.context = context;
     inflater = LayoutInflater.from(context);
     this.kcOrderList = kcOrderList;
     this.isUnParticipation = isUnParticipation;
-    df = new DecimalFormat("######0.00");
+    doubleDF = new DecimalFormat("######0.00");
+    timeDF = new SimpleDateFormat("HH:mm:ss");
   }
 
   @Override
@@ -117,9 +116,8 @@ public class TenderAdapter extends BaseAdapter {
         holder.tvType.setText(R.string.compare);
         holder.tvType.setBackgroundResource(R.drawable.round_green);
 
-        SimpleDateFormat dfs = new SimpleDateFormat("HH:mm:ss");
         long between = TimeUtil.UTCTimeToTimeMillis(tender.getStart_time()) - TimeUtil.UTCTimeToTimeMillis(tender.getEnd_time()) / 1000;//除以1000是为了转换成秒
-        String time = dfs.format(between);
+        String time = timeDF.format(between);
         holder.tvImgAbove.setText(time);
         holder.tvImgBelow.setText(R.string.rest_time);
       }

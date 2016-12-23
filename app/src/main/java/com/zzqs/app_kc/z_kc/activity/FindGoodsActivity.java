@@ -81,7 +81,7 @@ public class FindGoodsActivity extends BaseActivity implements XListView.IXListV
     lvOrders.setPullRefreshEnable(true);
     lvOrders.setPullLoadEnable(false);
     lvOrders.setXListViewListener(this);
-    adapter = new TenderAdapter(this, tenderList, false);
+    adapter = new TenderAdapter(this, tenderList, true);
     lvOrders.setAdapter(adapter);
     lvOrders.stopRefresh();
     lvOrders.stopLoadMore();

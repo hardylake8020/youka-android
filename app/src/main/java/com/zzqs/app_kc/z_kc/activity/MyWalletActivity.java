@@ -29,7 +29,7 @@ public class MyWalletActivity extends BaseActivity {
 
   @Override
   public void initViews(Bundle savedInstanceState) {
-    setContentView(R.layout.z_kc_my_wallet);
+    setContentView(R.layout.z_kc_act_my_wallet);
     tvLeft = (TextView) findViewById(R.id.head_back);
     tvLeft.setText("");
     tvLeft.setOnClickListener(new MyOnClickListener() {

@@ -32,7 +32,7 @@ public class MyCarsActivity extends BaseActivity {
 
   @Override
   public void initViews(Bundle savedInstanceState) {
-    setContentView(R.layout.z_kc_my_cars);
+    setContentView(R.layout.z_kc_act_my_cars);
     tvLeft = (TextView) findViewById(R.id.head_back);
     tvLeft.setText("");
     tvLeft.setOnClickListener(new MyOnClickListener() {
