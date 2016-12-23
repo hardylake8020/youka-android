@@ -87,7 +87,7 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/cursor"
+            android:id="@+id/ivCursor"
             android:layout_width="100dp"
             android:layout_height="4dp"
             android:layout_below="@id/linearLayout1"

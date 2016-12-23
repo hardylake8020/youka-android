@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.MotionEvent;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.TextView;
 
 import com.zzqs.app_kc.app.ZZQSApplication;
 import com.zzqs.app_kc.widgets.SafeProgressDialog;
@@ -14,61 +15,65 @@ import com.zzqs.app_kc.widgets.SafeProgressDialog;
  */
 
 public abstract class BaseActivity extends FragmentActivity {
-  public SafeProgressDialog safePd;
-  protected Context mContext;
-  protected boolean isVisible;
-  private InputMethodManager manager;
+    public SafeProgressDialog safePd;
+    protected Context mContext;
+    protected boolean isVisible;
+    private InputMethodManager manager;
 
-  @Override
-  public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    mContext = this;
-    ZZQSApplication.getInstance().addActivity(this);
-    initVariables();
-    initViews(savedInstanceState);
-    loadData();
-    manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-    safePd = new SafeProgressDialog(this);
-  }
+    private TextView head_back;
+    private TextView head_title;
+    private TextView head_right;
 
-  public abstract void initVariables();//初始化变量
-
-  public abstract void initViews(Bundle savedInstanceState);//初始化布局、控件和绑定点击事件
-
-  public abstract void loadData();//初始化数据
-
-  public boolean onTouchEvent(MotionEvent event) {
-
-    // TODO Auto-generated method stub
-    if (event.getAction() == MotionEvent.ACTION_DOWN) {
-      if (getCurrentFocus() != null && getCurrentFocus().getWindowToken() != null) {
-        manager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-      }
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mContext = this;
+        ZZQSApplication.getInstance().addActivity(this);
+        initVariables();
+        initViews(savedInstanceState);
+        loadData();
+        manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        safePd = new SafeProgressDialog(this);
     }
-    return super.onTouchEvent(event);
-  }
 
-  @Override
-  protected void onDestroy() {
-    super.onDestroy();
-    if (safePd != null) {
-      safePd.dismiss();
+    public abstract void initVariables();//初始化变量
+
+    public abstract void initViews(Bundle savedInstanceState);//初始化布局、控件和绑定点击事件
+
+    public abstract void loadData();//初始化数据
+
+    public boolean onTouchEvent(MotionEvent event) {
+
+        // TODO Auto-generated method stub
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            if (getCurrentFocus() != null && getCurrentFocus().getWindowToken() != null) {
+                manager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+        }
+        return super.onTouchEvent(event);
     }
-  }
 
-  @Override
-  protected void onResume() {
-    super.onResume();
-    isVisible = true;
-  }
-
-  @Override
-  protected void onPause() {
-    super.onPause();
-    isVisible = false;
-    if (safePd != null) {
-      safePd.dismiss();
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (safePd != null) {
+            safePd.dismiss();
+        }
     }
-  }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        isVisible = true;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        isVisible = false;
+        if (safePd != null) {
+            safePd.dismiss();
+        }
+    }
 
 }
