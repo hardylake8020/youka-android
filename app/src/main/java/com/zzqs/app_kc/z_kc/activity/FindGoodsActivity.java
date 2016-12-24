@@ -48,7 +48,7 @@ public class FindGoodsActivity extends BaseActivity implements XListView.IXListV
             }
         });
         tvTitle = (TextView) findViewById(R.id.head_title);
-        tvTitle.setText(R.string.goods_list);
+        tvTitle.setText(R.string.source_of_goods);
         tvSelectAll = (TextView) findViewById(R.id.tvSelectAll);
         tvSelectAll.setOnClickListener(new View.OnClickListener() {
             @Override
