@@ -30,13 +30,13 @@ public class MyCarsActivity extends BaseActivity {
   ListView lvCars;
   CarAdapter carAdapter;
   List<Car> carList;
-  public static final String IS_SELECT = "isSelect";
-  private boolean isSelect;
+  public static final String IS_SELECT_CAR = "isSelectCar";
+  private boolean isSelectCar;
   public static final int TO_ADD_CAR = 100;
 
   @Override
   public void initVariables() {
-    isSelect = getIntent().getBooleanExtra(IS_SELECT, false);
+    isSelectCar = getIntent().getBooleanExtra(IS_SELECT_CAR, false);
     carList = new ArrayList<>();
   }
 
@@ -55,7 +55,7 @@ public class MyCarsActivity extends BaseActivity {
     tvTitle.setText(R.string.my_cars);
     tvRight = (TextView) findViewById(R.id.head_right);
     tvBottom = (TextView) findViewById(R.id.tvBottom);
-    if (isSelect) {
+    if (isSelectCar) {
       tvRight.setText(R.string.add_car);
       tvBottom.setText(R.string.distribution_car);
     } else {
@@ -63,10 +63,17 @@ public class MyCarsActivity extends BaseActivity {
       tvBottom.setText(R.string.add_car);
     }
     tvRight.setVisibility(View.VISIBLE);
+    tvRight.setOnClickListener(new MyOnClickListener() {
+      @Override
+      public void OnceOnClick(View view) {
+        startActivityForResult(new Intent(mContext, AddCarActivity.class), TO_ADD_CAR);
+      }
+    });
+
     tvBottom.setOnClickListener(new MyOnClickListener() {
       @Override
       public void OnceOnClick(View view) {
-        if (isSelect) {
+        if (isSelectCar) {
 
         } else {
           startActivityForResult(new Intent(mContext, AddCarActivity.class), TO_ADD_CAR);
@@ -74,13 +81,19 @@ public class MyCarsActivity extends BaseActivity {
       }
     });
     lvCars = (ListView) findViewById(R.id.lvCars);
-    carAdapter = new CarAdapter(this, carList, isSelect);
+    carAdapter = new CarAdapter(this, carList, isSelectCar);
     lvCars.setAdapter(carAdapter);
     lvCars.setOnItemClickListener(new AdapterView.OnItemClickListener() {
       @Override
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Car car = carList.get(position);
-        if (isSelect) {
+        if (car.isSelect()) {
+          return;
+        }
+        if (isSelectCar) {
+          for (Car car1 : carList) {
+            car1.setSelect(false);
+          }
           car.setSelect(true);
           carAdapter.notifyDataSetChanged();
         } else {
@@ -133,7 +146,7 @@ public class MyCarsActivity extends BaseActivity {
         if (car == null) {
           return;
         }
-        carList.add(0,car);
+        carList.add(0, car);
         carAdapter.notifyDataSetChanged();
       }
     }

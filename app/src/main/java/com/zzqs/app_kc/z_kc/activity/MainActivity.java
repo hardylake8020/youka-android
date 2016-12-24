@@ -59,7 +59,7 @@ public class MainActivity extends BaseActivity implements XListView.IXListViewLi
       @Override
       public void OnceOnClick(View view) {
         Intent intent = new Intent(mContext, MyCarsActivity.class);
-        intent.putExtra(MyCarsActivity.IS_SELECT, false);
+        intent.putExtra(MyCarsActivity.IS_SELECT_CAR, false);
         startActivity(intent);
       }
     });

@@ -112,4 +112,5 @@
   <string name="car_driver">车辆司机&#160;&#160;&#160;&#160;</string>
   <string name="driver_phone">联系手机&#160;&#160;&#160;&#160;</string>
   <string name="un_write">未填写</string>
+  <string name="grabbed">已抢到</string>
 </resources>

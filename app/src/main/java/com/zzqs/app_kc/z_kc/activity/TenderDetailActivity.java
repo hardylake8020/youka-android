@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -43,11 +44,9 @@ public class TenderDetailActivity extends BaseActivity {
   private Timer timer;
   private long remainingTime;
 
-
   @Override
   public void initVariables() {
     tender = getIntent().getParcelableExtra(Tender.TENDER);
-    System.out.println("detail:" + tender.toString());
   }
 
   @Override
@@ -104,13 +103,22 @@ public class TenderDetailActivity extends BaseActivity {
       llBiddingOrder.setVisibility(View.GONE);
       DecimalFormat df = new DecimalFormat("######0.00");
       tvFreight.setText(df.format(tender.getLowest_grab_price()));
-      tvGrabOrder.setOnClickListener(new MyOnClickListener() {
-        @Override
-        public void OnceOnClick(View view) {
-          //抢单
-          grabTender();
-        }
-      });
+      if (tender.getStatus().equals(Tender.UN_STARTED)) {
+        tvGrabOrder.setText(R.string.grab_order);
+        tvGrabOrder.setBackgroundResource(R.color.red_5);
+        tvGrabOrder.setTextColor(ContextCompat.getColor(this, android.R.color.white));
+        tvGrabOrder.setOnClickListener(new MyOnClickListener() {
+          @Override
+          public void OnceOnClick(View view) {
+            //抢单
+            grabTender();
+          }
+        });
+      } else {
+        tvGrabOrder.setText(R.string.grabbed);
+        tvGrabOrder.setBackgroundResource(R.color.tender_primary_color);
+        tvGrabOrder.setTextColor(ContextCompat.getColor(this, R.color.text_gray));
+      }
     } else {
       tvTitle.setText(R.string.bidding_details);
       llGrabOrder.setVisibility(View.GONE);

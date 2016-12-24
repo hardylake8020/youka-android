@@ -18,6 +18,7 @@ public class Tender implements Parcelable {
   public static final String TENDERS = "tenders";
   public static final String GRAB = "grab";
   public static final String COMPARE = "compare";
+  public static final String UN_STARTED = "unStarted";//未分配
   public static final String UN_ASSIGNED = "unAssigned";//未分配
   public static final String IN_PROGRESS = "inProgress";//进行中
   public static final String COMPLETED = "completed";//已完成
@@ -91,6 +92,8 @@ public class Tender implements Parcelable {
   private double current_grab_price;
 
   private double driver_price;
+
+
 
   public String getTender_id() {
     return tender_id;

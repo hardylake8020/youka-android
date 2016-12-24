@@ -98,7 +98,7 @@ public class TenderAdapter extends BaseAdapter {
             case Tender.UN_ASSIGNED:
               //去分配车辆的页面
               Intent intent = new Intent(context, MyCarsActivity.class);
-              intent.putExtra(MyCarsActivity.IS_SELECT, true);
+              intent.putExtra(MyCarsActivity.IS_SELECT_CAR, true);
               context.startActivity(intent);
               break;
             case Tender.IN_PROGRESS:
