@@ -58,7 +58,9 @@ public class MainActivity extends BaseActivity implements XListView.IXListViewLi
     rlMyCars.setOnClickListener(new MyOnClickListener() {
       @Override
       public void OnceOnClick(View view) {
-        startActivity(new Intent(mContext, MyCarsActivity.class));
+        Intent intent = new Intent(mContext, MyCarsActivity.class);
+        intent.putExtra(MyCarsActivity.IS_SELECT, false);
+        startActivity(intent);
       }
     });
     rlMyWallet = (RelativeLayout) findViewById(R.id.rlMyWallet);

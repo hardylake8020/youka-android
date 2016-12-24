@@ -39,7 +39,7 @@ public class CashDepositActivity extends BaseActivity implements XListView.IXLis
 
   @Override
   public void initViews(Bundle savedInstanceState) {
-    setContentView(R.layout.z_kc_cash_deposit);
+    setContentView(R.layout.z_kc_act_cash_deposit);
     tvLeft = (TextView) findViewById(R.id.head_back);
     tvLeft.setText("");
     tvLeft.setOnClickListener(new MyOnClickListener() {

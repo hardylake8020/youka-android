@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zzqs.app_kc.R;
+import com.zzqs.app_kc.z_kc.activity.MyCarsActivity;
 import com.zzqs.app_kc.z_kc.activity.TenderDetailActivity;
 import com.zzqs.app_kc.z_kc.entitiy.Goods;
 import com.zzqs.app_kc.z_kc.entitiy.Tender;
@@ -85,7 +86,7 @@ public class TenderAdapter extends BaseAdapter {
         public void OnceOnClick(View view) {
           Intent intent = new Intent(context, TenderDetailActivity.class);
           intent.putExtra(Tender.TENDER, tender);
-          System.out.println("adapter :"+tender.toString());
+          System.out.println("adapter :" + tender.toString());
           context.startActivity(intent);
         }
       });
@@ -96,6 +97,9 @@ public class TenderAdapter extends BaseAdapter {
           switch (tender.getStatus()) {
             case Tender.UN_ASSIGNED:
               //去分配车辆的页面
+              Intent intent = new Intent(context, MyCarsActivity.class);
+              intent.putExtra(MyCarsActivity.IS_SELECT, true);
+              context.startActivity(intent);
               break;
             case Tender.IN_PROGRESS:
             case Tender.COMPLETED:

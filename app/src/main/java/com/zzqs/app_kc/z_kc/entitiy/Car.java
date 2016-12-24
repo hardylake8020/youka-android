@@ -10,20 +10,22 @@ import java.util.List;
  * Created by lance on 2016/12/4.
  */
 
-public class Car implements Parcelable{
-  public static final String CAR = "car";
+public class Car implements Parcelable {
+  public static final String TRUCK = "truck";
+  public static final String TRUCKS = "trucks";
   public static final String UN_USAGE = "unUsage";
   public static final String USAGE = "usage";
   private String truck_number;
   private String truck_type;
   private List<Double> location;
 
-  private String driver_phone;
+  private String driver_number;
   private String car_photo;
   private String driver_name;
   private String status;
   private String oil_card;
 
+  private boolean isSelect;
 
   public String getTruck_number() {
     return truck_number;
@@ -41,12 +43,12 @@ public class Car implements Parcelable{
     this.truck_type = truck_type;
   }
 
-  public String getDriver_phone() {
-    return driver_phone;
+  public String getDriver_number() {
+    return driver_number;
   }
 
-  public void setDriver_phone(String driver_phone) {
-    this.driver_phone = driver_phone;
+  public void setDriver_number(String driver_number) {
+    this.driver_number = driver_number;
   }
 
   public String getCar_photo() {
@@ -90,6 +92,15 @@ public class Car implements Parcelable{
   }
 
 
+  public boolean isSelect() {
+    return isSelect;
+  }
+
+  public void setSelect(boolean select) {
+    isSelect = select;
+  }
+
+
   @Override
   public int describeContents() {
     return 0;
@@ -99,12 +110,13 @@ public class Car implements Parcelable{
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeString(this.truck_number);
     dest.writeString(this.truck_type);
-    dest.writeString(this.driver_phone);
+    dest.writeList(this.location);
+    dest.writeString(this.driver_number);
     dest.writeString(this.car_photo);
     dest.writeString(this.driver_name);
     dest.writeString(this.status);
     dest.writeString(this.oil_card);
-    dest.writeList(this.location);
+    dest.writeByte(this.isSelect ? (byte) 1 : (byte) 0);
   }
 
   public Car() {
@@ -113,13 +125,14 @@ public class Car implements Parcelable{
   protected Car(Parcel in) {
     this.truck_number = in.readString();
     this.truck_type = in.readString();
-    this.driver_phone = in.readString();
+    this.location = new ArrayList<Double>();
+    in.readList(this.location, Double.class.getClassLoader());
+    this.driver_number = in.readString();
     this.car_photo = in.readString();
     this.driver_name = in.readString();
     this.status = in.readString();
     this.oil_card = in.readString();
-    this.location = new ArrayList<Double>();
-    in.readList(this.location, Double.class.getClassLoader());
+    this.isSelect = in.readByte() != 0;
   }
 
   public static final Creator<Car> CREATOR = new Creator<Car>() {
@@ -133,4 +146,19 @@ public class Car implements Parcelable{
       return new Car[size];
     }
   };
+
+  @Override
+  public String toString() {
+    return "Car{" +
+        "truck_number='" + truck_number + '\'' +
+        ", truck_type='" + truck_type + '\'' +
+        ", location=" + location +
+        ", driver_number='" + driver_number + '\'' +
+        ", car_photo='" + car_photo + '\'' +
+        ", driver_name='" + driver_name + '\'' +
+        ", status='" + status + '\'' +
+        ", oil_card='" + oil_card + '\'' +
+        ", isSelect=" + isSelect +
+        '}';
+  }
 }

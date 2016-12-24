@@ -32,7 +32,7 @@ public class CarDetailActivity extends BaseActivity {
 
   @Override
   public void initVariables() {
-    car = getIntent().getParcelableExtra(Car.CAR);
+    car = getIntent().getParcelableExtra(Car.TRUCK);
     if (car == null) {
       finish();
     }
@@ -69,7 +69,7 @@ public class CarDetailActivity extends BaseActivity {
     tvDriverName = (TextView) findViewById(R.id.tvDriverName);
     tvDriverName.setText(car.getDriver_name());
     tvDriverPhone = (TextView) findViewById(R.id.tvDriverPhone);
-    tvDriverPhone.setText(car.getDriver_phone());
+    tvDriverPhone.setText(car.getDriver_number());
     tvCarStatus = (TextView) findViewById(R.id.tvCarStatus);
     if (car.getStatus().equals(Car.UN_USAGE)) {
       tvCarStatus.setText(R.string.un_transport);
