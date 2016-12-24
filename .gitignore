@@ -8,9 +8,7 @@
 /app/build
 /captures
 .externalNativeBuild
-<<<<<<< HEAD
 gradle
-=======
 .idea
 .idea/.name
->>>>>>> 18a6d64d2a0b4d3348a5e72017e0e1bcd7a790be
+build.gradle
