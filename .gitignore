@@ -11,4 +11,4 @@
 gradle
 .idea
 .idea/.name
-build.gradle
+/build.gradle
