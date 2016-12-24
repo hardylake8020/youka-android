@@ -6,27 +6,37 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zzqs.app_kc.R;
+import com.zzqs.app_kc.utils.CommonTools;
 import com.zzqs.app_kc.z_kc.adapter.CarAdapter;
 import com.zzqs.app_kc.z_kc.entitiy.Car;
+import com.zzqs.app_kc.z_kc.entitiy.ErrorInfo;
 import com.zzqs.app_kc.z_kc.listener.MyOnClickListener;
+import com.zzqs.app_kc.z_kc.network.CarApiImpl;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import rx.Subscriber;
 
 /**
  * Created by lance on 2016/12/4.
  */
 
 public class MyCarsActivity extends BaseActivity {
-  TextView tvLeft, tvTitle, tvRight, tvAddCar;
+  TextView tvLeft, tvTitle, tvRight, tvBottom;
   ListView lvCars;
   CarAdapter carAdapter;
   List<Car> carList;
+  public static final String IS_SELECT = "isSelect";
+  private boolean isSelect;
+  public static final int TO_ADD_CAR = 100;
 
   @Override
   public void initVariables() {
+    isSelect = getIntent().getBooleanExtra(IS_SELECT, false);
     carList = new ArrayList<>();
   }
 
@@ -44,57 +54,88 @@ public class MyCarsActivity extends BaseActivity {
     tvTitle = (TextView) findViewById(R.id.head_title);
     tvTitle.setText(R.string.my_cars);
     tvRight = (TextView) findViewById(R.id.head_right);
-    tvRight.setText(R.string.find_good_by_map);
+    tvBottom = (TextView) findViewById(R.id.tvBottom);
+    if (isSelect) {
+      tvRight.setText(R.string.add_car);
+      tvBottom.setText(R.string.distribution_car);
+    } else {
+      tvRight.setText("");
+      tvBottom.setText(R.string.add_car);
+    }
     tvRight.setVisibility(View.VISIBLE);
-    tvAddCar = (TextView) findViewById(R.id.tvAddCar);
-    tvAddCar.setOnClickListener(new MyOnClickListener() {
+    tvBottom.setOnClickListener(new MyOnClickListener() {
       @Override
       public void OnceOnClick(View view) {
+        if (isSelect) {
 
+        } else {
+          startActivityForResult(new Intent(mContext, AddCarActivity.class), TO_ADD_CAR);
+        }
       }
     });
     lvCars = (ListView) findViewById(R.id.lvCars);
-    carAdapter = new CarAdapter(this, carList);
+    carAdapter = new CarAdapter(this, carList, isSelect);
     lvCars.setAdapter(carAdapter);
     lvCars.setOnItemClickListener(new AdapterView.OnItemClickListener() {
       @Override
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Car car = carList.get(position);
-        Intent intent = new Intent(mContext,CarDetailActivity.class);
-        intent.putExtra(Car.CAR,car);
-        startActivity(intent);
+        Car car = carList.get(position);
+        if (isSelect) {
+          car.setSelect(true);
+          carAdapter.notifyDataSetChanged();
+        } else {
+          Intent intent = new Intent(mContext, CarDetailActivity.class);
+          intent.putExtra(Car.TRUCK, car);
+          startActivity(intent);
+        }
       }
     });
   }
 
   @Override
   public void loadData() {
-    Car car1 = new Car();
-    car1.setTruck_type("金杯");
-    car1.setDriver_name("张三");
-    car1.setDriver_phone("18721850339");
-    car1.setTruck_number("沪A12345");
-    car1.setOil_card("1234 1234 1234 1234");
-    car1.setStatus(Car.USAGE);
-    List<Double> location = new ArrayList<>();
-    location.add(121.48789949);
-    location.add(31.24916171);
-    car1.setLocation(location);
-    carList.add(car1);
+    getCars();
+  }
 
-    Car car2 = new Car();
-    car2.setTruck_type("五菱之光");
-    car2.setDriver_name("李四");
-    car2.setDriver_phone("13927499609");
-    car2.setTruck_number("沪B54321");
-    car2.setOil_card("4321 4321 4321 4321");
-    car2.setStatus(Car.UN_USAGE);
-    List<Double> location2 = new ArrayList<>();
-    location2.add(120.48789949);
-    location2.add(29.24916171);
-    car2.setLocation(location2);
-    carList.add(car2);
+  private void getCars() {
+    safePd.show();
+    CarApiImpl.getCarApiImpl().getListByDriver(CommonTools.getToken(this), new Subscriber<ErrorInfo>() {
+      @Override
+      public void onCompleted() {
 
-    carAdapter.notifyDataSetChanged();
+      }
+
+      @Override
+      public void onError(Throwable e) {
+        e.printStackTrace();
+        safePd.dismiss();
+      }
+
+      @Override
+      public void onNext(ErrorInfo errorInfo) {
+        safePd.dismiss();
+        if (errorInfo.getType().equals(ErrorInfo.SUCCESS)) {
+          List<Car> list = (List<Car>) errorInfo.object;
+          carList.addAll(list);
+          carAdapter.notifyDataSetChanged();
+        } else {
+          Toast.makeText(mContext, errorInfo.getMessage(), Toast.LENGTH_LONG).show();
+        }
+      }
+    });
+  }
+
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    if (resultCode == RESULT_OK) {
+      if (requestCode == TO_ADD_CAR) {
+        Car car = data.getParcelableExtra(Car.TRUCK);
+        if (car == null) {
+          return;
+        }
+        carList.add(0,car);
+        carAdapter.notifyDataSetChanged();
+      }
+    }
   }
 }

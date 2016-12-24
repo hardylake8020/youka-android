@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -24,11 +25,13 @@ public class CarAdapter extends BaseAdapter {
   private Context context;
   private LayoutInflater inflater;
   private List<Car> carList;
+  private boolean isSelectCar;
 
-  public CarAdapter(Context context, List<Car> carList) {
+  public CarAdapter(Context context, List<Car> carList, boolean isSelectCar) {
     this.context = context;
     inflater = LayoutInflater.from(context);
     this.carList = carList;
+    this.isSelectCar = isSelectCar;
   }
 
   @Override
@@ -57,6 +60,13 @@ public class CarAdapter extends BaseAdapter {
       holder.tvPlateNumber = (TextView) view.findViewById(R.id.tvPlateNumber);
       holder.tvCarType = (TextView) view.findViewById(R.id.tvCarType);
       holder.tvDriverPhone = (TextView) view.findViewById(R.id.tvDriverPhone);
+      holder.tvDriverName = (TextView) view.findViewById(R.id.tvDriverName);
+      holder.ivSelect = (ImageView) view.findViewById(R.id.ivSelect);
+      if (isSelectCar) {
+        holder.ivSelect.setVisibility(View.VISIBLE);
+      } else {
+        holder.ivSelect.setVisibility(View.GONE);
+      }
       view.setTag(holder);
     } else {
       holder = (ViewHolder) view.getTag();
@@ -66,13 +76,22 @@ public class CarAdapter extends BaseAdapter {
       holder.sdCarPhoto.setImageURI(uri);
     }
     holder.tvPlateNumber.setText(car.getTruck_number() + "");
-    holder.tvCarType.setText(car.getTruck_type() + "");
-    holder.tvDriverPhone.setText(car.getDriver_phone() + "");
+    holder.tvCarType.setText(context.getString(R.string.car_describe) + car.getTruck_type() + "");
+    holder.tvDriverName.setText(context.getString(R.string.car_driver) + (TextUtils.isEmpty(car.getDriver_name()) ? context.getString(R.string.un_write) : car.getDriver_name()));
+    holder.tvDriverPhone.setText(context.getString(R.string.driver_phone) + car.getDriver_number() + "");
+    if (isSelectCar) {
+      if (car.isSelect()) {
+        holder.ivSelect.setBackgroundResource(R.drawable.z_kc_ic_select);
+      } else {
+        holder.ivSelect.setBackgroundResource(R.drawable.z_kc_ic_un_select);
+      }
+    }
     return view;
   }
 
   private class ViewHolder {
     SimpleDraweeView sdCarPhoto;
-    TextView tvPlateNumber, tvCarType, tvDriverPhone;
+    TextView tvPlateNumber, tvCarType, tvDriverPhone, tvDriverName;
+    ImageView ivSelect;
   }
 }

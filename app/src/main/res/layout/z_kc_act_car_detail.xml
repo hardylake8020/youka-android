@@ -152,7 +152,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_alignParentLeft="true"
-      android:text="@string/driver_phone"
+      android:text="@string/driver_number"
       android:textColor="@color/black"
       android:textSize="14sp"/>
 

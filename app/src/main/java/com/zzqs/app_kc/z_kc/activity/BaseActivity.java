@@ -28,12 +28,12 @@ public abstract class BaseActivity extends FragmentActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = this;
+        manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        safePd = new SafeProgressDialog(this);
         ZZQSApplication.getInstance().addActivity(this);
         initVariables();
         initViews(savedInstanceState);
         loadData();
-        manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        safePd = new SafeProgressDialog(this);
     }
 
     public abstract void initVariables();//初始化变量

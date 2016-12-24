@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zzqs.app_kc.R;
 import com.zzqs.app_kc.utils.CommonTools;
@@ -27,136 +28,139 @@ import rx.Subscriber;
  */
 
 public class MainActivity extends BaseActivity implements XListView.IXListViewListener {
-    CircleImageView cvUserPhoto;
-    TextView tvUnDealOrderNum, tvUnDealWaybillNum;
-    RelativeLayout rlFindGoods, rlMyCars, rlMyWallet, rlMyOilCard;
-    LinearLayout llZCOrder, llDriverOrder;
-    XListView lvTenders;
-    TenderAdapter adapter;
-    private List<Tender> tenderList;
+  CircleImageView cvUserPhoto;
+  TextView tvUnDealOrderNum, tvUnDealWaybillNum;
+  RelativeLayout rlFindGoods, rlMyCars, rlMyWallet, rlMyOilCard;
+  LinearLayout llZCOrder, llDriverOrder;
+  XListView lvTenders;
+  TenderAdapter adapter;
+  private List<Tender> tenderList;
 
-    @Override
-    public void initVariables() {
-        tenderList = new ArrayList<>();
+  @Override
+  public void initVariables() {
+    tenderList = new ArrayList<>();
+  }
+
+  @Override
+  public void initViews(Bundle savedInstanceState) {
+    setContentView(R.layout.z_kc_act_main);
+    cvUserPhoto = (CircleImageView) findViewById(R.id.cvUserPhoto);
+    tvUnDealOrderNum = (TextView) findViewById(R.id.tvUnDealOrderNum);
+    tvUnDealWaybillNum = (TextView) findViewById(R.id.tvUnDealWaybillNum);
+    rlFindGoods = (RelativeLayout) findViewById(R.id.rlFindGoods);
+    rlFindGoods.setOnClickListener(new MyOnClickListener() {
+      @Override
+      public void OnceOnClick(View view) {
+        startActivity(new Intent(mContext, FindGoodsActivity.class));
+      }
+    });
+    rlMyCars = (RelativeLayout) findViewById(R.id.rlMyCars);
+    rlMyCars.setOnClickListener(new MyOnClickListener() {
+      @Override
+      public void OnceOnClick(View view) {
+        Intent intent = new Intent(mContext, MyCarsActivity.class);
+        intent.putExtra(MyCarsActivity.IS_SELECT, false);
+        startActivity(intent);
+      }
+    });
+    rlMyWallet = (RelativeLayout) findViewById(R.id.rlMyWallet);
+    rlMyWallet.setOnClickListener(new MyOnClickListener() {
+      @Override
+      public void OnceOnClick(View view) {
+        startActivity(new Intent(mContext, MyWalletActivity.class));
+      }
+    });
+    rlMyOilCard = (RelativeLayout) findViewById(R.id.rlMyOilCard);
+    rlMyOilCard.setOnClickListener(new MyOnClickListener() {
+      @Override
+      public void OnceOnClick(View view) {
+        startActivity(new Intent(mContext, MyOilCardActivity.class));
+      }
+    });
+    lvTenders = (XListView) findViewById(R.id.lvTenders);
+    lvTenders.setPullRefreshEnable(true);
+    lvTenders.setPullLoadEnable(false);
+    lvTenders.setXListViewListener(this);
+    adapter = new TenderAdapter(this, tenderList, false);
+    lvTenders.setAdapter(adapter);
+    lvTenders.stopRefresh();
+    lvTenders.stopLoadMore();
+
+    llZCOrder = (LinearLayout) findViewById(R.id.llZCOrder);
+    llZCOrder.setOnClickListener(new MyOnClickListener() {
+      @Override
+      public void OnceOnClick(View view) {
+        startActivity(new Intent(mContext, MyTendersActivity.class));
+      }
+    });
+    llDriverOrder = (LinearLayout) findViewById(R.id.llDriverOrder);
+    llDriverOrder.setOnClickListener(new MyOnClickListener() {
+      @Override
+      public void OnceOnClick(View view) {
+        startActivity(new Intent(mContext, com.zzqs.app_kc.activities.MainActivity.class));
+      }
+    });
+  }
+
+  @Override
+  public void loadData() {
+    getTenders(true);
+  }
+
+  @Override
+  public void onRefresh() {
+    getTenders(true);
+  }
+
+  @Override
+  public void onLoadMore() {
+    getTenders(false);
+  }
+
+  private void getTenders(final boolean isRefresh) {
+    int count = 0;
+    if (!isRefresh) {
+      count = tenderList.size();
     }
+    TenderApiImpl.getUserApiImpl().getUnStartedListByDriver(CommonTools.getToken(this), count, 10, new Subscriber<ErrorInfo>() {
+      @Override
+      public void onCompleted() {
 
-    @Override
-    public void initViews(Bundle savedInstanceState) {
-        setContentView(R.layout.z_kc_act_main);
-        cvUserPhoto = (CircleImageView) findViewById(R.id.cvUserPhoto);
-        tvUnDealOrderNum = (TextView) findViewById(R.id.tvUnDealOrderNum);
-        tvUnDealWaybillNum = (TextView) findViewById(R.id.tvUnDealWaybillNum);
-        rlFindGoods = (RelativeLayout) findViewById(R.id.rlFindGoods);
-        rlFindGoods.setOnClickListener(new MyOnClickListener() {
-            @Override
-            public void OnceOnClick(View view) {
-                startActivity(new Intent(mContext, FindGoodsActivity.class));
-            }
-        });
-        rlMyCars = (RelativeLayout) findViewById(R.id.rlMyCars);
-        rlMyCars.setOnClickListener(new MyOnClickListener() {
-            @Override
-            public void OnceOnClick(View view) {
-                startActivity(new Intent(mContext, MyCarsActivity.class));
-            }
-        });
-        rlMyWallet = (RelativeLayout) findViewById(R.id.rlMyWallet);
-        rlMyWallet.setOnClickListener(new MyOnClickListener() {
-            @Override
-            public void OnceOnClick(View view) {
-                startActivity(new Intent(mContext, MyWalletActivity.class));
-            }
-        });
-        rlMyOilCard = (RelativeLayout) findViewById(R.id.rlMyOilCard);
-        rlMyOilCard.setOnClickListener(new MyOnClickListener() {
-            @Override
-            public void OnceOnClick(View view) {
-                startActivity(new Intent(mContext, MyOilCardActivity.class));
-            }
-        });
-        lvTenders = (XListView) findViewById(R.id.lvTenders);
-        lvTenders.setPullRefreshEnable(true);
-        lvTenders.setPullLoadEnable(false);
-        lvTenders.setXListViewListener(this);
-        adapter = new TenderAdapter(this, tenderList, false);
-        lvTenders.setAdapter(adapter);
-        lvTenders.stopRefresh();
-        lvTenders.stopLoadMore();
+      }
 
-        llZCOrder = (LinearLayout) findViewById(R.id.llZCOrder);
-        llZCOrder.setOnClickListener(new MyOnClickListener() {
-            @Override
-            public void OnceOnClick(View view) {
-                startActivity(new Intent(mContext, MyTendersActivity.class));
-            }
-        });
-        llDriverOrder = (LinearLayout) findViewById(R.id.llDriverOrder);
-        llDriverOrder.setOnClickListener(new MyOnClickListener() {
-            @Override
-            public void OnceOnClick(View view) {
-                startActivity(new Intent(mContext, com.zzqs.app_kc.activities.MainActivity.class));
-            }
-        });
-    }
+      @Override
+      public void onError(Throwable e) {
+        onLoad();
+        e.printStackTrace();
+      }
 
-    @Override
-    public void loadData() {
-        getTenders(true);
-    }
-
-    @Override
-    public void onRefresh() {
-        getTenders(true);
-    }
-
-    @Override
-    public void onLoadMore() {
-        getTenders(false);
-    }
-
-    private void getTenders(final boolean isRefresh) {
-        int count = 0;
-        if (!isRefresh) {
-            count = tenderList.size();
+      @Override
+      public void onNext(ErrorInfo errorInfo) {
+        if (errorInfo.getType().equals(ErrorInfo.SUCCESS)) {
+          List<Tender> list = (ArrayList) errorInfo.object;
+          if (isRefresh) {
+            tenderList.clear();
+          }
+          tenderList.addAll(list);
+          adapter.notifyDataSetChanged();
+        } else {
+          System.out.println(errorInfo.getType());
+          Toast.makeText(mContext, errorInfo.getType(), Toast.LENGTH_LONG).show();
         }
-        TenderApiImpl.getUserApiImpl().getUnStartedListByDriver(CommonTools.getToken(this), count, 10, new Subscriber<ErrorInfo>() {
-            @Override
-            public void onCompleted() {
+        onLoad();
+      }
+    });
+  }
 
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                onLoad();
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onNext(ErrorInfo errorInfo) {
-                if (errorInfo.getType().equals(ErrorInfo.SUCCESS)) {
-                    List<Tender> list = (ArrayList) errorInfo.object;
-                    if (isRefresh) {
-                        tenderList.clear();
-                    }
-                    tenderList.addAll(list);
-                    adapter.notifyDataSetChanged();
-                } else {
-                    System.out.println(errorInfo.getType());
-                }
-                onLoad();
-            }
-        });
+  /**
+   * 停止刷新，
+   */
+  private void onLoad() {
+    lvTenders.stopRefresh();
+    lvTenders.stopLoadMore();
+    lvTenders.setRefreshTime(getString(R.string.xilstview_refreshed));
+    if (tenderList.size() >= 10) {
+      lvTenders.setPullLoadEnable(true);
     }
-
-    /**
-     * 停止刷新，
-     */
-    private void onLoad() {
-        lvTenders.stopRefresh();
-        lvTenders.stopLoadMore();
-        lvTenders.setRefreshTime(getString(R.string.xilstview_refreshed));
-        if (tenderList.size() >= 10) {
-            lvTenders.setPullLoadEnable(true);
-        }
-    }
+  }
 }

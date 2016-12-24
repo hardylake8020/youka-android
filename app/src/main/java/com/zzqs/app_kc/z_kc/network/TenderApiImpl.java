@@ -51,16 +51,9 @@ public class TenderApiImpl {
                         } else {
                             errorInfo.setType(ErrorInfo.SUCCESS);
                             JsonArray jsonArray = jsonObject.getAsJsonArray(Tender.TENDERS);
-                            for (int i = 0; i < jsonArray.size(); i++) {
-                                JsonObject obj = (JsonObject) jsonArray.get(i);
-                                Log.e("obj", obj.toString());
-                            }
                             Type type = new TypeToken<List<Tender>>() {
                             }.getType();
                             List<Tender> list = gson.fromJson(jsonArray, type);
-                            for (Tender tender : list) {
-                                Log.e("tender", tender.toString());
-                            }
                             errorInfo.object = list;
                         }
                         return errorInfo;
@@ -85,16 +78,9 @@ public class TenderApiImpl {
                         } else {
                             errorInfo.setType(ErrorInfo.SUCCESS);
                             JsonArray jsonArray = jsonObject.getAsJsonArray(Tender.TENDERS);
-                            for (int i = 0; i < jsonArray.size(); i++) {
-                                JsonObject obj = (JsonObject) jsonArray.get(i);
-                                Log.e("obj", obj.toString());
-                            }
                             Type type = new TypeToken<List<Tender>>() {
                             }.getType();
                             List<Tender> list = gson.fromJson(jsonArray, type);
-                            for (Tender tender : list) {
-                                Log.e("tender", tender.toString());
-                            }
                             errorInfo.object = list;
                         }
                         return errorInfo;

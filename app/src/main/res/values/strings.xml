@@ -76,7 +76,7 @@
   <string name="truck_number">车牌</string>
   <string name="truck_type">车型</string>
   <string name="driver">司机</string>
-  <string name="driver_phone">司机手机</string>
+  <string name="driver_number">司机手机</string>
   <string name="status">状态</string>
   <string name="now_location">当前位置</string>
   <string name="car_detail">车辆详情</string>
@@ -103,4 +103,13 @@
   <string name="grab_success">抢标成功</string>
   <string name="un_distribution_car">待分配车辆</string>
   <string name="distribution_car">分配车辆</string>
+  <string name="is_over">已结束</string>
+  <string name="grabbing">抢单中。。。</string>
+  <string name="input_car_number">请输入车牌</string>
+  <string name="input_driver_phone">请输入司机手机号码</string>
+  <string name="add_success">添加成功</string>
+  <string name="car_describe">车辆描述&#160;&#160;&#160;&#160;</string>
+  <string name="car_driver">车辆司机&#160;&#160;&#160;&#160;</string>
+  <string name="driver_phone">联系手机&#160;&#160;&#160;&#160;</string>
+  <string name="un_write">未填写</string>
 </resources>
