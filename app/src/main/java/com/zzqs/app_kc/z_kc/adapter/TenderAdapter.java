@@ -16,6 +16,7 @@ import com.zzqs.app_kc.R;
 import com.zzqs.app_kc.z_kc.activity.TenderDetailActivity;
 import com.zzqs.app_kc.z_kc.entitiy.Goods;
 import com.zzqs.app_kc.z_kc.entitiy.Tender;
+import com.zzqs.app_kc.z_kc.listener.MyOnClickListener;
 import com.zzqs.app_kc.z_kc.util.NumberUtil;
 import com.zzqs.app_kc.z_kc.util.TimeUtil;
 
@@ -62,7 +63,7 @@ public class TenderAdapter extends BaseAdapter {
   @Override
   public View getView(int position, View view, ViewGroup parent) {
     ViewHolder holder;
-    Tender tender = kcOrderList.get(position);
+    final Tender tender = kcOrderList.get(position);
     if (view == null) {
       view = inflater.inflate(R.layout.z_kc_item_kc_order, null);
       holder = new ViewHolder();
@@ -79,18 +80,19 @@ public class TenderAdapter extends BaseAdapter {
       holder.llBottom = (LinearLayout) view.findViewById(R.id.llBottom);
       holder.tvBottom = (TextView) view.findViewById(R.id.tvBottom);
 
-      holder.rlTop.setOnClickListener(new ViewHolderClicKListener(tender) {
+      holder.rlTop.setOnClickListener(new MyOnClickListener() {
         @Override
-        public void onClick(View v, Tender tender) {
+        public void OnceOnClick(View view) {
           Intent intent = new Intent(context, TenderDetailActivity.class);
           intent.putExtra(Tender.TENDER, tender);
+          System.out.println("adapter :"+tender.toString());
           context.startActivity(intent);
         }
       });
 
-      holder.llBottom.setOnClickListener(new ViewHolderClicKListener(tender) {
+      holder.llBottom.setOnClickListener(new MyOnClickListener() {
         @Override
-        public void onClick(View v, Tender tender) {
+        public void OnceOnClick(View view) {
           switch (tender.getStatus()) {
             case Tender.UN_ASSIGNED:
               //去分配车辆的页面
@@ -100,12 +102,11 @@ public class TenderAdapter extends BaseAdapter {
               //去时间轴页面
               break;
           }
+
         }
       });
 
       view.setTag(holder);
-      holder.rlTop.setTag(tender);
-      holder.llBottom.setTag(tender);
     } else {
       holder = (ViewHolder) view.getTag();
     }
@@ -188,22 +189,5 @@ public class TenderAdapter extends BaseAdapter {
     TextView tvType, tvPickupProvince, tvPickupCity, tvDeliveryProvince, tvDeliveryCity, tvImgAbove, tvImgBelow, tvCreateTime, tvGoodsDescription, tvBottom;
     RelativeLayout rlTop;
     LinearLayout llBottom;
-  }
-
-  private abstract class ViewHolderClicKListener implements View.OnClickListener {
-
-    private Tender tender;
-
-    public ViewHolderClicKListener(Tender tender) {
-      this.tender = tender;
-    }
-
-    @Override
-    public void onClick(View v) {
-      onClick(v, tender);
-    }
-
-    public abstract void onClick(View v, Tender tender);
-
   }
 }

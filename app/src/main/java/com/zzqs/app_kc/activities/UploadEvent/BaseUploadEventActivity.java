@@ -842,9 +842,6 @@ public abstract class BaseUploadEventActivity extends BaseActivity implements Vi
                         }
                     }
                     if (mold.equals(OrderEvent.MOLD_DELIVERY)) {
-                        System.out.println("1:" + order.getOperationGoodsName());
-                        System.out.println("2:" + order.getDeliveryMustConfirmDetail());
-                        System.out.println("3:" + order.getCommitDeliveryConfigDetail());
                         if (!StringTools.isEmp(order.getDeliveryMustConfirmDetail()) && order.getDeliveryMustConfirmDetail().equals("true")) {
                             if (order.getCommitDeliveryConfigDetail().equals("false")) {
                                 Toast.makeText(BaseUploadEventActivity.this, getString(R.string.prompt_must_delivery_actual), Toast.LENGTH_SHORT).show();
@@ -1011,7 +1008,6 @@ public abstract class BaseUploadEventActivity extends BaseActivity implements Vi
                                     }
                                     eventFileDao.update(eventFile);
                                 }
-                                System.out.println("bigFilePath:" + bigFilePath);
                                 callbackHandler.sendEmptyMessage(GET_PHOTO);
                             }
                         }.start();

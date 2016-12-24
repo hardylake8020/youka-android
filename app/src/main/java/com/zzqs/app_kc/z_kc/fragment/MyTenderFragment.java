@@ -7,14 +7,20 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.zzqs.app_kc.R;
+import com.zzqs.app_kc.utils.CommonTools;
 import com.zzqs.app_kc.widgets.xlistView.XListView;
 import com.zzqs.app_kc.z_kc.adapter.TenderAdapter;
+import com.zzqs.app_kc.z_kc.entitiy.ErrorInfo;
 import com.zzqs.app_kc.z_kc.entitiy.Tender;
+import com.zzqs.app_kc.z_kc.network.TenderApiImpl;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import rx.Subscriber;
 
 /**
  * Created by lance on 2016/12/23.
@@ -67,8 +73,39 @@ public class MyTenderFragment extends Fragment implements XListView.IXListViewLi
     getTenderByStatus(false);
   }
 
-  private void getTenderByStatus(boolean isRefresh) {
-    //根据状态获取相应标书
+  private void getTenderByStatus(final boolean isRefresh) {
+    int currentCount = isRefresh ? 0 : tenderList.size();
+    TenderApiImpl.getUserApiImpl().getStartedListByDriver(CommonTools.getToken(getContext()), currentCount, 10, status, new Subscriber<ErrorInfo>() {
+      @Override
+      public void onCompleted() {
+      }
+
+      @Override
+      public void onError(Throwable e) {
+        e.printStackTrace();
+        onLoad();
+      }
+
+      @Override
+      public void onNext(ErrorInfo errorInfo) {
+        onLoad();
+        if (errorInfo.getType().equals(ErrorInfo.SUCCESS)) {
+          List<Tender> list = (List<Tender>) errorInfo.object;
+          if (isRefresh) {
+            tenderList.clear();
+          }
+          if (list.size() < 10) {
+            lvTenders.setPullLoadEnable(false);
+          } else {
+            lvTenders.setPullLoadEnable(true);
+          }
+          tenderList.addAll(list);
+          adapter.notifyDataSetChanged();
+        } else {
+          Toast.makeText(getContext(), errorInfo.getMessage(), Toast.LENGTH_LONG).show();
+        }
+      }
+    });
   }
 
   private void onLoad() {

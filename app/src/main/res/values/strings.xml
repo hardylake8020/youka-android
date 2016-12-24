@@ -103,4 +103,6 @@
   <string name="grab_success">抢标成功</string>
   <string name="un_distribution_car">待分配车辆</string>
   <string name="distribution_car">分配车辆</string>
+  <string name="is_over">已结束</string>
+  <string name="grabbing">抢单中。。。</string>
 </resources>

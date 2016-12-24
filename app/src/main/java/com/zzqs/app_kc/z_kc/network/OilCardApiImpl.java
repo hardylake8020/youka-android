@@ -46,7 +46,6 @@ public class OilCardApiImpl {
                     public ErrorInfo call(JsonObject jsonObject) {
                         ErrorInfo errorInfo = new ErrorInfo();
                         if (jsonObject.has(errorInfo.ERR)) {
-                            Log.e("getOilCardListByDriver", jsonObject.toString());
                             JsonObject errObj = jsonObject.getAsJsonObject(errorInfo.ERR);
                             errorInfo = gson.fromJson(errObj, ErrorInfo.class);
                         } else {
@@ -79,7 +78,6 @@ public class OilCardApiImpl {
                     public ErrorInfo call(JsonObject jsonObject) {
                         ErrorInfo errorInfo = new ErrorInfo();
                         if (jsonObject.has(errorInfo.ERR)) {
-                            Log.e("addOilCardByDriver", jsonObject.toString());
                             JsonObject errObj = jsonObject.getAsJsonObject(errorInfo.ERR);
                             errorInfo = gson.fromJson(errObj, ErrorInfo.class);
                         } else {
