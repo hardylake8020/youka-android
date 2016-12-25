@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/radius_5dp_col_white_border_blue"
+    android:padding="15dp">
+
+    <TextView
+        android:id="@+id/tvCardStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="未使用"
+        android:textColor="@color/primary_colors"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvCardType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/tvCardStatus"
+        android:layout_marginTop="5dp"
+        android:text="油卡"
+        android:textColor="@color/primary_colors"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tvCardNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/tvCardType"
+        android:layout_marginTop="5dp"
+        android:text="123456"
+        android:textColor="@color/primary_colors"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:id="@+id/ivChoice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/tvCardStatus"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/z_kc_ic_un_select"
+        android:visibility="gone" />
+</RelativeLayout>
