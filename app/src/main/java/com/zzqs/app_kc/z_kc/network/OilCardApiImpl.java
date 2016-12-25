@@ -1,12 +1,9 @@
 package com.zzqs.app_kc.z_kc.network;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.squareup.okhttp.MediaType;
-import com.squareup.okhttp.RequestBody;
 import com.zzqs.app_kc.z_kc.entitiy.ErrorInfo;
 import com.zzqs.app_kc.z_kc.entitiy.OilCard;
 
@@ -15,6 +12,7 @@ import org.json.JSONObject;
 
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.RequestBody;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
@@ -60,35 +58,37 @@ public class OilCardApiImpl {
                 .subscribe(subscriber);
     }
 
-    public void addOilCardByDriver(@NonNull String accessToken, @NonNull OilCard oilCard, Subscriber<ErrorInfo> subscriber) {
-        JSONObject jsonObject = new JSONObject();
-        JSONObject cardInfo = new JSONObject();
+    public void addOilCardByDriver(@NonNull String accessToken, @NonNull String number, @NonNull String type, Subscriber<ErrorInfo> subscriber) {
         try {
-            cardInfo.put("number", oilCard.getNumber());
-            cardInfo.put("type", oilCard.getType());
+            JSONObject jsonObject = new JSONObject();
+            JSONObject cardInfo = new JSONObject();
+            cardInfo.put("number", number);
+            cardInfo.put("type", type);
             jsonObject.put("access_token", accessToken);
             jsonObject.put("card_info", cardInfo);
+            RequestBody body = okhttp3.RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), jsonObject.toString());
+            oilCardApi.addOilCardByDriver(body)
+                    .map(new Func1<JsonObject, ErrorInfo>() {
+                        @Override
+                        public ErrorInfo call(JsonObject jsonObject) {
+                            ErrorInfo errorInfo = new ErrorInfo();
+                            if (jsonObject.has(errorInfo.ERR)) {
+                                JsonObject errObj = jsonObject.getAsJsonObject(errorInfo.ERR);
+                                errorInfo = gson.fromJson(errObj, ErrorInfo.class);
+                            } else {
+                                errorInfo.setType(ErrorInfo.SUCCESS);
+                                OilCard oilCard = gson.fromJson(jsonObject, OilCard.class);
+                                errorInfo.object = oilCard;
+                            }
+                            return errorInfo;
+                        }
+                    })
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .throttleFirst(1000, TimeUnit.MILLISECONDS)
+                    .subscribe(subscriber);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonObject.toString());
-        oilCardApi.addOilCardByDriver(body)
-                .map(new Func1<JsonObject, ErrorInfo>() {
-                    @Override
-                    public ErrorInfo call(JsonObject jsonObject) {
-                        ErrorInfo errorInfo = new ErrorInfo();
-                        if (jsonObject.has(errorInfo.ERR)) {
-                            JsonObject errObj = jsonObject.getAsJsonObject(errorInfo.ERR);
-                            errorInfo = gson.fromJson(errObj, ErrorInfo.class);
-                        } else {
-                            errorInfo.setType(ErrorInfo.SUCCESS);
-                        }
-                        return errorInfo;
-                    }
-                })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .throttleFirst(1000, TimeUnit.MILLISECONDS)
-                .subscribe(subscriber);
     }
 }

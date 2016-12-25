@@ -81,7 +81,7 @@ public class NetWork {
      * @time 16/7/19 下午5:09
      */
     public static String getBaseUrl() {
-        return "http://192.168.0.112:3006";
+        return "http://183.131.76.178:3006";
 //        return BuildConfig.BASE_URL;
     }
 }

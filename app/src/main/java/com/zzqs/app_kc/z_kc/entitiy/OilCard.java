@@ -11,8 +11,10 @@ import com.google.gson.annotations.SerializedName;
  * Description :油卡对象
  */
 public class OilCard implements Parcelable {
+    public static final String OILCARD = "oilCard";
     public static final String UNETC = "unEtc";
     public static final String ETC = "etc";
+    public static final String OILCARD_TYPE = "oilCard_type";
 
     @SerializedName("_id")
     private String card_id;

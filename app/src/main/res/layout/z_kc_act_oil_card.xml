@@ -33,7 +33,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="油卡"
+                    android:text="@string/oil_card"
                     android:textColor="@android:color/white"
                     android:textSize="16sp" />
 
@@ -59,7 +59,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="right"
-                    android:text="ETC卡"
+                    android:text="@string/etc_card"
                     android:textColor="@color/dark_blue"
                     android:textSize="16sp" />
 

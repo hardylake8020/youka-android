@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string-array name="truck_type">
-    <item>金杯车</item>
-    <item>4.2米</item>
-    <item>6.8米</item>
-    <item>7.6米</item>
-    <item>9.6前四后四</item>
-    <item>9.6前四后八</item>
-    <item>12.5米</item>
-    <item>14.7米</item>
-    <item>16.5米</item>
-    <item>17.5米</item>
-  </string-array>
+    <string-array name="truck_type">
+        <item>金杯车</item>
+        <item>4.2米</item>
+        <item>6.8米</item>
+        <item>7.6米</item>
+        <item>9.6前四后四</item>
+        <item>9.6前四后八</item>
+        <item>12.5米</item>
+        <item>14.7米</item>
+        <item>16.5米</item>
+        <item>17.5米</item>
+    </string-array>
+    <string-array name="card_type">
+        <item>etc</item>
+        <item>unEtc</item>
+    </string-array>
 </resources>

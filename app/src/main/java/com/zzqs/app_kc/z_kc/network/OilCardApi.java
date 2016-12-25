@@ -1,8 +1,8 @@
 package com.zzqs.app_kc.z_kc.network;
 
 import com.google.gson.JsonObject;
-import com.squareup.okhttp.RequestBody;
 
+import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;

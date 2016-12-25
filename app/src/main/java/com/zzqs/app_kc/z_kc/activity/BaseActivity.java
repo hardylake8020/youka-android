@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.MotionEvent;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.TextView;
 
 import com.zzqs.app_kc.app.ZZQSApplication;
 import com.zzqs.app_kc.widgets.SafeProgressDialog;
@@ -19,10 +18,6 @@ public abstract class BaseActivity extends FragmentActivity {
     protected Context mContext;
     protected boolean isVisible;
     private InputMethodManager manager;
-
-    private TextView head_back;
-    private TextView head_title;
-    private TextView head_right;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
