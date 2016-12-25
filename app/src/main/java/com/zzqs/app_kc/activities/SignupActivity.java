@@ -206,7 +206,7 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
                                         });
                                     }
                                 }
-                                ZZQSApplication.getInstance().finishUnMainActivity();
+                                ZZQSApplication.getInstance().cleanAllActivity();
                                 startActivity(new Intent(getApplicationContext(), GuideAfterSignupActivity.class));
                             }
 

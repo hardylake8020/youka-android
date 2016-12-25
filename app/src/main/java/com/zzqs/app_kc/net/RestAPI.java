@@ -8,6 +8,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.PersistentCookieStore;
 import com.loopj.android.http.RequestHandle;
 import com.loopj.android.http.RequestParams;
+import com.qiniu.android.utils.StringUtils;
 import com.testin.agent.TestinAgent;
 import com.zzqs.app_kc.BuildConfig;
 import com.zzqs.app_kc.app.ZZQSApplication;
@@ -1746,8 +1747,8 @@ public class RestAPI {
     order.setDeliveryEntranceForce(orderObject.optString("delivery_entrance_force", "false"));
     order.setDeliveryPhotoForce(orderObject.optString("delivery_photo_force", "true"));
 
-    if (orderObject.has("pickup_contact")) {
-      JSONObject pickUpObject = orderObject.optJSONObject("pickup_contact");
+    if (orderObject.has("pickup_contacts")) {
+      JSONObject pickUpObject = orderObject.optJSONObject("pickup_contacts");
       if (null != pickUpObject) {
         order.setFromMobilePhone(pickUpObject.optString("mobile_phone"));
         order.setFromPhone(pickUpObject.optString("phone"));
@@ -1755,8 +1756,8 @@ public class RestAPI {
         order.setFromContact(pickUpObject.optString("name"));
       }
     }
-    if (orderObject.has("delivery_contact")) {
-      JSONObject deliveryObject = orderObject.optJSONObject("delivery_contact");
+    if (orderObject.has("delivery_contacts")) {
+      JSONObject deliveryObject = orderObject.optJSONObject("delivery_contacts");
       if (null != deliveryObject) {
         order.setToMobilePhone(deliveryObject.optString("mobile_phone"));
         order.setToPhone(deliveryObject.optString("phone"));
@@ -2018,20 +2019,5 @@ public class RestAPI {
       }
     }
     return order;
-  }
-
-  public static void show(String content) {
-    int p = 2048;
-    long length = content.length();
-    if (length < p || length == p)
-      System.out.println(content);
-    else {
-      while (content.length() > p) {
-        String logContent = content.substring(0, p);
-        content = content.replace(logContent, "");
-        System.out.println(logContent);
-      }
-      System.out.println(content);
-    }
   }
 }

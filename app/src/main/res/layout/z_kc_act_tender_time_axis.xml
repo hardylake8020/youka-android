@@ -4,7 +4,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
         android:background="@android:color/white">
-    <include layout="@layout/default_head"/>
+    <include layout="@layout/z_kc_default_head"/>
     <ListView
             android:layout_marginTop="20dp"
             android:id="@+id/lvEvents"

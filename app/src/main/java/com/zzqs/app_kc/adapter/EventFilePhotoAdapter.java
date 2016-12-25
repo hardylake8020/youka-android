@@ -40,7 +40,7 @@ public class EventFilePhotoAdapter extends BaseAdapter {
         this.isAddPhoto = isAddPhoto;
         this.mold = mold;
         inflater = LayoutInflater.from(context);
-        imageLoader = imageLoader.getInstance();
+        imageLoader = ImageLoader.getInstance();
         options = new DisplayImageOptions.Builder()
                 .imageScaleType(ImageScaleType.EXACTLY_STRETCHED)
                 .bitmapConfig(Bitmap.Config.RGB_565)
@@ -73,7 +73,7 @@ public class EventFilePhotoAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.item_gridview, null);
             holder = new ViewHolder();
-            holder.img = (ImageView) convertView.findViewById(R.id.imageView);
+            holder.img = (ImageView) convertView.findViewById(R.id.ivPhoto);
             holder.mold = (TextView) convertView.findViewById(R.id.mold);
             holder.tv_icon = (TextView) convertView.findViewById(R.id.tv_icon);
             holder.tv_shoot = (TextView) convertView.findViewById(R.id.tv_shoot);

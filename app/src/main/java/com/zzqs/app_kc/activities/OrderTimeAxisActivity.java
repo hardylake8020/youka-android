@@ -34,7 +34,7 @@ public class OrderTimeAxisActivity extends BaseActivity {
         setContentView(R.layout.act_order_time_axis);
         order = this.getIntent().getParcelableExtra(Order.ORDER);
         orderEventBaseDao = DaoManager.getOrderEventDao(this);
-        mListView = (ListView) findViewById(R.id.listView);
+        mListView = (ListView) findViewById(R.id.lvEvents);
         headMessage = (TextView) findViewById(R.id.head_title);
         headMessage.setText(R.string.view_tv_check_time_axis);
         findViewById(R.id.head_back).setOnClickListener(new View.OnClickListener() {

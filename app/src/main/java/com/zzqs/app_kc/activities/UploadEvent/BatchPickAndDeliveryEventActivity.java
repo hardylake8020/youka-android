@@ -1,5 +1,6 @@
 package com.zzqs.app_kc.activities.UploadEvent;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.view.KeyEvent;
@@ -9,6 +10,7 @@ import android.widget.Toast;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
 import com.zzqs.app_kc.R;
+import com.zzqs.app_kc.activities.MainActivity;
 import com.zzqs.app_kc.app.ZZQSApplication;
 import com.zzqs.app_kc.entity.EventFile;
 import com.zzqs.app_kc.entity.Events;
@@ -48,7 +50,7 @@ public class BatchPickAndDeliveryEventActivity extends BaseUploadEventActivity {
                         adapter.notifyDataSetChanged();
                         break;
                     case UPLOAD_SUCCESS:
-                        ZZQSApplication.getInstance().finishUnMainActivity();
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         break;
                     case SAVE_FILE_FAILED:
                         Toast.makeText(BatchPickAndDeliveryEventActivity.this, getString(R.string.prompt_save_file_failed), Toast.LENGTH_SHORT).show();

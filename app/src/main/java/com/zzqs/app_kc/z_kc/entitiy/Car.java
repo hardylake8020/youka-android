@@ -3,6 +3,8 @@ package com.zzqs.app_kc.z_kc.entitiy;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +17,8 @@ public class Car implements Parcelable {
   public static final String TRUCKS = "trucks";
   public static final String UN_USAGE = "unUsage";
   public static final String USAGE = "usage";
+  @SerializedName("_id")
+  private String truck_id;
   private String truck_number;
   private String truck_type;
   private List<Double> location;
@@ -23,7 +27,8 @@ public class Car implements Parcelable {
   private String car_photo;
   private String driver_name;
   private String status;
-  private String oil_card;
+  private OilCard card;
+
 
   private boolean isSelect;
 
@@ -75,12 +80,12 @@ public class Car implements Parcelable {
     this.status = status;
   }
 
-  public String getOil_card() {
-    return oil_card;
+  public OilCard getCard() {
+    return card;
   }
 
-  public void setOil_card(String oil_card) {
-    this.oil_card = oil_card;
+  public void setCard(OilCard card) {
+    this.card = card;
   }
 
   public List<Double> getLocation() {
@@ -100,6 +105,17 @@ public class Car implements Parcelable {
     isSelect = select;
   }
 
+  public String getTruck_id() {
+    return truck_id;
+  }
+
+  public void setTruck_id(String truck_id) {
+    this.truck_id = truck_id;
+  }
+
+  public Car() {
+  }
+
 
   @Override
   public int describeContents() {
@@ -108,6 +124,7 @@ public class Car implements Parcelable {
 
   @Override
   public void writeToParcel(Parcel dest, int flags) {
+    dest.writeString(this.truck_id);
     dest.writeString(this.truck_number);
     dest.writeString(this.truck_type);
     dest.writeList(this.location);
@@ -115,14 +132,12 @@ public class Car implements Parcelable {
     dest.writeString(this.car_photo);
     dest.writeString(this.driver_name);
     dest.writeString(this.status);
-    dest.writeString(this.oil_card);
+    dest.writeParcelable(this.card, flags);
     dest.writeByte(this.isSelect ? (byte) 1 : (byte) 0);
   }
 
-  public Car() {
-  }
-
   protected Car(Parcel in) {
+    this.truck_id = in.readString();
     this.truck_number = in.readString();
     this.truck_type = in.readString();
     this.location = new ArrayList<Double>();
@@ -131,7 +146,7 @@ public class Car implements Parcelable {
     this.car_photo = in.readString();
     this.driver_name = in.readString();
     this.status = in.readString();
-    this.oil_card = in.readString();
+    this.card = in.readParcelable(OilCard.class.getClassLoader());
     this.isSelect = in.readByte() != 0;
   }
 
@@ -146,19 +161,4 @@ public class Car implements Parcelable {
       return new Car[size];
     }
   };
-
-  @Override
-  public String toString() {
-    return "Car{" +
-        "truck_number='" + truck_number + '\'' +
-        ", truck_type='" + truck_type + '\'' +
-        ", location=" + location +
-        ", driver_number='" + driver_number + '\'' +
-        ", car_photo='" + car_photo + '\'' +
-        ", driver_name='" + driver_name + '\'' +
-        ", status='" + status + '\'' +
-        ", oil_card='" + oil_card + '\'' +
-        ", isSelect=" + isSelect +
-        '}';
-  }
 }

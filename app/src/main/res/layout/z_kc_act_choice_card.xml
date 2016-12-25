@@ -11,19 +11,21 @@
     <com.zzqs.app_kc.widgets.xlistView.XListView
         android:id="@+id/lvOilCards"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/rlHeader"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:divider="@android:color/white"
-        android:dividerHeight="0px"
+        android:layout_marginBottom="50dp"
+        android:background="@color/bg_gray"
+        android:divider="@color/bg_gray"
+        android:dividerHeight="10dp"
         android:listSelector="@android:color/white"
         android:scrollbars="none" />
 
     <TextView
         android:id="@+id/tvConfirm"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_above="@id/lvOilCards"
         android:layout_alignParentBottom="true"
         android:background="@color/green"

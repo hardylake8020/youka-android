@@ -19,6 +19,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.zzqs.app_kc.R;
 import com.zzqs.app_kc.utils.CommonFiled;
 import com.zzqs.app_kc.z_kc.entitiy.Car;
+import com.zzqs.app_kc.z_kc.entitiy.OilCard;
 import com.zzqs.app_kc.z_kc.listener.MyOnClickListener;
 
 /**
@@ -65,16 +66,23 @@ public class CarDetailActivity extends BaseActivity {
     tvCarType = (TextView) findViewById(R.id.tvCarType);
     tvCarType.setText(car.getTruck_type());
     tvOilCard = (TextView) findViewById(R.id.tvOilCard);
-    tvOilCard.setText(car.getOil_card());
     tvDriverName = (TextView) findViewById(R.id.tvDriverName);
     tvDriverName.setText(car.getDriver_name());
     tvDriverPhone = (TextView) findViewById(R.id.tvDriverPhone);
     tvDriverPhone.setText(car.getDriver_number());
     tvCarStatus = (TextView) findViewById(R.id.tvCarStatus);
-    if (car.getStatus().equals(Car.UN_USAGE)) {
-      tvCarStatus.setText(R.string.un_transport);
-    } else if (car.getStatus().equals(Car.USAGE)) {
+//    if (car.getStatus().equals(Car.UN_USAGE)) {
+//      tvCarStatus.setText(R.string.un_transport);
+//    } else if (car.getStatus().equals(Car.USAGE)) {
+//      tvCarStatus.setText(R.string.transporting);
+//    }
+    OilCard card = car.getCard();
+    if (card != null && !TextUtils.isEmpty(card.getNumber())) {
+      tvOilCard.setText(card.getNumber());
       tvCarStatus.setText(R.string.transporting);
+    }else{
+      tvCarStatus.setText(R.string.un_transport);
+      tvCarStatus.setText(R.string.un_transport);
     }
     tvCarLocation = (TextView) findViewById(R.id.tvCarLocation);
 
@@ -110,34 +118,36 @@ public class CarDetailActivity extends BaseActivity {
   private GeoCoder mSearch;
 
   private void getCarLocationInfo() {
-    mSearch = GeoCoder.newInstance();
-    OnGetGeoCoderResultListener listener = new OnGetGeoCoderResultListener() {
-      public void onGetGeoCodeResult(GeoCodeResult result) {
-        if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
-          //没有检索到结果
+    if (car.getLocation() != null && car.getLocation().size() == 2) {
+      mSearch = GeoCoder.newInstance();
+      OnGetGeoCoderResultListener listener = new OnGetGeoCoderResultListener() {
+        public void onGetGeoCodeResult(GeoCodeResult result) {
+          if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
+            //没有检索到结果
+          }
+          //获取地理编码结果
+          System.out.println("onGetGeoCodeResult:" + result.getAddress());
         }
-        //获取地理编码结果
-        System.out.println("onGetGeoCodeResult:" + result.getAddress());
-      }
 
-      @Override
-      public void onGetReverseGeoCodeResult(ReverseGeoCodeResult result) {
-        if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
-          //没有找到检索结果
-          locationInfoHandler.sendEmptyMessage(NO_LOCATION_RESULT);
+        @Override
+        public void onGetReverseGeoCodeResult(ReverseGeoCodeResult result) {
+          if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
+            //没有找到检索结果
+            locationInfoHandler.sendEmptyMessage(NO_LOCATION_RESULT);
+          }
+          //获取反向地理编码结果
+          System.out.println("onGetReverseGeoCodeResult:" + result.getLocation().toString() + "--" + result.getAddress() + "--" + result.getAddressDetail().city + "--" + result.getAddressDetail().district);
+          String info = result.getAddressDetail().city + result.getAddressDetail().district;
+          Message msg = locationInfoHandler.obtainMessage();
+          msg.what = GET_LOCATION_RESULT;
+          msg.obj = info;
+          locationInfoHandler.sendMessage(msg);
         }
-        //获取反向地理编码结果
-        System.out.println("onGetReverseGeoCodeResult:" + result.getLocation().toString() + "--" + result.getAddress() + "--" + result.getAddressDetail().city + "--" + result.getAddressDetail().district);
-        String info = result.getAddressDetail().city + result.getAddressDetail().district;
-        Message msg = locationInfoHandler.obtainMessage();
-        msg.what = GET_LOCATION_RESULT;
-        msg.obj = info;
-        locationInfoHandler.sendMessage(msg);
-      }
-    };
-    mSearch.setOnGetGeoCodeResultListener(listener);
-    LatLng latLng = new LatLng(car.getLocation().get(1), car.getLocation().get(0));
-    mSearch.reverseGeoCode(new ReverseGeoCodeOption().location(latLng));
+      };
+      mSearch.setOnGetGeoCodeResultListener(listener);
+      LatLng latLng = new LatLng(car.getLocation().get(1), car.getLocation().get(0));
+      mSearch.reverseGeoCode(new ReverseGeoCodeOption().location(latLng));
+    }
   }
 
   @Override

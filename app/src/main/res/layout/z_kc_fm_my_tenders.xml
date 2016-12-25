@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
+              android:background="@color/bg_gray"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
   <com.zzqs.app_kc.widgets.xlistView.XListView
     android:id="@+id/lvTenders"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="10dp"
     android:background="@android:color/white"
     android:divider="@android:color/white"
     android:dividerHeight="0px"

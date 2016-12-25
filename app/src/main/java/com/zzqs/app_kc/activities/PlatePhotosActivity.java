@@ -580,7 +580,7 @@ public class PlatePhotosActivity extends BaseActivity implements View.OnClickLis
             if (convertView == null) {
                 convertView = LayoutInflater.from(PlatePhotosActivity.this).inflate(R.layout.item_gridview, null);
                 holder = new ViewHolder();
-                holder.img = (ImageView) convertView.findViewById(R.id.imageView);
+                holder.img = (ImageView) convertView.findViewById(R.id.ivPhoto);
                 holder.tv = (TextView) convertView.findViewById(R.id.textView);
                 holder.mold = (TextView) convertView.findViewById(R.id.mold);
                 convertView.setTag(holder);

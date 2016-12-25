@@ -12,6 +12,7 @@ import com.google.gson.annotations.SerializedName;
  */
 public class OilCard implements Parcelable {
     public static final String OILCARD = "oilCard";
+    public static final String CARDS = "cards";
     public static final String UNETC = "unEtc";
     public static final String ETC = "etc";
     public static final String OILCARD_TYPE = "oilCard_type";
@@ -24,6 +25,8 @@ public class OilCard implements Parcelable {
     private String updated;
     private String owner;
     private String truck_number;
+
+    private boolean isSelect;
 
     public String getCard_id() {
         return card_id;
@@ -81,6 +84,30 @@ public class OilCard implements Parcelable {
         this.truck_number = truck_number;
     }
 
+    public boolean isSelect() {
+        return isSelect;
+    }
+
+    public void setSelect(boolean select) {
+        isSelect = select;
+    }
+
+    public OilCard() {
+    }
+
+    @Override
+    public String toString() {
+        return "OilCard{" +
+                "card_id='" + card_id + '\'' +
+                ", number='" + number + '\'' +
+                ", type='" + type + '\'' +
+                ", created='" + created + '\'' +
+                ", updated='" + updated + '\'' +
+                ", owner='" + owner + '\'' +
+                ", truck_number='" + truck_number + '\'' +
+                '}';
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -95,9 +122,7 @@ public class OilCard implements Parcelable {
         dest.writeString(this.updated);
         dest.writeString(this.owner);
         dest.writeString(this.truck_number);
-    }
-
-    public OilCard() {
+        dest.writeByte(this.isSelect ? (byte) 1 : (byte) 0);
     }
 
     protected OilCard(Parcel in) {
@@ -108,6 +133,7 @@ public class OilCard implements Parcelable {
         this.updated = in.readString();
         this.owner = in.readString();
         this.truck_number = in.readString();
+        this.isSelect = in.readByte() != 0;
     }
 
     public static final Creator<OilCard> CREATOR = new Creator<OilCard>() {
@@ -121,17 +147,4 @@ public class OilCard implements Parcelable {
             return new OilCard[size];
         }
     };
-
-    @Override
-    public String toString() {
-        return "OilCard{" +
-                "card_id='" + card_id + '\'' +
-                ", number='" + number + '\'' +
-                ", type='" + type + '\'' +
-                ", created='" + created + '\'' +
-                ", updated='" + updated + '\'' +
-                ", owner='" + owner + '\'' +
-                ", truck_number='" + truck_number + '\'' +
-                '}';
-    }
 }

@@ -3,27 +3,35 @@ package com.zzqs.app_kc.z_kc.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.view.StandaloneActionMode;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zzqs.app_kc.R;
+import com.zzqs.app_kc.utils.CommonTools;
 import com.zzqs.app_kc.z_kc.activity.MyCarsActivity;
 import com.zzqs.app_kc.z_kc.activity.TenderDetailActivity;
+import com.zzqs.app_kc.z_kc.activity.TenderTimeAxisActivity;
+import com.zzqs.app_kc.z_kc.entitiy.ErrorInfo;
 import com.zzqs.app_kc.z_kc.entitiy.Goods;
 import com.zzqs.app_kc.z_kc.entitiy.Tender;
 import com.zzqs.app_kc.z_kc.listener.MyOnClickListener;
+import com.zzqs.app_kc.z_kc.network.TenderApiImpl;
 import com.zzqs.app_kc.z_kc.util.NumberUtil;
 import com.zzqs.app_kc.z_kc.util.TimeUtil;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
+
+import rx.Subscriber;
 
 /**
  * Created by lance on 2016/12/3.
@@ -66,8 +74,9 @@ public class TenderAdapter extends BaseAdapter {
     ViewHolder holder;
     final Tender tender = kcOrderList.get(position);
     if (view == null) {
-      view = inflater.inflate(R.layout.z_kc_item_kc_order, null);
+      view = inflater.inflate(R.layout.z_kc_item_kc_tender, null);
       holder = new ViewHolder();
+      holder.ivMarginTop = (ImageView) view.findViewById(R.id.ivMarginTop);
       holder.tvType = (TextView) view.findViewById(R.id.tvType);
       holder.tvPickupProvince = (TextView) view.findViewById(R.id.tvPickupProvince);
       holder.tvPickupCity = (TextView) view.findViewById(R.id.tvPickupCity);
@@ -86,7 +95,6 @@ public class TenderAdapter extends BaseAdapter {
         public void OnceOnClick(View view) {
           Intent intent = new Intent(context, TenderDetailActivity.class);
           intent.putExtra(Tender.TENDER, tender);
-          System.out.println("adapter :" + tender.toString());
           context.startActivity(intent);
         }
       });
@@ -99,11 +107,14 @@ public class TenderAdapter extends BaseAdapter {
               //去分配车辆的页面
               Intent intent = new Intent(context, MyCarsActivity.class);
               intent.putExtra(MyCarsActivity.IS_SELECT_CAR, true);
+              intent.putExtra(Tender.TENDER, tender);
               context.startActivity(intent);
               break;
             case Tender.IN_PROGRESS:
             case Tender.COMPLETED:
-              //去时间轴页面
+              Intent intent1 = new Intent(context, TenderTimeAxisActivity.class);
+              intent1.putExtra(Tender.TENDER_ID, tender.getTender_id());
+              context.startActivity(intent1);
               break;
           }
 
@@ -148,6 +159,7 @@ public class TenderAdapter extends BaseAdapter {
     holder.tvCreateTime.setText(context.getString(R.string.order_item_create_time, TimeUtil.convertDateStringFormat(tender.getStart_time(), TimeUtil.SERVER_TIME_FORMAT, "MM-dd HH:mm")));
 
     if (isMyTender) {
+      holder.ivMarginTop.setVisibility(View.VISIBLE);
       holder.llBottom.setVisibility(View.VISIBLE);
       holder.tvType.setVisibility(View.GONE);
       holder.tvImgAbove.setText(R.string.grab_success);
@@ -159,14 +171,15 @@ public class TenderAdapter extends BaseAdapter {
           break;
         case Tender.IN_PROGRESS:
           holder.tvImgBelow.setText(R.string.transporting);
-          holder.tvBottom.setText("湘A12345");
+          holder.tvBottom.setText(tender.getTruck_number());
           break;
         case Tender.COMPLETED:
           holder.tvImgBelow.setText(R.string.completed);
-          holder.tvBottom.setText("湘A12345");
+          holder.tvBottom.setText(tender.getTruck_number());
           break;
       }
     } else {
+      holder.ivMarginTop.setVisibility(View.GONE);
       holder.llBottom.setVisibility(View.GONE);
       holder.tvType.setVisibility(View.VISIBLE);
       holder.tvImgAbove.setTextColor(ContextCompat.getColor(context, R.color.red_5));
@@ -190,6 +203,7 @@ public class TenderAdapter extends BaseAdapter {
   }
 
   private class ViewHolder {
+    ImageView ivMarginTop;
     TextView tvType, tvPickupProvince, tvPickupCity, tvDeliveryProvince, tvDeliveryCity, tvImgAbove, tvImgBelow, tvCreateTime, tvGoodsDescription, tvBottom;
     RelativeLayout rlTop;
     LinearLayout llBottom;

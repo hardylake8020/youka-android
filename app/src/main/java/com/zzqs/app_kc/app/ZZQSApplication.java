@@ -227,14 +227,6 @@ public class ZZQSApplication extends Application {
     }
   }
 
-  public void finishUnMainActivity() {
-    for (Activity activity : activityList) {
-      if (activity.getClass() != MainActivity.class || activity.getClass() != com.zzqs.app_kc.z_kc.activity.MainActivity.class) {
-        activity.finish();
-      }
-    }
-  }
-
   public void CrashToLogin() {
     Toast.makeText(currentContext, R.string.prompt_date_err, Toast.LENGTH_SHORT).show();
     ZZQSApplication.getInstance().clearUser(this);

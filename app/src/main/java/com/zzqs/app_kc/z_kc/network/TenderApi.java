@@ -13,25 +13,28 @@ import rx.Observable;
  * Description :
  */
 public interface TenderApi {
-    /**
-     * 获取未开始的标书
-     */
-    @FormUrlEncoded
-    @POST("/tender/driver/getUnStartedListByDriver")
-    Observable<JsonObject> getUnStartedListByDriver(@Field("access_token") String accessToken, @Field("currentCount") int currentCount, @Field("limit") int limit);
+  /**
+   * 获取未开始的标书
+   */
+  @FormUrlEncoded
+  @POST("/tender/driver/getUnStartedListByDriver")
+  Observable<JsonObject> getUnStartedListByDriver(@Field("access_token") String accessToken, @Field("currentCount") int currentCount, @Field("limit") int limit);
 
-    /**
-     * 获取已开始的标书
-     */
-    @FormUrlEncoded
-    @POST("/tender/driver/getStartedListByDriver")
-    Observable<JsonObject> getStartedListByDriver(@Field("access_token") String accessToken, @Field("currentCount") int currentCount, @Field("limit") int limit, @Field("status") String status);
+  /**
+   * 获取已开始的标书
+   */
+  @FormUrlEncoded
+  @POST("/tender/driver/getStartedListByDriver")
+  Observable<JsonObject> getStartedListByDriver(@Field("access_token") String accessToken, @Field("currentCount") int currentCount, @Field("limit") int limit, @Field("status") String status);
 
-    /**
-     * 抢标书
-     */
-    @FormUrlEncoded
-    @POST("/tender/driver/grab")
-    Observable<JsonObject> grabTender(@Field("access_token") String accessToken, @Field("tender_id") String tender_id);
+  /**
+   * 抢标书
+   */
+  @FormUrlEncoded
+  @POST("/tender/driver/grab")
+  Observable<JsonObject> grabTender(@Field("access_token") String accessToken, @Field("tender_id") String tenderId);
 
+  @FormUrlEncoded
+  @POST("/tender/driver/transportevent")
+  Observable<JsonObject> getTransportEvents(@Field("access_token") String accessToken, @Field("tender_id") String tenderId);
 }

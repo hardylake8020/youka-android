@@ -1,5 +1,6 @@
 package com.zzqs.app_kc.activities.UploadEvent;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.Toast;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
 import com.zzqs.app_kc.R;
+import com.zzqs.app_kc.activities.MainActivity;
 import com.zzqs.app_kc.app.ZZQSApplication;
 import com.zzqs.app_kc.entity.EventFile;
 import com.zzqs.app_kc.entity.Events;
@@ -50,11 +52,11 @@ public class SingleEntranceAndMidwayEventActivity extends BaseUploadEventActivit
                         break;
                     case ORDER_NOT_EXIST:
                         Toast.makeText(SingleEntranceAndMidwayEventActivity.this, getString(R.string.prompt_cancelled_order), Toast.LENGTH_SHORT).show();
-                        ZZQSApplication.getInstance().finishUnMainActivity();
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         break;
                     case ORDER_STATUS_HAS_CHANGED:
                         Toast.makeText(SingleEntranceAndMidwayEventActivity.this, getString(R.string.prompt_operating_order), Toast.LENGTH_SHORT).show();
-                        ZZQSApplication.getInstance().finishUnMainActivity();
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         break;
                     case SAVE_FILE_FAILED:
                         Toast.makeText(SingleEntranceAndMidwayEventActivity.this, getString(R.string.prompt_save_file_failed), Toast.LENGTH_SHORT).show();

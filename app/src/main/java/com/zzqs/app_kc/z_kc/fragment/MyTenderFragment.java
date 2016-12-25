@@ -31,7 +31,7 @@ public class MyTenderFragment extends Fragment implements XListView.IXListViewLi
 
   private View view;
   XListView lvTenders;
-  TenderAdapter adapter;
+  private TenderAdapter adapter;
   private List<Tender> tenderList;
 
   @Override
@@ -73,7 +73,17 @@ public class MyTenderFragment extends Fragment implements XListView.IXListViewLi
     getTenderByStatus(false);
   }
 
-  private void getTenderByStatus(final boolean isRefresh) {
+  public void clearTenderList() {
+    if (tenderList != null) {
+      tenderList.clear();
+    }
+    if (adapter != null) {
+      adapter.notifyDataSetChanged();
+    }
+  }
+
+  public void getTenderByStatus(final boolean isRefresh) {
+    System.out.println("--getTenderByStatus--");
     int currentCount = isRefresh ? 0 : tenderList.size();
     TenderApiImpl.getUserApiImpl().getStartedListByDriver(CommonTools.getToken(getContext()), currentCount, 10, status, new Subscriber<ErrorInfo>() {
       @Override

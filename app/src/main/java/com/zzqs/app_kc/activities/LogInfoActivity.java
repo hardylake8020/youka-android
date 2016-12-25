@@ -29,7 +29,7 @@ public class LogInfoActivity extends BaseActivity implements XListView.IXListVie
         logInfoDao = DaoManager.getLogInfoDao(this);
         logList = new ArrayList<LogInfo>();
         logList.addAll(logInfoDao.find(null, null, null, null, null, null, 20 + ""));
-        listView = (XListView) findViewById(R.id.listView);
+        listView = (XListView) findViewById(R.id.lvEvents);
         listView.setPullRefreshEnable(false);
         listView.setPullLoadEnable(true);
         listView.setXListViewListener(this);

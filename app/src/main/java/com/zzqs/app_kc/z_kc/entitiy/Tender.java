@@ -14,6 +14,7 @@ import java.util.List;
  */
 
 public class Tender implements Parcelable {
+  public static final String TENDER_ID = "tender_id";
   public static final String TENDER = "tender";
   public static final String TENDERS = "tenders";
   public static final String GRAB = "grab";
@@ -40,6 +41,7 @@ public class Tender implements Parcelable {
   private String end_time;
   private String truck_type;
   private int truck_count;
+  private String truck_number;
   private List<Goods> mobile_goods = new ArrayList<>();
   private String remark;
   private String transport_type;
@@ -92,7 +94,6 @@ public class Tender implements Parcelable {
   private double current_grab_price;
 
   private double driver_price;
-
 
 
   public String getTender_id() {
@@ -567,153 +568,14 @@ public class Tender implements Parcelable {
     this.driver_price = driver_price;
   }
 
-
-  @Override
-  public int describeContents() {
-    return 0;
+  public String getTruck_number() {
+    return truck_number;
   }
 
-  @Override
-  public void writeToParcel(Parcel dest, int flags) {
-    dest.writeString(this.tender_id);
-    dest.writeString(this.tender_number);
-    dest.writeString(this.order_number);
-    dest.writeString(this.refer_order_number);
-    dest.writeString(this.sender_company);
-    dest.writeString(this.sender_phone);
-    dest.writeString(this.sender_name);
-    dest.writeString(this.pay_approver);
-    dest.writeString(this.finance_officer);
-    dest.writeString(this.status);
-    dest.writeString(this.start_time);
-    dest.writeString(this.end_time);
-    dest.writeString(this.truck_type);
-    dest.writeInt(this.truck_count);
-    dest.writeTypedList(this.mobile_goods);
-    dest.writeString(this.remark);
-    dest.writeString(this.transport_type);
-    dest.writeInt(this.distance);
-    dest.writeString(this.pickup_province);
-    dest.writeString(this.pickup_city);
-    dest.writeString(this.pickup_region);
-    dest.writeString(this.pickup_street);
-    dest.writeString(this.pickup_address);
-    dest.writeList(this.pickup_location);
-    dest.writeString(this.pickup_start_time_format);
-    dest.writeString(this.pickup_end_time_format);
-    dest.writeString(this.pickup_name);
-    dest.writeString(this.pickup_mobile_phone);
-    dest.writeString(this.pickup_tel_phone);
-    dest.writeString(this.delivery_province);
-    dest.writeString(this.delivery_city);
-    dest.writeString(this.delivery_region);
-    dest.writeString(this.delivery_street);
-    dest.writeString(this.delivery_address);
-    dest.writeList(this.delivery_location);
-    dest.writeString(this.delivery_start_time_format);
-    dest.writeString(this.delivery_end_time_format);
-    dest.writeString(this.delivery_name);
-    dest.writeString(this.delivery_mobile_phone);
-    dest.writeString(this.delivery_tel_phone);
-    dest.writeString(this.initiator_name);
-    dest.writeString(this.initiator_phone);
-    dest.writeDouble(this.payment_top_rate);
-    dest.writeDouble(this.payment_top_cash_rate);
-    dest.writeDouble(this.payment_top_card_rate);
-    dest.writeDouble(this.payment_tail_rate);
-    dest.writeDouble(this.payment_tail_cash_rate);
-    dest.writeDouble(this.payment_tail_card_rate);
-    dest.writeDouble(this.payment_last_rate);
-    dest.writeDouble(this.payment_last_cash_rate);
-    dest.writeDouble(this.payment_last_card_rate);
-    dest.writeString(this.tender_type);
-    dest.writeDouble(this.lowest_protect_price);
-    dest.writeDouble(this.highest_protect_price);
-    dest.writeDouble(this.lowest_grab_price);
-    dest.writeDouble(this.highest_grab_price);
-    dest.writeDouble(this.grab_increment_price);
-    dest.writeDouble(this.current_grab_price);
-    dest.writeDouble(this.driver_price);
+  public void setTruck_number(String truck_number) {
+    this.truck_number = truck_number;
   }
 
-  public Tender() {
-  }
-
-  protected Tender(Parcel in) {
-    this.tender_id = in.readString();
-    this.tender_number = in.readString();
-    this.order_number = in.readString();
-    this.refer_order_number = in.readString();
-    this.sender_company = in.readString();
-    this.sender_phone = in.readString();
-    this.sender_name = in.readString();
-    this.pay_approver = in.readString();
-    this.finance_officer = in.readString();
-    this.status = in.readString();
-    this.start_time = in.readString();
-    this.end_time = in.readString();
-    this.truck_type = in.readString();
-    this.truck_count = in.readInt();
-    this.mobile_goods = in.createTypedArrayList(Goods.CREATOR);
-    this.remark = in.readString();
-    this.transport_type = in.readString();
-    this.distance = in.readInt();
-    this.pickup_province = in.readString();
-    this.pickup_city = in.readString();
-    this.pickup_region = in.readString();
-    this.pickup_street = in.readString();
-    this.pickup_address = in.readString();
-    this.pickup_location = new ArrayList<Double>();
-    in.readList(this.pickup_location, Double.class.getClassLoader());
-    this.pickup_start_time_format = in.readString();
-    this.pickup_end_time_format = in.readString();
-    this.pickup_name = in.readString();
-    this.pickup_mobile_phone = in.readString();
-    this.pickup_tel_phone = in.readString();
-    this.delivery_province = in.readString();
-    this.delivery_city = in.readString();
-    this.delivery_region = in.readString();
-    this.delivery_street = in.readString();
-    this.delivery_address = in.readString();
-    this.delivery_location = new ArrayList<Double>();
-    in.readList(this.delivery_location, Double.class.getClassLoader());
-    this.delivery_start_time_format = in.readString();
-    this.delivery_end_time_format = in.readString();
-    this.delivery_name = in.readString();
-    this.delivery_mobile_phone = in.readString();
-    this.delivery_tel_phone = in.readString();
-    this.initiator_name = in.readString();
-    this.initiator_phone = in.readString();
-    this.payment_top_rate = in.readDouble();
-    this.payment_top_cash_rate = in.readDouble();
-    this.payment_top_card_rate = in.readDouble();
-    this.payment_tail_rate = in.readDouble();
-    this.payment_tail_cash_rate = in.readDouble();
-    this.payment_tail_card_rate = in.readDouble();
-    this.payment_last_rate = in.readDouble();
-    this.payment_last_cash_rate = in.readDouble();
-    this.payment_last_card_rate = in.readDouble();
-    this.tender_type = in.readString();
-    this.lowest_protect_price = in.readDouble();
-    this.highest_protect_price = in.readDouble();
-    this.lowest_grab_price = in.readDouble();
-    this.highest_grab_price = in.readDouble();
-    this.grab_increment_price = in.readDouble();
-    this.current_grab_price = in.readDouble();
-    this.driver_price = in.readDouble();
-  }
-
-  public static final Creator<Tender> CREATOR = new Creator<Tender>() {
-    @Override
-    public Tender createFromParcel(Parcel source) {
-      return new Tender(source);
-    }
-
-    @Override
-    public Tender[] newArray(int size) {
-      return new Tender[size];
-    }
-  };
 
   @Override
   public String toString() {
@@ -779,4 +641,153 @@ public class Tender implements Parcelable {
         ", driver_price=" + driver_price +
         '}';
   }
+
+  @Override
+  public int describeContents() {
+    return 0;
+  }
+
+  @Override
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeString(this.tender_id);
+    dest.writeString(this.tender_number);
+    dest.writeString(this.order_number);
+    dest.writeString(this.refer_order_number);
+    dest.writeString(this.sender_company);
+    dest.writeString(this.sender_phone);
+    dest.writeString(this.sender_name);
+    dest.writeString(this.pay_approver);
+    dest.writeString(this.finance_officer);
+    dest.writeString(this.status);
+    dest.writeString(this.start_time);
+    dest.writeString(this.end_time);
+    dest.writeString(this.truck_type);
+    dest.writeInt(this.truck_count);
+    dest.writeString(this.truck_number);
+    dest.writeTypedList(this.mobile_goods);
+    dest.writeString(this.remark);
+    dest.writeString(this.transport_type);
+    dest.writeInt(this.distance);
+    dest.writeString(this.pickup_province);
+    dest.writeString(this.pickup_city);
+    dest.writeString(this.pickup_region);
+    dest.writeString(this.pickup_street);
+    dest.writeString(this.pickup_address);
+    dest.writeList(this.pickup_location);
+    dest.writeString(this.pickup_start_time_format);
+    dest.writeString(this.pickup_end_time_format);
+    dest.writeString(this.pickup_name);
+    dest.writeString(this.pickup_mobile_phone);
+    dest.writeString(this.pickup_tel_phone);
+    dest.writeString(this.delivery_province);
+    dest.writeString(this.delivery_city);
+    dest.writeString(this.delivery_region);
+    dest.writeString(this.delivery_street);
+    dest.writeString(this.delivery_address);
+    dest.writeList(this.delivery_location);
+    dest.writeString(this.delivery_start_time_format);
+    dest.writeString(this.delivery_end_time_format);
+    dest.writeString(this.delivery_name);
+    dest.writeString(this.delivery_mobile_phone);
+    dest.writeString(this.delivery_tel_phone);
+    dest.writeString(this.initiator_name);
+    dest.writeString(this.initiator_phone);
+    dest.writeDouble(this.payment_top_rate);
+    dest.writeDouble(this.payment_top_cash_rate);
+    dest.writeDouble(this.payment_top_card_rate);
+    dest.writeDouble(this.payment_tail_rate);
+    dest.writeDouble(this.payment_tail_cash_rate);
+    dest.writeDouble(this.payment_tail_card_rate);
+    dest.writeDouble(this.payment_last_rate);
+    dest.writeDouble(this.payment_last_cash_rate);
+    dest.writeDouble(this.payment_last_card_rate);
+    dest.writeString(this.tender_type);
+    dest.writeDouble(this.lowest_protect_price);
+    dest.writeDouble(this.highest_protect_price);
+    dest.writeDouble(this.lowest_grab_price);
+    dest.writeDouble(this.highest_grab_price);
+    dest.writeDouble(this.grab_increment_price);
+    dest.writeDouble(this.current_grab_price);
+    dest.writeDouble(this.driver_price);
+  }
+
+  public Tender() {
+  }
+
+  protected Tender(Parcel in) {
+    this.tender_id = in.readString();
+    this.tender_number = in.readString();
+    this.order_number = in.readString();
+    this.refer_order_number = in.readString();
+    this.sender_company = in.readString();
+    this.sender_phone = in.readString();
+    this.sender_name = in.readString();
+    this.pay_approver = in.readString();
+    this.finance_officer = in.readString();
+    this.status = in.readString();
+    this.start_time = in.readString();
+    this.end_time = in.readString();
+    this.truck_type = in.readString();
+    this.truck_count = in.readInt();
+    this.truck_number = in.readString();
+    this.mobile_goods = in.createTypedArrayList(Goods.CREATOR);
+    this.remark = in.readString();
+    this.transport_type = in.readString();
+    this.distance = in.readInt();
+    this.pickup_province = in.readString();
+    this.pickup_city = in.readString();
+    this.pickup_region = in.readString();
+    this.pickup_street = in.readString();
+    this.pickup_address = in.readString();
+    this.pickup_location = new ArrayList<Double>();
+    in.readList(this.pickup_location, Double.class.getClassLoader());
+    this.pickup_start_time_format = in.readString();
+    this.pickup_end_time_format = in.readString();
+    this.pickup_name = in.readString();
+    this.pickup_mobile_phone = in.readString();
+    this.pickup_tel_phone = in.readString();
+    this.delivery_province = in.readString();
+    this.delivery_city = in.readString();
+    this.delivery_region = in.readString();
+    this.delivery_street = in.readString();
+    this.delivery_address = in.readString();
+    this.delivery_location = new ArrayList<Double>();
+    in.readList(this.delivery_location, Double.class.getClassLoader());
+    this.delivery_start_time_format = in.readString();
+    this.delivery_end_time_format = in.readString();
+    this.delivery_name = in.readString();
+    this.delivery_mobile_phone = in.readString();
+    this.delivery_tel_phone = in.readString();
+    this.initiator_name = in.readString();
+    this.initiator_phone = in.readString();
+    this.payment_top_rate = in.readDouble();
+    this.payment_top_cash_rate = in.readDouble();
+    this.payment_top_card_rate = in.readDouble();
+    this.payment_tail_rate = in.readDouble();
+    this.payment_tail_cash_rate = in.readDouble();
+    this.payment_tail_card_rate = in.readDouble();
+    this.payment_last_rate = in.readDouble();
+    this.payment_last_cash_rate = in.readDouble();
+    this.payment_last_card_rate = in.readDouble();
+    this.tender_type = in.readString();
+    this.lowest_protect_price = in.readDouble();
+    this.highest_protect_price = in.readDouble();
+    this.lowest_grab_price = in.readDouble();
+    this.highest_grab_price = in.readDouble();
+    this.grab_increment_price = in.readDouble();
+    this.current_grab_price = in.readDouble();
+    this.driver_price = in.readDouble();
+  }
+
+  public static final Creator<Tender> CREATOR = new Creator<Tender>() {
+    @Override
+    public Tender createFromParcel(Parcel source) {
+      return new Tender(source);
+    }
+
+    @Override
+    public Tender[] newArray(int size) {
+      return new Tender[size];
+    }
+  };
 }
