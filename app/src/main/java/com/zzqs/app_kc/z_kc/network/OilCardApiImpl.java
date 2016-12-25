@@ -3,13 +3,17 @@ package com.zzqs.app_kc.z_kc.network;
 import android.support.annotation.NonNull;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 import com.zzqs.app_kc.z_kc.entitiy.ErrorInfo;
 import com.zzqs.app_kc.z_kc.entitiy.OilCard;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.RequestBody;
@@ -48,6 +52,11 @@ public class OilCardApiImpl {
                             errorInfo = gson.fromJson(errObj, ErrorInfo.class);
                         } else {
                             errorInfo.setType(ErrorInfo.SUCCESS);
+                            JsonArray jsonArray = jsonObject.getAsJsonArray(OilCard.CARDS);
+                            Type type = new TypeToken<List<OilCard>>() {
+                            }.getType();
+                            List<OilCard> list=gson.fromJson(jsonArray, type);
+                            errorInfo.object = list;
                         }
                         return errorInfo;
                     }

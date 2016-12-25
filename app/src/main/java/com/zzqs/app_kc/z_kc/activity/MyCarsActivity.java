@@ -13,6 +13,7 @@ import com.zzqs.app_kc.utils.CommonTools;
 import com.zzqs.app_kc.z_kc.adapter.CarAdapter;
 import com.zzqs.app_kc.z_kc.entitiy.Car;
 import com.zzqs.app_kc.z_kc.entitiy.ErrorInfo;
+import com.zzqs.app_kc.z_kc.entitiy.Tender;
 import com.zzqs.app_kc.z_kc.listener.MyOnClickListener;
 import com.zzqs.app_kc.z_kc.network.CarApiImpl;
 
@@ -33,11 +34,14 @@ public class MyCarsActivity extends BaseActivity {
     public static final String IS_SELECT_CAR = "isSelectCar";
     private boolean isSelectCar;
     public static final int TO_ADD_CAR = 100;
+    private Tender tender;
 
     @Override
     public void initVariables() {
         isSelectCar = getIntent().getBooleanExtra(IS_SELECT_CAR, false);
+        tender = getIntent().getParcelableExtra("tender");
         carList = new ArrayList<>();
+
     }
 
     @Override
@@ -79,7 +83,16 @@ public class MyCarsActivity extends BaseActivity {
                         Toast.makeText(MyCarsActivity.this, getString(R.string.need_choice_car), Toast.LENGTH_LONG).show();
                         return;
                     }
-                    startActivity(new Intent(mContext, ChoiceOilCardActivity.class));
+                    Intent intent = new Intent(mContext, ChoiceOilCardActivity.class);
+                    Car car = new Car();
+                    for (Car car1 : carList) {
+                        if (car1.isSelect()) {
+                            car = car1;
+                        }
+                    }
+                    intent.putExtra("car", car);
+                    intent.putExtra("tender", tender);
+                    startActivity(intent);
                 } else {//添加车辆
                     startActivityForResult(new Intent(mContext, AddCarActivity.class), TO_ADD_CAR);
                 }

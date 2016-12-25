@@ -117,5 +117,7 @@
     <string name="choice_oil_card">选择卡券</string>
     <string name="add_oil_card">添加卡券</string>
     <string name="need_choice_car">请先选择车辆</string>
+    <string name="need_choice_card">请先选择卡券</string>
     <string name="my_cards">我的卡券</string>
+    <string name="un_use">未使用</string>
 </resources>

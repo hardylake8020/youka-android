@@ -2,41 +2,41 @@ package com.zzqs.app_kc.z_kc.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.AdapterView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zzqs.app_kc.R;
-import com.zzqs.app_kc.utils.ScreenUtil;
+import com.zzqs.app_kc.utils.CommonTools;
+import com.zzqs.app_kc.widgets.xlistView.XListView;
+import com.zzqs.app_kc.z_kc.adapter.OilCardAdapter;
+import com.zzqs.app_kc.z_kc.entitiy.ErrorInfo;
+import com.zzqs.app_kc.z_kc.entitiy.OilCard;
 import com.zzqs.app_kc.z_kc.listener.MyOnClickListener;
+import com.zzqs.app_kc.z_kc.network.OilCardApiImpl;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import rx.Subscriber;
 
 /**
  * Created by ray on 16/12/14.
  * Class name : MyOilCardActivity
  * Description :我的油卡
  */
-public class MyOilCardActivity extends BaseActivity {
+public class MyOilCardActivity extends BaseActivity implements XListView.IXListViewListener {
     private static final int ADD_CARD = 100;
-    private TextView tvOilCard, tvETCCard, tvLeft, tvTitle, tvRight;
-    private ImageView ivOilCursor;
-    private ViewPager vpOilCard;
-    private android.support.v4.app.FragmentManager mFragmentManager;
-    private FragmentAdapter mFragmentAdapter;
-    private List<Fragment> listFragments; // Tab页面列表
-    public int currIndex = 0;// 当前页卡编号
-    private int screenWidth;
+    private TextView tvLeft, tvTitle, tvRight;
+    private XListView lvOilCards;
+    private OilCardAdapter oilCardAdapter;
+    private List<OilCard> oilCards;
 
     @Override
 
     public void initVariables() {
+        oilCards = new ArrayList<>();
 
     }
 
@@ -60,69 +60,78 @@ public class MyOilCardActivity extends BaseActivity {
             @Override
             public void OnceOnClick(View view) {
                 startActivityForResult(new Intent(mContext, AddOilCardActivity.class), ADD_CARD);
-
             }
         });
-        tvOilCard = (TextView) findViewById(R.id.tvOilCard);
-        tvETCCard = (TextView) findViewById(R.id.tvETCCard);
-        tvOilCard.setOnClickListener(new MyOnClickListener() {
+        lvOilCards = (XListView) findViewById(R.id.lvOilCards);
+        lvOilCards.setPullRefreshEnable(true);
+        lvOilCards.setPullLoadEnable(false);
+        lvOilCards.setXListViewListener(this);
+        oilCardAdapter = new OilCardAdapter(this, oilCards, false);
+        lvOilCards.setAdapter(oilCardAdapter);
+        lvOilCards.stopRefresh();
+        lvOilCards.stopLoadMore();
+        lvOilCards.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void OnceOnClick(View view) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
             }
         });
-        tvETCCard.setOnClickListener(new MyOnClickListener() {
-            @Override
-            public void OnceOnClick(View view) {
-
-            }
-        });
-        initImageView();
-        mFragmentManager = getSupportFragmentManager();
-        vpOilCard= (ViewPager) findViewById(R.id.vpOilCard);
-        listFragments = new ArrayList<>();
-
     }
 
     @Override
     public void loadData() {
+        getOilCardListByDriver();
+    }
+
+    @Override
+    public void onRefresh() {
+        getOilCardListByDriver();
 
     }
 
+    @Override
+    public void onLoadMore() {
 
-    private void initImageView() {
-        ivOilCursor = (ImageView) findViewById(R.id.ivOilCursor);
-        screenWidth = ScreenUtil.getScreenWidth(getApplicationContext());// 获取分辨率宽度
-        RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) ivOilCursor.getLayoutParams();
-        lp.width = screenWidth / 2;
-        ivOilCursor.setLayoutParams(lp);
+    }
+
+    private void getOilCardListByDriver() {
+        safePd.show();
+        OilCardApiImpl.getOilCardApiImpl().getOilCardListByDriver(CommonTools.getToken(this), new Subscriber<ErrorInfo>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                e.printStackTrace();
+                safePd.dismiss();
+                onLoad();
+            }
+
+            @Override
+            public void onNext(ErrorInfo errorInfo) {
+                safePd.dismiss();
+                if (errorInfo.getType().equals(ErrorInfo.SUCCESS)) {
+
+                    List<OilCard> list = (List<OilCard>) errorInfo.object;
+                    oilCards.clear();
+                    oilCards.addAll(list);
+                    oilCardAdapter.notifyDataSetChanged();
+                } else {
+                    Toast.makeText(mContext, errorInfo.getMessage(), Toast.LENGTH_LONG).show();
+                }
+                onLoad();
+            }
+        });
     }
 
     /**
-     * ViewPager适配器
+     * 停止刷新，
      */
-    public class FragmentAdapter extends FragmentPagerAdapter {
-
-        List<Fragment> fragmentList = new ArrayList<Fragment>();
-
-        public FragmentAdapter(android.support.v4.app.FragmentManager fm, List<Fragment> fragmentList) {
-            super(fm);
-            this.fragmentList = fragmentList;
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return fragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return fragmentList.size();
-        }
-
-        @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            return super.instantiateItem(container, position);
-        }
+    private void onLoad() {
+        lvOilCards.stopRefresh();
+        lvOilCards.stopLoadMore();
+        lvOilCards.setRefreshTime(getString(R.string.xilstview_refreshed));
     }
 }
