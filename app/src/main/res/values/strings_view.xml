@@ -21,7 +21,7 @@
   <string name="view_bt_sign_up">注  册</string>
   <string name="view_bt_login">登  录</string>
   <string name="view_bt_clear_log_data">清空log数据</string>
-  <string name="view_tv_forget_password">忘记密码?</string>
+  <string name="view_tv_forget_password">忘记密码</string>
   <string name="view_et_input_tel_num">请输入手机号</string>
   <string name="view_tv_unfilled_nickname">未填昵称</string>
   <string name="view_tv_uncompleted_order">还未完成过接单</string>
@@ -161,4 +161,7 @@
   <string name="view_tv_no_un_pickup_order">暂时没有待提货的运单哟~</string>
   <string name="view_tv_no_warehouse_order">暂时没有仓储运单哟~</string>
   <string name="view_tv_combined">合计</string>
+  <string name="view_et_userName">用户名</string>
+  <string name="view_et_passWord">密码</string>
+  <string name="view_tv_register_user">创建账户</string>
 </resources>
