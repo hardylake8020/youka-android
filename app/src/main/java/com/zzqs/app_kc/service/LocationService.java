@@ -32,6 +32,7 @@ public class LocationService extends Service implements BDLocationListener {
     public static boolean isStart = false;
     private User user;
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    public static String cityName;
 
     @Override
     public void onReceiveLocation(BDLocation location) {
@@ -44,6 +45,7 @@ public class LocationService extends Service implements BDLocationListener {
             logInfo.setType(LogInfo.TYPE_OF_NORMAL);
             logInfo.setContent("定位信息已获取：" + type + "---" + location.getTime() + "\n" + location.getLatitude() + ":" + location.getLongitude());
             logInfo.setTime(System.currentTimeMillis());
+            cityName = location.getCity();
             logInfoDao.insert(logInfo);
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -141,5 +143,9 @@ public class LocationService extends Service implements BDLocationListener {
     @Override
     public void onDestroy() {
         super.onDestroy();
+    }
+
+    public static String getCityName() {
+        return cityName;
     }
 }

@@ -66,8 +66,8 @@
     <string name="grab_details">抢单详情</string>
     <string name="bidding_details">比价详情</string>
     <string name="contact_customer_service">联系客服</string>
-    <string name="provenance">始发地</string>
-    <string name="destination">目的地</string>
+    <string name="provenance">请输入始发地</string>
+    <string name="destination">请输入目的地</string>
     <string name="all">全部</string>
     <string name="bidding">竞价</string>
     <string name="goods_list">货源列表</string>
@@ -123,4 +123,5 @@
     <string name="distribution_tender_confirm_message">油卡&#160;&#160;%1$s\n请确认分配信息是否正确</string>
     <string name="distribution_success">分配成功</string>
     <string name="save">保存</string>
+    <string name="loading">加载中...</string>
 </resources>

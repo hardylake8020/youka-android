@@ -94,7 +94,7 @@ public class TruckApiImpl {
               JsonArray jsonArray = jsonObject.getAsJsonArray(Truck.TRUCKS);
               Type type = new TypeToken<List<Truck>>() {
               }.getType();
-              List<Car> list = gson.fromJson(jsonArray, type);
+              List<Truck> list = gson.fromJson(jsonArray, type);
               errorInfo.object = list;
             }
             return errorInfo;
