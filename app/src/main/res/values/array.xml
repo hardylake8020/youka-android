@@ -13,7 +13,7 @@
         <item>17.5米</item>
     </string-array>
     <string-array name="card_type">
-        <item>etc</item>
-        <item>unEtc</item>
+        <item>ETC 卡</item>
+        <item>油卡</item>
     </string-array>
 </resources>

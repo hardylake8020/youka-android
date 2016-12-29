@@ -235,7 +235,7 @@ public class DialogView {
   public static void showConfirmDialog(Context context, String title, String message, final Handler handler) {
     final Dialog dialog = new AlertDialog.Builder(context).create();
     dialog.show();
-    dialog.setCancelable(true);
+    dialog.setCancelable(false);
 
     Window window = dialog.getWindow();
     window.setContentView(R.layout.prompt_dialog);
@@ -259,14 +259,14 @@ public class DialogView {
     dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
       @Override
       public void onDismiss(DialogInterface dialog) {
-        if (handler != null) {
-          handler.sendEmptyMessage(CANCEL);
-        }
       }
     });
     btLeft.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
+        if (handler != null) {
+          handler.sendEmptyMessage(CANCEL);
+        }
         dialog.dismiss();
       }
     });

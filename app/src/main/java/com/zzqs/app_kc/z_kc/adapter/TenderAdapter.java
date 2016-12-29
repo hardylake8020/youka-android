@@ -89,6 +89,7 @@ public class TenderAdapter extends BaseAdapter {
       holder.rlTop = (RelativeLayout) view.findViewById(R.id.rlTop);
       holder.llBottom = (LinearLayout) view.findViewById(R.id.llBottom);
       holder.tvBottom = (TextView) view.findViewById(R.id.tvBottom);
+      holder.tvTenderNumber = (TextView) view.findViewById(R.id.tvTenderNumber);
 
       holder.rlTop.setOnClickListener(new MyOnClickListener() {
         @Override
@@ -164,21 +165,26 @@ public class TenderAdapter extends BaseAdapter {
       holder.tvType.setVisibility(View.GONE);
       holder.tvImgAbove.setText(R.string.grab_success);
       holder.tvImgAbove.setTextColor(ContextCompat.getColor(context, R.color.green));
+      holder.tvTenderNumber.setText(context.getString(R.string.tender_number, tender.getTender_number()));
       switch (tender.getStatus()) {
         case Tender.UN_ASSIGNED:
           holder.tvImgBelow.setText(R.string.un_distribution_car);
           holder.tvBottom.setText(R.string.distribution_car);
+          holder.tvTenderNumber.setVisibility(View.GONE);
           break;
         case Tender.IN_PROGRESS:
           holder.tvImgBelow.setText(R.string.transporting);
           holder.tvBottom.setText(tender.getTruck_number());
+          holder.tvTenderNumber.setVisibility(View.VISIBLE);
           break;
         case Tender.COMPLETED:
           holder.tvImgBelow.setText(R.string.completed);
           holder.tvBottom.setText(tender.getTruck_number());
+          holder.tvTenderNumber.setVisibility(View.VISIBLE);
           break;
       }
     } else {
+      holder.tvTenderNumber.setVisibility(View.GONE);
       holder.ivMarginTop.setVisibility(View.GONE);
       holder.llBottom.setVisibility(View.GONE);
       holder.tvType.setVisibility(View.VISIBLE);
@@ -199,12 +205,15 @@ public class TenderAdapter extends BaseAdapter {
       }
 
     }
+    if (position == 0) {
+      holder.ivMarginTop.setVisibility(View.VISIBLE);
+    }
     return view;
   }
 
   private class ViewHolder {
     ImageView ivMarginTop;
-    TextView tvType, tvPickupProvince, tvPickupCity, tvDeliveryProvince, tvDeliveryCity, tvImgAbove, tvImgBelow, tvCreateTime, tvGoodsDescription, tvBottom;
+    TextView tvType, tvPickupProvince, tvPickupCity, tvDeliveryProvince, tvDeliveryCity, tvImgAbove, tvImgBelow, tvCreateTime, tvGoodsDescription, tvBottom, tvTenderNumber;
     RelativeLayout rlTop;
     LinearLayout llBottom;
   }

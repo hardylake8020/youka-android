@@ -146,4 +146,19 @@ public class MyOilCardActivity extends BaseActivity implements XListView.IXListV
         lvOilCards.stopLoadMore();
         lvOilCards.setRefreshTime(getString(R.string.xilstview_refreshed));
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == ADD_CARD) {
+            if (resultCode == RESULT_OK) {
+                OilCard oilCard = data.getParcelableExtra(OilCard.OILCARD);
+                if (oilCard == null) {
+                    return;
+                }
+                System.out.println(oilCard.toString());
+                oilCards.add(0, oilCard);
+                oilCardAdapter.notifyDataSetChanged();
+            }
+        }
+    }
 }

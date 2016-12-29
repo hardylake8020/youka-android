@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@color/bg_gray"
+              android:background="@android:color/white"
               android:orientation="vertical">
 
   <LinearLayout
@@ -225,17 +225,12 @@
     android:layout_height="1px"
     android:background="@color/z_kc_line"/>
 
-  <ImageView
-    android:layout_width="match_parent"
-    android:layout_height="1px"
-    android:layout_marginTop="10dp"
-    android:background="@color/z_kc_line"/>
 
   <com.zzqs.app_kc.widgets.xlistView.XListView
     android:id="@+id/lvTenders"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="@color/bg_gray"
     android:divider="@android:color/white"
     android:dividerHeight="0px"
     android:listSelector="@android:color/white"

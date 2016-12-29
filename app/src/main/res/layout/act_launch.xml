@@ -10,13 +10,14 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="110dp"
         android:background="@drawable/new_logo" />
 
     <LinearLayout
         android:id="@+id/btns"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_below="@id/ivLogo"
         android:orientation="vertical">
 
@@ -24,56 +25,58 @@
             android:id="@+id/etUserName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
             android:layout_marginTop="60dp"
             android:background="@null"
             android:gravity="center"
             android:hint="@string/view_et_userName"
             android:padding="5dp"
+            android:textSize="16sp"
             android:textColor="@color/gray"
             android:textColorHint="@color/gray" />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
             android:background="@color/red" />
 
         <EditText
             android:id="@+id/etPassWord"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
             android:layout_marginTop="30dp"
             android:background="@null"
             android:gravity="center"
             android:hint="@string/view_et_passWord"
             android:inputType="textPassword"
             android:padding="5dp"
+            android:textSize="16sp"
             android:textColor="@color/gray"
             android:textColorHint="@color/gray" />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
             android:background="@color/red" />
 
         <RelativeLayout
             android:id="@+id/rlLogin"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="66dp"
+            android:layout_height="66dp"
             android:layout_gravity="center"
             android:layout_marginTop="35dp"
             android:background="@drawable/round_red">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_centerInParent="true"
                 android:background="@drawable/btn_right" />
         </RelativeLayout>
@@ -83,7 +86,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="50dp"
+            android:textSize="16sp"
             android:text="@string/view_tv_register_user"
             android:textColor="@android:color/white" />
 
@@ -94,6 +98,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
             android:text="@string/view_tv_forget_password"
+            android:textSize="16sp"
             android:textColor="@android:color/white" />
 
         <Button
@@ -125,18 +130,4 @@
             android:textSize="16sp"
             android:visibility="gone" />
     </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/btns"
-        android:visibility="gone">
-
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="60dp"
-            android:background="@drawable/new_logo" />
-    </RelativeLayout>
 </RelativeLayout>

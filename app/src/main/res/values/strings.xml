@@ -124,4 +124,5 @@
     <string name="distribution_success">分配成功</string>
     <string name="save">保存</string>
     <string name="loading">加载中...</string>
+    <string name="tender_number">运单编号&#160;&#160;&#160;&#160;%1$s</string>
 </resources>

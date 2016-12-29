@@ -65,9 +65,9 @@ public class MyCarsActivity extends BaseActivity {
       tvRight.setText(R.string.add_car);
       tvBottom.setText(R.string.distribution_car);
     } else {
-      tvRight.setText("");
+      tvRight.setText(R.string.add_car);
       tvTitle.setText(R.string.my_cars);
-      tvBottom.setText(R.string.add_car);
+      tvBottom.setVisibility(View.GONE);
     }
     tvRight.setVisibility(View.VISIBLE);
     tvRight.setOnClickListener(new MyOnClickListener() {
