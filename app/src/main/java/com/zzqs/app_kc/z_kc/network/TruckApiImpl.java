@@ -9,7 +9,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.zzqs.app_kc.z_kc.entitiy.Truck;
 import com.zzqs.app_kc.z_kc.entitiy.ErrorInfo;
-import com.zzqs.app_kc.z_kc.entitiy.Tender;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -95,7 +94,7 @@ public class TruckApiImpl {
               JsonArray jsonArray = jsonObject.getAsJsonArray(Truck.TRUCKS);
               Type type = new TypeToken<List<Truck>>() {
               }.getType();
-              List<Tender> list = gson.fromJson(jsonArray, type);
+              List<Truck> list = gson.fromJson(jsonArray, type);
               errorInfo.object = list;
             }
             return errorInfo;
