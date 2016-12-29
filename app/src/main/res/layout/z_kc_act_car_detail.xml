@@ -15,8 +15,8 @@
 
     <com.facebook.drawee.view.SimpleDraweeView
       android:id="@+id/sdCarPhoto"
-      android:layout_width="100dp"
-      android:layout_height="100dp"
+      android:layout_width="146dp"
+      android:layout_height="146dp"
       android:layout_centerInParent="true"
       android:layout_gravity="center_vertical"
       android:layout_marginBottom="20dp"
@@ -28,185 +28,226 @@
       fresco:roundAsCircle="true"/>
   </RelativeLayout>
 
+  <ImageView
+    android:layout_width="match_parent"
+    android:layout_height="1px"
+    android:layout_marginTop="7dp"
+    android:background="@color/z_kc_line"/>
+
   <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="7dp"
     android:background="@android:color/white"
-    android:padding="10dp">
+    android:paddingBottom="10dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingTop="10dp">
 
     <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_alignParentLeft="true"
       android:text="@string/truck_number"
-      android:textColor="@color/black"
-      android:textSize="14sp"/>
+      android:textColor="@color/text_black"
+      android:textSize="16sp"/>
 
     <TextView
       android:id="@+id/tvPlateNumber"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_alignParentRight="true"
-      android:textColor="@color/black"
-      android:textSize="14sp"/>
+      android:textColor="@color/text_black"
+      android:textSize="16sp"/>
   </RelativeLayout>
 
   <ImageView
     android:layout_width="match_parent"
     android:layout_height="1px"
-    android:background="@color/line_gray"/>
+    android:background="@color/z_kc_line"/>
 
   <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/white"
-    android:padding="10dp">
+    android:paddingBottom="10dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingTop="10dp">
 
     <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_alignParentLeft="true"
       android:text="@string/truck_type"
-      android:textColor="@color/black"
-      android:textSize="14sp"/>
+      android:textColor="@color/text_black"
+      android:textSize="16sp"/>
 
     <TextView
       android:id="@+id/tvCarType"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_alignParentRight="true"
-      android:textColor="@color/black"
-      android:textSize="14sp"/>
+      android:textColor="@color/text_black"
+      android:textSize="16sp"/>
   </RelativeLayout>
 
   <ImageView
     android:layout_width="match_parent"
     android:layout_height="1px"
-    android:background="@color/line_gray"/>
+    android:background="@color/z_kc_line"/>
 
   <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/white"
-    android:padding="10dp">
+    android:paddingBottom="10dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingTop="10dp">
 
     <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_alignParentLeft="true"
       android:text="@string/oil_card"
-      android:textColor="@color/black"
-      android:textSize="14sp"/>
+      android:textColor="@color/text_black"
+      android:textSize="16sp"/>
 
     <TextView
       android:id="@+id/tvOilCard"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_alignParentRight="true"
-      android:textColor="@color/black"
-      android:textSize="14sp"/>
+      android:textColor="@color/text_black"
+      android:textSize="16sp"/>
   </RelativeLayout>
 
   <ImageView
     android:layout_width="match_parent"
     android:layout_height="1px"
-    android:background="@color/line_gray"/>
+    android:background="@color/z_kc_line"/>
+
+  <ImageView
+    android:layout_width="match_parent"
+    android:layout_height="1px"
+    android:layout_marginTop="7dp"
+    android:background="@color/z_kc_line"/>
 
   <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="7dp"
     android:background="@android:color/white"
-    android:padding="10dp">
+    android:paddingBottom="10dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingTop="10dp">
 
     <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_alignParentLeft="true"
       android:text="@string/driver"
-      android:textColor="@color/black"
-      android:textSize="14sp"/>
+      android:textColor="@color/text_black"
+      android:textSize="16sp"/>
 
     <TextView
       android:id="@+id/tvDriverName"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_alignParentRight="true"
-      android:textColor="@color/black"
-      android:textSize="14sp"/>
+      android:textColor="@color/text_black"
+      android:textSize="16sp"/>
   </RelativeLayout>
 
   <ImageView
     android:layout_width="match_parent"
     android:layout_height="1px"
-    android:background="@color/line_gray"/>
+    android:background="@color/z_kc_line"/>
 
   <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/white"
-    android:padding="10dp">
+    android:paddingBottom="10dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingTop="10dp">
 
     <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_alignParentLeft="true"
       android:text="@string/driver_number"
-      android:textColor="@color/black"
-      android:textSize="14sp"/>
+      android:textColor="@color/text_black"
+      android:textSize="16sp"/>
 
     <TextView
       android:id="@+id/tvDriverPhone"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_alignParentRight="true"
-      android:textColor="@color/black"
-      android:textSize="14sp"/>
+      android:textColor="@color/text_black"
+      android:textSize="16sp"/>
   </RelativeLayout>
+
+  <ImageView
+    android:layout_width="match_parent"
+    android:layout_height="1px"
+    android:background="@color/z_kc_line"/>
+
+  <ImageView
+    android:layout_width="match_parent"
+    android:layout_height="1px"
+    android:layout_marginTop="7dp"
+    android:background="@color/z_kc_line"/>
 
   <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="7dp"
     android:background="@android:color/white"
-    android:padding="10dp">
+    android:paddingBottom="10dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingTop="10dp">
 
     <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_alignParentLeft="true"
       android:text="@string/status"
-      android:textColor="@color/black"
-      android:textSize="14sp"/>
+      android:textColor="@color/text_black"
+      android:textSize="16sp"/>
 
     <TextView
       android:id="@+id/tvCarStatus"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_alignParentRight="true"
-      android:textColor="@color/black"
-      android:textSize="14sp"/>
+      android:textColor="@color/text_black"
+      android:textSize="16sp"/>
   </RelativeLayout>
 
   <ImageView
     android:layout_width="match_parent"
     android:layout_height="1px"
-    android:background="@color/line_gray"/>
+    android:background="@color/z_kc_line"/>
 
   <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/white"
-    android:padding="10dp">
+    android:paddingBottom="10dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingTop="10dp">
 
     <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_alignParentLeft="true"
       android:text="@string/now_location"
-      android:textColor="@color/black"
-      android:textSize="14sp"/>
+      android:textColor="@color/text_black"
+      android:textSize="16sp"/>
 
     <TextView
       android:id="@+id/tvCarLocation"
@@ -214,7 +255,12 @@
       android:layout_height="wrap_content"
       android:layout_alignParentRight="true"
       android:drawableRight="@drawable/icon_right_arrows"
-      android:textColor="@color/black"
-      android:textSize="14sp"/>
+      android:textColor="@color/text_black"
+      android:textSize="16sp"/>
   </RelativeLayout>
+
+  <ImageView
+    android:layout_width="match_parent"
+    android:layout_height="1px"
+    android:background="@color/z_kc_line"/>
 </LinearLayout>

@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.zzqs.app_kc.R;
 import com.zzqs.app_kc.utils.CommonTools;
+import com.zzqs.app_kc.widgets.DialogView;
 import com.zzqs.app_kc.z_kc.entitiy.ErrorInfo;
 import com.zzqs.app_kc.z_kc.entitiy.Goods;
 import com.zzqs.app_kc.z_kc.entitiy.Tender;
@@ -59,8 +60,6 @@ public class TenderDetailActivity extends BaseActivity {
     });
     tvTitle = (TextView) findViewById(R.id.head_title);
     tvRight = (TextView) findViewById(R.id.head_right);
-    tvRight.setText(R.string.contact_customer_service);
-    tvRight.setVisibility(View.VISIBLE);
 
     tvRemainingTime = (TextView) findViewById(R.id.tvRemainingTime);
     tvMaxPrince = (TextView) findViewById(R.id.tvMaxPrince);
@@ -195,7 +194,8 @@ public class TenderDetailActivity extends BaseActivity {
     tvDeliveryAddress.setText(tender.getDelivery_address());
     if (tender.getPayment_top_rate() > 0) {
       sb.append(getString(R.string.payment_top_rate));
-    } else if (tender.getPayment_last_rate() > 0) {
+    }
+    if (tender.getPayment_last_rate() > 0) {
       sb.append("+" + getString(R.string.payment_last_rate));
     }
     if (tender.getPayment_tail_rate() > 0) {
@@ -296,26 +296,51 @@ public class TenderDetailActivity extends BaseActivity {
   }
 
   private void grabTender() {
-    safePd.setMessage(getString(R.string.grabbing));
-    safePd.show();
-    TenderApiImpl.getUserApiImpl().grabTender(CommonTools.getToken(this), tender.getTender_id(), new Subscriber<ErrorInfo>() {
+    DialogView.showConfirmDialog(this, "抢单确认", "您确定要抢单吗？抢单成功后若违约讲扣除您的保证金", new Handler() {
       @Override
-      public void onCompleted() {
+      public void handleMessage(Message msg) {
+        if (msg.what == DialogView.ACCEPT) {
+          safePd.setMessage(getString(R.string.grabbing));
+          safePd.show();
+          TenderApiImpl.getUserApiImpl().grabTender(CommonTools.getToken(mContext), tender.getTender_id(), new Subscriber<ErrorInfo>() {
+            @Override
+            public void onCompleted() {
 
-      }
+            }
 
-      @Override
-      public void onError(Throwable e) {
-        safePd.dismiss();
-        e.printStackTrace();
-      }
+            @Override
+            public void onError(Throwable e) {
+              safePd.dismiss();
+              e.printStackTrace();
+            }
 
-      @Override
-      public void onNext(ErrorInfo errorInfo) {
-        safePd.dismiss();
-        Toast.makeText(TenderDetailActivity.this, R.string.grab_success, Toast.LENGTH_LONG).show();
-        startActivity(new Intent(mContext, MyTendersActivity.class));
-        finish();
+            @Override
+            public void onNext(ErrorInfo errorInfo) {
+              safePd.dismiss();
+              if (errorInfo.getType().equals(ErrorInfo.SUCCESS)) {
+                tender.setStatus(Tender.UN_STARTED);
+                DialogView.showConfirmDialog(mContext, "抢单成功", "恭喜您抢单，请选择车辆与绑定油卡的操作，\"取消\"则可稍后操作", new Handler() {
+                  @Override
+                  public void handleMessage(Message msg) {
+                    if (msg.what == DialogView.ACCEPT) {
+                      Intent intent = new Intent(mContext, MyCarsActivity.class);
+                      intent.putExtra(MyCarsActivity.IS_SELECT_CAR, true);
+                      intent.putExtra(Tender.TENDER, tender);
+                      startActivity(intent);
+                    } else if (msg.what == DialogView.CANCEL) {
+                      startActivity(new Intent(mContext, MyTendersActivity.class));
+                    }
+                    finish();
+                  }
+                });
+
+              } else {
+                Toast.makeText(mContext, errorInfo.getMessage(), Toast.LENGTH_SHORT).show();
+              }
+            }
+          });
+
+        }
       }
     });
   }

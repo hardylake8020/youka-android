@@ -70,10 +70,10 @@
       android:id="@+id/cursor"
       android:layout_width="120dp"
       android:layout_height="4dp"
+      android:layout_marginBottom="2px"
       android:layout_below="@id/linearLayout1"
       android:background="@android:color/white"/>
   </RelativeLayout>
-
 
 
   <android.support.v4.view.ViewPager
@@ -82,6 +82,7 @@
     android:layout_height="match_parent"
     android:layout_below="@id/layout2"
     android:layout_gravity="center"
+    android:layout_marginTop="1px"
     android:flipInterval="30"
     android:persistentDrawingCache="animation"/>
 </LinearLayout>

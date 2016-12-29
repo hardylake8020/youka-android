@@ -100,7 +100,7 @@
   <string name="un_assigned">待处理</string>
   <string name="in_progress">进行中</string>
   <string name="completed">已完成</string>
-  <string name="grab_success">抢标成功</string>
+  <string name="grab_success">抢单成功</string>
   <string name="un_distribution_car">待分配车辆</string>
   <string name="distribution_car">分配车辆</string>
   <string name="is_over">已结束</string>
@@ -122,4 +122,5 @@
   <string name="un_use">未使用</string>
   <string name="distribution_tender_confirm_message">油卡&#160;&#160;%1$s\n请确认分配信息是否正确</string>
   <string name="distribution_success">分配成功</string>
+  <string name="tender_number">运单编号&#160;&#160;&#160;&#160;%1$s</string>
 </resources>

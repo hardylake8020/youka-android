@@ -11,6 +11,11 @@
     android:layout_height="10dp"
     android:background="@color/bg_gray"/>
 
+  <ImageView
+    android:layout_width="match_parent"
+    android:layout_height="1px"
+    android:background="@color/z_kc_line"/>
+
   <RelativeLayout
     android:id="@+id/rlTop"
     android:layout_width="match_parent"
@@ -24,13 +29,14 @@
 
     <TextView
       android:id="@+id/tvType"
-      android:layout_width="40dp"
-      android:layout_height="40dp"
+      android:layout_width="56dp"
+      android:layout_height="56dp"
       android:layout_alignParentRight="true"
       android:layout_centerVertical="true"
+      android:layout_marginLeft="20dp"
       android:gravity="center"
       android:textColor="@android:color/white"
-      android:textSize="16sp"/>
+      android:textSize="18sp"/>
 
     <LinearLayout
       android:layout_width="match_parent"
@@ -56,16 +62,16 @@
             android:id="@+id/tvPickupProvince"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="16sp"/>
+            android:textColor="@color/text_black"
+            android:textSize="18sp"/>
 
           <TextView
             android:id="@+id/tvPickupCity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
-            android:textColor="@color/text_gray"
-            android:textSize="12sp"/>
+            android:textColor="@color/actual_text"
+            android:textSize="13sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -79,17 +85,20 @@
             android:id="@+id/tvImgAbove"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/red_5"/>
+            android:textColor="@color/z_kc_red"
+            android:textSize="18sp"/>
 
           <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="96dp"
+            android:layout_height="7dp"
             android:background="@drawable/z_kc_ic_arrow"/>
 
           <TextView
             android:id="@+id/tvImgBelow"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:textColor="@color/gray"
+            android:textSize="13sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -103,16 +112,16 @@
             android:id="@+id/tvDeliveryProvince"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="16sp"/>
+            android:textColor="@color/text_black"
+            android:textSize="18sp"/>
 
           <TextView
             android:id="@+id/tvDeliveryCity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
-            android:textColor="@color/text_gray"
-            android:textSize="12sp"/>
+            android:textColor="@color/actual_text"
+            android:textSize="13sp"/>
         </LinearLayout>
       </LinearLayout>
 
@@ -121,7 +130,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:textColor="@color/black"
+        android:textColor="@color/text_black"
         android:textSize="14sp"/>
 
       <TextView
@@ -129,16 +138,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:textColor="@color/black"
+        android:textColor="@color/text_black"
         android:textSize="14sp"/>
+
+      <TextView
+        android:id="@+id/tvTenderNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/text_black"
+        android:textSize="14sp"
+        android:visibility="gone"/>
     </LinearLayout>
   </RelativeLayout>
 
   <ImageView
     android:layout_width="match_parent"
-    android:layout_height="1dp"
+    android:layout_height="1px"
     android:layout_marginTop="10dp"
-    android:background="@color/line_gray"/>
+    android:background="@color/z_kc_line"/>
 
   <LinearLayout
     android:id="@+id/llBottom"
@@ -149,16 +167,14 @@
     <TextView
       android:id="@+id/tvBottom"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
+      android:layout_height="50dp"
       android:gravity="center"
-      android:paddingBottom="10dp"
-      android:paddingTop="10dp"
       android:textColor="@color/dark_blue"
-      android:textSize="14sp"/>
+      android:textSize="16sp"/>
 
     <ImageView
       android:layout_width="match_parent"
-      android:layout_height="1dp"
-      android:background="@color/line_gray"/>
+      android:layout_height="1px"
+      android:background="@color/z_kc_line"/>
   </LinearLayout>
 </LinearLayout>

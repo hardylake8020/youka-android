@@ -22,17 +22,18 @@
 
       <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="20dp">
+        android:paddingLeft="20dp">
 
         <TextView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_weight="1"
           android:text="@string/compare_rest_time"
-          android:textColor="@color/text_gray"
-          android:textSize="12sp"/>
+          android:textColor="@color/gray"
+          android:textSize="13sp"/>
 
         <TextView
           android:id="@+id/tvRemainingTime"
@@ -41,27 +42,28 @@
           android:layout_weight="5"
           android:gravity="left"
           android:textColor="@color/red"
-          android:textSize="14sp"/>
+          android:textSize="16sp"/>
       </LinearLayout>
 
       <ImageView
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/line_gray"/>
+        android:background="@color/z_kc_line"/>
 
       <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="20dp">
+        android:paddingLeft="20dp">
 
         <TextView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_weight="1"
           android:text="@string/highest_grab_price"
-          android:textColor="@color/text_gray"
-          android:textSize="12sp"/>
+          android:textColor="@color/gray"
+          android:textSize="13sp"/>
 
         <TextView
           android:id="@+id/tvMaxPrince"
@@ -70,13 +72,8 @@
           android:layout_weight="5"
           android:gravity="left"
           android:textColor="@color/red"
-          android:textSize="14sp"/>
+          android:textSize="16sp"/>
       </LinearLayout>
-
-      <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@color/line_gray"/>
     </LinearLayout>
   </LinearLayout>
 
@@ -88,21 +85,23 @@
     android:orientation="vertical">
 
     <ImageView
-      android:layout_width="wrap_content"
+      android:layout_width="match_parent"
       android:layout_height="1px"
-      android:background="@color/line_gray"/>
+      android:background="@color/z_kc_line"/>
 
     <LinearLayout
       android:id="@+id/llGrabOrder"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
+      android:layout_height="60dp"
       android:orientation="horizontal">
 
       <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="2"
         android:background="@android:color/white"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
         android:padding="20dp">
 
@@ -110,22 +109,22 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="@string/order_detail_freight"
-          android:textColor="@color/text_gray"
-          android:textSize="14sp"/>
+          android:textColor="@color/gray"
+          android:textSize="18sp"/>
 
         <TextView
           android:id="@+id/tvFreight"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:textColor="@color/red"
-          android:textSize="14sp"/>
+          android:textSize="18sp"/>
 
         <TextView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="@string/prince_unit"
-          android:textColor="@color/text_gray"
-          android:textSize="14sp"/>
+          android:textColor="@color/gray"
+          android:textSize="18sp"/>
       </LinearLayout>
 
       <TextView
@@ -134,9 +133,8 @@
         android:layout_height="match_parent"
         android:layout_weight="5"
         android:gravity="center"
-        android:padding="20dp"
         android:text="@string/grab_order"
-        android:textSize="16sp"/>
+        android:textSize="18sp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -154,8 +152,8 @@
         android:background="@android:color/white"
         android:hint="@string/input_total_prince"
         android:paddingLeft="20dp"
-        android:textColorHint="@color/text_gray"
-        android:textSize="14sp"/>
+        android:textColorHint="@color/gray"
+        android:textSize="16sp"/>
 
       <TextView
         android:id="@+id/tvBiddingOrder"
@@ -184,25 +182,29 @@
       android:layout_above="@id/llBottom"
       android:layout_below="@+id/llHead"
       android:orientation="vertical">
-
+      <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/z_kc_line"/>
       <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingBottom="15dp"
-        android:paddingTop="15dp">
+        android:padding="20dp">
 
         <ImageView
           android:id="@+id/ivArrow"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
+          android:layout_width="96dp"
+          android:layout_height="7dp"
           android:layout_centerInParent="true"
           android:background="@drawable/z_kc_ic_arrow"
           android:gravity="center"/>
 
+
         <LinearLayout
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
+          android:layout_height="match_parent"
           android:layout_gravity="center"
           android:layout_toLeftOf="@id/ivArrow"
           android:gravity="center"
@@ -212,22 +214,23 @@
             android:id="@+id/tvStartCity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="16sp"/>
+            android:textColor="@color/text_black"
+            android:textSize="18sp"/>
 
           <TextView
             android:id="@+id/tvStartDistrict"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:textColor="@color/text_black"
-            android:textSize="14sp"/>
+            android:textColor="@color/actual_text"
+            android:textSize="13sp"/>
         </LinearLayout>
 
         <LinearLayout
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
+          android:layout_height="match_parent"
           android:layout_gravity="center"
+          android:layout_marginTop="5dp"
           android:layout_toRightOf="@id/ivArrow"
           android:gravity="center"
           android:orientation="vertical">
@@ -236,37 +239,38 @@
             android:id="@+id/tvEndCity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="16sp"/>
+            android:textColor="@color/text_black"
+            android:textSize="18sp"/>
 
           <TextView
             android:id="@+id/tvEndDistrict"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:textColor="@color/text_black"
-            android:textSize="14sp"/>
+            android:textColor="@color/actual_text"
+            android:textSize="13sp"/>
         </LinearLayout>
       </RelativeLayout>
 
       <ImageView
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/line_gray"/>
+        android:background="@color/z_kc_line"/>
 
       <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="20dp">
+        android:paddingLeft="20dp">
 
         <TextView
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_weight="5"
           android:text="@string/need_cars"
-          android:textColor="@color/text_gray"
-          android:textSize="12sp"/>
+          android:textColor="@color/gray"
+          android:textSize="13sp"/>
 
         <TextView
           android:id="@+id/tvNeedCars"
@@ -274,14 +278,15 @@
           android:layout_height="wrap_content"
           android:layout_weight="1"
           android:gravity="left"
-          android:textColor="@color/black"
-          android:textSize="14sp"/>
+          android:paddingLeft="20dp"
+          android:textColor="@color/text_black"
+          android:textSize="16sp"/>
       </LinearLayout>
 
       <ImageView
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/line_gray"/>
+        android:background="@color/z_kc_line"/>
 
       <LinearLayout
         android:layout_width="match_parent"
@@ -300,17 +305,18 @@
             android:layout_height="wrap_content"
             android:layout_weight="5"
             android:text="@string/total"
-            android:textColor="@color/text_gray"
-            android:textSize="12sp"/>
+            android:textColor="@color/gray"
+            android:textSize="13sp"/>
 
           <TextView
             android:id="@+id/tvGoodsInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:paddingLeft="20dp"
             android:gravity="left"
-            android:textColor="@color/black"
-            android:textSize="12sp"/>
+            android:textColor="@color/text_black"
+            android:textSize="13sp"/>
         </LinearLayout>
 
 
@@ -325,38 +331,40 @@
             android:layout_height="wrap_content"
             android:layout_weight="5"
             android:text="@string/remark"
-            android:textColor="@color/text_gray"
-            android:textSize="12sp"/>
+            android:textColor="@color/gray"
+            android:textSize="13sp"/>
 
           <TextView
             android:id="@+id/tvRemark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:paddingLeft="20dp"
             android:gravity="left"
-            android:textColor="@color/black"
-            android:textSize="12sp"/>
+            android:textColor="@color/text_black"
+            android:textSize="13sp"/>
         </LinearLayout>
       </LinearLayout>
 
       <ImageView
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/line_gray"/>
+        android:background="@color/z_kc_line"/>
 
       <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="20dp">
+        android:paddingLeft="20dp">
 
         <TextView
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_weight="5"
           android:text="@string/sender_company"
-          android:textColor="@color/text_gray"
-          android:textSize="12sp"/>
+          android:textColor="@color/gray"
+          android:textSize="13sp"/>
 
         <TextView
           android:id="@+id/tvInitiator"
@@ -364,19 +372,14 @@
           android:layout_height="wrap_content"
           android:layout_weight="1"
           android:gravity="left"
-          android:textColor="@color/black"
-          android:textSize="14sp"/>
+          android:textColor="@color/text_black"
+          android:textSize="16sp"/>
       </LinearLayout>
 
       <ImageView
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/line_gray"/>
-
-      <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@color/line_gray"/>
+        android:background="@color/z_kc_line"/>
 
       <LinearLayout
         android:layout_width="match_parent"
@@ -395,17 +398,18 @@
             android:layout_height="wrap_content"
             android:layout_weight="5"
             android:text="@string/initiator_name"
-            android:textColor="@color/text_gray"
-            android:textSize="12sp"/>
+            android:textColor="@color/gray"
+            android:textSize="13sp"/>
 
           <TextView
             android:id="@+id/tvInitiatorName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:paddingLeft="20dp"
             android:gravity="left"
-            android:textColor="@color/black"
-            android:textSize="12sp"/>
+            android:textColor="@color/text_black"
+            android:textSize="13sp"/>
         </LinearLayout>
 
 
@@ -420,48 +424,55 @@
             android:layout_height="wrap_content"
             android:layout_weight="5"
             android:text="@string/initiator_phone"
-            android:textColor="@color/text_gray"
-            android:textSize="12sp"/>
+            android:textColor="@color/gray"
+            android:textSize="13sp"/>
 
           <TextView
             android:id="@+id/tvInitiatorPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
             android:layout_weight="1"
             android:gravity="left"
             android:textColor="@color/primary_colors"
-            android:textSize="12sp"/>
+            android:textSize="13sp"/>
         </LinearLayout>
       </LinearLayout>
 
+      <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/z_kc_line"/>
       <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="20dp">
+        android:paddingLeft="20dp">
 
         <TextView
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_weight="5"
           android:text="@string/pickup_time"
-          android:textColor="@color/text_gray"
-          android:textSize="12sp"/>
+          android:textColor="@color/gray"
+          android:textSize="13sp"/>
 
         <TextView
           android:id="@+id/tvPickupTime"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
+          android:paddingLeft="20dp"
           android:layout_weight="1"
           android:gravity="left"
-          android:textColor="@color/black"
-          android:textSize="14sp"/>
+          android:textColor="@color/text_black"
+          android:textSize="16sp"/>
       </LinearLayout>
 
       <ImageView
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/line_gray"/>
+        android:background="@color/z_kc_line"/>
 
       <LinearLayout
         android:layout_width="match_parent"
@@ -480,53 +491,56 @@
             android:layout_height="wrap_content"
             android:layout_weight="5"
             android:text="@string/pickup_address"
-            android:textColor="@color/text_gray"
-            android:textSize="12sp"/>
+            android:textColor="@color/gray"
+            android:textSize="13sp"/>
 
           <TextView
             android:id="@+id/tvPickupAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:paddingLeft="20dp"
             android:gravity="left"
-            android:textColor="@color/black"
-            android:textSize="12sp"/>
+            android:textColor="@color/text_black"
+            android:textSize="13sp"/>
         </LinearLayout>
       </LinearLayout>
 
       <ImageView
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/line_gray"/>
+        android:background="@color/z_kc_line"/>
 
       <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="20dp">
+        android:paddingLeft="20dp">
 
         <TextView
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_weight="5"
           android:text="@string/delivery_time"
-          android:textColor="@color/text_gray"
-          android:textSize="12sp"/>
+          android:textColor="@color/gray"
+          android:textSize="13sp"/>
 
         <TextView
           android:id="@+id/tvDeliveryTime"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_weight="1"
+          android:paddingLeft="20dp"
           android:gravity="left"
-          android:textColor="@color/black"
-          android:textSize="14sp"/>
+          android:textColor="@color/text_black"
+          android:textSize="16sp"/>
       </LinearLayout>
 
       <ImageView
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/line_gray"/>
+        android:background="@color/z_kc_line"/>
 
       <LinearLayout
         android:layout_width="match_parent"
@@ -545,53 +559,56 @@
             android:layout_height="wrap_content"
             android:layout_weight="5"
             android:text="@string/delivery_address"
-            android:textColor="@color/text_gray"
-            android:textSize="12sp"/>
+            android:textColor="@color/gray"
+            android:textSize="13sp"/>
 
           <TextView
             android:id="@+id/tvDeliveryAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:paddingLeft="20dp"
             android:gravity="left"
-            android:textColor="@color/black"
-            android:textSize="12sp"/>
+            android:textColor="@color/text_black"
+            android:textSize="13sp"/>
         </LinearLayout>
       </LinearLayout>
 
       <ImageView
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/line_gray"/>
+        android:background="@color/z_kc_line"/>
 
       <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="20dp">
+        android:paddingLeft="20dp">
 
         <TextView
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_weight="5"
           android:text="@string/pay_way"
-          android:textColor="@color/text_gray"
-          android:textSize="12sp"/>
+          android:textColor="@color/gray"
+          android:textSize="13sp"/>
 
         <TextView
           android:id="@+id/tvPayWay"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_weight="1"
+          android:paddingLeft="20dp"
           android:gravity="left"
-          android:textColor="@color/black"
-          android:textSize="14sp"/>
+          android:textColor="@color/text_black"
+          android:textSize="16sp"/>
       </LinearLayout>
 
       <ImageView
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/line_gray"/>
+        android:background="@color/z_kc_line"/>
 
       <LinearLayout
         android:layout_width="match_parent"
@@ -611,8 +628,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="5"
             android:text="@string/payment_top_rate"
-            android:textColor="@color/text_gray"
-            android:textSize="12sp"/>
+            android:textColor="@color/gray"
+            android:textSize="13sp"/>
 
           <TextView
             android:id="@+id/tvFirstPay"
@@ -620,8 +637,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="left"
-            android:textColor="@color/black"
-            android:textSize="12sp"/>
+            android:paddingLeft="20dp"
+            android:textColor="@color/text_black"
+            android:textSize="13sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -636,17 +654,18 @@
             android:layout_height="wrap_content"
             android:layout_weight="5"
             android:text="@string/payment_last_rate"
-            android:textColor="@color/text_gray"
-            android:textSize="12sp"/>
+            android:textColor="@color/gray"
+            android:textSize="13sp"/>
 
           <TextView
             android:id="@+id/tvLastPay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:paddingLeft="20dp"
             android:gravity="left"
-            android:textColor="@color/black"
-            android:textSize="12sp"/>
+            android:textColor="@color/text_black"
+            android:textSize="13sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -661,8 +680,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="5"
             android:text="@string/receipt"
-            android:textColor="@color/text_gray"
-            android:textSize="12sp"/>
+            android:textColor="@color/gray"
+            android:textSize="13sp"/>
 
           <TextView
             android:id="@+id/tvReceipt"
@@ -670,15 +689,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="left"
-            android:textColor="@color/black"
-            android:textSize="12sp"/>
+            android:paddingLeft="20dp"
+            android:textColor="@color/text_black"
+            android:textSize="13sp"/>
         </LinearLayout>
       </LinearLayout>
 
       <ImageView
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/line_gray"/>
+        android:background="@color/z_kc_line"/>
 
     </LinearLayout>
   </ScrollView>
