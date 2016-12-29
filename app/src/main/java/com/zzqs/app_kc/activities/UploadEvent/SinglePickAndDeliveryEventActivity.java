@@ -88,18 +88,20 @@ public class SinglePickAndDeliveryEventActivity extends BaseUploadEventActivity 
     boolean oldOrderCountChange = false;
     boolean newOrderCountChange = false;
     //判断是否显示实收入口，实收入口和货损按钮只其中显示一个
-    if (!StringTools.isEmp(order.getOperationGoodsName())) {
-      rlActualDelivery.setVisibility(View.VISIBLE);
-      rlDamage.setVisibility(View.GONE);
-      if (!StringTools.isEmp(order.getActualGoodsId())) {
-        if (!order.getOperationGoodsCount().equals(order.getActualGoodsCount())) {
-          newOrderCountChange = true;
-        }
-      }
-    } else {
-      rlActualDelivery.setVisibility(View.GONE);
-      rlDamage.setVisibility(View.VISIBLE);
-    }
+//    if (!StringTools.isEmp(order.getOperationGoodsName())) {
+//      rlActualDelivery.setVisibility(View.VISIBLE);
+//      rlDamage.setVisibility(View.GONE);
+//      if (!StringTools.isEmp(order.getActualGoodsId())) {
+//        if (!order.getOperationGoodsCount().equals(order.getActualGoodsCount())) {
+//          newOrderCountChange = true;
+//        }
+//      }
+//    } else {
+//      rlActualDelivery.setVisibility(View.GONE);
+//      rlDamage.setVisibility(View.VISIBLE);
+//    }
+    rlActualDelivery.setVisibility(View.GONE);
+    rlDamage.setVisibility(View.VISIBLE);
 
     if (mold.equals(OrderEvent.MOLD_PICKUP)) {
       headMsg.setText(getString(R.string.view_tv_pickup));

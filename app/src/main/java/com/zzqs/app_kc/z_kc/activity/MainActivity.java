@@ -2,6 +2,8 @@ package com.zzqs.app_kc.z_kc.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -9,8 +11,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zzqs.app_kc.R;
+import com.zzqs.app_kc.activities.LaunchActivity;
+import com.zzqs.app_kc.activities.SettingActivity;
+import com.zzqs.app_kc.app.ZZQSApplication;
+import com.zzqs.app_kc.service.LocationService;
 import com.zzqs.app_kc.utils.CommonTools;
 import com.zzqs.app_kc.widgets.CircleImageView;
+import com.zzqs.app_kc.widgets.DialogView;
 import com.zzqs.app_kc.widgets.xlistView.XListView;
 import com.zzqs.app_kc.z_kc.adapter.TenderAdapter;
 import com.zzqs.app_kc.z_kc.entitiy.ErrorInfo;
@@ -45,6 +52,25 @@ public class MainActivity extends BaseActivity implements XListView.IXListViewLi
   public void initViews(Bundle savedInstanceState) {
     setContentView(R.layout.z_kc_act_main);
     cvUserPhoto = (CircleImageView) findViewById(R.id.cvUserPhoto);
+    cvUserPhoto.setOnClickListener(new MyOnClickListener() {
+      @Override
+      public void OnceOnClick(View view) {
+        DialogView.showConfirmDialog(mContext, "", "确认退出吗？", new Handler() {
+          @Override
+          public void handleMessage(Message msg) {
+            if (msg.what == DialogView.ACCEPT) {
+              stopService(new Intent(mContext, LocationService.class));
+              ZZQSApplication.getInstance().clearUser(mContext);
+              ZZQSApplication.getInstance().cleanAllActivity();
+              Intent intent = new Intent();
+              intent.setClass(getApplicationContext(), LaunchActivity.class);
+              intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);  //注意本行的FLAG设置
+              startActivity(intent);
+            }
+          }
+        });
+      }
+    });
     tvUnDealOrderNum = (TextView) findViewById(R.id.tvUnDealOrderNum);
     tvUnDealWaybillNum = (TextView) findViewById(R.id.tvUnDealWaybillNum);
     rlFindGoods = (RelativeLayout) findViewById(R.id.rlFindGoods);

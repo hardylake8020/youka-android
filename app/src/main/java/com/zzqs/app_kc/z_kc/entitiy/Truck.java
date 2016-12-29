@@ -12,7 +12,8 @@ import java.util.List;
  * Created by lance on 2016/12/4.
  */
 
-public class Car implements Parcelable {
+public class Truck implements Parcelable {
+  public static final String TRUCK_ID = "truckId";
   public static final String TRUCK = "truck";
   public static final String TRUCKS = "trucks";
   public static final String UN_USAGE = "unUsage";
@@ -24,11 +25,10 @@ public class Car implements Parcelable {
   private List<Double> location;
 
   private String driver_number;
-  private String car_photo;
+  private String truck_photo;
   private String driver_name;
   private String status;
-  private OilCard card;
-
+  private String card_id;
 
   private boolean isSelect;
 
@@ -56,12 +56,12 @@ public class Car implements Parcelable {
     this.driver_number = driver_number;
   }
 
-  public String getCar_photo() {
-    return car_photo;
+  public String getTruck_photo() {
+    return truck_photo;
   }
 
-  public void setCar_photo(String car_photo) {
-    this.car_photo = car_photo;
+  public void setTruck_photo(String truck_photo) {
+    this.truck_photo = truck_photo;
   }
 
   public String getDriver_name() {
@@ -80,13 +80,6 @@ public class Car implements Parcelable {
     this.status = status;
   }
 
-  public OilCard getCard() {
-    return card;
-  }
-
-  public void setCard(OilCard card) {
-    this.card = card;
-  }
 
   public List<Double> getLocation() {
     return location;
@@ -113,7 +106,12 @@ public class Car implements Parcelable {
     this.truck_id = truck_id;
   }
 
-  public Car() {
+  public String getCard_id() {
+    return card_id;
+  }
+
+  public void setCard_id(String card_id) {
+    this.card_id = card_id;
   }
 
 
@@ -129,36 +127,39 @@ public class Car implements Parcelable {
     dest.writeString(this.truck_type);
     dest.writeList(this.location);
     dest.writeString(this.driver_number);
-    dest.writeString(this.car_photo);
+    dest.writeString(this.truck_photo);
     dest.writeString(this.driver_name);
     dest.writeString(this.status);
-    dest.writeParcelable(this.card, flags);
+    dest.writeString(this.card_id);
     dest.writeByte(this.isSelect ? (byte) 1 : (byte) 0);
   }
 
-  protected Car(Parcel in) {
+  public Truck() {
+  }
+
+  protected Truck(Parcel in) {
     this.truck_id = in.readString();
     this.truck_number = in.readString();
     this.truck_type = in.readString();
     this.location = new ArrayList<Double>();
     in.readList(this.location, Double.class.getClassLoader());
     this.driver_number = in.readString();
-    this.car_photo = in.readString();
+    this.truck_photo = in.readString();
     this.driver_name = in.readString();
     this.status = in.readString();
-    this.card = in.readParcelable(OilCard.class.getClassLoader());
+    this.card_id = in.readString();
     this.isSelect = in.readByte() != 0;
   }
 
-  public static final Creator<Car> CREATOR = new Creator<Car>() {
+  public static final Creator<Truck> CREATOR = new Creator<Truck>() {
     @Override
-    public Car createFromParcel(Parcel source) {
-      return new Car(source);
+    public Truck createFromParcel(Parcel source) {
+      return new Truck(source);
     }
 
     @Override
-    public Car[] newArray(int size) {
-      return new Car[size];
+    public Truck[] newArray(int size) {
+      return new Truck[size];
     }
   };
 }

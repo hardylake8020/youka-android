@@ -7,6 +7,7 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.core.SearchResult;
@@ -18,23 +19,31 @@ import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.zzqs.app_kc.R;
 import com.zzqs.app_kc.utils.CommonFiled;
-import com.zzqs.app_kc.z_kc.entitiy.Car;
+import com.zzqs.app_kc.utils.CommonTools;
+import com.zzqs.app_kc.z_kc.entitiy.ErrorInfo;
+import com.zzqs.app_kc.z_kc.entitiy.Truck;
 import com.zzqs.app_kc.z_kc.entitiy.OilCard;
 import com.zzqs.app_kc.z_kc.listener.MyOnClickListener;
+import com.zzqs.app_kc.z_kc.network.OilCardApiImpl;
+import com.zzqs.app_kc.z_kc.network.TruckApiImpl;
+
+import rx.Subscriber;
 
 /**
  * Created by lance on 2016/12/6.
  */
 
-public class CarDetailActivity extends BaseActivity {
+public class TruckDetailActivity extends BaseActivity {
   TextView tvLeft, tvTitle, tvRight, tvPlateNumber, tvCarType, tvOilCard, tvDriverName, tvDriverPhone, tvCarStatus, tvCarLocation;
   SimpleDraweeView sdCarPhoto;
-  private Car car;
+  private Truck truck;
+  private String truckId;
+  private OilCard card;
 
   @Override
   public void initVariables() {
-    car = getIntent().getParcelableExtra(Car.TRUCK);
-    if (car == null) {
+    truckId = getIntent().getStringExtra(Truck.TRUCK_ID);
+    if (TextUtils.isEmpty(truckId)) {
       finish();
     }
   }
@@ -62,33 +71,85 @@ public class CarDetailActivity extends BaseActivity {
       }
     });
     tvPlateNumber = (TextView) findViewById(R.id.tvPlateNumber);
-    tvPlateNumber.setText(car.getTruck_number());
     tvCarType = (TextView) findViewById(R.id.tvCarType);
-    tvCarType.setText(car.getTruck_type());
     tvOilCard = (TextView) findViewById(R.id.tvOilCard);
     tvDriverName = (TextView) findViewById(R.id.tvDriverName);
-    tvDriverName.setText(car.getDriver_name());
     tvDriverPhone = (TextView) findViewById(R.id.tvDriverPhone);
-    tvDriverPhone.setText(car.getDriver_number());
     tvCarStatus = (TextView) findViewById(R.id.tvCarStatus);
-//    if (car.getStatus().equals(Car.UN_USAGE)) {
-//      tvCarStatus.setText(R.string.un_transport);
-//    } else if (car.getStatus().equals(Car.USAGE)) {
-//      tvCarStatus.setText(R.string.transporting);
-//    }
-    OilCard card = car.getCard();
+    tvCarLocation = (TextView) findViewById(R.id.tvCarLocation);
+    sdCarPhoto = (SimpleDraweeView) findViewById(R.id.sdCarPhoto);
+  }
+
+
+  @Override
+  public void loadData() {
+      safePd.show();
+      TruckApiImpl.getTruckApiImpl().getTuckById(CommonTools.getToken(this), truckId, new Subscriber<ErrorInfo>() {
+        @Override
+        public void onCompleted() {
+
+        }
+
+        @Override
+        public void onError(Throwable e) {
+          e.printStackTrace();
+          safePd.dismiss();
+        }
+
+        @Override
+        public void onNext(ErrorInfo errorInfo) {
+          if (errorInfo.getType().equals(ErrorInfo.SUCCESS)) {
+            truck = (Truck) errorInfo.object;
+            initViewData();
+            getOilCard();
+          } else {
+            safePd.dismiss();
+            Toast.makeText(mContext, errorInfo.getMessage(), Toast.LENGTH_SHORT).show();
+          }
+        }
+      });
+  }
+
+  private void getOilCard() {
+    OilCardApiImpl.getOilCardApiImpl().getCardById(CommonTools.getToken(this), truck.getCard_id(), new Subscriber<ErrorInfo>() {
+      @Override
+      public void onCompleted() {
+
+      }
+
+      @Override
+      public void onError(Throwable e) {
+        e.printStackTrace();
+        safePd.dismiss();
+      }
+
+      @Override
+      public void onNext(ErrorInfo errorInfo) {
+        safePd.dismiss();
+        if (errorInfo.getType().equals(ErrorInfo.SUCCESS)) {
+          card = (OilCard) errorInfo.object;
+          initViewData();
+        } else {
+          Toast.makeText(mContext, errorInfo.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+      }
+    });
+  }
+
+  private void initViewData() {
+    tvPlateNumber.setText(truck.getTruck_number());
+    tvDriverName.setText(truck.getDriver_name());
+    tvDriverPhone.setText(truck.getDriver_number());
+    tvCarType.setText(truck.getTruck_type());
     if (card != null && !TextUtils.isEmpty(card.getNumber())) {
       tvOilCard.setText(card.getNumber());
       tvCarStatus.setText(R.string.transporting);
-    }else{
+    } else {
       tvCarStatus.setText(R.string.un_transport);
       tvCarStatus.setText(R.string.un_transport);
     }
-    tvCarLocation = (TextView) findViewById(R.id.tvCarLocation);
-
-    sdCarPhoto = (SimpleDraweeView) findViewById(R.id.sdCarPhoto);
-    if (!TextUtils.isEmpty(car.getCar_photo())) {
-      Uri uri = Uri.parse(CommonFiled.QINIU_ZOOM + car.getCar_photo());
+    if (!TextUtils.isEmpty(truck.getTruck_photo())) {
+      Uri uri = Uri.parse(CommonFiled.QINIU_ZOOM + truck.getTruck_photo());
       sdCarPhoto.setImageURI(uri);
     }
     getCarLocationInfo();
@@ -118,7 +179,7 @@ public class CarDetailActivity extends BaseActivity {
   private GeoCoder mSearch;
 
   private void getCarLocationInfo() {
-    if (car.getLocation() != null && car.getLocation().size() == 2) {
+    if (truck.getLocation() != null && truck.getLocation().size() == 2) {
       mSearch = GeoCoder.newInstance();
       OnGetGeoCoderResultListener listener = new OnGetGeoCoderResultListener() {
         public void onGetGeoCodeResult(GeoCodeResult result) {
@@ -145,13 +206,9 @@ public class CarDetailActivity extends BaseActivity {
         }
       };
       mSearch.setOnGetGeoCodeResultListener(listener);
-      LatLng latLng = new LatLng(car.getLocation().get(1), car.getLocation().get(0));
+      LatLng latLng = new LatLng(truck.getLocation().get(1), truck.getLocation().get(0));
       mSearch.reverseGeoCode(new ReverseGeoCodeOption().location(latLng));
     }
   }
 
-  @Override
-  public void loadData() {
-
-  }
 }

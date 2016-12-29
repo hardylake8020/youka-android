@@ -13,10 +13,10 @@ import android.widget.Toast;
 import com.zzqs.app_kc.R;
 import com.zzqs.app_kc.utils.CommonTools;
 import com.zzqs.app_kc.utils.StringTools;
-import com.zzqs.app_kc.z_kc.entitiy.Car;
+import com.zzqs.app_kc.z_kc.entitiy.Truck;
 import com.zzqs.app_kc.z_kc.entitiy.ErrorInfo;
 import com.zzqs.app_kc.z_kc.listener.MyOnClickListener;
-import com.zzqs.app_kc.z_kc.network.CarApiImpl;
+import com.zzqs.app_kc.z_kc.network.TruckApiImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ import rx.Subscriber;
  * Created by lance on 2016/12/24.
  */
 
-public class AddCarActivity extends BaseActivity {
+public class AddTruckActivity extends BaseActivity {
   TextView tvLeft, tvTitle, tvAddCar;
   EditText etCarNumber, etDriverPhone;
   Spinner spinnerTruckType;
@@ -99,7 +99,7 @@ public class AddCarActivity extends BaseActivity {
     String truckType = spinnerTruckType.getSelectedItem().toString();
     System.out.println(carNumber + "--" + driverPhone + "--" + truckType);
     safePd.show();
-    CarApiImpl.getCarApiImpl().createCar(CommonTools.getToken(this), driverPhone, carNumber, truckType, new Subscriber<ErrorInfo>() {
+    TruckApiImpl.getTruckApiImpl().createCar(CommonTools.getToken(this), driverPhone, carNumber, truckType, new Subscriber<ErrorInfo>() {
       @Override
       public void onCompleted() {
 
@@ -115,11 +115,11 @@ public class AddCarActivity extends BaseActivity {
       public void onNext(ErrorInfo errorInfo) {
         safePd.dismiss();
         if (errorInfo.getType().equals(ErrorInfo.SUCCESS)) {
-          Car car = (Car) errorInfo.object;
-          System.out.println(car.toString());
+          Truck truck = (Truck) errorInfo.object;
+          System.out.println(truck.toString());
           Toast.makeText(mContext, R.string.add_success, Toast.LENGTH_LONG).show();
           Intent data = new Intent();
-          data.putExtra(Car.TRUCK, car);
+          data.putExtra(Truck.TRUCK, truck);
           setResult(RESULT_OK, data);
           finish();
         } else {

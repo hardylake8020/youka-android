@@ -32,11 +32,11 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             //shrinkResources false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.cfg'
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
-            buildConfigField "String", "BASE_URL", "\"http://www.zhuzhu56.com\""
+            buildConfigField "String", "BASE_URL", "\"http://183.131.76.178:3002\""
         }
         debug {
             minifyEnabled false

@@ -7,7 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
-import com.zzqs.app_kc.z_kc.entitiy.Car;
+import com.zzqs.app_kc.z_kc.entitiy.Truck;
 import com.zzqs.app_kc.z_kc.entitiy.ErrorInfo;
 
 import org.json.JSONException;
@@ -28,18 +28,18 @@ import rx.schedulers.Schedulers;
  * Class name : OilCardApiImpl
  * Description :
  */
-public class CarApiImpl {
-  private static CarApiImpl carApiImpl;
-  private static CarApi carApi;
+public class TruckApiImpl {
+  private static TruckApiImpl truckApiImpl;
+  private static TruckApi truckApi;
   private static Gson gson;
 
-  public static CarApiImpl getCarApiImpl() {
-    if (carApiImpl == null) {
-      carApi = NetWork.getRetrofit().create(CarApi.class);
+  public static TruckApiImpl getTruckApiImpl() {
+    if (truckApiImpl == null) {
+      truckApi = NetWork.getRetrofit().create(TruckApi.class);
       gson = NetWork.getGson();
-      carApiImpl = new CarApiImpl();
+      truckApiImpl = new TruckApiImpl();
     }
-    return carApiImpl;
+    return truckApiImpl;
   }
 
   public void createCar(@NonNull String accessToken, @NonNull String driverPhone, @NonNull String carNumber, @NonNull String truckType, Subscriber<ErrorInfo> subscriber) {
@@ -53,7 +53,7 @@ public class CarApiImpl {
       jsonObject.put("truck_info", truckInfo);
 
       RequestBody body = okhttp3.RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), jsonObject.toString());
-      carApi.createCar(body)
+      truckApi.createCar(body)
           .map(new Func1<JsonObject, ErrorInfo>() {
             @Override
             public ErrorInfo call(JsonObject jsonObject) {
@@ -64,8 +64,8 @@ public class CarApiImpl {
                 errorInfo = gson.fromJson(errObj, ErrorInfo.class);
               } else {
                 errorInfo.setType(ErrorInfo.SUCCESS);
-                Car car = gson.fromJson(jsonObject, Car.class);
-                errorInfo.object = car;
+                Truck truck = gson.fromJson(jsonObject, Truck.class);
+                errorInfo.object = truck;
               }
               return errorInfo;
             }
@@ -80,7 +80,7 @@ public class CarApiImpl {
   }
 
   public void getListByDriver(@NonNull String accessToken, Subscriber<ErrorInfo> subscriber) {
-    carApi.getListByDriver(accessToken)
+    truckApi.getListByDriver(accessToken)
         .map(new Func1<JsonObject, ErrorInfo>() {
           @Override
           public ErrorInfo call(JsonObject jsonObject) {
@@ -91,11 +91,35 @@ public class CarApiImpl {
               errorInfo = gson.fromJson(errObj, ErrorInfo.class);
             } else {
               errorInfo.setType(ErrorInfo.SUCCESS);
-              JsonArray jsonArray = jsonObject.getAsJsonArray(Car.TRUCKS);
-              Type type = new TypeToken<List<Car>>() {
+              JsonArray jsonArray = jsonObject.getAsJsonArray(Truck.TRUCKS);
+              Type type = new TypeToken<List<Truck>>() {
               }.getType();
               List<Car> list = gson.fromJson(jsonArray, type);
               errorInfo.object = list;
+            }
+            return errorInfo;
+          }
+        })
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .throttleFirst(1000, TimeUnit.MILLISECONDS)
+        .subscribe(subscriber);
+  }
+
+  public void getTuckById(@NonNull String accessToken, @NonNull String truckId, Subscriber<ErrorInfo> subscriber) {
+    truckApi.getTruckById(accessToken, truckId)
+        .map(new Func1<JsonObject, ErrorInfo>() {
+          @Override
+          public ErrorInfo call(JsonObject jsonObject) {
+            ErrorInfo errorInfo = new ErrorInfo();
+            if (jsonObject.has(errorInfo.ERR)) {
+              Log.e("getTuckById", jsonObject.toString());
+              JsonObject errObj = jsonObject.getAsJsonObject(errorInfo.ERR);
+              errorInfo = gson.fromJson(errObj, ErrorInfo.class);
+            } else {
+              errorInfo.setType(ErrorInfo.SUCCESS);
+              Truck truck = gson.fromJson(jsonObject, Truck.class);
+              errorInfo.object = truck;
             }
             return errorInfo;
           }
