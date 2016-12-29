@@ -15,16 +15,21 @@ import rx.Observable;
  * Description :油卡接口
  */
 public interface OilCardApi {
-    /**
-     * 获取油卡列表
-     */
-    @FormUrlEncoded
-    @POST("/tender/driver/card/getListByDriver")
-    Observable<JsonObject> getOilCardListByDriver(@Field("access_token") String accessToken);
+  /**
+   * 获取油卡列表
+   */
+  @FormUrlEncoded
+  @POST("/tender/driver/card/getListByDriver")
+  Observable<JsonObject> getOilCardListByDriver(@Field("access_token") String accessToken);
 
-    /**
-     * 添加油卡
-     */
-    @POST("/tender/driver/card/create")
-    Observable<JsonObject> addOilCardByDriver(@Body RequestBody requestBody);
+  /**
+   * 添加油卡
+   */
+  @POST("/tender/driver/card/create")
+  Observable<JsonObject> addOilCardByDriver(@Body RequestBody requestBody);
+
+
+  @FormUrlEncoded
+  @POST("/tender/driver/card/getById")
+  Observable<JsonObject> getCardById(@Field("access_token") String accessToken, @Field("card_id") String cardId);
 }

@@ -97,7 +97,6 @@
 -keep class com.mcxiaoke.** {*;}
 -keep class com.nostra13.** {*;}
 -keep class in.srain.** {*;}
--keep class com.loopj.** {*;}
 -keepattributes Signature
 -dontwarn com.jcraft.jzlib.**
 -keep class com.jcraft.jzlib.**  { *;}
@@ -143,8 +142,8 @@
 -dontwarn com.testin.agent.**
 -keep class com.testin.agent.** {*;}
 
--dontwarn com.qiniu.android.**
--keep class com.qiniu.android.**{*;}
+-keep class com.qiniu.**{*;}
+-keep class com.qiniu.**{public <init>();}
 -keepattributes SourceFile, LineNumberTable
 
 -dontshrink
@@ -187,3 +186,20 @@
 -keep class com.squareup.okhttp.** { *;}
 -dontwarn okio.**
 #===================================
+-dontwarn net.poemcode.**
+-keep class com.squareup.okhttp3.** { *; }
+-keep interface com.squareup.okhttp3.** { *; }
+-dontwarn com.squareup.okhttp3.**
+-keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
+   long producerIndex;
+   long consumerIndex;
+}
+
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
+    rx.internal.util.atomic.LinkedQueueNode producerNode;
+}
+
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
+    rx.internal.util.atomic.LinkedQueueNode consumerNode;
+}
+

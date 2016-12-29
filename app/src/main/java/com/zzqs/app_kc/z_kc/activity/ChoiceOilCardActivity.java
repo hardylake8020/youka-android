@@ -16,7 +16,7 @@ import com.zzqs.app_kc.utils.CommonTools;
 import com.zzqs.app_kc.widgets.DialogView;
 import com.zzqs.app_kc.widgets.xlistView.XListView;
 import com.zzqs.app_kc.z_kc.adapter.OilCardAdapter;
-import com.zzqs.app_kc.z_kc.entitiy.Car;
+import com.zzqs.app_kc.z_kc.entitiy.Truck;
 import com.zzqs.app_kc.z_kc.entitiy.ErrorInfo;
 import com.zzqs.app_kc.z_kc.entitiy.OilCard;
 import com.zzqs.app_kc.z_kc.entitiy.Tender;
@@ -42,13 +42,13 @@ public class ChoiceOilCardActivity extends BaseActivity implements XListView.IXL
   private XListView lvOilCards;
   private List<OilCard> oilCards;
   private OilCardAdapter oilCardAdapter;
-  private Car car;
+  private Truck truck;
   private Tender tender;
 
   @Override
   public void initVariables() {
     oilCards = new ArrayList<>();
-    car = getIntent().getParcelableExtra("car");
+    truck = getIntent().getParcelableExtra("truck");
     tender = getIntent().getParcelableExtra("tender");
   }
 
@@ -184,13 +184,13 @@ public class ChoiceOilCardActivity extends BaseActivity implements XListView.IXL
   }
 
   private void assginDriver(final OilCard card) {
-    DialogView.showConfirmDialog(this, car.getTruck_number(), getString(R.string.distribution_tender_confirm_message, card.getNumber()), new Handler() {
+    DialogView.showConfirmDialog(this, truck.getTruck_number(), getString(R.string.distribution_tender_confirm_message, card.getNumber()), new Handler() {
       @Override
       public void handleMessage(Message msg) {
         super.handleMessage(msg);
         if (msg.what == DialogView.ACCEPT) {
           safePd.show();
-          DriverApiImpl.getDriverApiImpl().assginDriver(CommonTools.getToken(mContext), tender.getTender_id(), car.getTruck_id(), card.getCard_id(), new Subscriber<ErrorInfo>() {
+          DriverApiImpl.getDriverApiImpl().assginDriver(CommonTools.getToken(mContext), tender.getTender_id(), truck.getTruck_id(), card.getCard_id(), new Subscriber<ErrorInfo>() {
             @Override
             public void onCompleted() {
 

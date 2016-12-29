@@ -38,4 +38,5 @@
     <color name="gray">#999999</color>
     <color name="red_5">#ef614b</color>
     <color name="tender_primary_color">#262C37</color>
+    <color name="z_kc_line">#cccccc</color>
 </resources>

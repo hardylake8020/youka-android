@@ -804,17 +804,17 @@ public abstract class BaseUploadEventActivity extends BaseActivity implements Vi
                 startActivityForResult(intent, MipcaActivityCapture.SCAN_CODE);
                 break;
             case R.id.rl_actualDelivery:
-                intent = new Intent(this, ActualDeliveryActivity.class);
-                String type;
-                if (order.getStatus().equals(Order.UN_PICKUP_ENTRANCE) || order.getStatus().equals(Order.UN_PICKUP)) {
-                    type = OrderEvent.MOLD_PICKUP;
-                } else {
-                    type = OrderEvent.MOLD_DELIVERY;
-                }
-                intent.putExtra(BaseUploadEventActivity.EVENT_TYPE, type);
-                intent.putExtra(Order.ORDER_ID, order.getOrderId());
-                intent.putExtra(OrderEvent.ORDER_EVENT_ID, orderEvent.get_id());
-                startActivityForResult(intent, ActualDeliveryActivity.ACTUAL);
+//                intent = new Intent(this, ActualDeliveryActivity.class);
+//                String type;
+//                if (order.getStatus().equals(Order.UN_PICKUP_ENTRANCE) || order.getStatus().equals(Order.UN_PICKUP)) {
+//                    type = OrderEvent.MOLD_PICKUP;
+//                } else {
+//                    type = OrderEvent.MOLD_DELIVERY;
+//                }
+//                intent.putExtra(BaseUploadEventActivity.EVENT_TYPE, type);
+//                intent.putExtra(Order.ORDER_ID, order.getOrderId());
+//                intent.putExtra(OrderEvent.ORDER_EVENT_ID, orderEvent.get_id());
+//                startActivityForResult(intent, ActualDeliveryActivity.ACTUAL);
                 break;
             case R.id.head_back:
                 isUpload = false;
@@ -832,24 +832,24 @@ public abstract class BaseUploadEventActivity extends BaseActivity implements Vi
                         return;
                     }
                 }
-                if (!StringTools.isEmp(order.getOperationGoodsName())) {
-                    if (mold.equals(OrderEvent.MOLD_PICKUP)) {
-                        if (!StringTools.isEmp(order.getPickupMustConfirmDetail()) && order.getPickupMustConfirmDetail().equals("true")) {
-                            if (order.getCommitPickupConfigDetail().equals("false")) {
-                                Toast.makeText(BaseUploadEventActivity.this, getString(R.string.prompt_must_pickup_actual), Toast.LENGTH_SHORT).show();
-                                return;
-                            }
-                        }
-                    }
-                    if (mold.equals(OrderEvent.MOLD_DELIVERY)) {
-                        if (!StringTools.isEmp(order.getDeliveryMustConfirmDetail()) && order.getDeliveryMustConfirmDetail().equals("true")) {
-                            if (order.getCommitDeliveryConfigDetail().equals("false")) {
-                                Toast.makeText(BaseUploadEventActivity.this, getString(R.string.prompt_must_delivery_actual), Toast.LENGTH_SHORT).show();
-                                return;
-                            }
-                        }
-                    }
-                }
+//                if (!StringTools.isEmp(order.getOperationGoodsName())) {
+//                    if (mold.equals(OrderEvent.MOLD_PICKUP)) {
+//                        if (!StringTools.isEmp(order.getPickupMustConfirmDetail()) && order.getPickupMustConfirmDetail().equals("true")) {
+//                            if (order.getCommitPickupConfigDetail().equals("false")) {
+//                                Toast.makeText(BaseUploadEventActivity.this, getString(R.string.prompt_must_pickup_actual), Toast.LENGTH_SHORT).show();
+//                                return;
+//                            }
+//                        }
+//                    }
+//                    if (mold.equals(OrderEvent.MOLD_DELIVERY)) {
+//                        if (!StringTools.isEmp(order.getDeliveryMustConfirmDetail()) && order.getDeliveryMustConfirmDetail().equals("true")) {
+//                            if (order.getCommitDeliveryConfigDetail().equals("false")) {
+//                                Toast.makeText(BaseUploadEventActivity.this, getString(R.string.prompt_must_delivery_actual), Toast.LENGTH_SHORT).show();
+//                                return;
+//                            }
+//                        }
+//                    }
+//                }
                 isUpload = true;
                 lastTrace = LocationService.lastTrace;
                 submit();
