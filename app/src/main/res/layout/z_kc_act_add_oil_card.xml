@@ -20,17 +20,24 @@
             android:layout_marginRight="15dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/login_edit_normal"
-            android:hint="请输入卡号"
+            android:hint="请输入油卡卡号"
             android:lines="1"
             android:textColorHint="@color/hint"
             android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:text="请选择油卡类型：" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
             android:background="@drawable/login_edit_normal">
 
             <Spinner
@@ -49,7 +56,7 @@
         android:background="@color/green"
         android:gravity="center"
         android:padding="10dp"
-        android:text="@string/add_oil_card"
+        android:text="@string/save"
         android:textColor="@android:color/white"
         android:textSize="18sp" />
 </RelativeLayout>
