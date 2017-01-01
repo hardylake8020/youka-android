@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-              android:background="@color/bg_gray"
+    android:background="@color/bg_gray"
     android:orientation="vertical">
 
     <include layout="@layout/z_kc_default_head" />
@@ -16,8 +16,8 @@
 
         <ImageView
             android:id="@+id/ivSearch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true"
             android:background="@drawable/z_kc_ic_search" />
@@ -39,15 +39,19 @@
                 android:paddingBottom="20dp"
                 android:paddingTop="20dp"
                 android:textColorHint="@color/click_gray"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
-            <ImageView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@drawable/z_kc_ic_arrow"
-                android:gravity="center" />
-
+                android:gravity="center"
+                android:text="至" />
+            <!--<ImageView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:background="@drawable/z_kc_ic_arrow"-->
+            <!--android:gravity="center" />-->
             <EditText
                 android:id="@+id/etEnd"
                 android:layout_width="match_parent"
@@ -59,14 +63,14 @@
                 android:paddingBottom="20dp"
                 android:paddingTop="20dp"
                 android:textColorHint="@color/click_gray"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
         </LinearLayout>
     </RelativeLayout>
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/line_gray" />
+        android:background="@color/hint" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -107,13 +111,13 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/line_gray" />
+        android:background="@color/hint" />
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:layout_marginTop="10dp"
-        android:background="@color/line_gray" />
+        android:background="@color/hint" />
 
     <com.zzqs.app_kc.widgets.xlistView.XListView
         android:id="@+id/lvTenders"
