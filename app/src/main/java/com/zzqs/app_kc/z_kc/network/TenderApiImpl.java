@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
+import com.zzqs.app_kc.z_kc.entitiy.CountNumber;
 import com.zzqs.app_kc.z_kc.entitiy.ErrorInfo;
 import com.zzqs.app_kc.z_kc.entitiy.Tender;
 import com.zzqs.app_kc.z_kc.entitiy.TenderEvent;
@@ -132,6 +133,30 @@ public class TenderApiImpl {
                             }.getType();
                             List<Tender> list = gson.fromJson(jsonArray, type);
                             errorInfo.object = list;
+                        }
+                        return errorInfo;
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .throttleFirst(1000, TimeUnit.MILLISECONDS)
+                .subscribe(subscriber);
+    }
+
+    public void getDashboard(@NonNull String accessToken, Subscriber<ErrorInfo> subscriber) {
+        tenderApi.getDashboard(accessToken)
+                .map(new Func1<JsonObject, ErrorInfo>() {
+                    @Override
+                    public ErrorInfo call(JsonObject jsonObject) {
+                        ErrorInfo errorInfo = new ErrorInfo();
+                        if (jsonObject.has(errorInfo.ERR)) {
+                            Log.e("getDashboard", jsonObject.toString());
+                            JsonObject errObj = jsonObject.getAsJsonObject(errorInfo.ERR);
+                            errorInfo = gson.fromJson(errObj, ErrorInfo.class);
+                        } else {
+                            errorInfo.setType(ErrorInfo.SUCCESS);
+                            CountNumber countNumber = gson.fromJson(jsonObject, CountNumber.class);
+                            errorInfo.object = countNumber;
                         }
                         return errorInfo;
                     }

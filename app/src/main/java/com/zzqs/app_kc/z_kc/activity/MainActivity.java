@@ -19,6 +19,7 @@ import com.zzqs.app_kc.widgets.CircleImageView;
 import com.zzqs.app_kc.widgets.DialogView;
 import com.zzqs.app_kc.widgets.xlistView.XListView;
 import com.zzqs.app_kc.z_kc.adapter.TenderAdapter;
+import com.zzqs.app_kc.z_kc.entitiy.CountNumber;
 import com.zzqs.app_kc.z_kc.entitiy.ErrorInfo;
 import com.zzqs.app_kc.z_kc.entitiy.Tender;
 import com.zzqs.app_kc.z_kc.listener.MyOnClickListener;
@@ -92,7 +93,9 @@ public class MainActivity extends BaseActivity implements XListView.IXListViewLi
         rlMyWallet.setOnClickListener(new MyOnClickListener() {
             @Override
             public void OnceOnClick(View view) {
-                startActivity(new Intent(mContext, MyWalletActivity.class));
+//                startActivity(new Intent(mContext, MyWalletActivity.class));
+                startActivity(new Intent(mContext, MapViewActivity.class));
+
             }
         });
         rlMyOilCard = (RelativeLayout) findViewById(R.id.rlMyOilCard);
@@ -129,7 +132,15 @@ public class MainActivity extends BaseActivity implements XListView.IXListViewLi
 
     @Override
     public void loadData() {
+//        getTenders(true);
+//        getDashboard();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         getTenders(true);
+        getDashboard();
     }
 
     @Override
@@ -173,6 +184,28 @@ public class MainActivity extends BaseActivity implements XListView.IXListViewLi
                     Toast.makeText(mContext, errorInfo.getType(), Toast.LENGTH_LONG).show();
                 }
                 onLoad();
+            }
+        });
+    }
+
+    private void getDashboard() {
+        TenderApiImpl.getUserApiImpl().getDashboard(CommonTools.getToken(this), new Subscriber<ErrorInfo>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onNext(ErrorInfo errorInfo) {
+                CountNumber countNumber = (CountNumber) errorInfo.object;
+                tvUnDealOrderNum.setText(countNumber.getTender_count() + "");
+                tvUnDealWaybillNum.setText(countNumber.getOrder_count() + "");
+
             }
         });
     }

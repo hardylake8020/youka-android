@@ -1,6 +1,8 @@
 package com.zzqs.app_kc.z_kc.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.View;
@@ -10,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zzqs.app_kc.R;
-import com.zzqs.app_kc.service.LocationService;
+import com.zzqs.app_kc.net.Connectivities;
 import com.zzqs.app_kc.utils.CommonTools;
 import com.zzqs.app_kc.widgets.xlistView.XListView;
 import com.zzqs.app_kc.z_kc.adapter.TenderAdapter;
@@ -18,6 +20,7 @@ import com.zzqs.app_kc.z_kc.entitiy.ErrorInfo;
 import com.zzqs.app_kc.z_kc.entitiy.Tender;
 import com.zzqs.app_kc.z_kc.listener.MyOnClickListener;
 import com.zzqs.app_kc.z_kc.network.TenderApiImpl;
+import com.zzqs.app_kc.z_kc.tool.LocationTool;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,13 +43,30 @@ public class FindGoodsActivity extends BaseActivity implements XListView.IXListV
     private static final int ALL = 1;
     private static final int BIDDING = 2;
     private static final int GRAB = 3;
-    private String locationCity;
     private String currentType = "";
+    private LocationTool locationTool;
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case LocationTool.LOCATION_CHANGED:
+                    locationTool.locationStop();
+                    if (!TextUtils.isEmpty(locationTool.getCity())) {
+                        etStart.setText(locationTool.getCity());
+                    }
+                    getTenders(true, locationTool.getCity(), "", "");
+                    break;
+            }
+        }
+    };
 
     @Override
     public void initVariables() {
         tenderList = new ArrayList<>();
-        locationCity = LocationService.getCityName();
+        locationTool = new LocationTool(this);
+        locationTool.enableLocationListener(handler);
     }
 
     @Override
@@ -85,9 +105,6 @@ public class FindGoodsActivity extends BaseActivity implements XListView.IXListV
             }
         });
         etStart = (EditText) findViewById(R.id.etStart);
-        if (!TextUtils.isEmpty(locationCity)) {
-            etStart.setText(locationCity);
-        }
         etEnd = (EditText) findViewById(R.id.etEnd);
         lvTenders = (XListView) findViewById(R.id.lvTenders);
         lvTenders.setPullRefreshEnable(true);
@@ -108,7 +125,12 @@ public class FindGoodsActivity extends BaseActivity implements XListView.IXListV
 
     @Override
     public void loadData() {
-        getTenders(true, locationCity, "", "");
+        if (!Connectivities.isGpsConnected(this)) {
+            Toast.makeText(this, getString(R.string.prompt_unable_get_location_1), Toast.LENGTH_LONG).show();
+            getTenders(true, "", "", "");
+        } else {
+            locationTool.locationStart();
+        }
     }
 
     @Override
@@ -172,7 +194,7 @@ public class FindGoodsActivity extends BaseActivity implements XListView.IXListV
         if (!isRefresh) {
             count = tenderList.size();
         }
-        safePd.setMessage(getString(R.string.grabbing));
+        safePd.setMessage("搜索中...");
         safePd.show();
         TenderApiImpl.getUserApiImpl().getUnStartedListByDriver(CommonTools.getToken(this), count, 10, pickUpAddress, deliveryAddress, tenderType, new Subscriber<ErrorInfo>() {
             @Override

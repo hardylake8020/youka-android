@@ -39,4 +39,12 @@ public interface TenderApi {
     @FormUrlEncoded
     @POST("/tender/driver/transportevent")
     Observable<JsonObject> getTransportEvents(@Field("access_token") String accessToken, @Field("tender_id") String tenderId);
+
+    /**
+     * 获取首页订单和运单统计
+     */
+    @FormUrlEncoded
+    @POST("/tender/driver/dashboard")
+    Observable<JsonObject> getDashboard(@Field("access_token") String accessToken);
+
 }
