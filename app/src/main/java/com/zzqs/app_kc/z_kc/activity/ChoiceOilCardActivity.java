@@ -184,7 +184,7 @@ public class ChoiceOilCardActivity extends BaseActivity implements XListView.IXL
   }
 
   private void assginDriver(final OilCard card) {
-    DialogView.showConfirmDialog(this, truck.getTruck_number(), getString(R.string.distribution_tender_confirm_message, card.getNumber()), new Handler() {
+    DialogView.showConfirmDialog(this, truck.getTruck_number(), getString(R.string.distribution_tender_confirm_message, card.getNumber()),true, new Handler() {
       @Override
       public void handleMessage(Message msg) {
         super.handleMessage(msg);

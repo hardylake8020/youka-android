@@ -25,55 +25,57 @@ public class SQLHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.beginTransaction();
-        switch (oldVersion) {
-            case 18:
-            case 19:
-                updateDatabase18to20(db);
-            case 20:
-                updateDatabase20to21(db);
-            case 21:
-                updateDatabase21to22(db);
-            case 22:
-                updateDatabase22to23(db);
-            case 23:
-                updateDatabase23to24(db);
-            case 24:
-                updateDatabase24to25(db);
-            case 25:
-                updateDatabase25to26(db);
-            case 26:
-                updateDatabase26to27(db);
-            case 27:
-                updateDatabase27to28(db);
-            case 28:
-                updateDatabase28to29(db);
-            case 29:
-                updateDatabase29to30(db);
-            case 30:
-                updateDatabase30to31(db);
-            case 31:
-                updateDatabase31to32(db);
-            case 32:
-                updateDatabase32to33(db);
-            case 33:
-                updateDataBase33to34(db);
-            case 34:
-                updateDataBase34to35(db);
-            case 35:
-                updateDataBase35to36(db);
-            case 36:
-                updateDataBase36to37(db);
-                break;
-            default:
-                if (oldVersion < 18) {
-                    DBManager.dropTablesByClasses(db, modelClasses);
-                    onCreate(db);
-                }
-                break;
-        }
-        db.setTransactionSuccessful();
-        db.endTransaction();
+//        db.beginTransaction();
+//        switch (oldVersion) {
+//            case 18:
+//            case 19:
+//                updateDatabase18to20(db);
+//            case 20:
+//                updateDatabase20to21(db);
+//            case 21:
+//                updateDatabase21to22(db);
+//            case 22:
+//                updateDatabase22to23(db);
+//            case 23:
+//                updateDatabase23to24(db);
+//            case 24:
+//                updateDatabase24to25(db);
+//            case 25:
+//                updateDatabase25to26(db);
+//            case 26:
+//                updateDatabase26to27(db);
+//            case 27:
+//                updateDatabase27to28(db);
+//            case 28:
+//                updateDatabase28to29(db);
+//            case 29:
+//                updateDatabase29to30(db);
+//            case 30:
+//                updateDatabase30to31(db);
+//            case 31:
+//                updateDatabase31to32(db);
+//            case 32:
+//                updateDatabase32to33(db);
+//            case 33:
+//                updateDataBase33to34(db);
+//            case 34:
+//                updateDataBase34to35(db);
+//            case 35:
+//                updateDataBase35to36(db);
+//            case 36:
+//                updateDataBase36to37(db);
+//                break;
+//            case 37:
+//                updateDataBase37to38(db);
+//            default:
+//                if (oldVersion < 18) {
+//                    DBManager.dropTablesByClasses(db, modelClasses);
+//                    onCreate(db);
+//                }
+//                break;
+//        }
+//        db.setTransactionSuccessful();
+//        db.endTransaction();
     }
 
     private void updateDatabase18to20(SQLiteDatabase db) {
@@ -184,5 +186,9 @@ public class SQLHelper extends SQLiteOpenHelper {
 
     private void updateDataBase36to37(SQLiteDatabase db) {
         db.execSQL("alter table event_file ADD big_file_path string");
+    }
+
+    private void updateDataBase37to38(SQLiteDatabase db) {
+        db.execSQL("alter table user ADD driver_id string");
     }
 }

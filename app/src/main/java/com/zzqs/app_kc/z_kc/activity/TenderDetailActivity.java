@@ -5,7 +5,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.content.ContextCompat;
+import android.text.Editable;
+import android.text.Html;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -13,11 +16,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zzqs.app_kc.R;
+import com.zzqs.app_kc.app.ZZQSApplication;
+import com.zzqs.app_kc.entity.User;
 import com.zzqs.app_kc.utils.CommonTools;
+import com.zzqs.app_kc.utils.StringTools;
 import com.zzqs.app_kc.widgets.DialogView;
 import com.zzqs.app_kc.z_kc.entitiy.ErrorInfo;
 import com.zzqs.app_kc.z_kc.entitiy.Goods;
 import com.zzqs.app_kc.z_kc.entitiy.Tender;
+import com.zzqs.app_kc.z_kc.entitiy.TenderRecord;
 import com.zzqs.app_kc.z_kc.listener.MyOnClickListener;
 import com.zzqs.app_kc.z_kc.network.TenderApiImpl;
 import com.zzqs.app_kc.z_kc.util.NumberUtil;
@@ -34,17 +41,23 @@ import rx.Subscriber;
  */
 
 public class TenderDetailActivity extends BaseActivity {
-    TextView tvLeft, tvTitle, tvRight, tvRemainingTime, tvMaxPrince, tvStartCity, tvStartDistrict, tvEndCity, tvEndDistrict, tvNeedCars, tvGoodsInfo, tvRemark, tvInitiator, tvInitiatorName, tvInitiatorPhone, tvPickupTime, tvPickupAddress, tvDeliveryTime, tvDeliveryAddress, tvPayWay, tvFirstPay, tvLastPay, tvReceipt, tvFreight, tvGrabOrder, tvBiddingOrder;
+    TextView tvLeft, tvTitle, tvRight, tvRemainingTime, tvMaxPrince, tvStartCity, tvStartDistrict, tvEndCity,
+            tvEndDistrict, tvNeedCars, tvGoodsInfo, tvRemark, tvInitiator, tvInitiatorName, tvInitiatorPhone,
+            tvPickupTime, tvPickupAddress, tvDeliveryTime, tvDeliveryAddress, tvPayWay, tvFirstPay, tvLastPay,
+            tvReceipt, tvFreight, tvGrabOrder, tvBiddingOrder, tvCompareResult, tvComparePrice;
     LinearLayout llBiddingOrderHead, llGrabOrder, llBiddingOrder, llFirstPay, llLastPay, llReceiptPay;
     EditText etBiddingPrince;
 
     private Tender tender;
     private Timer timer;
     private long remainingTime;
+    private User user;
 
     @Override
     public void initVariables() {
         tender = getIntent().getParcelableExtra(Tender.TENDER);
+        user = ZZQSApplication.getInstance().getUser();
+
     }
 
     @Override
@@ -93,6 +106,9 @@ public class TenderDetailActivity extends BaseActivity {
         tvReceipt = (TextView) findViewById(R.id.tvReceipt);
         tvFreight = (TextView) findViewById(R.id.tvFreight);
 
+        tvCompareResult = (TextView) findViewById(R.id.tvCompareResult);
+        tvComparePrice = (TextView) findViewById(R.id.tvComparePrice);
+
         tvGrabOrder = (TextView) findViewById(R.id.tvGrabOrder);
         tvBiddingOrder = (TextView) findViewById(R.id.tvBiddingOrder);
 
@@ -140,16 +156,96 @@ public class TenderDetailActivity extends BaseActivity {
                         setRemainingTime();
                     }
                 }, 0, 1000);
-                tvMaxPrince.setText(tender.getHighest_grab_price() + getString(R.string.prince_unit));
+                tvMaxPrince.setText(tender.getHighest_protect_price() + getString(R.string.prince_unit));
                 tvBiddingOrder.setOnClickListener(new MyOnClickListener() {
                     @Override
                     public void OnceOnClick(View view) {
                         //出价
+                        compareTender();
+                    }
+                });
+                etBiddingPrince.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        if (StringTools.isEmp(etBiddingPrince.getText().toString())) {
+                            return;
+                        }
+                        if (tender.getTender_records().size() > 0) {
+                            for (TenderRecord record : tender.getTender_records()) {
+                                if (record.getDriver().equals(user.getDriver_id())) {
+                                    return;
+                                }
+                            }
+                        }
+                        int price = Integer.parseInt(etBiddingPrince.getText().toString());
+                        int highProtectPrice = (int) tender.getHighest_protect_price();
+                        int lowestProtectPrice = (int) tender.getLowest_protect_price();
+                        if (price > highProtectPrice) {
+                            Toast.makeText(TenderDetailActivity.this, "出价不能高于" + tender.getHighest_protect_price() + "元", Toast.LENGTH_LONG).show();
+                            etBiddingPrince.setText("");
+                            return;
+                        }
+                        if (price < lowestProtectPrice) {
+                            Toast.makeText(TenderDetailActivity.this, "出价不能低于" + tender.getLowest_protect_price() + "元", Toast.LENGTH_LONG).show();
+                            etBiddingPrince.setText("");
+                            return;
+                        }
                     }
                 });
             } else {
-                tvRemainingTime.setText(R.string.is_over);
-                llBiddingOrder.setVisibility(View.GONE);
+                tvComparePrice.setText("中标情况");
+                tvCompareResult.setText("比价结果");
+                switch (tender.getStatus()) {
+                    case Tender.COMPARING:
+                        break;
+                    case Tender.UN_ASSIGNED:
+                        if (!TextUtils.isEmpty(tender.getDriver_winner().getDriver_id()) && tender.getDriver_winner().getDriver_id().equals(user.getDriver_id())) {
+                            tvRemainingTime.setText("恭喜您中标了");
+                            tvRemainingTime.setTextColor(ContextCompat.getColor(this, R.color.green));
+                            tvMaxPrince.setText(tender.getWinner_price() + "元");
+                            tvMaxPrince.setTextColor(ContextCompat.getColor(this, R.color.green));
+                            tvComparePrice.setTextColor(ContextCompat.getColor(this, R.color.green));
+                            tvCompareResult.setTextColor(ContextCompat.getColor(this, R.color.green));
+
+                        } else {
+                            tvRemainingTime.setText("很遗憾您未中标");
+                            tvRemainingTime.setTextColor(ContextCompat.getColor(this, R.color.red));
+                            tvMaxPrince.setTextColor(ContextCompat.getColor(this, R.color.red));
+                            tvComparePrice.setTextColor(ContextCompat.getColor(this, R.color.red));
+                            tvCompareResult.setTextColor(ContextCompat.getColor(this, R.color.red));
+                            String phone = tender.getDriver_winner().getUsername();
+                            phone = hidePhoneNumber(phone);
+                            tvMaxPrince.setText(tender.getWinner_price() + "元(" + phone + ")");
+                        }
+                        break;
+                }
+
+//                tvRemainingTime.setText(R.string.is_over);
+//                llBiddingOrder.setVisibility(View.GONE);
+            }
+            if (tender.getTender_records().size() > 0) {
+                for (TenderRecord record : tender.getTender_records()) {
+                    if (record.getDriver().equals(user.getDriver_id())) {
+                        tvBiddingOrder.setText("已出价");
+                        tvBiddingOrder.setTextColor(ContextCompat.getColor(this, R.color.text_gray));
+                        tvBiddingOrder.setBackgroundResource(R.color.tender_primary_color);
+                        tvBiddingOrder.setClickable(false);
+                        etBiddingPrince.setText(Html.fromHtml("出价：" + "<font color = #ED6250>" + record.getPrice() + "</font>元"));
+                        etBiddingPrince.setTextColor(ContextCompat.getColor(this, R.color.text_gray));
+                        etBiddingPrince.setEnabled(false);
+                        break;
+                    }
+                }
             }
         }
 
@@ -306,7 +402,7 @@ public class TenderDetailActivity extends BaseActivity {
     }
 
     private void grabTender() {
-        DialogView.showConfirmDialog(this, "抢单确认", "您确定要抢单吗？抢单成功后若违约讲扣除您的保证金", new Handler() {
+        DialogView.showConfirmDialog(this, "抢单确认", "您确定要抢单吗？抢单成功后若违约讲扣除您的保证金", true, new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 if (msg.what == DialogView.ACCEPT) {
@@ -329,7 +425,7 @@ public class TenderDetailActivity extends BaseActivity {
                             safePd.dismiss();
                             if (errorInfo.getType().equals(ErrorInfo.SUCCESS)) {
                                 tender.setStatus(Tender.UN_STARTED);
-                                DialogView.showConfirmDialog(mContext, "抢单成功", "恭喜您抢单，请选择车辆与绑定油卡的操作，\"取消\"则可稍后操作", new Handler() {
+                                DialogView.showConfirmDialog(mContext, "抢单成功", "恭喜您抢单，请选择车辆与绑定油卡的操作，\"取消\"则可稍后操作", true, new Handler() {
                                     @Override
                                     public void handleMessage(Message msg) {
                                         if (msg.what == DialogView.ACCEPT) {
@@ -353,6 +449,68 @@ public class TenderDetailActivity extends BaseActivity {
                 }
             }
         });
+    }
+
+    private void compareTender() {
+        DialogView.showConfirmDialog(this, "出价确认", "您确定要出价吗？出价中标后若违约讲扣除您的保证金", true, new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == DialogView.ACCEPT) {
+                    safePd.setMessage(getString(R.string.comparing));
+                    safePd.show();
+                    int price = Integer.parseInt(etBiddingPrince.getText().toString());
+                    TenderApiImpl.getUserApiImpl().compareTender(CommonTools.getToken(mContext), tender.getTender_id(), price, new Subscriber<ErrorInfo>() {
+                        @Override
+                        public void onCompleted() {
+
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            safePd.dismiss();
+                            e.printStackTrace();
+                        }
+
+                        @Override
+                        public void onNext(ErrorInfo errorInfo) {
+                            safePd.dismiss();
+                            if (errorInfo.getType().equals(ErrorInfo.SUCCESS)) {
+                                tender.setStatus(Tender.UN_STARTED);
+                                DialogView.showConfirmDialog(mContext, "出价成功", "恭喜您出价成功，请耐心等待比价截止，系统会即使通知您比价结果", false, new Handler() {
+                                    @Override
+                                    public void handleMessage(Message msg) {
+                                        if (msg.what == DialogView.ACCEPT) {
+                                            Intent intent = new Intent(mContext, MyTendersActivity.class);
+                                            startActivity(intent);
+                                        } else if (msg.what == DialogView.CANCEL) {
+                                            startActivity(new Intent(mContext, MyTendersActivity.class));
+                                        }
+                                        finish();
+                                    }
+                                });
+
+                            } else {
+                                Toast.makeText(mContext, errorInfo.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+
+                }
+            }
+        });
+    }
+
+    private String hidePhoneNumber(String phone) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < phone.length(); i++) {
+            char c = phone.charAt(i);
+            if (i >= 3 && i <= 6) {
+                sb.append('*');
+            } else {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
     }
 }
 

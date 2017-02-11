@@ -47,4 +47,12 @@ public interface TenderApi {
     @POST("/tender/driver/dashboard")
     Observable<JsonObject> getDashboard(@Field("access_token") String accessToken);
 
+    /**
+     * 比价
+     */
+    @FormUrlEncoded
+    @POST("/tender/driver/compare")
+    Observable<JsonObject> compareTender(@Field("access_token") String accessToken, @Field("tender_id") String tenderId, @Field("price") int price);
+
+
 }

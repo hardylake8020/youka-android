@@ -8,7 +8,6 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.PersistentCookieStore;
 import com.loopj.android.http.RequestHandle;
 import com.loopj.android.http.RequestParams;
-import com.qiniu.android.utils.StringUtils;
 import com.testin.agent.TestinAgent;
 import com.zzqs.app_kc.BuildConfig;
 import com.zzqs.app_kc.app.ZZQSApplication;
@@ -341,6 +340,7 @@ public class RestAPI {
             user.setNickname(object.optString("nickname"));
             user.setDevice_id(object.optString("device_id"));
             user.setUsername(object.optString("username"));
+            user.setDriver_id(object.optString("_id"));
             String drivingDate = object.optString("driving_date");
             if (!StringTools.isEmp(drivingDate)) {
               if (drivingDate.length() > 10) {

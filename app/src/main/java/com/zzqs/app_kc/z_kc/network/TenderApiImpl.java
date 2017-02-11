@@ -166,4 +166,28 @@ public class TenderApiImpl {
                 .throttleFirst(1000, TimeUnit.MILLISECONDS)
                 .subscribe(subscriber);
     }
+
+    public void compareTender(@NonNull String accessToken, @NonNull String tenderId, @NonNull int price, Subscriber<ErrorInfo> subscriber) {
+        tenderApi.compareTender(accessToken,tenderId,price)
+                .map(new Func1<JsonObject, ErrorInfo>() {
+                    @Override
+                    public ErrorInfo call(JsonObject jsonObject) {
+                        ErrorInfo errorInfo = new ErrorInfo();
+                        if (jsonObject.has(errorInfo.ERR)) {
+                            Log.e("compareTender", jsonObject.toString());
+                            JsonObject errObj = jsonObject.getAsJsonObject(errorInfo.ERR);
+                            errorInfo = gson.fromJson(errObj, ErrorInfo.class);
+                        } else {
+                            errorInfo.setType(ErrorInfo.SUCCESS);
+//                            CountNumber countNumber = gson.fromJson(jsonObject, CountNumber.class);
+//                            errorInfo.object = countNumber;
+                        }
+                        return errorInfo;
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .throttleFirst(1000, TimeUnit.MILLISECONDS)
+                .subscribe(subscriber);
+    }
 }

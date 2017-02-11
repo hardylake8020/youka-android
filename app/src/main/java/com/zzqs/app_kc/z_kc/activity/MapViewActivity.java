@@ -101,7 +101,7 @@ public class MapViewActivity extends BaseActivity implements OnGetRoutePlanResul
         tvTitle.setText("车辆地图");
         tvDistance = (TextView) findViewById(R.id.tvDistance);
         if (!Connectivities.isConnected(getApplicationContext())) {
-            DialogView.showConfirmDialog(this, "提醒", "当前无网络，请检查您的网络连接状态", new Handler());
+            DialogView.showConfirmDialog(this, "提醒", "当前无网络，请检查您的网络连接状态",false, new Handler());
             return;
         }
         mapView = (MapView) findViewById(R.id.mapView);

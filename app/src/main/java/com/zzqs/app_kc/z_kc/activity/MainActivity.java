@@ -55,7 +55,7 @@ public class MainActivity extends BaseActivity implements XListView.IXListViewLi
         cvUserPhoto.setOnClickListener(new MyOnClickListener() {
             @Override
             public void OnceOnClick(View view) {
-                DialogView.showConfirmDialog(mContext, "", "确认退出吗？", new Handler() {
+                DialogView.showConfirmDialog(mContext, "", "确认退出吗？",true, new Handler() {
                     @Override
                     public void handleMessage(Message msg) {
                         if (msg.what == DialogView.ACCEPT) {

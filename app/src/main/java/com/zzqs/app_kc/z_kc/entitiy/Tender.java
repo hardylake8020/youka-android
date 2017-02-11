@@ -24,7 +24,7 @@ public class Tender implements Parcelable {
     public static final String IN_PROGRESS = "inProgress";//进行中
     public static final String COMPLETED = "completed";//已完成
     public static final String TENDER_STATUS = "tenderStatus";
-
+    public static final String COMPARING = "comparing";//比价中
 
     @SerializedName("_id")
     private String tender_id;
@@ -97,6 +97,11 @@ public class Tender implements Parcelable {
 
     private double driver_price;
 
+    private WinnerDriver driver_winner;
+
+    private double winner_price;
+
+    private List<TenderRecord> tender_records;
 
     public String getTender_id() {
         return tender_id;
@@ -594,6 +599,30 @@ public class Tender implements Parcelable {
         this.delivery_region_location = delivery_region_location;
     }
 
+    public WinnerDriver getDriver_winner() {
+        return driver_winner;
+    }
+
+    public void setDriver_winner(WinnerDriver driver_winner) {
+        this.driver_winner = driver_winner;
+    }
+
+    public double getWinner_price() {
+        return winner_price;
+    }
+
+    public void setWinner_price(double winner_price) {
+        this.winner_price = winner_price;
+    }
+
+    public List<TenderRecord> getTender_records() {
+        return tender_records;
+    }
+
+    public void setTender_records(List<TenderRecord> tender_records) {
+        this.tender_records = tender_records;
+    }
+
     @Override
     public String toString() {
         return "Tender{" +
@@ -731,6 +760,9 @@ public class Tender implements Parcelable {
         dest.writeDouble(this.grab_increment_price);
         dest.writeDouble(this.current_grab_price);
         dest.writeDouble(this.driver_price);
+        dest.writeParcelable(this.driver_winner, flags);
+        dest.writeDouble(this.winner_price);
+        dest.writeTypedList(this.tender_records);
     }
 
     protected Tender(Parcel in) {
@@ -800,6 +832,9 @@ public class Tender implements Parcelable {
         this.grab_increment_price = in.readDouble();
         this.current_grab_price = in.readDouble();
         this.driver_price = in.readDouble();
+        this.driver_winner = in.readParcelable(WinnerDriver.class.getClassLoader());
+        this.winner_price = in.readDouble();
+        this.tender_records = in.createTypedArrayList(TenderRecord.CREATOR);
     }
 
     public static final Creator<Tender> CREATOR = new Creator<Tender>() {
