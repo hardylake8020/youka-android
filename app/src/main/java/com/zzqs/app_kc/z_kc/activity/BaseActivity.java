@@ -5,8 +5,11 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.MotionEvent;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
+import com.zzqs.app_kc.R;
 import com.zzqs.app_kc.app.ZZQSApplication;
+import com.zzqs.app_kc.net.Connectivities;
 import com.zzqs.app_kc.widgets.SafeProgressDialog;
 
 /**
@@ -71,4 +74,16 @@ public abstract class BaseActivity extends FragmentActivity {
         }
     }
 
+    public void showToast(String msg, int length) {
+        Toast.makeText(this, msg, length).show();
+    }
+
+    public boolean checkConnected() {
+        if (!Connectivities.isConnected(this)) {
+            showToast(getString(R.string.no_connected), Toast.LENGTH_LONG);
+            return false;
+        } else {
+            return true;
+        }
+    }
 }

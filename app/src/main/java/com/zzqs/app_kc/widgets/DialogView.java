@@ -30,6 +30,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.zzqs.app_kc.R;
 import com.zzqs.app_kc.utils.CommonFiled;
+import com.zzqs.app_kc.utils.ImageUtil;
 import com.zzqs.app_kc.utils.ScreenUtil;
 import com.zzqs.app_kc.utils.StringTools;
 import com.zzqs.app_kc.widgets.photoview.PhotoView;
@@ -123,6 +124,47 @@ public class DialogView {
             }
             Uri uri = Uri.fromFile(file);
             ImageLoader.getInstance().displayImage(uri.toString(), bigImage);
+        }
+        dialog.show();
+    }
+
+    public static void showBigImageDialog(final Context context, final String path, boolean fromServer,
+                                          final Handler handler) {
+        if (StringTools.isEmp(path)) {
+            return;
+        }
+        final Dialog dialog = new Dialog(context, R.style.Dialog_Fullscreen);
+        dialog.setContentView(R.layout.full_screen_img);
+        PhotoView photoView = (PhotoView) dialog.findViewById(R.id.photoView);
+        TextView tvDel = (TextView) dialog.findViewById(R.id.tvDelete);
+        TextView tvBack = (TextView) dialog.findViewById(R.id.tvBack);
+
+        if (!fromServer) {
+            ImageUtil.showImage(path, photoView);
+        } else {
+            ImageUtil.showImage(path, photoView, true);
+        }
+
+        tvBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        if (handler == null) {
+            tvDel.setVisibility(View.GONE);
+        } else {
+            tvDel.setVisibility(View.VISIBLE);
+            tvDel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Message msg = handler.obtainMessage();
+                    msg.what = DELETE;
+                    msg.obj = path;
+                    handler.sendMessage(msg);
+                    dialog.dismiss();
+                }
+            });
         }
         dialog.show();
     }

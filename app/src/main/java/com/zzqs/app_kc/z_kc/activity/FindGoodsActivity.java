@@ -1,11 +1,13 @@
 package com.zzqs.app_kc.z_kc.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -114,6 +116,14 @@ public class FindGoodsActivity extends BaseActivity implements XListView.IXListV
         lvTenders.setAdapter(adapter);
         lvTenders.stopRefresh();
         lvTenders.stopLoadMore();
+        lvTenders.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(FindGoodsActivity.this, TenderDetailActivity.class);
+                intent.putExtra(Tender.TENDER, tenderList.get(position-1));
+                startActivity(intent);
+            }
+        });
         ivSearch = (ImageView) findViewById(R.id.ivSearch);
         ivSearch.setOnClickListener(new MyOnClickListener() {
             @Override
@@ -190,6 +200,9 @@ public class FindGoodsActivity extends BaseActivity implements XListView.IXListV
     }
 
     private void getTenders(final boolean isRefresh, String pickUpAddress, String deliveryAddress, String tenderType) {
+        if (!checkConnected()) {
+            return;
+        }
         int count = 0;
         if (!isRefresh) {
             count = tenderList.size();

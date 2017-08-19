@@ -6,10 +6,15 @@ import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
+import android.text.TextUtils;
 import android.util.Log;
+import android.widget.ImageView;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.BinaryHttpResponseHandler;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.zzqs.app_kc.R;
 import com.zzqs.app_kc.net.RestAPI;
 
 import java.io.ByteArrayInputStream;
@@ -20,6 +25,37 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class ImageUtil {
+    public static ImageLoader imageLoader = ImageLoader.getInstance();
+
+
+    public static void showImage(String path, ImageView imageView, boolean isServer) {
+        if (isServer) {
+            DisplayImageOptions options = new DisplayImageOptions.Builder()
+                    .showImageOnLoading(R.drawable.ic_loading)
+                    .showImageOnFail(R.drawable.ic_default_head)
+                    .cacheInMemory(true)
+                    .cacheOnDisk(true)
+                    .bitmapConfig(Bitmap.Config.RGB_565)
+                    .build();
+            imageLoader.displayImage(CommonFiled.QINIU_ZOOM + path, imageView, options);
+        } else {
+            imageLoader.displayImage(path, imageView);
+        }
+    }
+
+    public static void showImage(String path, ImageView imageView, DisplayImageOptions options) {
+        imageLoader.displayImage(path, imageView, options);
+    }
+
+    public static void showImage(String path, ImageView imageView) {
+        if (!TextUtils.isEmpty(path)) {
+            path = "file://" + path;
+        } else {
+            path = "";
+        }
+        imageLoader.displayImage(path, imageView);
+    }
+
     /**
      * 质量压缩
      */

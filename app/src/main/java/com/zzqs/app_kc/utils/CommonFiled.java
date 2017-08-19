@@ -13,7 +13,7 @@ public class CommonFiled {
     public static final String SETTING_MSG = "setting";
     public static final String HELP_MSG = "help";
     public static final String VERSION_CODE = "versionCode";
-    public static final String QINIU_ZOOM = "http://7xiwrb.com1.z0.glb.clouddn.com/@";
+    public static final String QINIU_ZOOM = "http://7xiwrb.com1.z0.glb.clouddn.com/";
     public static final String IS_FIRST_INSTALL_APP = "isFirstInstallApp";
     public static final int MAX_INTERVAL = 30 * 60 * 1000;//前台页面提交事件时定位失败向后台服务拿定位信息的最大时间间隔
     public static final int LOCATION_REQUEST_INTERVAL = 20 * 1000;//后台定位服务每次取点间隔

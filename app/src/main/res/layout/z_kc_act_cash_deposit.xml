@@ -1,62 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/bg_gray"
-                android:orientation="vertical">
-
-  <include
-    android:id="@+id/defaultHead"
-    layout="@layout/z_kc_default_head"/>
-
-  <RelativeLayout
-    android:id="@+id/rlSubHead"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@id/defaultHead"
-    android:background="@color/green"
-    android:paddingBottom="15dp"
-    android:paddingTop="15dp">
-
-    <ImageView
-      android:id="@+id/ivCashDepositStatus"
-      android:layout_width="75dp"
-      android:layout_height="75dp"
-      android:layout_centerHorizontal="true"
-      android:background="@drawable/ic_tick_blue"/>
-
-    <TextView
-      android:id="@+id/tvCashDepositStatus"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_below="@id/ivCashDepositStatus"
-      android:layout_centerHorizontal="true"
-      android:layout_marginTop="15dp"
-      android:text="@string/payed"
-      android:textColor="@android:color/white"
-      android:textSize="16sp"/>
-  </RelativeLayout>
-
-  <TextView
-    android:id="@+id/tvOperation"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:background="@android:color/white"
-    android:gravity="center"
-    android:padding="20dp"
-    android:textColor="@color/primary_colors"
-    android:textSize="16sp"/>
-
-  <com.zzqs.app_kc.widgets.xlistView.XListView
-    android:id="@+id/lvRecords"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_above="@id/tvOperation"
-    android:layout_below="@id/rlSubHead"
     android:background="@color/bg_gray"
-    android:divider="@android:color/white"
-    android:dividerHeight="0px"
-    android:listSelector="@color/lucency"
-    android:scrollbars="none"/>
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/defaultHead"
+        layout="@layout/z_kc_default_head" />
+
+    <RelativeLayout
+        android:id="@+id/rlSubHead"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/defaultHead"
+        android:background="@color/orange"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp">
+
+        <ImageView
+            android:id="@+id/ivCashDepositStatus"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/ic_unpaid" />
+
+        <TextView
+            android:id="@+id/tvCashDepositStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ivCashDepositStatus"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:text="@string/un_pay"
+            android:textColor="@android:color/white"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tvBalance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvCashDepositStatus"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:text="请充值"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvOperation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:padding="20dp"
+        android:textColor="@color/primary_colors"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/llButtons"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentTop="true"
+            android:background="@android:color/darker_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:id="@+id/rlRecharge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="1px"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:background="@android:color/darker_gray" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="1px"
+                    android:gravity="center"
+                    android:text="@string/top_up"
+                    android:textColor="@color/green"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tvCash"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/withdraw"
+                android:textColor="@color/orange"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <com.zzqs.app_kc.widgets.xlistView.XListView
+        android:id="@+id/lvRecords"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/llButtons"
+        android:layout_below="@id/rlSubHead"
+        android:background="@color/bg_gray"
+        android:divider="@color/text_gray"
+        android:dividerHeight="0px"
+        android:listSelector="@color/lucency"
+        android:scrollbars="none" />
 </RelativeLayout>

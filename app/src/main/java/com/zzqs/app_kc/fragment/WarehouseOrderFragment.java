@@ -231,7 +231,7 @@ public class WarehouseOrderFragment extends Fragment implements XListView.IXList
             orderDao = DaoManager.getOrderDao(mActivity.getApplicationContext());
         }
         orders.clear();
-        orders.addAll(orderDao.rawQuery("select * from zz_order where order_type=? and status=? order by _id desc", new String[]{Order.WAREHOUSE_ORDER, Order.UN_DELIVERY}));
+        orders.addAll(orderDao.rawQuery("select * from zz_order where order_type=? and status=? order by _id desc", new String[]{Order.DRIVER_ORDER, Order.STATUS_COMMIT}));
         seekList.clear();
         seekList.addAll(orders);
         adapter.notifyDataSetChanged();
@@ -249,7 +249,7 @@ public class WarehouseOrderFragment extends Fragment implements XListView.IXList
     public void onRefresh() {
         if (!isUpdate) {
             isUpdate = true;
-            RestAPI.getInstance(mActivity.getApplicationContext()).getOrders(new String[]{Order.UN_DELIVERY}, Order.WAREHOUSE_ORDER, new RestAPI.RestResponse() {
+            RestAPI.getInstance(mActivity.getApplicationContext()).getOrders(new String[]{Order.STATUS_COMMIT}, Order.DRIVER_ORDER, new RestAPI.RestResponse() {
                 @Override
                 public void onSuccess(Object object) {
                     final List<Order> newList = (ArrayList<Order>) object;

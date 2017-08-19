@@ -5,10 +5,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.content.ContextCompat;
-import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -19,7 +17,6 @@ import com.zzqs.app_kc.R;
 import com.zzqs.app_kc.app.ZZQSApplication;
 import com.zzqs.app_kc.entity.User;
 import com.zzqs.app_kc.utils.CommonTools;
-import com.zzqs.app_kc.utils.StringTools;
 import com.zzqs.app_kc.widgets.DialogView;
 import com.zzqs.app_kc.z_kc.entitiy.ErrorInfo;
 import com.zzqs.app_kc.z_kc.entitiy.Goods;
@@ -44,9 +41,9 @@ public class TenderDetailActivity extends BaseActivity {
     TextView tvLeft, tvTitle, tvRight, tvRemainingTime, tvMaxPrince, tvStartCity, tvStartDistrict, tvEndCity,
             tvEndDistrict, tvNeedCars, tvGoodsInfo, tvRemark, tvInitiator, tvInitiatorName, tvInitiatorPhone,
             tvPickupTime, tvPickupAddress, tvDeliveryTime, tvDeliveryAddress, tvPayWay, tvFirstPay, tvLastPay,
-            tvReceipt, tvFreight, tvGrabOrder, tvBiddingOrder, tvCompareResult, tvComparePrice;
-    LinearLayout llBiddingOrderHead, llGrabOrder, llBiddingOrder, llFirstPay, llLastPay, llReceiptPay;
-    EditText etBiddingPrince;
+            tvReceipt, tvFreight, tvGrabOrder, tvBiddingOrder, tvCompareResult, tvComparePrice, tvTon, tvTonOder;
+    LinearLayout llBiddingOrderHead, llGrabOrder, llBiddingOrder, llFirstPay, llLastPay, llReceiptPay, llTon, llTonOperation;
+    EditText etBiddingPrince, editTonPrice, editTonOverPrice;
 
     private Tender tender;
     private Timer timer;
@@ -119,10 +116,22 @@ public class TenderDetailActivity extends BaseActivity {
         llFirstPay = (LinearLayout) findViewById(R.id.llFirstPay);
         llLastPay = (LinearLayout) findViewById(R.id.llLastPay);
         llReceiptPay = (LinearLayout) findViewById(R.id.llReceiptPay);
-        if (tender.getTender_type().equals(Tender.GRAB)) {
-            tvTitle.setText(R.string.grab_details);
+        llTon = (LinearLayout) findViewById(R.id.llTon);
+        tvTon = (TextView) findViewById(R.id.tvTon);
+        llTonOperation = (LinearLayout) findViewById(R.id.llTonOperation);
+        editTonPrice = (EditText) findViewById(R.id.editTonPrice);
+        editTonOverPrice = (EditText) findViewById(R.id.editTonOverPrice);
+        tvTonOder = (TextView) findViewById(R.id.tvTonOder);
+
+        if (tender.getTender_type().equals(Tender.GRAB) || tender.getTender_type().equals(Tender.ASSIGN)) {
+            if (tender.getTender_type().equals(Tender.ASSIGN)) {
+                tvTitle.setText("派单详情");
+            } else {
+                tvTitle.setText(R.string.grab_details);
+            }
             llBiddingOrderHead.setVisibility(View.GONE);
             llBiddingOrder.setVisibility(View.GONE);
+            llTonOperation.setVisibility(View.GONE);
             DecimalFormat df = new DecimalFormat("######0.00");
             tvFreight.setText(df.format(tender.getLowest_grab_price()));
             if (tender.getStatus().equals(Tender.UN_STARTED)) {
@@ -137,13 +146,27 @@ public class TenderDetailActivity extends BaseActivity {
                     }
                 });
             } else {
-                tvGrabOrder.setText(R.string.grabbed);
+                if (tender.getTender_type().equals(Tender.ASSIGN)) {
+                    tvGrabOrder.setText("已接收");
+                } else {
+                    tvGrabOrder.setText(R.string.grabbed);
+                }
                 tvGrabOrder.setBackgroundResource(R.color.tender_primary_color);
                 tvGrabOrder.setTextColor(ContextCompat.getColor(this, R.color.text_gray));
             }
         } else {
             tvTitle.setText(R.string.bidding_details);
             llGrabOrder.setVisibility(View.GONE);
+            if (tender.getTender_type().equals(Tender.COMPARE)) {
+                llTon.setVisibility(View.GONE);
+                llTonOperation.setVisibility(View.GONE);
+            } else {
+                llBiddingOrder.setVisibility(View.GONE);
+            }
+            if (!TextUtils.isEmpty(tender.getLowest_tons_count())) {
+                tvTon.setText(tender.getLowest_tons_count() + "吨");
+                tvComparePrice.setText("保底价不高于");
+            }
             long startTime = System.currentTimeMillis();
             long endTime = TimeUtil.UTCTimeToTimeMillis(tender.getEnd_time());
             remainingTime = endTime - startTime;
@@ -156,36 +179,23 @@ public class TenderDetailActivity extends BaseActivity {
                         setRemainingTime();
                     }
                 }, 0, 1000);
+                if (tender.getTender_records().size() > 0) {
+                    for (TenderRecord record : tender.getTender_records()) {
+                        if (record.getDriver().equals(user.getDriver_id())) {
+                            etBiddingPrince.setHint(Html.fromHtml("出价：" + "<font color = #ED6250>" + new DecimalFormat("#").format(record.getPrice()) + "</font>元 点击修改"));
+                            editTonPrice.setHint(Html.fromHtml("保底价：" + "<font color = #ED6250>" + new DecimalFormat("#").format(record.getPrice()) + "</font>元 点击修改"));
+                            editTonOverPrice.setHint(Html.fromHtml("超额单价：" + "<font color = #ED6250>" + new DecimalFormat("#").format(record.getPrice_per_ton()) + "</font>元 点击修改"));
+                            break;
+                        }
+                    }
+                }
                 tvMaxPrince.setText(tender.getHighest_protect_price() + getString(R.string.prince_unit));
                 tvBiddingOrder.setOnClickListener(new MyOnClickListener() {
                     @Override
                     public void OnceOnClick(View view) {
-                        //出价
-                        compareTender();
-                    }
-                });
-                etBiddingPrince.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable s) {
-                        if (StringTools.isEmp(etBiddingPrince.getText().toString())) {
+                        if (TextUtils.isEmpty(etBiddingPrince.getText().toString())) {
+                            Toast.makeText(TenderDetailActivity.this, "请输入价格", Toast.LENGTH_LONG).show();
                             return;
-                        }
-                        if (tender.getTender_records().size() > 0) {
-                            for (TenderRecord record : tender.getTender_records()) {
-                                if (record.getDriver().equals(user.getDriver_id())) {
-                                    return;
-                                }
-                            }
                         }
                         int price = Integer.parseInt(etBiddingPrince.getText().toString());
                         int highProtectPrice = (int) tender.getHighest_protect_price();
@@ -200,6 +210,29 @@ public class TenderDetailActivity extends BaseActivity {
                             etBiddingPrince.setText("");
                             return;
                         }
+                        //出价
+                        compareTender();
+                    }
+                });
+                tvTonOder.setOnClickListener(new MyOnClickListener() {
+                    @Override
+                    public void OnceOnClick(View view) {
+                        if (TextUtils.isEmpty(editTonPrice.getText().toString())) {
+                            Toast.makeText(TenderDetailActivity.this, "请输入保底价", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                        if (TextUtils.isEmpty(editTonOverPrice.getText().toString())) {
+                            Toast.makeText(TenderDetailActivity.this, "请输入超额单价", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                        int price = Integer.parseInt(editTonPrice.getText().toString());
+                        int highProtectPrice = (int) tender.getHighest_protect_price();
+                        if (price > highProtectPrice) {
+                            Toast.makeText(TenderDetailActivity.this, "出价不能高于" + tender.getHighest_protect_price() + "元", Toast.LENGTH_LONG).show();
+                            editTonPrice.setText("");
+                            return;
+                        }
+                        compareTender();
                     }
                 });
             } else {
@@ -209,10 +242,11 @@ public class TenderDetailActivity extends BaseActivity {
                     case Tender.COMPARING:
                         break;
                     case Tender.UN_ASSIGNED:
+                    case Tender.IN_PROGRESS:
                         if (!TextUtils.isEmpty(tender.getDriver_winner().getDriver_id()) && tender.getDriver_winner().getDriver_id().equals(user.getDriver_id())) {
                             tvRemainingTime.setText("恭喜您中标了");
                             tvRemainingTime.setTextColor(ContextCompat.getColor(this, R.color.green));
-                            tvMaxPrince.setText(tender.getWinner_price() + "元");
+                            tvMaxPrince.setText(new DecimalFormat("#").format(tender.getWinner_price()) + "元");
                             tvMaxPrince.setTextColor(ContextCompat.getColor(this, R.color.green));
                             tvComparePrice.setTextColor(ContextCompat.getColor(this, R.color.green));
                             tvCompareResult.setTextColor(ContextCompat.getColor(this, R.color.green));
@@ -225,7 +259,7 @@ public class TenderDetailActivity extends BaseActivity {
                             tvCompareResult.setTextColor(ContextCompat.getColor(this, R.color.red));
                             String phone = tender.getDriver_winner().getUsername();
                             phone = hidePhoneNumber(phone);
-                            tvMaxPrince.setText(tender.getWinner_price() + "元(" + phone + ")");
+                            tvMaxPrince.setText(new DecimalFormat("#").format(tender.getWinner_price()) + "元(" + phone + ")");
                         }
                         break;
                 }
@@ -235,14 +269,25 @@ public class TenderDetailActivity extends BaseActivity {
             }
             if (tender.getTender_records().size() > 0) {
                 for (TenderRecord record : tender.getTender_records()) {
-                    if (record.getDriver().equals(user.getDriver_id())) {
+                    if (record.getDriver().equals(user.getDriver_id()) && remainingTime <= 0) {
                         tvBiddingOrder.setText("已出价");
                         tvBiddingOrder.setTextColor(ContextCompat.getColor(this, R.color.text_gray));
                         tvBiddingOrder.setBackgroundResource(R.color.tender_primary_color);
                         tvBiddingOrder.setClickable(false);
-                        etBiddingPrince.setText(Html.fromHtml("出价：" + "<font color = #ED6250>" + record.getPrice() + "</font>元"));
+                        etBiddingPrince.setText(Html.fromHtml("出价：" + "<font color = #ED6250>" + new DecimalFormat("#").format(record.getPrice()) + "</font>元"));
                         etBiddingPrince.setTextColor(ContextCompat.getColor(this, R.color.text_gray));
                         etBiddingPrince.setEnabled(false);
+
+                        tvTonOder.setText("已出价");
+                        tvTonOder.setTextColor(ContextCompat.getColor(this, R.color.text_gray));
+                        tvTonOder.setBackgroundResource(R.color.tender_primary_color);
+                        tvTonOder.setClickable(false);
+                        editTonPrice.setText(Html.fromHtml("保底价：" + "<font color = #ED6250>" + new DecimalFormat("#").format(record.getPrice()) + "</font>元"));
+                        editTonPrice.setTextColor(ContextCompat.getColor(this, R.color.text_gray));
+                        editTonPrice.setEnabled(false);
+                        editTonOverPrice.setText(Html.fromHtml("超额单价：" + "<font color = #ED6250>" + new DecimalFormat("#").format(record.getPrice_per_ton()) + "</font>元"));
+                        editTonOverPrice.setTextColor(ContextCompat.getColor(this, R.color.text_gray));
+                        editTonOverPrice.setEnabled(false);
                         break;
                     }
                 }
@@ -266,10 +311,10 @@ public class TenderDetailActivity extends BaseActivity {
                     quantityUnit = goods.getUnit();
                 }
                 if (!TextUtils.isEmpty(goods.getUnit2())) {
-                    quantityUnit = goods.getUnit2();
+                    weightUnit = goods.getUnit2();
                 }
-                if (!TextUtils.isEmpty(goods.getUnit2())) {
-                    quantityUnit = goods.getUnit2();
+                if (!TextUtils.isEmpty(goods.getUnit3())) {
+                    volumeUnit = goods.getUnit3();
                 }
             }
             if (!TextUtils.isEmpty(quantityUnit)) {
@@ -406,6 +451,9 @@ public class TenderDetailActivity extends BaseActivity {
             @Override
             public void handleMessage(Message msg) {
                 if (msg.what == DialogView.ACCEPT) {
+                    if (!checkConnected()) {
+                        return;
+                    }
                     safePd.setMessage(getString(R.string.grabbing));
                     safePd.show();
                     TenderApiImpl.getUserApiImpl().grabTender(CommonTools.getToken(mContext), tender.getTender_id(), new Subscriber<ErrorInfo>() {
@@ -456,10 +504,20 @@ public class TenderDetailActivity extends BaseActivity {
             @Override
             public void handleMessage(Message msg) {
                 if (msg.what == DialogView.ACCEPT) {
+                    if (!checkConnected()) {
+                        return;
+                    }
                     safePd.setMessage(getString(R.string.comparing));
                     safePd.show();
-                    int price = Integer.parseInt(etBiddingPrince.getText().toString());
-                    TenderApiImpl.getUserApiImpl().compareTender(CommonTools.getToken(mContext), tender.getTender_id(), price, new Subscriber<ErrorInfo>() {
+                    int price = 0;
+                    String price_per_ton = "";
+                    if (tender.getTender_type().equals(Tender.COMPARE)) {
+                        price = Integer.parseInt(etBiddingPrince.getText().toString());
+                    } else {
+                        price = Integer.parseInt(editTonPrice.getText().toString());
+                        price_per_ton = editTonOverPrice.getText().toString();
+                    }
+                    TenderApiImpl.getUserApiImpl().compareTender(CommonTools.getToken(mContext), tender.getTender_id(), price, price_per_ton, new Subscriber<ErrorInfo>() {
                         @Override
                         public void onCompleted() {
 

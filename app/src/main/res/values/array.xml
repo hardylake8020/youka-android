@@ -11,6 +11,7 @@
         <item>14.7米</item>
         <item>16.5米</item>
         <item>17.5米</item>
+        <item>请选择车辆类型</item>
     </string-array>
     <string-array name="card_type">
         <item>ETC 卡</item>

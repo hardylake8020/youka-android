@@ -16,6 +16,7 @@ public class TenderRecord implements Parcelable {
     private double price;
     private String driver;
     private String tender;
+    private double price_per_ton;
 
     public String getRecord_id() {
         return record_id;
@@ -49,6 +50,14 @@ public class TenderRecord implements Parcelable {
         this.tender = tender;
     }
 
+    public double getPrice_per_ton() {
+        return price_per_ton;
+    }
+
+    public void setPrice_per_ton(double price_per_ton) {
+        this.price_per_ton = price_per_ton;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -60,6 +69,7 @@ public class TenderRecord implements Parcelable {
         dest.writeDouble(this.price);
         dest.writeString(this.driver);
         dest.writeString(this.tender);
+        dest.writeDouble(this.price_per_ton);
     }
 
     public TenderRecord() {
@@ -70,6 +80,7 @@ public class TenderRecord implements Parcelable {
         this.price = in.readDouble();
         this.driver = in.readString();
         this.tender = in.readString();
+        this.price_per_ton = in.readDouble();
     }
 
     public static final Parcelable.Creator<TenderRecord> CREATOR = new Parcelable.Creator<TenderRecord>() {

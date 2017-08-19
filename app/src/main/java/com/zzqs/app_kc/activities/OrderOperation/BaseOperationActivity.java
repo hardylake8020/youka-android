@@ -49,9 +49,9 @@ public abstract class BaseOperationActivity extends BaseActivity implements View
     public static final int TO_HALF_EVENT = 2;
 
     LayoutInflater inflater;
-    LinearLayout insertView;
+    LinearLayout insertView, llOperation;
 
-    ImageView  haveCodeImg, haveEntrance;
+    ImageView haveCodeImg, haveEntrance;
     Button commit;
     TextView title, timeLine, scanCodeTv, entranceTv, back;
     TextView iconHalfEvent, iconEntrance, IconScan;
@@ -148,6 +148,11 @@ public abstract class BaseOperationActivity extends BaseActivity implements View
         commit.setOnClickListener(this);
         timeLine.setOnClickListener(this);
         scan.setOnClickListener(this);
+        llOperation = (LinearLayout) findViewById(R.id.llOperation);
+        if (order != null && order.getStatus().contains(Order.STATUS_COMMIT)) {
+            llOperation.setVisibility(View.GONE);
+            commit.setVisibility(View.GONE);
+        }
     }
 
     public void setOrder(Order order) {
@@ -178,6 +183,9 @@ public abstract class BaseOperationActivity extends BaseActivity implements View
                 title.setText(getString(R.string.view_tv_executing));
                 commit.setText(getString(R.string.view_tv_confirm_delivery));
                 mold = OrderEvent.MOLD_DELIVERY;
+            }
+            if (order.getStatus().equals(Order.STATUS_COMMIT)) {
+                title.setText(getString(R.string.view_tv_order_detail));
             }
             halfEvent.setOnClickListener(this);
             entrance.setOnClickListener(this);

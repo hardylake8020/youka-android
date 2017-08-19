@@ -85,25 +85,63 @@ public class OilCardAdapter extends BaseAdapter {
 
         if (oilCard.getType().equals(OilCard.ETC)) {
             holder.setCardType(context.getString(R.string.etc_card));
-            if (TextUtils.isEmpty(oilCard.getTruck_number())) {
+//            if (TextUtils.isEmpty(oilCard.getTruck_number())) {
+//                holder.rlOilCardItem.setBackgroundResource(R.drawable.radius_5dp_col_white_border_red);
+//                holder.setTextColor(context.getResources().getColor(R.color.z_kc_red));
+//                holder.tvCardStatus.setText(context.getString(R.string.un_use));
+//            } else {
+//                holder.rlOilCardItem.setBackgroundResource(R.drawable.radius_5dp_col_red);
+//                holder.setTextColor(context.getResources().getColor(R.color.base_gray));
+//                holder.tvCardStatus.setText(oilCard.getTruck_number());
+//            }
+            if (!needShowSelectImage) {
+                if (TextUtils.isEmpty(oilCard.getTruck_number())) {
+                    holder.rlOilCardItem.setBackgroundResource(R.drawable.radius_5dp_col_white_border_red);
+                    holder.setTextColor(context.getResources().getColor(R.color.z_kc_red));
+                    holder.tvCardStatus.setText(context.getString(R.string.un_use));
+                } else {
+                    holder.rlOilCardItem.setBackgroundResource(R.drawable.radius_5dp_col_red);
+                    holder.setTextColor(context.getResources().getColor(R.color.base_gray));
+                    holder.tvCardStatus.setText(oilCard.getTruck_number());
+                }
+            } else {
+                if (TextUtils.isEmpty(oilCard.getTruck_number())) {
+                    holder.tvCardStatus.setText(context.getString(R.string.un_use));
+                } else {
+                    holder.tvCardStatus.setText(oilCard.getTruck_number());
+                }
                 holder.rlOilCardItem.setBackgroundResource(R.drawable.radius_5dp_col_white_border_red);
                 holder.setTextColor(context.getResources().getColor(R.color.z_kc_red));
-                holder.tvCardStatus.setText(context.getString(R.string.un_use));
-            } else {
-                holder.rlOilCardItem.setBackgroundResource(R.drawable.radius_5dp_col_red);
-                holder.setTextColor(context.getResources().getColor(R.color.base_gray));
-                holder.tvCardStatus.setText(oilCard.getTruck_number());
             }
         } else {
             holder.setCardType(context.getString(R.string.oil_card));
-            if (TextUtils.isEmpty(oilCard.getTruck_number())) {
+//            if (TextUtils.isEmpty(oilCard.getTruck_number())) {
+//                holder.rlOilCardItem.setBackgroundResource(R.drawable.radius_5dp_col_white_border_blue);
+//                holder.setTextColor(context.getResources().getColor(R.color.primary_colors));
+//                holder.tvCardStatus.setText(context.getString(R.string.un_use));
+//            } else {
+//                holder.rlOilCardItem.setBackgroundResource(R.drawable.radius_5dp_col_blue);
+//                holder.setTextColor(context.getResources().getColor(R.color.base_gray));
+//                holder.tvCardStatus.setText(oilCard.getTruck_number());
+//            }
+            if (!needShowSelectImage) {
+                if (TextUtils.isEmpty(oilCard.getTruck_number())) {
+                    holder.rlOilCardItem.setBackgroundResource(R.drawable.radius_5dp_col_white_border_blue);
+                    holder.setTextColor(context.getResources().getColor(R.color.primary_colors));
+                    holder.tvCardStatus.setText(context.getString(R.string.un_use));
+                } else {
+                    holder.rlOilCardItem.setBackgroundResource(R.drawable.radius_5dp_col_blue);
+                    holder.setTextColor(context.getResources().getColor(R.color.base_gray));
+                    holder.tvCardStatus.setText(oilCard.getTruck_number());
+                }
+            } else {
+                if (TextUtils.isEmpty(oilCard.getTruck_number())) {
+                    holder.tvCardStatus.setText(context.getString(R.string.un_use));
+                } else {
+                    holder.tvCardStatus.setText(oilCard.getTruck_number());
+                }
                 holder.rlOilCardItem.setBackgroundResource(R.drawable.radius_5dp_col_white_border_blue);
                 holder.setTextColor(context.getResources().getColor(R.color.primary_colors));
-                holder.tvCardStatus.setText(context.getString(R.string.un_use));
-            } else {
-                holder.rlOilCardItem.setBackgroundResource(R.drawable.radius_5dp_col_blue);
-                holder.setTextColor(context.getResources().getColor(R.color.base_gray));
-                holder.tvCardStatus.setText(oilCard.getTruck_number());
             }
         }
         return convertView;

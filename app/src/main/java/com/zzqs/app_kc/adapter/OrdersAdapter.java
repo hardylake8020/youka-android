@@ -57,7 +57,6 @@ public class OrdersAdapter extends BaseAdapter {
     }
 
 
-
     @Override
     public int getCount() {
         if (list == null)
@@ -166,104 +165,78 @@ public class OrdersAdapter extends BaseAdapter {
             }
         }
 
-        if (!StringTools.isEmp(order.getActualGoodsId())) {//新版本创建的运单
+        if (!StringTools.isEmp(order.getActualGoodsName())) {
             holder.ll_old.setVisibility(View.GONE);
             holder.tv_new_goods_name.setVisibility(View.VISIBLE);
-            if (!StringTools.isEmp(order.getActualGoodsName())) {
-                StringBuffer goods = new StringBuffer();
-                String[] names = order.getActualGoodsName().split("/zzqs/");
-                String[] units = order.getActualGoodsUnit().split("/zzqs/");
-                String[] units2 = order.getActualGoodsUnit2().split("/zzqs/");
-                String[] units3 = order.getActualGoodsUnit3().split("/zzqs/");
-                String[] counts = order.getActualGoodsCount().split("/zzqs/");
-                String[] counts2 = order.getActualGoodsCount2().split("/zzqs/");
-                String[] counts3 = order.getActualGoodsCount3().split("/zzqs/");
-                for (int j = 0; j < names.length; j++) {
-                    if (!StringTools.isEmp(names[j])) {
-                        if (null != units2 && units2.length >= j + 1) {
-                            if (StringTools.isEmp(units2[j])) {
-                                goods.append(names[j]);
-                                if (!StringTools.isEmp(counts[j])) {
-                                    goods.append(counts[j]);
-                                }
-                                if (!StringTools.isEmp(units[j])) {
-                                    goods.append(units[j]);
-                                }
-                            } else {
-                                String count = "", count2 = "", count3 = "", unit = "", unit2 = "", unit3 = "";
-                                if (!StringTools.isEmp(counts[j])) {
-                                    count = counts[j].toString();
-                                    unit = units[j].toString();
-                                }
-
-                                if (!StringTools.isEmp(counts2[j])) {
-                                    count2 = counts2[j].toString();
-                                    unit2 = units2[j].toString();
-                                }
-
-                                if (!StringTools.isEmp(counts3[j])) {
-                                    count3 = counts3[j].toString();
-                                    unit3 = units3[j].toString();
-                                }
-                                goods.append(names[j] + " " + count + unit + " " + count2 + unit2 + " " + count3 + unit3);
+            StringBuffer goods = new StringBuffer();
+            String[] names = order.getActualGoodsName().split("/zzqs/");
+            String[] units = order.getActualGoodsUnit().split("/zzqs/");
+            String[] units2 = order.getActualGoodsUnit2().split("/zzqs/");
+            String[] units3 = order.getActualGoodsUnit3().split("/zzqs/");
+            String[] counts = order.getActualGoodsCount().split("/zzqs/");
+            String[] counts2 = order.getActualGoodsCount2().split("/zzqs/");
+            String[] counts3 = order.getActualGoodsCount3().split("/zzqs/");
+            for (int j = 0; j < names.length; j++) {
+                if (!StringTools.isEmp(names[j])) {
+                    if (null != units2 && units2.length >= j + 1) {
+                        if (StringTools.isEmp(units2[j])) {
+                            goods.append(names[j]);
+                            if (!StringTools.isEmp(counts[j])) {
+                                goods.append(counts[j]);
+                            }
+                            if (!StringTools.isEmp(units[j])) {
+                                goods.append(units[j]);
                             }
                         } else {
-                            if (!StringTools.isEmp(names[j])) {
-                                goods.append(names[j]);
-                                if (!StringTools.isEmp(counts[j])) {
-                                    goods.append(counts[j]);
-                                }
-                                if (!StringTools.isEmp(units[j])) {
-                                    goods.append(units[j]);
-                                }
+                            String count = "", count2 = "", count3 = "", unit = "", unit2 = "", unit3 = "";
+                            if (!StringTools.isEmp(counts[j])) {
+                                count = counts[j].toString();
+                                unit = units[j].toString();
+                            }
+
+                            if (!StringTools.isEmp(counts2[j])) {
+                                count2 = counts2[j].toString();
+                                unit2 = units2[j].toString();
+                            }
+
+                            if (!StringTools.isEmp(counts3[j])) {
+                                count3 = counts3[j].toString();
+                                unit3 = units3[j].toString();
+                            }
+                            goods.append(names[j] + " " + count + unit + " " + count2 + unit2 + " " + count3 + unit3);
+                        }
+                    } else {
+                        if (!StringTools.isEmp(names[j])) {
+                            goods.append(names[j]);
+                            if (!StringTools.isEmp(counts[j])) {
+                                goods.append(counts[j]);
+                            }
+                            if (!StringTools.isEmp(units[j])) {
+                                goods.append(units[j]);
                             }
                         }
-                        if (j != names.length - 1) {
-                            goods.append("  |  ");
-                        }
+                    }
+                    if (j != names.length - 1) {
+                        goods.append("  |  ");
                     }
                 }
-                holder.tv_new_goods_name.setText(goods);
-            } else {
-                holder.tv_new_goods_name.setText(R.string.view_tv_no_goods_name);
             }
+            holder.tv_new_goods_name.setText(goods);
         } else {
-            holder.ll_old.setVisibility(View.VISIBLE);
-            holder.tv_new_goods_name.setVisibility(View.GONE);
-            if (!StringTools.isEmp(order.getGoodsName())) {
-                holder.goodsName.setText(order.getGoodsName());
-            } else {
-                holder.goodsName.setText(R.string.view_tv_no_goods_name);
-            }
-
-            if (!StringTools.isEmp(order.getTotalQuantity())) {
-                holder.quantity.setText(" " + order.getTotalQuantity() + " " + order.getQuantityUnit());
-            } else {
-                holder.quantity.setText(" / " + order.getQuantityUnit());
-            }
-
-            if (!StringTools.isEmp(order.getTotalWeight())) {
-                holder.weight.setText(" " + order.getTotalWeight() + " " + order.getWeightUnit());
-            } else {
-                holder.weight.setText(" / " + order.getWeightUnit());
-            }
-
-            if (!StringTools.isEmp(order.getTotalVolume())) {
-                holder.volume.setText(" " + order.getTotalVolume() + " " + order.getVolumeUnit());
-            } else {
-                holder.volume.setText(" / " + order.getVolumeUnit());
-            }
+            holder.tv_new_goods_name.setText(R.string.view_tv_no_goods_name);
         }
 
-        if (!StringTools.isEmp(order.getReceiverName())) {
-            holder.receiverName.setText(order.getReceiverName());
+        if (!StringTools.isEmp(order.getToContact())) {
+            holder.receiverName.setText(order.getToContact());
         } else {
             holder.receiverName.setText("");
         }
 
 
         if (order.getIsNew() == Order.NEW) {
-            holder.isNew.setVisibility(View.VISIBLE);
+            if (!order.getStatus().equals(Order.STATUS_COMMIT)) {
+                holder.isNew.setVisibility(View.VISIBLE);
+            }
             holder.isNew.setText(R.string.view_tv_new_order);
             holder.isNew.setBackgroundResource(R.drawable.bg_red_corners);
             holder.changeTime.setVisibility(View.GONE);
@@ -271,17 +244,6 @@ public class OrdersAdapter extends BaseAdapter {
             holder.isNew.setVisibility(View.VISIBLE);
             holder.isNew.setText(R.string.view_tv_modified);
             holder.isNew.setBackgroundResource(R.drawable.bg_green_corners);
-            /**隐藏更新时间控件的显示，以备以后改回来*/
-//            holder.changeTime.setVisibility(View.VISIBLE);
-//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-//            String str = order.getUpdateTime();
-//            String str1 = str.replace("T", " ");
-//            String str2 = str1.replace("Z", "");
-//            Date date = strToDate(str2);
-//            String time = sdf.format(date);
-//            holder.changeTime.setText("更新于 " + time);
-//            holder.changeTime.setTextColor(activity.getResources().getColor(R.color.green));
-//            holder.serialNo.setTextColor(activity.getResources().getColor(R.color.green));
         } else if (order.getStatus().equals(Order.STATUS_INVALID)) {
             holder.isNew.setVisibility(View.GONE);
             holder.changeTime.setVisibility(View.VISIBLE);

@@ -52,7 +52,7 @@ public interface TenderApi {
      */
     @FormUrlEncoded
     @POST("/tender/driver/compare")
-    Observable<JsonObject> compareTender(@Field("access_token") String accessToken, @Field("tender_id") String tenderId, @Field("price") int price);
+    Observable<JsonObject> compareTender(@Field("access_token") String accessToken, @Field("tender_id") String tenderId, @Field("price") int price,@Field("price_per_ton") String price_per_ton);
 
 
 }

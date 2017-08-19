@@ -110,6 +110,9 @@ public class MyOilCardActivity extends BaseActivity implements XListView.IXListV
     }
 
     private void getOilCardListByDriver() {
+        if (!checkConnected()) {
+            return;
+        }
         OilCardApiImpl.getOilCardApiImpl().getOilCardListByDriver(CommonTools.getToken(this), new Subscriber<ErrorInfo>() {
             @Override
             public void onCompleted() {

@@ -19,6 +19,8 @@ public class Tender implements Parcelable {
     public static final String TENDERS = "tenders";
     public static final String GRAB = "grab";
     public static final String COMPARE = "compare";
+    public static final String COMPARESTON = "compares_ton";
+    public static final String ASSIGN = "assign";
     public static final String UN_STARTED = "unStarted";//未分配
     public static final String UN_ASSIGNED = "unAssigned";//未分配
     public static final String IN_PROGRESS = "inProgress";//进行中
@@ -96,12 +98,11 @@ public class Tender implements Parcelable {
     private double current_grab_price;
 
     private double driver_price;
-
     private WinnerDriver driver_winner;
-
     private double winner_price;
-
     private List<TenderRecord> tender_records;
+    private String lowest_tons_count;
+    private String highest_more_price_per_ton;
 
     public String getTender_id() {
         return tender_id;
@@ -623,6 +624,22 @@ public class Tender implements Parcelable {
         this.tender_records = tender_records;
     }
 
+    public String getLowest_tons_count() {
+        return lowest_tons_count;
+    }
+
+    public void setLowest_tons_count(String lowest_tons_count) {
+        this.lowest_tons_count = lowest_tons_count;
+    }
+
+    public String getHighest_more_price_per_ton() {
+        return highest_more_price_per_ton;
+    }
+
+    public void setHighest_more_price_per_ton(String highest_more_price_per_ton) {
+        this.highest_more_price_per_ton = highest_more_price_per_ton;
+    }
+
     @Override
     public String toString() {
         return "Tender{" +
@@ -763,6 +780,9 @@ public class Tender implements Parcelable {
         dest.writeParcelable(this.driver_winner, flags);
         dest.writeDouble(this.winner_price);
         dest.writeTypedList(this.tender_records);
+        dest.writeString(this.lowest_tons_count);
+        dest.writeString(this.highest_more_price_per_ton);
+
     }
 
     protected Tender(Parcel in) {
@@ -835,6 +855,9 @@ public class Tender implements Parcelable {
         this.driver_winner = in.readParcelable(WinnerDriver.class.getClassLoader());
         this.winner_price = in.readDouble();
         this.tender_records = in.createTypedArrayList(TenderRecord.CREATOR);
+        this.lowest_tons_count = in.readString();
+        this.highest_more_price_per_ton = in.readString();
+
     }
 
     public static final Creator<Tender> CREATOR = new Creator<Tender>() {

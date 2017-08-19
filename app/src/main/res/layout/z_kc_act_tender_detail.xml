@@ -51,6 +51,37 @@
                 android:background="@color/z_kc_line" />
 
             <LinearLayout
+                android:id="@+id/llTon"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="保底吨数"
+                    android:textColor="@color/gray"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tvTon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:gravity="left"
+                    android:textColor="@color/red"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/z_kc_line" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center_vertical"
@@ -144,7 +175,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-
             <EditText
                 android:id="@+id/etBiddingPrince"
                 android:layout_width="match_parent"
@@ -169,6 +199,61 @@
                 android:textColor="@android:color/white"
                 android:textSize="16sp" />
         </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llTonOperation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/editTonPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:hint="请输入保底价格"
+                    android:inputType="number"
+                    android:padding="20dp"
+                    android:textColorHint="@color/gray"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/z_kc_line" />
+
+                <EditText
+                    android:id="@+id/editTonOverPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:hint="请输入超额单价/吨"
+                    android:inputType="number"
+                    android:padding="20dp"
+                    android:textColorHint="@color/gray"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvTonOder"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:background="@color/green"
+                android:gravity="center"
+                android:padding="20dp"
+                android:text="@string/offer"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <ScrollView

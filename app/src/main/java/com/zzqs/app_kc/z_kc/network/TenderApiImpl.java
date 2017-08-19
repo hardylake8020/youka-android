@@ -167,8 +167,8 @@ public class TenderApiImpl {
                 .subscribe(subscriber);
     }
 
-    public void compareTender(@NonNull String accessToken, @NonNull String tenderId, @NonNull int price, Subscriber<ErrorInfo> subscriber) {
-        tenderApi.compareTender(accessToken,tenderId,price)
+    public void compareTender(@NonNull String accessToken, @NonNull String tenderId, @NonNull int price, String price_per_ton, Subscriber<ErrorInfo> subscriber) {
+        tenderApi.compareTender(accessToken, tenderId, price, price_per_ton)
                 .map(new Func1<JsonObject, ErrorInfo>() {
                     @Override
                     public ErrorInfo call(JsonObject jsonObject) {

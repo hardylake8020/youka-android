@@ -40,4 +40,11 @@
     <color name="tender_primary_color">#262C37</color>
     <color name="z_kc_line">#cccccc</color>
     <color name="z_kc_red">#f3455a</color>
+
+    <color name="white_gray">#EEEEEE</color>
+    <color name="white">#FFFFFFFF</color>
+    <!-- 支付成功 -->
+    <color name="oreder_success">#85B200</color>
+    <!--添加修改左边-->
+    <color name="item_left_color">#999999</color>
 </resources>

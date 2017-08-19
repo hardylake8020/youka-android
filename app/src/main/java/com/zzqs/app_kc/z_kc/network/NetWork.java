@@ -81,7 +81,9 @@ public class NetWork {
      * @time 16/7/19 下午5:09
      */
     public static String getBaseUrl() {
-        return "http://183.131.76.178:3006";
+//        return "http://183.131.76.178:3006";
+//        return "http://123.58.128.254:3006";
+        return "https://www.zzuka.com.cn/";
 //        return BuildConfig.BASE_URL;
     }
 }

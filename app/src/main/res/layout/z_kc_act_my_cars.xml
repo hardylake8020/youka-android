@@ -1,32 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-  <include
-    android:id="@+id/defaultHead"
-    layout="@layout/z_kc_default_head"/>
-
-  <TextView
-    android:id="@+id/tvBottom"
-    android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:layout_alignParentBottom="true"
-    android:background="@color/green"
-    android:gravity="center"
-    android:textColor="@android:color/white"
-    android:textSize="18sp"/>
-
-  <ListView
-    android:id="@+id/lvCars"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_above="@id/tvBottom"
-    android:layout_below="@id/defaultHead"
     android:background="@color/bg_gray"
-    android:divider="#00000000"
-    android:listSelector="@android:color/white"
-    android:scrollbars="none"/>
+    android:orientation="vertical">
 
+    <include
+        android:id="@+id/defaultHead"
+        layout="@layout/z_kc_default_head" />
+
+    <RelativeLayout
+        android:id="@+id/rlSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/defaultHead"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/radius_5dp_col_white"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/tvHint"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="搜索添加"
+            android:textColor="@color/middle_gray" />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_toLeftOf="@id/tvHint"
+            android:src="@drawable/ic_search_click" />
+    </RelativeLayout>
+
+
+    <ListView
+        android:id="@+id/lvCars"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/rlSearch"
+        android:background="@color/bg_gray"
+        android:divider="#00000000"
+        android:listSelector="@android:color/white"
+        android:scrollbars="none" />
+
+    <TextView
+        android:id="@+id/tvBottom"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_above="@id/lvCars"
+        android:layout_alignParentBottom="true"
+        android:background="@color/green"
+        android:gravity="center"
+        android:text="@string/distribution_car"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
 </RelativeLayout>

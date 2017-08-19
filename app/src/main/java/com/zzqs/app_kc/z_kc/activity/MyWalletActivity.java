@@ -24,7 +24,7 @@ public class MyWalletActivity extends BaseActivity {
   public void initVariables() {
     user = ZZQSApplication.getInstance().getUser();
     //test
-    user.setAccountBalance(23333.33);
+    user.setAccountBalance(0.0);
   }
 
   @Override
@@ -51,14 +51,14 @@ public class MyWalletActivity extends BaseActivity {
       }
     });
     tvTopUp = (TextView) findViewById(R.id.tvTopUp);
-    tvTopUp.setOnClickListener(new MyOnClickListener() {
+    tvTopUp.setOnClickListener(new MyOnClickListener() {//充值
       @Override
       public void OnceOnClick(View view) {
 
       }
     });
     tvWithdraw = (TextView) findViewById(R.id.tvWithdraw);
-    tvWithdraw.setOnClickListener(new MyOnClickListener() {
+    tvWithdraw.setOnClickListener(new MyOnClickListener() {//提现
       @Override
       public void OnceOnClick(View view) {
 

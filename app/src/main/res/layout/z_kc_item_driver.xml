@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_gray"
+    android:orientation="vertical"
+    android:paddingTop="10dp">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@android:color/darker_gray" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="horizontal"
+        android:padding="15dp">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/sdDriverPhoto"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_vertical"
+            fresco:actualImageScaleType="focusCrop"
+            fresco:fadeDuration="1000"
+            fresco:placeholderImage="@drawable/default_head_portrait"
+            fresco:placeholderImageScaleType="focusCrop"
+            fresco:roundAsCircle="true" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dp">
+
+            <TextView
+                android:id="@+id/tvCarNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:text="@string/un_write"
+                android:textColor="@color/text_black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvDescribe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvCarNumber"
+                android:layout_marginTop="3dp"
+                android:text="车辆描述"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tvCarType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvCarNumber"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="3dp"
+                android:layout_toRightOf="@id/tvDescribe"
+                android:text="@string/un_write"
+                android:textColor="@color/text_black"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvDescribe"
+                android:layout_marginTop="3dp"
+                android:text="车辆司机"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tvDriverName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvCarType"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="3dp"
+                android:layout_toRightOf="@id/tvDescribe"
+                android:text="@string/un_write"
+                android:textColor="@color/text_black"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvDriverName"
+                android:layout_marginTop="3dp"
+                android:text="联系手机"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tvDriverPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvDriverName"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="3dp"
+                android:layout_toRightOf="@id/tvDescribe"
+                android:text="@string/un_write"
+                android:textColor="@color/text_black"
+                android:textSize="12sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@android:color/darker_gray" />
+</LinearLayout>

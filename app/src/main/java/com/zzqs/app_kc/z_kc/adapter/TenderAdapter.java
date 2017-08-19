@@ -10,14 +10,14 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.utils.DistanceUtil;
 import com.zzqs.app_kc.R;
 import com.zzqs.app_kc.app.ZZQSApplication;
 import com.zzqs.app_kc.entity.User;
 import com.zzqs.app_kc.z_kc.activity.MyCarsActivity;
-import com.zzqs.app_kc.z_kc.activity.TenderDetailActivity;
 import com.zzqs.app_kc.z_kc.activity.TenderTimeAxisActivity;
 import com.zzqs.app_kc.z_kc.entitiy.Goods;
 import com.zzqs.app_kc.z_kc.entitiy.Tender;
@@ -25,6 +25,7 @@ import com.zzqs.app_kc.z_kc.listener.MyOnClickListener;
 import com.zzqs.app_kc.z_kc.util.NumberUtil;
 import com.zzqs.app_kc.z_kc.util.TimeUtil;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -82,20 +83,9 @@ public class TenderAdapter extends BaseAdapter {
             holder.tvImgBelow = (TextView) view.findViewById(R.id.tvImgBelow);
             holder.tvGoodsDescription = (TextView) view.findViewById(R.id.tvGoodsDescription);
             holder.tvCreateTime = (TextView) view.findViewById(R.id.tvCreateTime);
-            holder.rlTop = (RelativeLayout) view.findViewById(R.id.rlTop);
             holder.llBottom = (LinearLayout) view.findViewById(R.id.llBottom);
             holder.tvBottom = (TextView) view.findViewById(R.id.tvBottom);
             holder.tvTenderNumber = (TextView) view.findViewById(R.id.tvTenderNumber);
-
-            holder.rlTop.setOnClickListener(new MyOnClickListener() {
-                @Override
-                public void OnceOnClick(View view) {
-                    Intent intent = new Intent(context, TenderDetailActivity.class);
-                    intent.putExtra(Tender.TENDER, tender);
-                    context.startActivity(intent);
-                }
-            });
-
             holder.llBottom.setOnClickListener(new MyOnClickListener() {
                 @Override
                 public void OnceOnClick(View view) {
@@ -138,10 +128,10 @@ public class TenderAdapter extends BaseAdapter {
                     quantityUnit = goods.getUnit();
                 }
                 if (!TextUtils.isEmpty(goods.getUnit2())) {
-                    quantityUnit = goods.getUnit2();
+                    volumeUnit = goods.getUnit2();
                 }
                 if (!TextUtils.isEmpty(goods.getUnit2())) {
-                    quantityUnit = goods.getUnit2();
+                    weightUnit = goods.getUnit2();
                 }
             }
             if (!TextUtils.isEmpty(quantityUnit)) {
@@ -152,7 +142,7 @@ public class TenderAdapter extends BaseAdapter {
                 msg = NumberUtil.doubleTrans(weight) + weightUnit;
             }
         }
-        holder.tvGoodsDescription.setText(context.getString(R.string.order_item_description, tender.getSender_company(), msg, tender.getDistance() + context.getString(R.string.distance_unit)));
+        holder.tvGoodsDescription.setText(context.getString(R.string.order_item_description, tender.getSender_company(), msg, getDistance(tender) + context.getString(R.string.distance_unit)));
         holder.tvCreateTime.setText(context.getString(R.string.order_item_create_time, TimeUtil.convertDateStringFormat(tender.getStart_time(), TimeUtil.SERVER_TIME_FORMAT, "MM-dd HH:mm")));
 
         if (isMyTender) {
@@ -167,7 +157,7 @@ public class TenderAdapter extends BaseAdapter {
                     holder.tvImgBelow.setText(R.string.un_distribution_car);
                     holder.tvBottom.setText(R.string.distribution_car);
                     holder.tvTenderNumber.setVisibility(View.GONE);
-                    if (tender.getTender_type().equals(Tender.COMPARE)) {
+                    if (tender.getTender_type().equals(Tender.COMPARE) || tender.getTender_type().equals(Tender.COMPARESTON)) {
                         User user = ZZQSApplication.getInstance().getUser();
                         if (tender.getDriver_winner().getDriver_id().equals(user.getDriver_id())) {
                             holder.tvImgAbove.setText(R.string.compared);
@@ -177,14 +167,30 @@ public class TenderAdapter extends BaseAdapter {
                             holder.llBottom.setVisibility(View.GONE);
                             holder.tvImgBelow.setVisibility(View.INVISIBLE);
                         }
+                    } else if (tender.getTender_type().equals(Tender.ASSIGN)) {
+                        holder.tvImgAbove.setText("派单成功");
                     }
                     break;
                 case Tender.IN_PROGRESS:
+                    if (tender.getTender_type().equals(Tender.GRAB)) {
+                        holder.tvImgAbove.setText(R.string.grab_success);
+                    } else if (tender.getTender_type().equals(Tender.COMPARE) || tender.getTender_type().equals(Tender.COMPARESTON)) {
+                        holder.tvImgAbove.setText(R.string.compared);
+                    } else {
+                        holder.tvImgAbove.setText("派单成功");
+                    }
                     holder.tvImgBelow.setText(R.string.transporting);
                     holder.tvBottom.setText(tender.getTruck_number());
                     holder.tvTenderNumber.setVisibility(View.VISIBLE);
                     break;
                 case Tender.COMPLETED:
+                    if (tender.getTender_type().equals(Tender.GRAB)) {
+                        holder.tvImgAbove.setText(R.string.grab_success);
+                    } else if (tender.getTender_type().equals(Tender.COMPARE) || tender.getTender_type().equals(Tender.COMPARESTON)) {
+                        holder.tvImgAbove.setText(R.string.compared);
+                    } else {
+                        holder.tvImgAbove.setText("派单成功");
+                    }
                     holder.tvImgBelow.setText(R.string.completed);
                     holder.tvBottom.setText(tender.getTruck_number());
                     holder.tvTenderNumber.setVisibility(View.VISIBLE);
@@ -226,7 +232,24 @@ public class TenderAdapter extends BaseAdapter {
     private class ViewHolder {
         ImageView ivMarginTop;
         TextView tvType, tvPickupProvince, tvPickupCity, tvDeliveryProvince, tvDeliveryCity, tvImgAbove, tvImgBelow, tvCreateTime, tvGoodsDescription, tvBottom, tvTenderNumber;
-        RelativeLayout rlTop;
         LinearLayout llBottom;
+    }
+
+    private String getDistance(Tender tender) {
+        double distance = 0.0;
+        if (tender.getPickup_region_location().size() == 0 || tender.getDelivery_region_location().size() == 0) {
+            return distance + "";
+        }
+        LatLng startLatLng = new LatLng(tender.getPickup_region_location().get(1), tender.getPickup_region_location().get(0));
+        LatLng endLatLng = new LatLng(tender.getDelivery_region_location().get(1), tender.getDelivery_region_location().get(0));
+        distance = DistanceUtil.getDistance(startLatLng, endLatLng);
+        if (distance >= 1000) {
+            distance = distance / 1000;
+            BigDecimal bd = new BigDecimal(distance);
+            bd = bd.setScale(1, BigDecimal.ROUND_HALF_UP);
+            return bd + "";
+        } else {
+            return distance + "";
+        }
     }
 }
